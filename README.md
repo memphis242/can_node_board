@@ -22,3 +22,6 @@ I have not exhaustively searched for similar projects, but I am sure there are p
 ### References
 [Microchip Application Note AN215](https://ww1.microchip.com/downloads/en/AppNotes/00215c.pdf)
 [Microchip Application Note AN212](https://ww1.microchip.com/downloads/en/AppNotes/00212c.pdf)
+Datasheet for CAN Controller:
+Datasheet for CAN Transceiver:
+Datasheet for Microcontroller PIC18F4620: 
