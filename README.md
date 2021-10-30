@@ -5,12 +5,12 @@ A board to send J1939 messages to wheel loader controllers over CAN (2.0B Extend
 ### What Problem This Solves
 I intend to integrate this board with a test bench I built at work for a particular controller, along with any necessary switches/knobs, in order to make it more intuititve to test and have everything together as a "package". The test bench tests the controller outside of the machine it would normally be in, so when it is turned on, if it doesn't receive certain messages over CAN that it normally expects from other controllers, then it throws errors and this prevents the controller from being fully tested. I have set up CANalyzer to fulfill this purpose at work, but I thought that having a separate board that I would just put on the test bench would make the testing process more efficient than having to look for an available Vector Bus module and setting up CANalyzer.
 
-**NOTE** The actual specific J1939 messages I am sending wil NOT be pushed onto this remote directory, for obvious purposes! *However, example J1939 messages from the SAE J1939-71 Standard document are included for demonstration purposes.*
+**NOTE!** The actual specific J1939 messages I am sending wil NOT be pushed onto this remote directory, for obvious purposes! *However, example J1939 messages from the SAE J1939-71 Standard document are included for demonstration purposes.*
 
 ### Structure of This Repo and How To Build
-The "CAN WL SIM.X" folder has the '.X' extension because this project was done on the MPLAB X IDE. If you download this repo, you can open this project on MPLAB X by selecting this "CAN WL SIM.X" folder. In addition, note that the #include statements made within the various files will work only if you add the "inc" subdirectory under Project Properties > XC8 Compiler > XC8 Compiler > Include Directories > (add the "inc" relative path -- you can use the Browse button).
+The "CAN WL SIM.X" folder has the '.X' extension because this project was done on the MPLAB X IDE. If you download this repo, you can open this project on MPLAB X by selecting this "CAN WL SIM.X" folder. In addition, note that the #include statements made within the various files will work only if you add the "inc" subdirectory under Project Properties > XC8 Compiler > XC8 Compiler > Include Directories > (add the "inc" relative path -- you can use the Browse button).  
 
-MPLAB X IDE version: v5.45
+MPLAB X IDE version: v5.45  
 XC8 C Compiler version: v2.31
 
 ### Motivation & Reasoning
