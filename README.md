@@ -20,8 +20,8 @@ I wanted to get more in detail with the various layers that make up a CAN node, 
 I have not exhaustively searched for similar projects, but I am sure there are plenty. The references section shows two Microchip application notes of boards built using a similar set up to me and programmed in assembly. I have seen some colleagues use a Raspberry Pi + CAN Hat and run some python scripts to do something similar. However, I think my project offers a non-operating system solution using an 8-bit Microchip PIC microcontroller using the C programming language, and also is meant to send J1939 messages, not just generic CAN messages.
 
 ### References
-[Microchip Application Note AN215](https://ww1.microchip.com/downloads/en/AppNotes/00215c.pdf)
-[Microchip Application Note AN212](https://ww1.microchip.com/downloads/en/AppNotes/00212c.pdf)
-Datasheet for CAN Controller:
-Datasheet for CAN Transceiver:
-Datasheet for Microcontroller PIC18F4620: 
+[Microchip Application Note AN215](https://ww1.microchip.com/downloads/en/AppNotes/00215c.pdf)  
+[Microchip Application Note AN212](https://ww1.microchip.com/downloads/en/AppNotes/00212c.pdf)  
+Datasheet for CAN Controller:  
+Datasheet for CAN Transceiver:  
+Datasheet for Microcontroller PIC18F4620:  
