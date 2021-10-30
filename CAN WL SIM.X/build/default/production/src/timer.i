@@ -1,4 +1,4 @@
-# 1 "main.c"
+# 1 "src/timer.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,61 +6,12 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "main.c" 2
-# 12 "main.c"
-#pragma config OSC = HSPLL
-#pragma config FCMEN = OFF
-#pragma config IESO = OFF
+# 1 "src/timer.c" 2
 
 
-#pragma config PWRT = OFF
-#pragma config BOREN = SBORDIS
-#pragma config BORV = 3
 
 
-#pragma config WDT = OFF
-#pragma config WDTPS = 32768
 
-
-#pragma config CCP2MX = PORTBE
-#pragma config PBADEN = OFF
-#pragma config LPT1OSC = OFF
-#pragma config MCLRE = ON
-
-
-#pragma config STVREN = ON
-#pragma config LVP = OFF
-#pragma config XINST = OFF
-
-
-#pragma config CP0 = OFF
-#pragma config CP1 = OFF
-#pragma config CP2 = OFF
-#pragma config CP3 = OFF
-
-
-#pragma config CPB = OFF
-#pragma config CPD = OFF
-
-
-#pragma config WRT0 = OFF
-#pragma config WRT1 = OFF
-#pragma config WRT2 = OFF
-#pragma config WRT3 = OFF
-
-
-#pragma config WRTC = OFF
-#pragma config WRTB = OFF
-#pragma config WRTD = OFF
-
-
-#pragma config EBTR0 = OFF
-#pragma config EBTR1 = OFF
-#pragma config EBTR2 = OFF
-#pragma config EBTR3 = OFF
-
-
-#pragma config EBTRB = OFF
 
 
 
@@ -4438,8 +4389,10 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 33 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 2 3
-# 67 "main.c" 2
+# 9 "src/timer.c" 2
 
+# 1 "inc\\timer.h" 1
+# 15 "inc\\timer.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 1 3
 # 22 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 3
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\bits/alltypes.h" 1 3
@@ -4525,150 +4478,38 @@ typedef int32_t int_fast32_t;
 typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
-# 68 "main.c" 2
-
-# 1 "./inc/mssp_spi_driver.h" 1
-# 102 "./inc/mssp_spi_driver.h"
-void SPI_Init_Master_Default(void);
-void SPI_Init_Slave_Default(void);
-uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8_t fosc_div, uint8_t slave0_or_master1);
-
-void SPI_Disable(void);
-
-void SPI_Transfer_Byte(uint8_t tx, uint8_t * rx);
-void SPI_Transfer_Packet(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_size);
-void SPI_Send_Byte(uint8_t tx);
-void SPI_Send_Packet(uint8_t * tx_pack, uint16_t tx_size);
-void SPI_Receive_Byte(uint8_t * rx);
-void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size);
-# 69 "main.c" 2
-
-# 1 "./inc/lcd_driver.h" 1
-# 177 "./inc/lcd_driver.h"
-void static LCD_enable_toggle(void);
-void static LCD_wait_for_BF(void);
-void LCD_write_data_byte_4bit(uint8_t data);
-void LCD_write_data_byte_8bit(uint8_t data);
-void LCD_write_instr_byte_4bit(uint8_t instr);
-void LCD_write_instr_byte_8bit(uint8_t instr);
-void LCD_Init_ECE376(void);
-void LCD_Init(uint8_t entry_mode, uint8_t disp_ctrl, uint8_t func_set);
-uint8_t LCD_isInit(void);
-uint8_t LCD_clear_display(void);
-uint8_t LCD_return_home(void);
-uint8_t LCD_read_current_address_counter(void);
-uint8_t LCD_set_cursor_position(uint8_t line, uint8_t pos_on_line);
-uint8_t LCD_write_characters(char * toWrite, uint8_t size);
-uint8_t LCD_turn_off_cursor(void);
-uint8_t LCD_turn_on_cursor(void);
-
-
-void static LCD_enable_toggle_amazonLCD(void);
-void LCD_write_data_byte_4bit_amazonLCD(uint8_t data);
-void LCD_write_data_byte_8bit_amazonLCD(uint8_t data);
-void LCD_write_instr_byte_4bit_amazonLCD(uint8_t instr);
-void LCD_write_instr_byte_8bit_amazonLCD(uint8_t instr);
-void LCD_write_instr_nibble_4bit_amazonLCD(uint8_t instr);
-uint8_t LCD_clear_display_amazonLCD(void);
-void LCD_Init_amazonLCD(uint8_t mode_4bit);
-uint8_t LCD_set_cursor_position_amazonLCD(uint8_t line, uint8_t pos_on_line);
-# 70 "main.c" 2
-
-# 1 "./inc/timer.h" 1
-# 58 "./inc/timer.h"
+# 15 "inc\\timer.h" 2
+# 58 "inc\\timer.h"
 void Timer1_Init_Default(uint16_t period_val);
 void Timer1_Enable(void);
 void Timer1_Disable(void);
-# 71 "main.c" 2
+# 10 "src/timer.c" 2
 
-# 1 "./inc/ccp.h" 1
-# 32 "./inc/ccp.h"
+# 1 "inc\\ccp.h" 1
+# 32 "inc\\ccp.h"
 void CCP2_Init_Default(void);
 void CCP2_Compare_Val(uint16_t comp_val);
-# 72 "main.c" 2
-
-# 1 "./spi_two_node_test.h" 1
-# 73 "main.c" 2
-
+# 11 "src/timer.c" 2
+# 20 "src/timer.c"
+void Timer1_Init_Default(uint16_t period_val){
 
 
+    T1CON = 0xB0;
+    T3CON &= ~0x48;
 
 
+    CCP2_Init_Default();
+    CCP2_Compare_Val(period_val);
 
 
+    PIE2bits.CCP2IE = 1u;
 
-extern uint8_t receive_byte;
-extern uint8_t slave_mode;
-extern uint8_t transfer_complete_flag;
-extern uint8_t manual_transfer;
-
-static volatile uint8_t tmr_100ms_next = 0x00;
-static uint8_t spi_tx_test_message = 0x00;
-static volatile uint8_t spi_ready_to_tx = 0x00;
-
-
-void __attribute__((picinterrupt(("")))) isr(void){
-
-    if(PIR1bits.SSPIF && PIE1bits.SSPIE) {
-
-        transfer_complete_flag = 0x01;
-
-        PIR1bits.SSPIF = 0;
-    }
-
-    if(PIR2bits.CCP2IF && PIE2bits.CCP2IE){
-
-        if(tmr_100ms_next){
-
-            tmr_100ms_next = 0x00;
-
-
-            spi_ready_to_tx = 0x01;
-
-            PIR2bits.CCP2IF = 0u;;
-
-        } else{
-
-            tmr_100ms_next = 0x01;
-
-            PIR2bits.CCP2IF = 0u;;
-        }
-
-
-    }
-
-    return;
 }
 
+void Timer1_Enable(void){
+    T1CON |= 0x01;
+}
 
-void main(void) {
-
-
-    SPI_Init_Master_Default();
-
-    PORTE = 0x00;
-    TRISEbits.RE0 = 1u;;
-    TRISEbits.RE1 = 1u;;
-
-
-    ADCON1bits.PCFG = 0xE;
-
-
-    Timer1_Init_Default(62500u);
-
-
-
-    Timer1_Enable();
-    (INTCONbits.GIE = 1);
-
-
-
-
-    while(1){
-
-
-
-    }
-
-    return;
+void Timer1_Disable(void){
+    T1CON &= ~0x01;
 }

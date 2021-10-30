@@ -461,302 +461,302 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6715
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6715: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"13 lcd_driver.c
-[; ;lcd_driver.c: 13: static uint8_t init_complete = 0x00;
+"13 src/lcd_driver.c
+[; ;src/lcd_driver.c: 13: static uint8_t init_complete = 0x00;
 [v _init_complete `uc ~T0 @X0 1 s ]
 [i _init_complete
 -> -> 0 `i `uc
 ]
 "14
-[; ;lcd_driver.c: 14: static uint8_t shift_mode = 0x0u;
+[; ;src/lcd_driver.c: 14: static uint8_t shift_mode = 0x0u;
 [v _shift_mode `uc ~T0 @X0 1 s ]
 [i _shift_mode
 -> -> 0 `ui `uc
 ]
 "15
-[; ;lcd_driver.c: 15: static uint8_t disp_16x2 = 0x1u;
+[; ;src/lcd_driver.c: 15: static uint8_t disp_16x2 = 0x1u;
 [v _disp_16x2 `uc ~T0 @X0 1 s ]
 [i _disp_16x2
 -> -> 1 `ui `uc
 ]
 "17
-[; ;lcd_driver.c: 17: static uint8_t current_entry_mode = 0x06u;
+[; ;src/lcd_driver.c: 17: static uint8_t current_entry_mode = 0x06u;
 [v _current_entry_mode `uc ~T0 @X0 1 s ]
 [i _current_entry_mode
 -> -> 6 `ui `uc
 ]
 "18
-[; ;lcd_driver.c: 18: static uint8_t current_disp_ctrl = 0x08u;
+[; ;src/lcd_driver.c: 18: static uint8_t current_disp_ctrl = 0x08u;
 [v _current_disp_ctrl `uc ~T0 @X0 1 s ]
 [i _current_disp_ctrl
 -> -> 8 `ui `uc
 ]
 "19
-[; ;lcd_driver.c: 19: static uint8_t current_func_set = 0x30u;
+[; ;src/lcd_driver.c: 19: static uint8_t current_func_set = 0x30u;
 [v _current_func_set `uc ~T0 @X0 1 s ]
 [i _current_func_set
 -> -> 48 `ui `uc
 ]
 "21
-[; ;lcd_driver.c: 21: static uint8_t address_counter = 0x00;
+[; ;src/lcd_driver.c: 21: static uint8_t address_counter = 0x00;
 [v _address_counter `uc ~T0 @X0 1 s ]
 [i _address_counter
 -> -> 0 `i `uc
 ]
 "25
-[; ;lcd_driver.c: 25: void static LCD_enable_toggle(void){
+[; ;src/lcd_driver.c: 25: void static LCD_enable_toggle(void){
 [v _LCD_enable_toggle `(v ~T0 @X0 1 sf ]
 {
 [e :U _LCD_enable_toggle ]
 [f ]
 "26
-[; ;lcd_driver.c: 26:     (LATCbits.LATC2 = 0u);
+[; ;src/lcd_driver.c: 26:     (LATCbits.LATC2 = 0u);
 [e = . . _LATCbits 0 2 -> -> 0 `ui `uc ]
 "27
-[; ;lcd_driver.c: 27:     _delay((unsigned long)((2u)*(40000000u/4000000.0)));
+[; ;src/lcd_driver.c: 27:     _delay((unsigned long)((2u)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 2 `ui `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
 "28
-[; ;lcd_driver.c: 28:     (LATCbits.LATC2 = 1u);
+[; ;src/lcd_driver.c: 28:     (LATCbits.LATC2 = 1u);
 [e = . . _LATCbits 0 2 -> -> 1 `ui `uc ]
 "29
-[; ;lcd_driver.c: 29:     _delay((unsigned long)((2u)*(40000000u/4000000.0)));
+[; ;src/lcd_driver.c: 29:     _delay((unsigned long)((2u)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 2 `ui `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
 "30
-[; ;lcd_driver.c: 30:     (LATCbits.LATC2 = 0u);
+[; ;src/lcd_driver.c: 30:     (LATCbits.LATC2 = 0u);
 [e = . . _LATCbits 0 2 -> -> 0 `ui `uc ]
 "31
-[; ;lcd_driver.c: 31:     _delay((unsigned long)((2u)*(40000000u/4000000.0)));
+[; ;src/lcd_driver.c: 31:     _delay((unsigned long)((2u)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 2 `ui `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
 "32
-[; ;lcd_driver.c: 32: }
+[; ;src/lcd_driver.c: 32: }
 [e :UE 270 ]
 }
 "35
-[; ;lcd_driver.c: 35: void static LCD_wait_for_BF(void){
+[; ;src/lcd_driver.c: 35: void static LCD_wait_for_BF(void){
 [v _LCD_wait_for_BF `(v ~T0 @X0 1 sf ]
 {
 [e :U _LCD_wait_for_BF ]
 [f ]
 "37
-[; ;lcd_driver.c: 37:     (TRISD = 0xFFu);
+[; ;src/lcd_driver.c: 37:     (TRISD = 0xFFu);
 [e = _TRISD -> -> 255 `ui `uc ]
 "38
-[; ;lcd_driver.c: 38:     (LATCbits.LATC0 = 0u);
+[; ;src/lcd_driver.c: 38:     (LATCbits.LATC0 = 0u);
 [e = . . _LATCbits 0 0 -> -> 0 `ui `uc ]
 "39
-[; ;lcd_driver.c: 39:     (LATCbits.LATC1 = 1u);
+[; ;src/lcd_driver.c: 39:     (LATCbits.LATC1 = 1u);
 [e = . . _LATCbits 0 1 -> -> 1 `ui `uc ]
 "40
-[; ;lcd_driver.c: 40:     LCD_enable_toggle();
+[; ;src/lcd_driver.c: 40:     LCD_enable_toggle();
 [e ( _LCD_enable_toggle ..  ]
 "41
-[; ;lcd_driver.c: 41:     while(PORTDbits.RD7);
+[; ;src/lcd_driver.c: 41:     while(PORTDbits.RD7);
 [e $U 272  ]
 [e :U 273 ]
 [e :U 272 ]
 [e $ != -> . . _PORTDbits 0 7 `i -> 0 `i 273  ]
 [e :U 274 ]
 "42
-[; ;lcd_driver.c: 42: }
+[; ;src/lcd_driver.c: 42: }
 [e :UE 271 ]
 }
 "45
-[; ;lcd_driver.c: 45: void LCD_write_data_byte_4bit(uint8_t data){
+[; ;src/lcd_driver.c: 45: void LCD_write_data_byte_4bit(uint8_t data){
 [v _LCD_write_data_byte_4bit `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _LCD_write_data_byte_4bit ]
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
 "47
-[; ;lcd_driver.c: 47:     (TRISC = 0xF8);
+[; ;src/lcd_driver.c: 47:     (TRISC = 0xF8);
 [e = _TRISC -> -> 248 `i `uc ]
 "48
-[; ;lcd_driver.c: 48:     (TRISD &= 0x0Fu);
+[; ;src/lcd_driver.c: 48:     (TRISD &= 0x0Fu);
 [e =& _TRISD -> -> 15 `ui `Vuc ]
 "49
-[; ;lcd_driver.c: 49:     (LATCbits.LATC0 = 1u);
+[; ;src/lcd_driver.c: 49:     (LATCbits.LATC0 = 1u);
 [e = . . _LATCbits 0 0 -> -> 1 `ui `uc ]
 "50
-[; ;lcd_driver.c: 50:     (LATCbits.LATC1 = 0u);
+[; ;src/lcd_driver.c: 50:     (LATCbits.LATC1 = 0u);
 [e = . . _LATCbits 0 1 -> -> 0 `ui `uc ]
 "53
-[; ;lcd_driver.c: 53:     PORTD = (PORTD & 0x0F) | (data & 0xF0);
+[; ;src/lcd_driver.c: 53:     PORTD = (PORTD & 0x0F) | (data & 0xF0);
 [e = _PORTD -> | & -> _PORTD `i -> 15 `i & -> _data `i -> 240 `i `uc ]
 "54
-[; ;lcd_driver.c: 54:     LCD_enable_toggle();
+[; ;src/lcd_driver.c: 54:     LCD_enable_toggle();
 [e ( _LCD_enable_toggle ..  ]
 "55
-[; ;lcd_driver.c: 55:     PORTD = (PORTD & 0x0F) | ((data<<4) & 0xF0);
+[; ;src/lcd_driver.c: 55:     PORTD = (PORTD & 0x0F) | ((data<<4) & 0xF0);
 [e = _PORTD -> | & -> _PORTD `i -> 15 `i & << -> _data `i -> 4 `i -> 240 `i `uc ]
 "56
-[; ;lcd_driver.c: 56:     LCD_enable_toggle();
+[; ;src/lcd_driver.c: 56:     LCD_enable_toggle();
 [e ( _LCD_enable_toggle ..  ]
 "58
-[; ;lcd_driver.c: 58:     _delay((unsigned long)((10)*(40000000u/4000.0)));
+[; ;src/lcd_driver.c: 58:     _delay((unsigned long)((10)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "59
-[; ;lcd_driver.c: 59: }
+[; ;src/lcd_driver.c: 59: }
 [e :UE 275 ]
 }
 "61
-[; ;lcd_driver.c: 61: void LCD_write_data_byte_8bit(uint8_t data){
+[; ;src/lcd_driver.c: 61: void LCD_write_data_byte_8bit(uint8_t data){
 [v _LCD_write_data_byte_8bit `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _LCD_write_data_byte_8bit ]
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
 "63
-[; ;lcd_driver.c: 63:     (TRISC = 0xF8);
+[; ;src/lcd_driver.c: 63:     (TRISC = 0xF8);
 [e = _TRISC -> -> 248 `i `uc ]
 "64
-[; ;lcd_driver.c: 64:     (TRISD = 0x00u);
+[; ;src/lcd_driver.c: 64:     (TRISD = 0x00u);
 [e = _TRISD -> -> 0 `ui `uc ]
 "65
-[; ;lcd_driver.c: 65:     (LATCbits.LATC0 = 1u);
+[; ;src/lcd_driver.c: 65:     (LATCbits.LATC0 = 1u);
 [e = . . _LATCbits 0 0 -> -> 1 `ui `uc ]
 "66
-[; ;lcd_driver.c: 66:     (LATCbits.LATC1 = 0u);
+[; ;src/lcd_driver.c: 66:     (LATCbits.LATC1 = 0u);
 [e = . . _LATCbits 0 1 -> -> 0 `ui `uc ]
 "69
-[; ;lcd_driver.c: 69:     PORTD = data;
+[; ;src/lcd_driver.c: 69:     PORTD = data;
 [e = _PORTD _data ]
 "70
-[; ;lcd_driver.c: 70:     LCD_enable_toggle();
+[; ;src/lcd_driver.c: 70:     LCD_enable_toggle();
 [e ( _LCD_enable_toggle ..  ]
 "72
-[; ;lcd_driver.c: 72:     _delay((unsigned long)((10)*(40000000u/4000.0)));
+[; ;src/lcd_driver.c: 72:     _delay((unsigned long)((10)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "73
-[; ;lcd_driver.c: 73: }
+[; ;src/lcd_driver.c: 73: }
 [e :UE 276 ]
 }
 "76
-[; ;lcd_driver.c: 76: void LCD_write_instr_byte_4bit(uint8_t instr){
+[; ;src/lcd_driver.c: 76: void LCD_write_instr_byte_4bit(uint8_t instr){
 [v _LCD_write_instr_byte_4bit `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _LCD_write_instr_byte_4bit ]
 [v _instr `uc ~T0 @X0 1 r1 ]
 [f ]
 "78
-[; ;lcd_driver.c: 78:     (TRISC = 0xF8);
+[; ;src/lcd_driver.c: 78:     (TRISC = 0xF8);
 [e = _TRISC -> -> 248 `i `uc ]
 "79
-[; ;lcd_driver.c: 79:     (TRISD &= 0x0Fu);
+[; ;src/lcd_driver.c: 79:     (TRISD &= 0x0Fu);
 [e =& _TRISD -> -> 15 `ui `Vuc ]
 "80
-[; ;lcd_driver.c: 80:     (LATCbits.LATC0 = 0u);
+[; ;src/lcd_driver.c: 80:     (LATCbits.LATC0 = 0u);
 [e = . . _LATCbits 0 0 -> -> 0 `ui `uc ]
 "81
-[; ;lcd_driver.c: 81:     (LATCbits.LATC1 = 0u);
+[; ;src/lcd_driver.c: 81:     (LATCbits.LATC1 = 0u);
 [e = . . _LATCbits 0 1 -> -> 0 `ui `uc ]
 "84
-[; ;lcd_driver.c: 84:     PORTD = (PORTD & 0x0F) | (instr & 0xF0);
+[; ;src/lcd_driver.c: 84:     PORTD = (PORTD & 0x0F) | (instr & 0xF0);
 [e = _PORTD -> | & -> _PORTD `i -> 15 `i & -> _instr `i -> 240 `i `uc ]
 "85
-[; ;lcd_driver.c: 85:     LCD_enable_toggle();
+[; ;src/lcd_driver.c: 85:     LCD_enable_toggle();
 [e ( _LCD_enable_toggle ..  ]
 "86
-[; ;lcd_driver.c: 86:     PORTD = (PORTD & 0x0F) | ((instr<<4) & 0xF0);
+[; ;src/lcd_driver.c: 86:     PORTD = (PORTD & 0x0F) | ((instr<<4) & 0xF0);
 [e = _PORTD -> | & -> _PORTD `i -> 15 `i & << -> _instr `i -> 4 `i -> 240 `i `uc ]
 "87
-[; ;lcd_driver.c: 87:     LCD_enable_toggle();
+[; ;src/lcd_driver.c: 87:     LCD_enable_toggle();
 [e ( _LCD_enable_toggle ..  ]
 "89
-[; ;lcd_driver.c: 89:     _delay((unsigned long)((10)*(40000000u/4000.0)));
+[; ;src/lcd_driver.c: 89:     _delay((unsigned long)((10)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "90
-[; ;lcd_driver.c: 90: }
+[; ;src/lcd_driver.c: 90: }
 [e :UE 277 ]
 }
 "92
-[; ;lcd_driver.c: 92: void LCD_write_instr_byte_8bit(uint8_t instr){
+[; ;src/lcd_driver.c: 92: void LCD_write_instr_byte_8bit(uint8_t instr){
 [v _LCD_write_instr_byte_8bit `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _LCD_write_instr_byte_8bit ]
 [v _instr `uc ~T0 @X0 1 r1 ]
 [f ]
 "94
-[; ;lcd_driver.c: 94:     (TRISC = 0xF8);
+[; ;src/lcd_driver.c: 94:     (TRISC = 0xF8);
 [e = _TRISC -> -> 248 `i `uc ]
 "95
-[; ;lcd_driver.c: 95:     (TRISD = 0x00u);
+[; ;src/lcd_driver.c: 95:     (TRISD = 0x00u);
 [e = _TRISD -> -> 0 `ui `uc ]
 "96
-[; ;lcd_driver.c: 96:     (LATCbits.LATC0 = 0u);
+[; ;src/lcd_driver.c: 96:     (LATCbits.LATC0 = 0u);
 [e = . . _LATCbits 0 0 -> -> 0 `ui `uc ]
 "97
-[; ;lcd_driver.c: 97:     (LATCbits.LATC1 = 0u);
+[; ;src/lcd_driver.c: 97:     (LATCbits.LATC1 = 0u);
 [e = . . _LATCbits 0 1 -> -> 0 `ui `uc ]
 "100
-[; ;lcd_driver.c: 100:     PORTD = instr;
+[; ;src/lcd_driver.c: 100:     PORTD = instr;
 [e = _PORTD _instr ]
 "101
-[; ;lcd_driver.c: 101:     LCD_enable_toggle();
+[; ;src/lcd_driver.c: 101:     LCD_enable_toggle();
 [e ( _LCD_enable_toggle ..  ]
 "103
-[; ;lcd_driver.c: 103:     _delay((unsigned long)((10)*(40000000u/4000.0)));
+[; ;src/lcd_driver.c: 103:     _delay((unsigned long)((10)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "104
-[; ;lcd_driver.c: 104: }
+[; ;src/lcd_driver.c: 104: }
 [e :UE 278 ]
 }
 "106
-[; ;lcd_driver.c: 106: void LCD_Init_ECE376(void){
+[; ;src/lcd_driver.c: 106: void LCD_Init_ECE376(void){
 [v _LCD_Init_ECE376 `(v ~T0 @X0 1 ef ]
 {
 [e :U _LCD_Init_ECE376 ]
 [f ]
 "109
-[; ;lcd_driver.c: 109:     _delay((unsigned long)((100)*(40000000u/4000.0)));
+[; ;src/lcd_driver.c: 109:     _delay((unsigned long)((100)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 100 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "110
-[; ;lcd_driver.c: 110:     LCD_write_instr_byte_4bit(0x30u);
+[; ;src/lcd_driver.c: 110:     LCD_write_instr_byte_4bit(0x30u);
 [e ( _LCD_write_instr_byte_4bit (1 -> -> 48 `ui `uc ]
 "111
-[; ;lcd_driver.c: 111:     _delay((unsigned long)((5)*(40000000u/4000.0)));
+[; ;src/lcd_driver.c: 111:     _delay((unsigned long)((5)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 5 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "112
-[; ;lcd_driver.c: 112:     LCD_write_instr_byte_4bit(0x30u);
+[; ;src/lcd_driver.c: 112:     LCD_write_instr_byte_4bit(0x30u);
 [e ( _LCD_write_instr_byte_4bit (1 -> -> 48 `ui `uc ]
 "113
-[; ;lcd_driver.c: 113:     _delay((unsigned long)((150)*(40000000u/4000000.0)));
+[; ;src/lcd_driver.c: 113:     _delay((unsigned long)((150)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 150 `i `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
 "114
-[; ;lcd_driver.c: 114:     LCD_write_instr_byte_4bit(0x30u);
+[; ;src/lcd_driver.c: 114:     LCD_write_instr_byte_4bit(0x30u);
 [e ( _LCD_write_instr_byte_4bit (1 -> -> 48 `ui `uc ]
 "116
-[; ;lcd_driver.c: 116:     LCD_write_instr_byte_4bit(0x28u);
+[; ;src/lcd_driver.c: 116:     LCD_write_instr_byte_4bit(0x28u);
 [e ( _LCD_write_instr_byte_4bit (1 -> -> 40 `ui `uc ]
 "117
-[; ;lcd_driver.c: 117:     LCD_write_instr_byte_4bit(0x0Eu);
+[; ;src/lcd_driver.c: 117:     LCD_write_instr_byte_4bit(0x0Eu);
 [e ( _LCD_write_instr_byte_4bit (1 -> -> 14 `ui `uc ]
 "118
-[; ;lcd_driver.c: 118:     LCD_write_instr_byte_4bit(0x01u);
+[; ;src/lcd_driver.c: 118:     LCD_write_instr_byte_4bit(0x01u);
 [e ( _LCD_write_instr_byte_4bit (1 -> -> 1 `ui `uc ]
 "119
-[; ;lcd_driver.c: 119:     LCD_write_instr_byte_4bit(0x06u);
+[; ;src/lcd_driver.c: 119:     LCD_write_instr_byte_4bit(0x06u);
 [e ( _LCD_write_instr_byte_4bit (1 -> -> 6 `ui `uc ]
 "121
-[; ;lcd_driver.c: 121:     _delay((unsigned long)((100)*(40000000u/4000.0)));
+[; ;src/lcd_driver.c: 121:     _delay((unsigned long)((100)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 100 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "124
-[; ;lcd_driver.c: 124:     init_complete = 0x01u;
+[; ;src/lcd_driver.c: 124:     init_complete = 0x01u;
 [e = _init_complete -> -> 1 `ui `uc ]
 "125
-[; ;lcd_driver.c: 125:     current_entry_mode = 0x06u;
+[; ;src/lcd_driver.c: 125:     current_entry_mode = 0x06u;
 [e = _current_entry_mode -> -> 6 `ui `uc ]
 "126
-[; ;lcd_driver.c: 126:     current_disp_ctrl = 0x0Eu;
+[; ;src/lcd_driver.c: 126:     current_disp_ctrl = 0x0Eu;
 [e = _current_disp_ctrl -> -> 14 `ui `uc ]
 "127
-[; ;lcd_driver.c: 127:     current_func_set = 0x28u;
+[; ;src/lcd_driver.c: 127:     current_func_set = 0x28u;
 [e = _current_func_set -> -> 40 `ui `uc ]
 "128
-[; ;lcd_driver.c: 128: }
+[; ;src/lcd_driver.c: 128: }
 [e :UE 279 ]
 }
 "130
-[; ;lcd_driver.c: 130: void LCD_Init(uint8_t entry_mode, uint8_t disp_ctrl, uint8_t func_set){
+[; ;src/lcd_driver.c: 130: void LCD_Init(uint8_t entry_mode, uint8_t disp_ctrl, uint8_t func_set){
 [v _LCD_Init `(v ~T0 @X0 1 ef3`uc`uc`uc ]
 {
 [e :U _LCD_Init ]
@@ -765,214 +765,214 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _func_set `uc ~T0 @X0 1 r3 ]
 [f ]
 "133
-[; ;lcd_driver.c: 133:     _delay((unsigned long)((60)*(40000000u/4000.0)));
+[; ;src/lcd_driver.c: 133:     _delay((unsigned long)((60)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 60 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "136
-[; ;lcd_driver.c: 136:     (TRISC = 0xF8);
+[; ;src/lcd_driver.c: 136:     (TRISC = 0xF8);
 [e = _TRISC -> -> 248 `i `uc ]
 "137
-[; ;lcd_driver.c: 137:     (TRISD &= 0x0Fu);
+[; ;src/lcd_driver.c: 137:     (TRISD &= 0x0Fu);
 [e =& _TRISD -> -> 15 `ui `Vuc ]
 "138
-[; ;lcd_driver.c: 138:     (LATCbits.LATC0 = 0u);
+[; ;src/lcd_driver.c: 138:     (LATCbits.LATC0 = 0u);
 [e = . . _LATCbits 0 0 -> -> 0 `ui `uc ]
 "139
-[; ;lcd_driver.c: 139:     (LATCbits.LATC1 = 0u);
+[; ;src/lcd_driver.c: 139:     (LATCbits.LATC1 = 0u);
 [e = . . _LATCbits 0 1 -> -> 0 `ui `uc ]
 "142
-[; ;lcd_driver.c: 142:     PORTD = 0x30;
+[; ;src/lcd_driver.c: 142:     PORTD = 0x30;
 [e = _PORTD -> -> 48 `i `uc ]
 "143
-[; ;lcd_driver.c: 143:     (LATCbits.LATC2 = 1u);
+[; ;src/lcd_driver.c: 143:     (LATCbits.LATC2 = 1u);
 [e = . . _LATCbits 0 2 -> -> 1 `ui `uc ]
 "144
-[; ;lcd_driver.c: 144:     _delay((unsigned long)((10)*(40000000u/4000.0)));
+[; ;src/lcd_driver.c: 144:     _delay((unsigned long)((10)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "145
-[; ;lcd_driver.c: 145:     (LATCbits.LATC2 = 0u);
+[; ;src/lcd_driver.c: 145:     (LATCbits.LATC2 = 0u);
 [e = . . _LATCbits 0 2 -> -> 0 `ui `uc ]
 "146
-[; ;lcd_driver.c: 146:     _delay((unsigned long)((10)*(40000000u/4000.0)));
+[; ;src/lcd_driver.c: 146:     _delay((unsigned long)((10)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "149
-[; ;lcd_driver.c: 149:     PORTD = 0x30;
+[; ;src/lcd_driver.c: 149:     PORTD = 0x30;
 [e = _PORTD -> -> 48 `i `uc ]
 "150
-[; ;lcd_driver.c: 150:     (LATCbits.LATC2 = 1u);
+[; ;src/lcd_driver.c: 150:     (LATCbits.LATC2 = 1u);
 [e = . . _LATCbits 0 2 -> -> 1 `ui `uc ]
 "151
-[; ;lcd_driver.c: 151:     _delay((unsigned long)((1)*(40000000u/4000.0)));
+[; ;src/lcd_driver.c: 151:     _delay((unsigned long)((1)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "152
-[; ;lcd_driver.c: 152:     (LATCbits.LATC2 = 0u);
+[; ;src/lcd_driver.c: 152:     (LATCbits.LATC2 = 0u);
 [e = . . _LATCbits 0 2 -> -> 0 `ui `uc ]
 "153
-[; ;lcd_driver.c: 153:     _delay((unsigned long)((1)*(40000000u/4000.0)));
+[; ;src/lcd_driver.c: 153:     _delay((unsigned long)((1)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "156
-[; ;lcd_driver.c: 156:     PORTD = 0x30;
+[; ;src/lcd_driver.c: 156:     PORTD = 0x30;
 [e = _PORTD -> -> 48 `i `uc ]
 "157
-[; ;lcd_driver.c: 157:     (LATCbits.LATC2 = 1u);
+[; ;src/lcd_driver.c: 157:     (LATCbits.LATC2 = 1u);
 [e = . . _LATCbits 0 2 -> -> 1 `ui `uc ]
 "158
-[; ;lcd_driver.c: 158:     _delay((unsigned long)((1)*(40000000u/4000.0)));
+[; ;src/lcd_driver.c: 158:     _delay((unsigned long)((1)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "159
-[; ;lcd_driver.c: 159:     (LATCbits.LATC2 = 0u);
+[; ;src/lcd_driver.c: 159:     (LATCbits.LATC2 = 0u);
 [e = . . _LATCbits 0 2 -> -> 0 `ui `uc ]
 "160
-[; ;lcd_driver.c: 160:     _delay((unsigned long)((1)*(40000000u/4000.0)));
+[; ;src/lcd_driver.c: 160:     _delay((unsigned long)((1)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "165
-[; ;lcd_driver.c: 165:     PORTD = func_set;
+[; ;src/lcd_driver.c: 165:     PORTD = func_set;
 [e = _PORTD _func_set ]
 "166
-[; ;lcd_driver.c: 166:     LCD_enable_toggle();
+[; ;src/lcd_driver.c: 166:     LCD_enable_toggle();
 [e ( _LCD_enable_toggle ..  ]
 "169
-[; ;lcd_driver.c: 169:     PORTD = 0x08u;
+[; ;src/lcd_driver.c: 169:     PORTD = 0x08u;
 [e = _PORTD -> -> 8 `ui `uc ]
 "170
-[; ;lcd_driver.c: 170:     LCD_enable_toggle();
+[; ;src/lcd_driver.c: 170:     LCD_enable_toggle();
 [e ( _LCD_enable_toggle ..  ]
 "173
-[; ;lcd_driver.c: 173:     PORTD = 0x01u;
+[; ;src/lcd_driver.c: 173:     PORTD = 0x01u;
 [e = _PORTD -> -> 1 `ui `uc ]
 "174
-[; ;lcd_driver.c: 174:     LCD_enable_toggle();
+[; ;src/lcd_driver.c: 174:     LCD_enable_toggle();
 [e ( _LCD_enable_toggle ..  ]
 "177
-[; ;lcd_driver.c: 177:     PORTD = entry_mode;
+[; ;src/lcd_driver.c: 177:     PORTD = entry_mode;
 [e = _PORTD _entry_mode ]
 "178
-[; ;lcd_driver.c: 178:     LCD_enable_toggle();
+[; ;src/lcd_driver.c: 178:     LCD_enable_toggle();
 [e ( _LCD_enable_toggle ..  ]
 "181
-[; ;lcd_driver.c: 181:     _delay((unsigned long)((100)*(40000000u/4000.0)));
+[; ;src/lcd_driver.c: 181:     _delay((unsigned long)((100)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 100 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "182
-[; ;lcd_driver.c: 182:     PORTD = disp_ctrl;
+[; ;src/lcd_driver.c: 182:     PORTD = disp_ctrl;
 [e = _PORTD _disp_ctrl ]
 "183
-[; ;lcd_driver.c: 183:     LCD_enable_toggle();
+[; ;src/lcd_driver.c: 183:     LCD_enable_toggle();
 [e ( _LCD_enable_toggle ..  ]
 "186
-[; ;lcd_driver.c: 186:     init_complete = 0x01u;
+[; ;src/lcd_driver.c: 186:     init_complete = 0x01u;
 [e = _init_complete -> -> 1 `ui `uc ]
 "188
-[; ;lcd_driver.c: 188:     current_entry_mode = entry_mode;
+[; ;src/lcd_driver.c: 188:     current_entry_mode = entry_mode;
 [e = _current_entry_mode _entry_mode ]
 "189
-[; ;lcd_driver.c: 189:     current_disp_ctrl = disp_ctrl;
+[; ;src/lcd_driver.c: 189:     current_disp_ctrl = disp_ctrl;
 [e = _current_disp_ctrl _disp_ctrl ]
 "190
-[; ;lcd_driver.c: 190:     current_func_set = func_set;
+[; ;src/lcd_driver.c: 190:     current_func_set = func_set;
 [e = _current_func_set _func_set ]
 "191
-[; ;lcd_driver.c: 191: }
+[; ;src/lcd_driver.c: 191: }
 [e :UE 280 ]
 }
 "193
-[; ;lcd_driver.c: 193: uint8_t LCD_isInit(void){
+[; ;src/lcd_driver.c: 193: uint8_t LCD_isInit(void){
 [v _LCD_isInit `(uc ~T0 @X0 1 ef ]
 {
 [e :U _LCD_isInit ]
 [f ]
 "194
-[; ;lcd_driver.c: 194:     return init_complete;
+[; ;src/lcd_driver.c: 194:     return init_complete;
 [e ) _init_complete ]
 [e $UE 281  ]
 "195
-[; ;lcd_driver.c: 195: }
+[; ;src/lcd_driver.c: 195: }
 [e :UE 281 ]
 }
 "197
-[; ;lcd_driver.c: 197: uint8_t LCD_clear_display(void){
+[; ;src/lcd_driver.c: 197: uint8_t LCD_clear_display(void){
 [v _LCD_clear_display `(uc ~T0 @X0 1 ef ]
 {
 [e :U _LCD_clear_display ]
 [f ]
 "198
-[; ;lcd_driver.c: 198:     if((~current_entry_mode & (1u << 4u))){
+[; ;src/lcd_driver.c: 198:     if((~current_entry_mode & (1u << 4u))){
 [e $ ! != & -> ~ -> _current_entry_mode `i `ui << -> 1 `ui -> 4 `ui -> -> 0 `i `ui 283  ]
 {
 "199
-[; ;lcd_driver.c: 199:         LCD_write_instr_byte_4bit(0x01u);
+[; ;src/lcd_driver.c: 199:         LCD_write_instr_byte_4bit(0x01u);
 [e ( _LCD_write_instr_byte_4bit (1 -> -> 1 `ui `uc ]
 "200
-[; ;lcd_driver.c: 200:     } else{
+[; ;src/lcd_driver.c: 200:     } else{
 }
 [e $U 284  ]
 [e :U 283 ]
 {
 "201
-[; ;lcd_driver.c: 201:         LCD_write_instr_byte_8bit(0x01u);
+[; ;src/lcd_driver.c: 201:         LCD_write_instr_byte_8bit(0x01u);
 [e ( _LCD_write_instr_byte_8bit (1 -> -> 1 `ui `uc ]
 "202
-[; ;lcd_driver.c: 202:     }
+[; ;src/lcd_driver.c: 202:     }
 }
 [e :U 284 ]
 "204
-[; ;lcd_driver.c: 204:     _delay((unsigned long)((10)*(40000000u/4000.0)));
+[; ;src/lcd_driver.c: 204:     _delay((unsigned long)((10)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "206
-[; ;lcd_driver.c: 206:     return 1;
+[; ;src/lcd_driver.c: 206:     return 1;
 [e ) -> -> 1 `i `uc ]
 [e $UE 282  ]
 "207
-[; ;lcd_driver.c: 207: }
+[; ;src/lcd_driver.c: 207: }
 [e :UE 282 ]
 }
 "209
-[; ;lcd_driver.c: 209: uint8_t LCD_return_home(void){
+[; ;src/lcd_driver.c: 209: uint8_t LCD_return_home(void){
 [v _LCD_return_home `(uc ~T0 @X0 1 ef ]
 {
 [e :U _LCD_return_home ]
 [f ]
 "210
-[; ;lcd_driver.c: 210:     if(!(current_entry_mode & (1u << 4u))){
+[; ;src/lcd_driver.c: 210:     if(!(current_entry_mode & (1u << 4u))){
 [e $ ! ! != & -> _current_entry_mode `ui << -> 1 `ui -> 4 `ui -> -> 0 `i `ui 286  ]
 {
 "211
-[; ;lcd_driver.c: 211:         LCD_write_instr_byte_4bit(0x02u);
+[; ;src/lcd_driver.c: 211:         LCD_write_instr_byte_4bit(0x02u);
 [e ( _LCD_write_instr_byte_4bit (1 -> -> 2 `ui `uc ]
 "212
-[; ;lcd_driver.c: 212:     } else{
+[; ;src/lcd_driver.c: 212:     } else{
 }
 [e $U 287  ]
 [e :U 286 ]
 {
 "213
-[; ;lcd_driver.c: 213:         LCD_write_instr_byte_8bit(0x02u);
+[; ;src/lcd_driver.c: 213:         LCD_write_instr_byte_8bit(0x02u);
 [e ( _LCD_write_instr_byte_8bit (1 -> -> 2 `ui `uc ]
 "214
-[; ;lcd_driver.c: 214:     }
+[; ;src/lcd_driver.c: 214:     }
 }
 [e :U 287 ]
 "216
-[; ;lcd_driver.c: 216:     return 1;
+[; ;src/lcd_driver.c: 216:     return 1;
 [e ) -> -> 1 `i `uc ]
 [e $UE 285  ]
 "219
-[; ;lcd_driver.c: 219:     address_counter = 0x00;
+[; ;src/lcd_driver.c: 219:     address_counter = 0x00;
 [e = _address_counter -> -> 0 `i `uc ]
 "221
-[; ;lcd_driver.c: 221:     return 1;
+[; ;src/lcd_driver.c: 221:     return 1;
 [e ) -> -> 1 `i `uc ]
 [e $UE 285  ]
 "222
-[; ;lcd_driver.c: 222: }
+[; ;src/lcd_driver.c: 222: }
 [e :UE 285 ]
 }
 "224
-[; ;lcd_driver.c: 224: uint8_t LCD_read_current_address_counter(void){
+[; ;src/lcd_driver.c: 224: uint8_t LCD_read_current_address_counter(void){
 [v _LCD_read_current_address_counter `(uc ~T0 @X0 1 ef ]
 {
 [e :U _LCD_read_current_address_counter ]
 [f ]
 "226
-[; ;lcd_driver.c: 226:     if(!init_complete) { return 0; }
+[; ;src/lcd_driver.c: 226:     if(!init_complete) { return 0; }
 [e $ ! ! != -> _init_complete `i -> 0 `i 289  ]
 {
 [e ) -> -> 0 `i `uc ]
@@ -980,27 +980,27 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 289 ]
 "228
-[; ;lcd_driver.c: 228:     (LATCbits.LATC0 = 0u);
+[; ;src/lcd_driver.c: 228:     (LATCbits.LATC0 = 0u);
 [e = . . _LATCbits 0 0 -> -> 0 `ui `uc ]
 "229
-[; ;lcd_driver.c: 229:     (LATCbits.LATC1 = 1u);
+[; ;src/lcd_driver.c: 229:     (LATCbits.LATC1 = 1u);
 [e = . . _LATCbits 0 1 -> -> 1 `ui `uc ]
 "230
-[; ;lcd_driver.c: 230:     LCD_enable_toggle();
+[; ;src/lcd_driver.c: 230:     LCD_enable_toggle();
 [e ( _LCD_enable_toggle ..  ]
 "231
-[; ;lcd_driver.c: 231:     address_counter = PORTD & 0x7F;
+[; ;src/lcd_driver.c: 231:     address_counter = PORTD & 0x7F;
 [e = _address_counter -> & -> _PORTD `i -> 127 `i `uc ]
 "233
-[; ;lcd_driver.c: 233:     return address_counter;
+[; ;src/lcd_driver.c: 233:     return address_counter;
 [e ) _address_counter ]
 [e $UE 288  ]
 "234
-[; ;lcd_driver.c: 234: }
+[; ;src/lcd_driver.c: 234: }
 [e :UE 288 ]
 }
 "237
-[; ;lcd_driver.c: 237: uint8_t LCD_set_cursor_position(uint8_t line, uint8_t pos_on_line){
+[; ;src/lcd_driver.c: 237: uint8_t LCD_set_cursor_position(uint8_t line, uint8_t pos_on_line){
 [v _LCD_set_cursor_position `(uc ~T0 @X0 1 ef2`uc`uc ]
 {
 [e :U _LCD_set_cursor_position ]
@@ -1008,104 +1008,104 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _pos_on_line `uc ~T0 @X0 1 r2 ]
 [f ]
 "239
-[; ;lcd_driver.c: 239:     if(line > 2u || pos_on_line > 2u * 16u){
+[; ;src/lcd_driver.c: 239:     if(line > 2u || pos_on_line > 2u * 16u){
 [e $ ! || > -> _line `ui -> 2 `ui > -> _pos_on_line `ui * -> 2 `ui -> 16 `ui 291  ]
 {
 "240
-[; ;lcd_driver.c: 240:         return 0;
+[; ;src/lcd_driver.c: 240:         return 0;
 [e ) -> -> 0 `i `uc ]
 [e $UE 290  ]
 "241
-[; ;lcd_driver.c: 241:     }
+[; ;src/lcd_driver.c: 241:     }
 }
 [e :U 291 ]
 "243
-[; ;lcd_driver.c: 243:     uint8_t ddram_addr;
+[; ;src/lcd_driver.c: 243:     uint8_t ddram_addr;
 [v _ddram_addr `uc ~T0 @X0 1 a ]
 "246
-[; ;lcd_driver.c: 246:     if(!shift_mode && disp_16x2){
+[; ;src/lcd_driver.c: 246:     if(!shift_mode && disp_16x2){
 [e $ ! && ! != -> _shift_mode `i -> 0 `i != -> _disp_16x2 `i -> 0 `i 292  ]
 {
 "248
-[; ;lcd_driver.c: 248:         if(line == 1u && pos_on_line < 16u){
+[; ;src/lcd_driver.c: 248:         if(line == 1u && pos_on_line < 16u){
 [e $ ! && == -> _line `ui -> 1 `ui < -> _pos_on_line `ui -> 16 `ui 293  ]
 {
 "249
-[; ;lcd_driver.c: 249:             ddram_addr = 0x00u + pos_on_line - 1;
+[; ;src/lcd_driver.c: 249:             ddram_addr = 0x00u + pos_on_line - 1;
 [e = _ddram_addr -> - + -> 0 `ui -> _pos_on_line `ui -> -> 1 `i `ui `uc ]
 "251
-[; ;lcd_driver.c: 251:         } else if(line == 2u && pos_on_line < 16u){
+[; ;src/lcd_driver.c: 251:         } else if(line == 2u && pos_on_line < 16u){
 }
 [e $U 294  ]
 [e :U 293 ]
 [e $ ! && == -> _line `ui -> 2 `ui < -> _pos_on_line `ui -> 16 `ui 295  ]
 {
 "252
-[; ;lcd_driver.c: 252:             ddram_addr = 0x40u + pos_on_line - 1;
+[; ;src/lcd_driver.c: 252:             ddram_addr = 0x40u + pos_on_line - 1;
 [e = _ddram_addr -> - + -> 64 `ui -> _pos_on_line `ui -> -> 1 `i `ui `uc ]
 "254
-[; ;lcd_driver.c: 254:         } else if(line == 1u && pos_on_line > 16u){
+[; ;src/lcd_driver.c: 254:         } else if(line == 1u && pos_on_line > 16u){
 }
 [e $U 296  ]
 [e :U 295 ]
 [e $ ! && == -> _line `ui -> 1 `ui > -> _pos_on_line `ui -> 16 `ui 297  ]
 {
 "255
-[; ;lcd_driver.c: 255:             ddram_addr = 0x40u + pos_on_line - 16 - 1;
+[; ;src/lcd_driver.c: 255:             ddram_addr = 0x40u + pos_on_line - 16 - 1;
 [e = _ddram_addr -> - - + -> 64 `ui -> _pos_on_line `ui -> -> 16 `i `ui -> -> 1 `i `ui `uc ]
 "257
-[; ;lcd_driver.c: 257:         } else{
+[; ;src/lcd_driver.c: 257:         } else{
 }
 [e $U 298  ]
 [e :U 297 ]
 {
 "258
-[; ;lcd_driver.c: 258:             return 0;
+[; ;src/lcd_driver.c: 258:             return 0;
 [e ) -> -> 0 `i `uc ]
 [e $UE 290  ]
 "259
-[; ;lcd_driver.c: 259:         }
+[; ;src/lcd_driver.c: 259:         }
 }
 [e :U 298 ]
 [e :U 296 ]
 [e :U 294 ]
 "260
-[; ;lcd_driver.c: 260:     }
+[; ;src/lcd_driver.c: 260:     }
 }
 [e :U 292 ]
 "262
-[; ;lcd_driver.c: 262:     if((~current_entry_mode & (1u << 4u))){
+[; ;src/lcd_driver.c: 262:     if((~current_entry_mode & (1u << 4u))){
 [e $ ! != & -> ~ -> _current_entry_mode `i `ui << -> 1 `ui -> 4 `ui -> -> 0 `i `ui 299  ]
 {
 "263
-[; ;lcd_driver.c: 263:         LCD_write_instr_byte_4bit(0x80u | ddram_addr);
+[; ;src/lcd_driver.c: 263:         LCD_write_instr_byte_4bit(0x80u | ddram_addr);
 [e ( _LCD_write_instr_byte_4bit (1 -> | -> 128 `ui -> _ddram_addr `ui `uc ]
 "264
-[; ;lcd_driver.c: 264:     } else{
+[; ;src/lcd_driver.c: 264:     } else{
 }
 [e $U 300  ]
 [e :U 299 ]
 {
 "265
-[; ;lcd_driver.c: 265:         LCD_write_instr_byte_8bit(0x80u | ddram_addr);
+[; ;src/lcd_driver.c: 265:         LCD_write_instr_byte_8bit(0x80u | ddram_addr);
 [e ( _LCD_write_instr_byte_8bit (1 -> | -> 128 `ui -> _ddram_addr `ui `uc ]
 "266
-[; ;lcd_driver.c: 266:     }
+[; ;src/lcd_driver.c: 266:     }
 }
 [e :U 300 ]
 "268
-[; ;lcd_driver.c: 268:     address_counter = ddram_addr;
+[; ;src/lcd_driver.c: 268:     address_counter = ddram_addr;
 [e = _address_counter _ddram_addr ]
 "270
-[; ;lcd_driver.c: 270:     return 1;
+[; ;src/lcd_driver.c: 270:     return 1;
 [e ) -> -> 1 `i `uc ]
 [e $UE 290  ]
 "271
-[; ;lcd_driver.c: 271: }
+[; ;src/lcd_driver.c: 271: }
 [e :UE 290 ]
 }
 "274
-[; ;lcd_driver.c: 274: uint8_t LCD_write_characters(char * toWrite, uint8_t size){
+[; ;src/lcd_driver.c: 274: uint8_t LCD_write_characters(char * toWrite, uint8_t size){
 [v _LCD_write_characters `(uc ~T0 @X0 1 ef2`*uc`uc ]
 {
 [e :U _LCD_write_characters ]
@@ -1113,7 +1113,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _size `uc ~T0 @X0 1 r2 ]
 [f ]
 "276
-[; ;lcd_driver.c: 276:     if(size > 80u) { return 0; }
+[; ;src/lcd_driver.c: 276:     if(size > 80u) { return 0; }
 [e $ ! > -> _size `ui -> 80 `ui 302  ]
 {
 [e ) -> -> 0 `i `uc ]
@@ -1121,7 +1121,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 302 ]
 "279
-[; ;lcd_driver.c: 279:     if(!init_complete) { return 0; }
+[; ;src/lcd_driver.c: 279:     if(!init_complete) { return 0; }
 [e $ ! ! != -> _init_complete `i -> 0 `i 303  ]
 {
 [e ) -> -> 0 `i `uc ]
@@ -1129,7 +1129,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 303 ]
 "282
-[; ;lcd_driver.c: 282:     for(uint8_t i=0u; i<size; i++){
+[; ;src/lcd_driver.c: 282:     for(uint8_t i=0u; i<size; i++){
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `ui `uc ]
@@ -1137,28 +1137,28 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 304 ]
 {
 "283
-[; ;lcd_driver.c: 283:         LCD_wait_for_BF();
+[; ;src/lcd_driver.c: 283:         LCD_wait_for_BF();
 [e ( _LCD_wait_for_BF ..  ]
 "285
-[; ;lcd_driver.c: 285:         (TRISD &= 0x0Fu);
+[; ;src/lcd_driver.c: 285:         (TRISD &= 0x0Fu);
 [e =& _TRISD -> -> 15 `ui `Vuc ]
 "286
-[; ;lcd_driver.c: 286:         (LATCbits.LATC0 = 1u);
+[; ;src/lcd_driver.c: 286:         (LATCbits.LATC0 = 1u);
 [e = . . _LATCbits 0 0 -> -> 1 `ui `uc ]
 "287
-[; ;lcd_driver.c: 287:         (LATCbits.LATC1 = 0u);
+[; ;src/lcd_driver.c: 287:         (LATCbits.LATC1 = 0u);
 [e = . . _LATCbits 0 1 -> -> 0 `ui `uc ]
 "288
-[; ;lcd_driver.c: 288:         PORTD = toWrite[i];
+[; ;src/lcd_driver.c: 288:         PORTD = toWrite[i];
 [e = _PORTD -> *U + _toWrite * -> _i `ux -> -> # *U _toWrite `ui `ux `uc ]
 "289
-[; ;lcd_driver.c: 289:         LCD_enable_toggle();
+[; ;src/lcd_driver.c: 289:         LCD_enable_toggle();
 [e ( _LCD_enable_toggle ..  ]
 "291
-[; ;lcd_driver.c: 291:         address_counter++;
+[; ;src/lcd_driver.c: 291:         address_counter++;
 [e ++ _address_counter -> -> 1 `i `uc ]
 "292
-[; ;lcd_driver.c: 292:     }
+[; ;src/lcd_driver.c: 292:     }
 }
 [e ++ _i -> -> 1 `i `uc ]
 [e :U 307 ]
@@ -1166,21 +1166,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 305 ]
 }
 "294
-[; ;lcd_driver.c: 294:     return 1;
+[; ;src/lcd_driver.c: 294:     return 1;
 [e ) -> -> 1 `i `uc ]
 [e $UE 301  ]
 "295
-[; ;lcd_driver.c: 295: }
+[; ;src/lcd_driver.c: 295: }
 [e :UE 301 ]
 }
 "297
-[; ;lcd_driver.c: 297: uint8_t LCD_turn_off_cursor(void){
+[; ;src/lcd_driver.c: 297: uint8_t LCD_turn_off_cursor(void){
 [v _LCD_turn_off_cursor `(uc ~T0 @X0 1 ef ]
 {
 [e :U _LCD_turn_off_cursor ]
 [f ]
 "299
-[; ;lcd_driver.c: 299:     if(!init_complete) { return 0; }
+[; ;src/lcd_driver.c: 299:     if(!init_complete) { return 0; }
 [e $ ! ! != -> _init_complete `i -> 0 `i 309  ]
 {
 [e ) -> -> 0 `i `uc ]
@@ -1188,42 +1188,42 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 309 ]
 "302
-[; ;lcd_driver.c: 302:     LCD_wait_for_BF();
+[; ;src/lcd_driver.c: 302:     LCD_wait_for_BF();
 [e ( _LCD_wait_for_BF ..  ]
 "305
-[; ;lcd_driver.c: 305:     (TRISD &= 0x0Fu);
+[; ;src/lcd_driver.c: 305:     (TRISD &= 0x0Fu);
 [e =& _TRISD -> -> 15 `ui `Vuc ]
 "306
-[; ;lcd_driver.c: 306:     (LATCbits.LATC0 = 0u);
+[; ;src/lcd_driver.c: 306:     (LATCbits.LATC0 = 0u);
 [e = . . _LATCbits 0 0 -> -> 0 `ui `uc ]
 "307
-[; ;lcd_driver.c: 307:     (LATCbits.LATC1 = 0u);
+[; ;src/lcd_driver.c: 307:     (LATCbits.LATC1 = 0u);
 [e = . . _LATCbits 0 1 -> -> 0 `ui `uc ]
 "310
-[; ;lcd_driver.c: 310:     PORTD = current_disp_ctrl & ~(0x02u);
+[; ;src/lcd_driver.c: 310:     PORTD = current_disp_ctrl & ~(0x02u);
 [e = _PORTD -> & -> _current_disp_ctrl `ui ~ -> 2 `ui `uc ]
 "311
-[; ;lcd_driver.c: 311:     LCD_enable_toggle();
+[; ;src/lcd_driver.c: 311:     LCD_enable_toggle();
 [e ( _LCD_enable_toggle ..  ]
 "313
-[; ;lcd_driver.c: 313:     current_disp_ctrl &= ~(0x02u);
+[; ;src/lcd_driver.c: 313:     current_disp_ctrl &= ~(0x02u);
 [e =& _current_disp_ctrl -> ~ -> 2 `ui `uc ]
 "315
-[; ;lcd_driver.c: 315:     return 1;
+[; ;src/lcd_driver.c: 315:     return 1;
 [e ) -> -> 1 `i `uc ]
 [e $UE 308  ]
 "316
-[; ;lcd_driver.c: 316: }
+[; ;src/lcd_driver.c: 316: }
 [e :UE 308 ]
 }
 "318
-[; ;lcd_driver.c: 318: uint8_t LCD_turn_on_cursor(void){
+[; ;src/lcd_driver.c: 318: uint8_t LCD_turn_on_cursor(void){
 [v _LCD_turn_on_cursor `(uc ~T0 @X0 1 ef ]
 {
 [e :U _LCD_turn_on_cursor ]
 [f ]
 "320
-[; ;lcd_driver.c: 320:     if(!init_complete) { return 0; }
+[; ;src/lcd_driver.c: 320:     if(!init_complete) { return 0; }
 [e $ ! ! != -> _init_complete `i -> 0 `i 311  ]
 {
 [e ) -> -> 0 `i `uc ]
@@ -1231,373 +1231,373 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 311 ]
 "323
-[; ;lcd_driver.c: 323:     LCD_wait_for_BF();
+[; ;src/lcd_driver.c: 323:     LCD_wait_for_BF();
 [e ( _LCD_wait_for_BF ..  ]
 "326
-[; ;lcd_driver.c: 326:     (TRISD &= 0x0Fu);
+[; ;src/lcd_driver.c: 326:     (TRISD &= 0x0Fu);
 [e =& _TRISD -> -> 15 `ui `Vuc ]
 "327
-[; ;lcd_driver.c: 327:     (LATCbits.LATC0 = 0u);
+[; ;src/lcd_driver.c: 327:     (LATCbits.LATC0 = 0u);
 [e = . . _LATCbits 0 0 -> -> 0 `ui `uc ]
 "328
-[; ;lcd_driver.c: 328:     (LATCbits.LATC1 = 0u);
+[; ;src/lcd_driver.c: 328:     (LATCbits.LATC1 = 0u);
 [e = . . _LATCbits 0 1 -> -> 0 `ui `uc ]
 "331
-[; ;lcd_driver.c: 331:     PORTD = current_disp_ctrl | 0x02u;
+[; ;src/lcd_driver.c: 331:     PORTD = current_disp_ctrl | 0x02u;
 [e = _PORTD -> | -> _current_disp_ctrl `ui -> 2 `ui `uc ]
 "332
-[; ;lcd_driver.c: 332:     LCD_enable_toggle();
+[; ;src/lcd_driver.c: 332:     LCD_enable_toggle();
 [e ( _LCD_enable_toggle ..  ]
 "334
-[; ;lcd_driver.c: 334:     current_disp_ctrl |= 0x02u;
+[; ;src/lcd_driver.c: 334:     current_disp_ctrl |= 0x02u;
 [e =| _current_disp_ctrl -> -> 2 `ui `uc ]
 "336
-[; ;lcd_driver.c: 336:     return 1;
+[; ;src/lcd_driver.c: 336:     return 1;
 [e ) -> -> 1 `i `uc ]
 [e $UE 310  ]
 "337
-[; ;lcd_driver.c: 337: }
+[; ;src/lcd_driver.c: 337: }
 [e :UE 310 ]
 }
 "341
-[; ;lcd_driver.c: 341: void static LCD_enable_toggle_amazonLCD(void){
+[; ;src/lcd_driver.c: 341: void static LCD_enable_toggle_amazonLCD(void){
 [v _LCD_enable_toggle_amazonLCD `(v ~T0 @X0 1 sf ]
 {
 [e :U _LCD_enable_toggle_amazonLCD ]
 [f ]
 "342
-[; ;lcd_driver.c: 342:     (LATCbits.LATC2 = 0u);
+[; ;src/lcd_driver.c: 342:     (LATCbits.LATC2 = 0u);
 [e = . . _LATCbits 0 2 -> -> 0 `ui `uc ]
 "343
-[; ;lcd_driver.c: 343:     _delay((unsigned long)((1u)*(40000000u/4000000.0)));
+[; ;src/lcd_driver.c: 343:     _delay((unsigned long)((1u)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 1 `ui `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
 "344
-[; ;lcd_driver.c: 344:     (LATCbits.LATC2 = 1u);
+[; ;src/lcd_driver.c: 344:     (LATCbits.LATC2 = 1u);
 [e = . . _LATCbits 0 2 -> -> 1 `ui `uc ]
 "345
-[; ;lcd_driver.c: 345:     _delay((unsigned long)((1u)*(40000000u/4000000.0)));
+[; ;src/lcd_driver.c: 345:     _delay((unsigned long)((1u)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 1 `ui `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
 "346
-[; ;lcd_driver.c: 346:     (LATCbits.LATC2 = 0u);
+[; ;src/lcd_driver.c: 346:     (LATCbits.LATC2 = 0u);
 [e = . . _LATCbits 0 2 -> -> 0 `ui `uc ]
 "347
-[; ;lcd_driver.c: 347:     _delay((unsigned long)((100u)*(40000000u/4000000.0)));
+[; ;src/lcd_driver.c: 347:     _delay((unsigned long)((100u)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 100 `ui `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
 "348
-[; ;lcd_driver.c: 348: }
+[; ;src/lcd_driver.c: 348: }
 [e :UE 312 ]
 }
 "350
-[; ;lcd_driver.c: 350: void LCD_write_data_byte_4bit_amazonLCD(uint8_t data){
+[; ;src/lcd_driver.c: 350: void LCD_write_data_byte_4bit_amazonLCD(uint8_t data){
 [v _LCD_write_data_byte_4bit_amazonLCD `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _LCD_write_data_byte_4bit_amazonLCD ]
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
 "352
-[; ;lcd_driver.c: 352:     (TRISC = 0xF8);
+[; ;src/lcd_driver.c: 352:     (TRISC = 0xF8);
 [e = _TRISC -> -> 248 `i `uc ]
 "353
-[; ;lcd_driver.c: 353:     (TRISD &= 0x0Fu);
+[; ;src/lcd_driver.c: 353:     (TRISD &= 0x0Fu);
 [e =& _TRISD -> -> 15 `ui `Vuc ]
 "354
-[; ;lcd_driver.c: 354:     (LATCbits.LATC0 = 1u);
+[; ;src/lcd_driver.c: 354:     (LATCbits.LATC0 = 1u);
 [e = . . _LATCbits 0 0 -> -> 1 `ui `uc ]
 "355
-[; ;lcd_driver.c: 355:     (LATCbits.LATC1 = 0u);
+[; ;src/lcd_driver.c: 355:     (LATCbits.LATC1 = 0u);
 [e = . . _LATCbits 0 1 -> -> 0 `ui `uc ]
 "358
-[; ;lcd_driver.c: 358:     PORTD = (PORTD & 0x0F) | (data & 0xF0);
+[; ;src/lcd_driver.c: 358:     PORTD = (PORTD & 0x0F) | (data & 0xF0);
 [e = _PORTD -> | & -> _PORTD `i -> 15 `i & -> _data `i -> 240 `i `uc ]
 "359
-[; ;lcd_driver.c: 359:     LCD_enable_toggle_amazonLCD();
+[; ;src/lcd_driver.c: 359:     LCD_enable_toggle_amazonLCD();
 [e ( _LCD_enable_toggle_amazonLCD ..  ]
 "360
-[; ;lcd_driver.c: 360:     PORTD = (PORTD & 0x0F) | ((data<<4) & 0xF0);
+[; ;src/lcd_driver.c: 360:     PORTD = (PORTD & 0x0F) | ((data<<4) & 0xF0);
 [e = _PORTD -> | & -> _PORTD `i -> 15 `i & << -> _data `i -> 4 `i -> 240 `i `uc ]
 "361
-[; ;lcd_driver.c: 361:     LCD_enable_toggle_amazonLCD();
+[; ;src/lcd_driver.c: 361:     LCD_enable_toggle_amazonLCD();
 [e ( _LCD_enable_toggle_amazonLCD ..  ]
 "362
-[; ;lcd_driver.c: 362: }
+[; ;src/lcd_driver.c: 362: }
 [e :UE 313 ]
 }
 "364
-[; ;lcd_driver.c: 364: void LCD_write_data_byte_8bit_amazonLCD(uint8_t data){
+[; ;src/lcd_driver.c: 364: void LCD_write_data_byte_8bit_amazonLCD(uint8_t data){
 [v _LCD_write_data_byte_8bit_amazonLCD `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _LCD_write_data_byte_8bit_amazonLCD ]
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
 "366
-[; ;lcd_driver.c: 366:     (TRISC = 0xF8);
+[; ;src/lcd_driver.c: 366:     (TRISC = 0xF8);
 [e = _TRISC -> -> 248 `i `uc ]
 "367
-[; ;lcd_driver.c: 367:     (TRISD = 0x00u);
+[; ;src/lcd_driver.c: 367:     (TRISD = 0x00u);
 [e = _TRISD -> -> 0 `ui `uc ]
 "368
-[; ;lcd_driver.c: 368:     (LATCbits.LATC0 = 1u);
+[; ;src/lcd_driver.c: 368:     (LATCbits.LATC0 = 1u);
 [e = . . _LATCbits 0 0 -> -> 1 `ui `uc ]
 "369
-[; ;lcd_driver.c: 369:     (LATCbits.LATC1 = 0u);
+[; ;src/lcd_driver.c: 369:     (LATCbits.LATC1 = 0u);
 [e = . . _LATCbits 0 1 -> -> 0 `ui `uc ]
 "372
-[; ;lcd_driver.c: 372:     PORTD = data;
+[; ;src/lcd_driver.c: 372:     PORTD = data;
 [e = _PORTD _data ]
 "373
-[; ;lcd_driver.c: 373:     LCD_enable_toggle_amazonLCD();
+[; ;src/lcd_driver.c: 373:     LCD_enable_toggle_amazonLCD();
 [e ( _LCD_enable_toggle_amazonLCD ..  ]
 "374
-[; ;lcd_driver.c: 374: }
+[; ;src/lcd_driver.c: 374: }
 [e :UE 314 ]
 }
 "376
-[; ;lcd_driver.c: 376: void LCD_write_instr_byte_4bit_amazonLCD(uint8_t instr){
+[; ;src/lcd_driver.c: 376: void LCD_write_instr_byte_4bit_amazonLCD(uint8_t instr){
 [v _LCD_write_instr_byte_4bit_amazonLCD `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _LCD_write_instr_byte_4bit_amazonLCD ]
 [v _instr `uc ~T0 @X0 1 r1 ]
 [f ]
 "378
-[; ;lcd_driver.c: 378:     (TRISC = 0xF8);
+[; ;src/lcd_driver.c: 378:     (TRISC = 0xF8);
 [e = _TRISC -> -> 248 `i `uc ]
 "379
-[; ;lcd_driver.c: 379:     (TRISD &= 0x0Fu);
+[; ;src/lcd_driver.c: 379:     (TRISD &= 0x0Fu);
 [e =& _TRISD -> -> 15 `ui `Vuc ]
 "380
-[; ;lcd_driver.c: 380:     (LATCbits.LATC0 = 0u);
+[; ;src/lcd_driver.c: 380:     (LATCbits.LATC0 = 0u);
 [e = . . _LATCbits 0 0 -> -> 0 `ui `uc ]
 "381
-[; ;lcd_driver.c: 381:     (LATCbits.LATC1 = 0u);
+[; ;src/lcd_driver.c: 381:     (LATCbits.LATC1 = 0u);
 [e = . . _LATCbits 0 1 -> -> 0 `ui `uc ]
 "384
-[; ;lcd_driver.c: 384:     PORTD = (PORTD & 0x0F) | (instr & 0xF0);
+[; ;src/lcd_driver.c: 384:     PORTD = (PORTD & 0x0F) | (instr & 0xF0);
 [e = _PORTD -> | & -> _PORTD `i -> 15 `i & -> _instr `i -> 240 `i `uc ]
 "385
-[; ;lcd_driver.c: 385:     LCD_enable_toggle_amazonLCD();
+[; ;src/lcd_driver.c: 385:     LCD_enable_toggle_amazonLCD();
 [e ( _LCD_enable_toggle_amazonLCD ..  ]
 "386
-[; ;lcd_driver.c: 386:     PORTD = (PORTD & 0x0F) | ((instr<<4) & 0xF0);
+[; ;src/lcd_driver.c: 386:     PORTD = (PORTD & 0x0F) | ((instr<<4) & 0xF0);
 [e = _PORTD -> | & -> _PORTD `i -> 15 `i & << -> _instr `i -> 4 `i -> 240 `i `uc ]
 "387
-[; ;lcd_driver.c: 387:     LCD_enable_toggle_amazonLCD();
+[; ;src/lcd_driver.c: 387:     LCD_enable_toggle_amazonLCD();
 [e ( _LCD_enable_toggle_amazonLCD ..  ]
 "388
-[; ;lcd_driver.c: 388: }
+[; ;src/lcd_driver.c: 388: }
 [e :UE 315 ]
 }
 "390
-[; ;lcd_driver.c: 390: void LCD_write_instr_byte_8bit_amazonLCD(uint8_t instr){
+[; ;src/lcd_driver.c: 390: void LCD_write_instr_byte_8bit_amazonLCD(uint8_t instr){
 [v _LCD_write_instr_byte_8bit_amazonLCD `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _LCD_write_instr_byte_8bit_amazonLCD ]
 [v _instr `uc ~T0 @X0 1 r1 ]
 [f ]
 "392
-[; ;lcd_driver.c: 392:     (TRISC = 0xF8);
+[; ;src/lcd_driver.c: 392:     (TRISC = 0xF8);
 [e = _TRISC -> -> 248 `i `uc ]
 "393
-[; ;lcd_driver.c: 393:     (TRISD = 0x00u);
+[; ;src/lcd_driver.c: 393:     (TRISD = 0x00u);
 [e = _TRISD -> -> 0 `ui `uc ]
 "394
-[; ;lcd_driver.c: 394:     (LATCbits.LATC0 = 0u);
+[; ;src/lcd_driver.c: 394:     (LATCbits.LATC0 = 0u);
 [e = . . _LATCbits 0 0 -> -> 0 `ui `uc ]
 "395
-[; ;lcd_driver.c: 395:     (LATCbits.LATC1 = 0u);
+[; ;src/lcd_driver.c: 395:     (LATCbits.LATC1 = 0u);
 [e = . . _LATCbits 0 1 -> -> 0 `ui `uc ]
 "398
-[; ;lcd_driver.c: 398:     PORTD = instr;
+[; ;src/lcd_driver.c: 398:     PORTD = instr;
 [e = _PORTD _instr ]
 "399
-[; ;lcd_driver.c: 399:     LCD_enable_toggle_amazonLCD();
+[; ;src/lcd_driver.c: 399:     LCD_enable_toggle_amazonLCD();
 [e ( _LCD_enable_toggle_amazonLCD ..  ]
 "400
-[; ;lcd_driver.c: 400: }
+[; ;src/lcd_driver.c: 400: }
 [e :UE 316 ]
 }
 "402
-[; ;lcd_driver.c: 402: void LCD_write_instr_nibble_4bit_amazonLCD(uint8_t instr){
+[; ;src/lcd_driver.c: 402: void LCD_write_instr_nibble_4bit_amazonLCD(uint8_t instr){
 [v _LCD_write_instr_nibble_4bit_amazonLCD `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _LCD_write_instr_nibble_4bit_amazonLCD ]
 [v _instr `uc ~T0 @X0 1 r1 ]
 [f ]
 "404
-[; ;lcd_driver.c: 404:     (TRISC = 0xF8);
+[; ;src/lcd_driver.c: 404:     (TRISC = 0xF8);
 [e = _TRISC -> -> 248 `i `uc ]
 "405
-[; ;lcd_driver.c: 405:     (TRISD &= 0x0Fu);
+[; ;src/lcd_driver.c: 405:     (TRISD &= 0x0Fu);
 [e =& _TRISD -> -> 15 `ui `Vuc ]
 "406
-[; ;lcd_driver.c: 406:     (LATCbits.LATC0 = 0u);
+[; ;src/lcd_driver.c: 406:     (LATCbits.LATC0 = 0u);
 [e = . . _LATCbits 0 0 -> -> 0 `ui `uc ]
 "407
-[; ;lcd_driver.c: 407:     (LATCbits.LATC1 = 0u);
+[; ;src/lcd_driver.c: 407:     (LATCbits.LATC1 = 0u);
 [e = . . _LATCbits 0 1 -> -> 0 `ui `uc ]
 "410
-[; ;lcd_driver.c: 410:     PORTD = (PORTD & 0x0F) | ((instr<<4) & 0xF0);
+[; ;src/lcd_driver.c: 410:     PORTD = (PORTD & 0x0F) | ((instr<<4) & 0xF0);
 [e = _PORTD -> | & -> _PORTD `i -> 15 `i & << -> _instr `i -> 4 `i -> 240 `i `uc ]
 "411
-[; ;lcd_driver.c: 411:     LCD_enable_toggle_amazonLCD();
+[; ;src/lcd_driver.c: 411:     LCD_enable_toggle_amazonLCD();
 [e ( _LCD_enable_toggle_amazonLCD ..  ]
 "412
-[; ;lcd_driver.c: 412: }
+[; ;src/lcd_driver.c: 412: }
 [e :UE 317 ]
 }
 "414
-[; ;lcd_driver.c: 414: uint8_t LCD_clear_display_amazonLCD(void){
+[; ;src/lcd_driver.c: 414: uint8_t LCD_clear_display_amazonLCD(void){
 [v _LCD_clear_display_amazonLCD `(uc ~T0 @X0 1 ef ]
 {
 [e :U _LCD_clear_display_amazonLCD ]
 [f ]
 "415
-[; ;lcd_driver.c: 415:     if((~current_entry_mode & (1u << 4u))){
+[; ;src/lcd_driver.c: 415:     if((~current_entry_mode & (1u << 4u))){
 [e $ ! != & -> ~ -> _current_entry_mode `i `ui << -> 1 `ui -> 4 `ui -> -> 0 `i `ui 319  ]
 {
 "416
-[; ;lcd_driver.c: 416:         LCD_write_instr_byte_4bit_amazonLCD(0x01u);
+[; ;src/lcd_driver.c: 416:         LCD_write_instr_byte_4bit_amazonLCD(0x01u);
 [e ( _LCD_write_instr_byte_4bit_amazonLCD (1 -> -> 1 `ui `uc ]
 "417
-[; ;lcd_driver.c: 417:     } else{
+[; ;src/lcd_driver.c: 417:     } else{
 }
 [e $U 320  ]
 [e :U 319 ]
 {
 "418
-[; ;lcd_driver.c: 418:         LCD_write_instr_byte_8bit_amazonLCD(0x01u);
+[; ;src/lcd_driver.c: 418:         LCD_write_instr_byte_8bit_amazonLCD(0x01u);
 [e ( _LCD_write_instr_byte_8bit_amazonLCD (1 -> -> 1 `ui `uc ]
 "419
-[; ;lcd_driver.c: 419:     }
+[; ;src/lcd_driver.c: 419:     }
 }
 [e :U 320 ]
 "420
-[; ;lcd_driver.c: 420:     _delay((unsigned long)((2)*(40000000u/4000.0)));
+[; ;src/lcd_driver.c: 420:     _delay((unsigned long)((2)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 2 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "422
-[; ;lcd_driver.c: 422:     return 1;
+[; ;src/lcd_driver.c: 422:     return 1;
 [e ) -> -> 1 `i `uc ]
 [e $UE 318  ]
 "423
-[; ;lcd_driver.c: 423: }
+[; ;src/lcd_driver.c: 423: }
 [e :UE 318 ]
 }
 "425
-[; ;lcd_driver.c: 425: void LCD_Init_amazonLCD(uint8_t mode_4bit){
+[; ;src/lcd_driver.c: 425: void LCD_Init_amazonLCD(uint8_t mode_4bit){
 [v _LCD_Init_amazonLCD `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _LCD_Init_amazonLCD ]
 [v _mode_4bit `uc ~T0 @X0 1 r1 ]
 [f ]
 "426
-[; ;lcd_driver.c: 426:     _delay((unsigned long)((50)*(40000000u/4000.0)));
+[; ;src/lcd_driver.c: 426:     _delay((unsigned long)((50)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 50 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "428
-[; ;lcd_driver.c: 428:     if(mode_4bit){
+[; ;src/lcd_driver.c: 428:     if(mode_4bit){
 [e $ ! != -> _mode_4bit `i -> 0 `i 322  ]
 {
 "429
-[; ;lcd_driver.c: 429:         (current_func_set &= ~(1u << 4u));
+[; ;src/lcd_driver.c: 429:         (current_func_set &= ~(1u << 4u));
 [e =& _current_func_set -> ~ << -> 1 `ui -> 4 `ui `uc ]
 "431
-[; ;lcd_driver.c: 431:         LCD_write_instr_nibble_4bit_amazonLCD(0x03);
+[; ;src/lcd_driver.c: 431:         LCD_write_instr_nibble_4bit_amazonLCD(0x03);
 [e ( _LCD_write_instr_nibble_4bit_amazonLCD (1 -> -> 3 `i `uc ]
 "432
-[; ;lcd_driver.c: 432:         _delay((unsigned long)((4500)*(40000000u/4000000.0)));
+[; ;src/lcd_driver.c: 432:         _delay((unsigned long)((4500)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 4500 `i `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
 "433
-[; ;lcd_driver.c: 433:         LCD_write_instr_nibble_4bit_amazonLCD(0x03);
+[; ;src/lcd_driver.c: 433:         LCD_write_instr_nibble_4bit_amazonLCD(0x03);
 [e ( _LCD_write_instr_nibble_4bit_amazonLCD (1 -> -> 3 `i `uc ]
 "434
-[; ;lcd_driver.c: 434:         _delay((unsigned long)((450)*(40000000u/4000000.0)));
+[; ;src/lcd_driver.c: 434:         _delay((unsigned long)((450)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 450 `i `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
 "435
-[; ;lcd_driver.c: 435:         LCD_write_instr_nibble_4bit_amazonLCD(0x03);
+[; ;src/lcd_driver.c: 435:         LCD_write_instr_nibble_4bit_amazonLCD(0x03);
 [e ( _LCD_write_instr_nibble_4bit_amazonLCD (1 -> -> 3 `i `uc ]
 "436
-[; ;lcd_driver.c: 436:         _delay((unsigned long)((150)*(40000000u/4000000.0)));
+[; ;src/lcd_driver.c: 436:         _delay((unsigned long)((150)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 150 `i `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
 "437
-[; ;lcd_driver.c: 437:         LCD_write_instr_nibble_4bit_amazonLCD(0x02);
+[; ;src/lcd_driver.c: 437:         LCD_write_instr_nibble_4bit_amazonLCD(0x02);
 [e ( _LCD_write_instr_nibble_4bit_amazonLCD (1 -> -> 2 `i `uc ]
 "439
-[; ;lcd_driver.c: 439:         LCD_write_instr_byte_4bit_amazonLCD(0x28u);
+[; ;src/lcd_driver.c: 439:         LCD_write_instr_byte_4bit_amazonLCD(0x28u);
 [e ( _LCD_write_instr_byte_4bit_amazonLCD (1 -> -> 40 `ui `uc ]
 "440
-[; ;lcd_driver.c: 440:         LCD_write_instr_byte_4bit_amazonLCD(0x0A);
+[; ;src/lcd_driver.c: 440:         LCD_write_instr_byte_4bit_amazonLCD(0x0A);
 [e ( _LCD_write_instr_byte_4bit_amazonLCD (1 -> -> 10 `i `uc ]
 "441
-[; ;lcd_driver.c: 441:         LCD_clear_display_amazonLCD();
+[; ;src/lcd_driver.c: 441:         LCD_clear_display_amazonLCD();
 [e ( _LCD_clear_display_amazonLCD ..  ]
 "442
-[; ;lcd_driver.c: 442:         LCD_write_instr_byte_4bit_amazonLCD(0x06u);
+[; ;src/lcd_driver.c: 442:         LCD_write_instr_byte_4bit_amazonLCD(0x06u);
 [e ( _LCD_write_instr_byte_4bit_amazonLCD (1 -> -> 6 `ui `uc ]
 "444
-[; ;lcd_driver.c: 444:         current_func_set = 0x28u;
+[; ;src/lcd_driver.c: 444:         current_func_set = 0x28u;
 [e = _current_func_set -> -> 40 `ui `uc ]
 "445
-[; ;lcd_driver.c: 445:         current_disp_ctrl = 0x0A;
+[; ;src/lcd_driver.c: 445:         current_disp_ctrl = 0x0A;
 [e = _current_disp_ctrl -> -> 10 `i `uc ]
 "446
-[; ;lcd_driver.c: 446:         current_entry_mode = 0x06u;
+[; ;src/lcd_driver.c: 446:         current_entry_mode = 0x06u;
 [e = _current_entry_mode -> -> 6 `ui `uc ]
 "448
-[; ;lcd_driver.c: 448:     } else{
+[; ;src/lcd_driver.c: 448:     } else{
 }
 [e $U 323  ]
 [e :U 322 ]
 {
 "449
-[; ;lcd_driver.c: 449:         (current_func_set |= (1u << 4u));
+[; ;src/lcd_driver.c: 449:         (current_func_set |= (1u << 4u));
 [e =| _current_func_set -> << -> 1 `ui -> 4 `ui `uc ]
 "451
-[; ;lcd_driver.c: 451:         LCD_write_instr_byte_8bit_amazonLCD(0x38u);
+[; ;src/lcd_driver.c: 451:         LCD_write_instr_byte_8bit_amazonLCD(0x38u);
 [e ( _LCD_write_instr_byte_8bit_amazonLCD (1 -> -> 56 `ui `uc ]
 "452
-[; ;lcd_driver.c: 452:         _delay((unsigned long)((4500)*(40000000u/4000000.0)));
+[; ;src/lcd_driver.c: 452:         _delay((unsigned long)((4500)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 4500 `i `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
 "453
-[; ;lcd_driver.c: 453:         LCD_write_instr_byte_8bit_amazonLCD(0x38u);
+[; ;src/lcd_driver.c: 453:         LCD_write_instr_byte_8bit_amazonLCD(0x38u);
 [e ( _LCD_write_instr_byte_8bit_amazonLCD (1 -> -> 56 `ui `uc ]
 "454
-[; ;lcd_driver.c: 454:         _delay((unsigned long)((150)*(40000000u/4000000.0)));
+[; ;src/lcd_driver.c: 454:         _delay((unsigned long)((150)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 150 `i `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
 "455
-[; ;lcd_driver.c: 455:         LCD_write_instr_byte_8bit_amazonLCD(0x38u);
+[; ;src/lcd_driver.c: 455:         LCD_write_instr_byte_8bit_amazonLCD(0x38u);
 [e ( _LCD_write_instr_byte_8bit_amazonLCD (1 -> -> 56 `ui `uc ]
 "457
-[; ;lcd_driver.c: 457:         LCD_write_instr_byte_8bit_amazonLCD(0x38u);
+[; ;src/lcd_driver.c: 457:         LCD_write_instr_byte_8bit_amazonLCD(0x38u);
 [e ( _LCD_write_instr_byte_8bit_amazonLCD (1 -> -> 56 `ui `uc ]
 "458
-[; ;lcd_driver.c: 458:         LCD_write_instr_byte_8bit_amazonLCD(0x0A);
+[; ;src/lcd_driver.c: 458:         LCD_write_instr_byte_8bit_amazonLCD(0x0A);
 [e ( _LCD_write_instr_byte_8bit_amazonLCD (1 -> -> 10 `i `uc ]
 "459
-[; ;lcd_driver.c: 459:         LCD_clear_display_amazonLCD();
+[; ;src/lcd_driver.c: 459:         LCD_clear_display_amazonLCD();
 [e ( _LCD_clear_display_amazonLCD ..  ]
 "460
-[; ;lcd_driver.c: 460:         LCD_write_instr_byte_8bit_amazonLCD(0x06u);
+[; ;src/lcd_driver.c: 460:         LCD_write_instr_byte_8bit_amazonLCD(0x06u);
 [e ( _LCD_write_instr_byte_8bit_amazonLCD (1 -> -> 6 `ui `uc ]
 "463
-[; ;lcd_driver.c: 463:         init_complete = 0x01u;
+[; ;src/lcd_driver.c: 463:         init_complete = 0x01u;
 [e = _init_complete -> -> 1 `ui `uc ]
 "464
-[; ;lcd_driver.c: 464:         current_func_set = 0x38u;
+[; ;src/lcd_driver.c: 464:         current_func_set = 0x38u;
 [e = _current_func_set -> -> 56 `ui `uc ]
 "465
-[; ;lcd_driver.c: 465:         current_disp_ctrl = 0x0A;
+[; ;src/lcd_driver.c: 465:         current_disp_ctrl = 0x0A;
 [e = _current_disp_ctrl -> -> 10 `i `uc ]
 "466
-[; ;lcd_driver.c: 466:         current_entry_mode = 0x06u;
+[; ;src/lcd_driver.c: 466:         current_entry_mode = 0x06u;
 [e = _current_entry_mode -> -> 6 `ui `uc ]
 "467
-[; ;lcd_driver.c: 467:     }
+[; ;src/lcd_driver.c: 467:     }
 }
 [e :U 323 ]
 "468
-[; ;lcd_driver.c: 468: }
+[; ;src/lcd_driver.c: 468: }
 [e :UE 321 ]
 }
 "470
-[; ;lcd_driver.c: 470: uint8_t LCD_set_cursor_position_amazonLCD(uint8_t line, uint8_t pos_on_line){
+[; ;src/lcd_driver.c: 470: uint8_t LCD_set_cursor_position_amazonLCD(uint8_t line, uint8_t pos_on_line){
 [v _LCD_set_cursor_position_amazonLCD `(uc ~T0 @X0 1 ef2`uc`uc ]
 {
 [e :U _LCD_set_cursor_position_amazonLCD ]
@@ -1605,99 +1605,99 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _pos_on_line `uc ~T0 @X0 1 r2 ]
 [f ]
 "472
-[; ;lcd_driver.c: 472:     if(line > 2u || pos_on_line > 2u * 16u){
+[; ;src/lcd_driver.c: 472:     if(line > 2u || pos_on_line > 2u * 16u){
 [e $ ! || > -> _line `ui -> 2 `ui > -> _pos_on_line `ui * -> 2 `ui -> 16 `ui 325  ]
 {
 "473
-[; ;lcd_driver.c: 473:         return 0;
+[; ;src/lcd_driver.c: 473:         return 0;
 [e ) -> -> 0 `i `uc ]
 [e $UE 324  ]
 "474
-[; ;lcd_driver.c: 474:     }
+[; ;src/lcd_driver.c: 474:     }
 }
 [e :U 325 ]
 "476
-[; ;lcd_driver.c: 476:     uint8_t ddram_addr;
+[; ;src/lcd_driver.c: 476:     uint8_t ddram_addr;
 [v _ddram_addr `uc ~T0 @X0 1 a ]
 "479
-[; ;lcd_driver.c: 479:     if(!shift_mode && disp_16x2){
+[; ;src/lcd_driver.c: 479:     if(!shift_mode && disp_16x2){
 [e $ ! && ! != -> _shift_mode `i -> 0 `i != -> _disp_16x2 `i -> 0 `i 326  ]
 {
 "481
-[; ;lcd_driver.c: 481:         if(line == 1u && pos_on_line < 16u){
+[; ;src/lcd_driver.c: 481:         if(line == 1u && pos_on_line < 16u){
 [e $ ! && == -> _line `ui -> 1 `ui < -> _pos_on_line `ui -> 16 `ui 327  ]
 {
 "482
-[; ;lcd_driver.c: 482:             ddram_addr = 0x00u + pos_on_line - 1;
+[; ;src/lcd_driver.c: 482:             ddram_addr = 0x00u + pos_on_line - 1;
 [e = _ddram_addr -> - + -> 0 `ui -> _pos_on_line `ui -> -> 1 `i `ui `uc ]
 "484
-[; ;lcd_driver.c: 484:         } else if(line == 2u && pos_on_line < 16u){
+[; ;src/lcd_driver.c: 484:         } else if(line == 2u && pos_on_line < 16u){
 }
 [e $U 328  ]
 [e :U 327 ]
 [e $ ! && == -> _line `ui -> 2 `ui < -> _pos_on_line `ui -> 16 `ui 329  ]
 {
 "485
-[; ;lcd_driver.c: 485:             ddram_addr = 0x40u + pos_on_line - 1;
+[; ;src/lcd_driver.c: 485:             ddram_addr = 0x40u + pos_on_line - 1;
 [e = _ddram_addr -> - + -> 64 `ui -> _pos_on_line `ui -> -> 1 `i `ui `uc ]
 "487
-[; ;lcd_driver.c: 487:         } else if(line == 1u && pos_on_line > 16u){
+[; ;src/lcd_driver.c: 487:         } else if(line == 1u && pos_on_line > 16u){
 }
 [e $U 330  ]
 [e :U 329 ]
 [e $ ! && == -> _line `ui -> 1 `ui > -> _pos_on_line `ui -> 16 `ui 331  ]
 {
 "488
-[; ;lcd_driver.c: 488:             ddram_addr = 0x40u + pos_on_line - 16 - 1;
+[; ;src/lcd_driver.c: 488:             ddram_addr = 0x40u + pos_on_line - 16 - 1;
 [e = _ddram_addr -> - - + -> 64 `ui -> _pos_on_line `ui -> -> 16 `i `ui -> -> 1 `i `ui `uc ]
 "490
-[; ;lcd_driver.c: 490:         } else{
+[; ;src/lcd_driver.c: 490:         } else{
 }
 [e $U 332  ]
 [e :U 331 ]
 {
 "491
-[; ;lcd_driver.c: 491:             return 0;
+[; ;src/lcd_driver.c: 491:             return 0;
 [e ) -> -> 0 `i `uc ]
 [e $UE 324  ]
 "492
-[; ;lcd_driver.c: 492:         }
+[; ;src/lcd_driver.c: 492:         }
 }
 [e :U 332 ]
 [e :U 330 ]
 [e :U 328 ]
 "493
-[; ;lcd_driver.c: 493:     }
+[; ;src/lcd_driver.c: 493:     }
 }
 [e :U 326 ]
 "495
-[; ;lcd_driver.c: 495:     if((~current_entry_mode & (1u << 4u))){
+[; ;src/lcd_driver.c: 495:     if((~current_entry_mode & (1u << 4u))){
 [e $ ! != & -> ~ -> _current_entry_mode `i `ui << -> 1 `ui -> 4 `ui -> -> 0 `i `ui 333  ]
 {
 "496
-[; ;lcd_driver.c: 496:         LCD_write_instr_byte_4bit_amazonLCD(0x80u | ddram_addr);
+[; ;src/lcd_driver.c: 496:         LCD_write_instr_byte_4bit_amazonLCD(0x80u | ddram_addr);
 [e ( _LCD_write_instr_byte_4bit_amazonLCD (1 -> | -> 128 `ui -> _ddram_addr `ui `uc ]
 "497
-[; ;lcd_driver.c: 497:     } else{
+[; ;src/lcd_driver.c: 497:     } else{
 }
 [e $U 334  ]
 [e :U 333 ]
 {
 "498
-[; ;lcd_driver.c: 498:         LCD_write_instr_byte_8bit_amazonLCD(0x80u | ddram_addr);
+[; ;src/lcd_driver.c: 498:         LCD_write_instr_byte_8bit_amazonLCD(0x80u | ddram_addr);
 [e ( _LCD_write_instr_byte_8bit_amazonLCD (1 -> | -> 128 `ui -> _ddram_addr `ui `uc ]
 "499
-[; ;lcd_driver.c: 499:     }
+[; ;src/lcd_driver.c: 499:     }
 }
 [e :U 334 ]
 "501
-[; ;lcd_driver.c: 501:     address_counter = ddram_addr;
+[; ;src/lcd_driver.c: 501:     address_counter = ddram_addr;
 [e = _address_counter _ddram_addr ]
 "503
-[; ;lcd_driver.c: 503:     return 1;
+[; ;src/lcd_driver.c: 503:     return 1;
 [e ) -> -> 1 `i `uc ]
 [e $UE 324  ]
 "504
-[; ;lcd_driver.c: 504: }
+[; ;src/lcd_driver.c: 504: }
 [e :UE 324 ]
 }

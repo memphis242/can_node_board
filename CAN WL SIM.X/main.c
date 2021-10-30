@@ -66,10 +66,10 @@
 
 #include <xc.h>
 #include <stdint.h>
-#include "mssp_spi_driver.h"
-#include "lcd_driver.h"
-#include "timer.h"
-#include "ccp.h"
+#include "inc/mssp_spi_driver.h"
+#include "inc/lcd_driver.h"
+#include "inc/timer.h"
+#include "inc/ccp.h"
 #include "spi_two_node_test.h"
 
 
