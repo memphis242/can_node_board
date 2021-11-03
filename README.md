@@ -23,7 +23,7 @@ The choice of microcontroller - PIC18F4620 - was because I wanted to use the sam
 I wanted to get more in detail with the various layers that make up a CAN node, and thought this was a great opportunity for that.
 
 ### What Makes This Project Unique
-I have not exhaustively searched for similar projects, but I am sure there are plenty. The references section shows two Microchip application notes of boards built using a similar set up to me and programmed in assembly. I have seen some colleagues use a Raspberry Pi + CAN Hat and run some python scripts to do something similar. However, I think my project offers a non-operating system solution using an 8-bit Microchip PIC microcontroller using the C programming language, and also is meant to send J1939 messages, not just generic CAN messages.
+I have not exhaustively searched for similar projects, but I am sure there are plenty. The references section shows two Microchip application notes of boards built using a similar set up to me and programmed in assembly. I have seen some colleagues use a Raspberry Pi + CAN Hat and run some python scripts to replay CAN traces. However, what makes this project unique to me is that it a) uses an 8-bit microcontroller, b) is a project that involves me developing/testing everything myself from the code to the circuit, c) does not utilize ready-made solutions, d) is also meant to send J1939 messages, not just generic CAN messages, and e) is a project that solves my particular problem.
 
 ### References
 [Microchip Application Note AN215](https://ww1.microchip.com/downloads/en/AppNotes/00215c.pdf)  
