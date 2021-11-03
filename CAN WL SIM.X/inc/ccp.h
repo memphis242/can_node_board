@@ -20,10 +20,10 @@
 #define CCP2M_DEFAULT   CCP2CON = 0x05
 
 // Interrupt-Related
-#define CCP2_IF_BIT             PIR2bits.CCP2IF
-#define CCP2_INT_ENABLE_BIT      PIE2bits.CCP2IE
-#define ENABLE_CCP2_INTERRUPT   CCP2_INT_ENABLE_BIT = 1u
-#define CLEAR_CCP2_IF           PIR2bits.CCP2IF = 0u;
+#define CCP2_IF_BIT                 PIR2bits.CCP2IF
+#define CCP2_INT_ENABLE_BIT         PIE2bits.CCP2IE
+#define ENABLE_CCP2_INTERRUPT       CCP2_INT_ENABLE_BIT = 1u
+#define CLEAR_CCP2_IF               PIR2bits.CCP2IF = 0u;
 
 
 // Function declarations

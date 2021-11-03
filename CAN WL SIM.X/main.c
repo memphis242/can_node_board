@@ -83,11 +83,15 @@ extern uint8_t slave_mode;  // Flag to indicate current mode --> 0 = master, 1 =
 extern uint8_t transfer_complete_flag;
 extern uint8_t manual_transfer; // Flag to indicate when we are manually (i.e., using the functions below) transferring data; may be used in ISR or debugging
 
-static volatile uint8_t tmr_100ms_next = 0x00;
-static uint8_t spi_tx_test_message = 0x00;
+static volatile uint8_t tmr_100ms_next = 0x00;  // This is used to indicate when 100ms has passed
+static uint8_t spi_tx_test_message = 0x00;  // This holds the test byte to be sent over SPI
+static uint8_t spi_rx_message_buf = 0x00;
 static volatile uint8_t spi_ready_to_tx = 0x00;
 
-// Interrupt Routine
+
+/******************************************************************************
+ * Interrupt Routine
+ */
 void __interrupt() isr(void){
         
     if(MSSP_IF_BIT && MSSP_INT_ENABLE_BIT) {
@@ -121,10 +125,15 @@ void __interrupt() isr(void){
     return;
 }
 
-// Main Routine
+
+/******************************************************************************
+ * Main Routine
+ */
 void main(void) {
     
-    // Code for Test TX Node
+    /**************************************************************************
+     * Code for Test TX Node
+     */
     SPI_Init_Master_Default();
     // Use RD0 and RD1 as button inputs
     PORTE = 0x00;
@@ -142,14 +151,68 @@ void main(void) {
     Timer1_Enable();
     ei();
     
-    
-    // Code for Test RX Node
-    
+    // TX Node while(1) loop
     while(1){
         
-        
+        if(spi_ready_to_tx){
+            
+            spi_tx_test_message = 0x00;
+            
+            // Set up I/O signals in byte
+            // Buttons 1 and 2
+            spi_tx_test_message |= (BUTTON1_PIN << SPI_TX_BYTE_BUTTON1_BIT_LOC);
+            spi_tx_test_message |= (BUTTON2_PIN << SPI_TX_BYTE_BUTTON2_BIT_LOC);
+            
+            // Place node ID in byte
+            spi_tx_test_message |= SPI_TX_NODE_ID;
+            
+            // Send byte away!
+            SPI_Send_Byte(spi_tx_test_message);
+            
+            // Check for acknowledge byte
+            SPI_Receive_Byte(&spi_rx_message_buf);
+            // If fail to acknowledge...
+            if(spi_rx_message_buf != SPI_RX_NODE_ACK_MSG) {
+                // Try to send the message again...
+                SPI_Send_Byte(spi_tx_test_message);
+                
+                // Check again for acknowledge...
+                SPI_Receive_Byte(&spi_rx_message_buf);
+                if(spi_rx_message_buf != SPI_RX_NODE_ACK_MSG) {
+                    // Show on display "ERR: Failed to get ACK!"
+                }
+            }
+            
+            spi_ready_to_tx = 0x00; // Reset ready-to-send flag
+        }
         
     }
+    
+    
+    /**************************************************************************
+     * Code for Test RX Node
+     */
+    //// Initialize I/O ports -- PORTC is for control lines, PORTD is for data lines, PORTE for debugging
+//    // Clear all ports just to help with debugging
+//    PORTC = 0x00;
+//    PORTD = 0x00;
+//    PORTE = 0x00;
+//    // Set pin directions
+//    ADCON1bits.PCFG = 0x0F;
+//    TRISC = 0xF8;   // RC0, RC1, RC2 outputs
+//    TRISD = 0xFF;   // All of PORTD inputs for now
+//    TRISE = 0xFC;   // RE0, RE1 outputs
+//    
+//    // For display to initialize, need to have at least a 9s delay...
+//    __delay_ms(4000);
+//    __delay_ms(4000);
+//    __delay_ms(2000);
+//        
+//    // LCD test - ECE376 LCD from ebay
+//    LCD_Init_ECE376();
+//    LCD_set_cursor_position(1,1);   // Row 1, position 1 (NOT 0 indexed)
+//    char message[10u] = {'H', 'i', ' ', 'A', 's', 'h', 'l', 'e', 'y', '!'};
+//    for(uint8_t i=0; i<10; i++) LCD_write_data_byte_4bit(message[i]);
            
     return;
 }

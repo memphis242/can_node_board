@@ -46,7 +46,8 @@
 #endif
 
 // Definitions
-// NOTE: The xx_xx_BIT macros are for 
+// NOTE: The xx_xx_BIT macros are for holding a constant with a 1 at the location of the bit
+//       The xx_xx_BIT_LOC macros are for what you'd use with the left shift << to get to the correct bit location
 // SSPCON1 Register
 #define SSPCON1_WCOL_BIT            0x80        // (MUST BE CLEARED IN SOFTWARE) Write Collision Detect bit --> 1 = SSPxBUF register is written while it is still transmitting, 0 = no collision
 #define SSPCON1_SSPOV_BIT           0x40        // (MUST BE CLEARED IN SOFTWARE) Receive Overflow bit --> 1 = In slave mode, if new byte is received while the SSPBUF is still holding previous data
@@ -90,8 +91,8 @@
 #define MASTER_CS_HIGH              MASTER_CS = 1      // De-Activate the CS line
 
 // MSSP Interrupt-Related
-#define MSSP_IF_BIT              PIR1bits.SSPIF
-#define MSSP_INT_ENABLE_BIT             PIE1bits.SSPIE
+#define MSSP_IF_BIT                 PIR1bits.SSPIF
+#define MSSP_INT_ENABLE_BIT         PIE1bits.SSPIE
 #define MSSP_ENABLE_INTERRUPT       PIE1bits.SSPIE = 1
 #define ENABLE_BCLIE_INTERRUPT      PIE2bits.BCLIE = 1
 #define CLEAR_MSSP_IFLAG            PIR1bits.SSPIF = 0      // Clear interrupt flag for MSSP

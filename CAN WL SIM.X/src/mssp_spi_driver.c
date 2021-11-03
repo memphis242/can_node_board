@@ -13,7 +13,7 @@
 
 // Global variables relevant to SPI
 uint8_t receive_byte = 0x00;    // Used by ISR when SPI mode is slave and receive has occurred
-uint8_t slave_mode = 0x00;      // Flag to indicate current mode --> 0 = master, 1 = slave
+static uint8_t slave_mode = 0x00;      // Flag to indicate current mode --> 0 = master, 1 = slave
 uint8_t transfer_complete_flag = 0x00;
 uint8_t manual_transfer = 0x00; // Flag to indicate when we are manually (i.e., using the functions below) transferring data; may be used in ISR or debugging
 
@@ -48,6 +48,8 @@ void SPI_Init_Master_Default(void){
     
     // Make sure CS line is HIGH (inactive)
     MASTER_CS_HIGH;
+    
+    slave_mode = 0x00;  // Set flag to master mode
             
     // Enable SSPIF interrupt
     MSSP_ENABLE_INTERRUPT;
@@ -141,6 +143,8 @@ uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8
         // Make sure CS line is HIGH (inactive)
         MASTER_CS_HIGH;
         
+        slave_mode = 0x00;  // Set flag to master mode
+        
     } else {
         // Slave mode 
         
@@ -233,7 +237,7 @@ void SPI_Transfer_Packet(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_siz
 
 /* Function: SPI_Send_Byte
  * ---------------------------------
- * Sends a byte tx over the SDO line without carrying any received byte.
+ * Sends a byte tx over the SDO line without caring about any received byte.
  * 
  * Parameters:
  *      . tx - The byte to be sent
