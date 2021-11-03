@@ -27,9 +27,9 @@
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "91 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c99\common\Umul64.c
 [v ___omul __omul `(uo  1 e 8 0 ]
-"91 C:\git\can_node_board\CAN WL SIM.X\main.c
+"124 C:\git\can_node_board\CAN WL SIM.X\main.c
 [v _isr isr `IIH(v  1 e 1 0 ]
-"125
+"178
 [v _main main `(v  1 e 1 0 ]
 "21 C:\git\can_node_board\CAN WL SIM.X\src/ccp.c
 [v _CCP2_Init_Default CCP2_Init_Default `(v  1 e 1 0 ]
@@ -39,35 +39,39 @@
 [v _LCD_enable_toggle LCD_enable_toggle `(v  1 s 1 LCD_enable_toggle ]
 "35
 [v _LCD_wait_for_BF LCD_wait_for_BF `(v  1 s 1 LCD_wait_for_BF ]
+"45
+[v _LCD_write_data_byte_4bit LCD_write_data_byte_4bit `(v  1 e 1 0 ]
 "76
 [v _LCD_write_instr_byte_4bit LCD_write_instr_byte_4bit `(v  1 e 1 0 ]
 "92
 [v _LCD_write_instr_byte_8bit LCD_write_instr_byte_8bit `(v  1 e 1 0 ]
-"341
+"106
+[v _LCD_Init_ECE376 LCD_Init_ECE376 `(v  1 e 1 0 ]
+"251
+[v _LCD_set_cursor_position LCD_set_cursor_position `(uc  1 e 1 0 ]
+"355
 [v _LCD_enable_toggle_amazonLCD LCD_enable_toggle_amazonLCD `(v  1 s 1 LCD_enable_toggle_amazonLCD ]
-"376
-[v _LCD_write_instr_byte_4bit_amazonLCD LCD_write_instr_byte_4bit_amazonLCD `(v  1 e 1 0 ]
 "390
+[v _LCD_write_instr_byte_4bit_amazonLCD LCD_write_instr_byte_4bit_amazonLCD `(v  1 e 1 0 ]
+"404
 [v _LCD_write_instr_byte_8bit_amazonLCD LCD_write_instr_byte_8bit_amazonLCD `(v  1 e 1 0 ]
-"402
+"416
 [v _LCD_write_instr_nibble_4bit_amazonLCD LCD_write_instr_nibble_4bit_amazonLCD `(v  1 e 1 0 ]
-"414
+"428
 [v _LCD_clear_display_amazonLCD LCD_clear_display_amazonLCD `(uc  1 e 1 0 ]
-"31 C:\git\can_node_board\CAN WL SIM.X\src/mssp_spi_driver.c
-[v _SPI_Init_Master_Default SPI_Init_Master_Default `(v  1 e 1 0 ]
-"200
+"69 C:\git\can_node_board\CAN WL SIM.X\src/mssp_spi_driver.c
+[v _SPI_Init_Slave_Default SPI_Init_Slave_Default `(v  1 e 1 0 ]
+"204
 [v _SPI_Transfer_Byte SPI_Transfer_Byte `(v  1 e 1 0 ]
-"243
+"247
 [v _SPI_Send_Byte SPI_Send_Byte `(v  1 e 1 0 ]
-"280
+"285
 [v _SPI_Receive_Byte SPI_Receive_Byte `(v  1 e 1 0 ]
-"20 C:\git\can_node_board\CAN WL SIM.X\src/timer.c
-[v _Timer1_Init_Default Timer1_Init_Default `(v  1 e 1 0 ]
-"35
-[v _Timer1_Enable Timer1_Enable `(v  1 e 1 0 ]
-"535 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
+"360 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
+[v _PORTC PORTC `VEuc  1 e 1 @3970 ]
+"535
 [v _PORTD PORTD `VEuc  1 e 1 @3971 ]
-[s S382 . 1 `uc 1 RD0 1 0 :1:0 
+[s S251 . 1 `uc 1 RD0 1 0 :1:0 
 `uc 1 RD1 1 0 :1:1 
 `uc 1 RD2 1 0 :1:2 
 `uc 1 RD3 1 0 :1:3 
@@ -77,7 +81,7 @@
 `uc 1 RD7 1 0 :1:7 
 ]
 "572
-[s S391 . 1 `uc 1 PSP0 1 0 :1:0 
+[s S260 . 1 `uc 1 PSP0 1 0 :1:0 
 `uc 1 PSP1 1 0 :1:1 
 `uc 1 PSP2 1 0 :1:2 
 `uc 1 PSP3 1 0 :1:3 
@@ -86,19 +90,17 @@
 `uc 1 PSP6 1 0 :1:6 
 `uc 1 PSP7 1 0 :1:7 
 ]
-[s S400 . 1 `uc 1 . 1 0 :5:0 
+[s S269 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 P1B 1 0 :1:5 
 `uc 1 P1C 1 0 :1:6 
 `uc 1 P1D 1 0 :1:7 
 ]
-[s S405 . 1 `uc 1 . 1 0 :7:0 
+[s S274 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 SS2 1 0 :1:7 
 ]
-[u S408 . 1 `S382 1 . 1 0 `S391 1 . 1 0 `S400 1 . 1 0 `S405 1 . 1 0 ]
-[v _PORTDbits PORTDbits `VES408  1 e 1 @3971 ]
-"677
-[v _PORTE PORTE `VEuc  1 e 1 @3972 ]
-[s S335 . 1 `uc 1 LATC0 1 0 :1:0 
+[u S277 . 1 `S251 1 . 1 0 `S260 1 . 1 0 `S269 1 . 1 0 `S274 1 . 1 0 ]
+[v _PORTDbits PORTDbits `VES277  1 e 1 @3971 ]
+[s S204 . 1 `uc 1 LATC0 1 0 :1:0 
 `uc 1 LATC1 1 0 :1:1 
 `uc 1 LATC2 1 0 :1:2 
 `uc 1 LATC3 1 0 :1:3 
@@ -108,7 +110,7 @@
 `uc 1 LATC7 1 0 :1:7 
 ]
 "1131
-[s S344 . 1 `uc 1 LC0 1 0 :1:0 
+[s S213 . 1 `uc 1 LC0 1 0 :1:0 
 `uc 1 LC1 1 0 :1:1 
 `uc 1 LC2 1 0 :1:2 
 `uc 1 LC3 1 0 :1:3 
@@ -117,9 +119,9 @@
 `uc 1 LC6 1 0 :1:6 
 `uc 1 LC7 1 0 :1:7 
 ]
-[u S353 . 1 `S335 1 . 1 0 `S344 1 . 1 0 ]
-[v _LATCbits LATCbits `VES353  1 e 1 @3979 ]
-[s S608 . 1 `uc 1 LATD0 1 0 :1:0 
+[u S222 . 1 `S204 1 . 1 0 `S213 1 . 1 0 ]
+[v _LATCbits LATCbits `VES222  1 e 1 @3979 ]
+[s S478 . 1 `uc 1 LATD0 1 0 :1:0 
 `uc 1 LATD1 1 0 :1:1 
 `uc 1 LATD2 1 0 :1:2 
 `uc 1 LATD3 1 0 :1:3 
@@ -129,7 +131,7 @@
 `uc 1 LATD7 1 0 :1:7 
 ]
 "1243
-[s S617 . 1 `uc 1 LD0 1 0 :1:0 
+[s S487 . 1 `uc 1 LD0 1 0 :1:0 
 `uc 1 LD1 1 0 :1:1 
 `uc 1 LD2 1 0 :1:2 
 `uc 1 LD3 1 0 :1:3 
@@ -138,15 +140,15 @@
 `uc 1 LD6 1 0 :1:6 
 `uc 1 LD7 1 0 :1:7 
 ]
-[u S626 . 1 `S608 1 . 1 0 `S617 1 . 1 0 ]
-[v _LATDbits LATDbits `VES626  1 e 1 @3980 ]
+[u S496 . 1 `S478 1 . 1 0 `S487 1 . 1 0 ]
+[v _LATDbits LATDbits `VES496  1 e 1 @3980 ]
 "1380
 [v _TRISA TRISA `VEuc  1 e 1 @3986 ]
 "1824
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
 "2046
 [v _TRISD TRISD `VEuc  1 e 1 @3989 ]
-[s S550 . 1 `uc 1 TRISD0 1 0 :1:0 
+[s S420 . 1 `uc 1 TRISD0 1 0 :1:0 
 `uc 1 TRISD1 1 0 :1:1 
 `uc 1 TRISD2 1 0 :1:2 
 `uc 1 TRISD3 1 0 :1:3 
@@ -156,25 +158,8 @@
 `uc 1 TRISD7 1 0 :1:7 
 ]
 "2078
-[u S568 . 1 `S550 1 . 1 0 `S382 1 . 1 0 ]
-[v _TRISDbits TRISDbits `VES568  1 e 1 @3989 ]
-[s S146 . 1 `uc 1 TRISE0 1 0 :1:0 
-`uc 1 TRISE1 1 0 :1:1 
-`uc 1 TRISE2 1 0 :1:2 
-`uc 1 . 1 0 :1:3 
-`uc 1 PSPMODE 1 0 :1:4 
-`uc 1 IBOV 1 0 :1:5 
-`uc 1 OBF 1 0 :1:6 
-`uc 1 IBF 1 0 :1:7 
-]
-"2296
-[s S155 . 1 `uc 1 RE0 1 0 :1:0 
-`uc 1 RE1 1 0 :1:1 
-`uc 1 RE2 1 0 :1:2 
-`uc 1 RE3 1 0 :1:3 
-]
-[u S160 . 1 `S146 1 . 1 0 `S155 1 . 1 0 ]
-[v _TRISEbits TRISEbits `VES160  1 e 1 @3990 ]
+[u S438 . 1 `S420 1 . 1 0 `S251 1 . 1 0 ]
+[v _TRISDbits TRISDbits `VES438  1 e 1 @3989 ]
 [s S54 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
@@ -207,7 +192,7 @@
 ]
 [u S37 . 1 `S24 1 . 1 0 `S33 1 . 1 0 ]
 [v _PIR1bits PIR1bits `VES37  1 e 1 @3998 ]
-[s S113 . 1 `uc 1 CCP2IE 1 0 :1:0 
+[s S597 . 1 `uc 1 CCP2IE 1 0 :1:0 
 `uc 1 TMR3IE 1 0 :1:1 
 `uc 1 HLVDIE 1 0 :1:2 
 `uc 1 BCLIE 1 0 :1:3 
@@ -217,73 +202,40 @@
 `uc 1 OSCFIE 1 0 :1:7 
 ]
 "2749
-[s S122 . 1 `uc 1 . 1 0 :2:0 
+[s S606 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 LVDIE 1 0 :1:2 
 ]
-[u S125 . 1 `S113 1 . 1 0 `S122 1 . 1 0 ]
-[v _PIE2bits PIE2bits `VES125  1 e 1 @4000 ]
-[s S85 . 1 `uc 1 CCP2IF 1 0 :1:0 
-`uc 1 TMR3IF 1 0 :1:1 
-`uc 1 HLVDIF 1 0 :1:2 
-`uc 1 BCLIF 1 0 :1:3 
-`uc 1 EEIF 1 0 :1:4 
-`uc 1 . 1 0 :1:5 
-`uc 1 CMIF 1 0 :1:6 
-`uc 1 OSCFIF 1 0 :1:7 
-]
-"2815
-[s S94 . 1 `uc 1 . 1 0 :2:0 
-`uc 1 LVDIF 1 0 :1:2 
-]
-[u S97 . 1 `S85 1 . 1 0 `S94 1 . 1 0 ]
-[v _PIR2bits PIR2bits `VES97  1 e 1 @4001 ]
+[u S609 . 1 `S597 1 . 1 0 `S606 1 . 1 0 ]
+[v _PIE2bits PIE2bits `VES609  1 e 1 @4000 ]
 "3529
 [v _T3CON T3CON `VEuc  1 e 1 @4017 ]
 "4155
 [v _CCP2CON CCP2CON `VEuc  1 e 1 @4026 ]
 "4234
 [v _CCPR2 CCPR2 `VEus  1 e 2 @4027 ]
-[s S178 . 1 `uc 1 PCFG 1 0 :4:0 
-`uc 1 VCFG 1 0 :2:4 
-]
-"4469
-[s S181 . 1 `uc 1 PCFG0 1 0 :1:0 
-`uc 1 PCFG1 1 0 :1:1 
-`uc 1 PCFG2 1 0 :1:2 
-`uc 1 PCFG3 1 0 :1:3 
-`uc 1 VCFG0 1 0 :1:4 
-`uc 1 VCFG1 1 0 :1:5 
-]
-[s S188 . 1 `uc 1 . 1 0 :3:0 
-`uc 1 CHSN3 1 0 :1:3 
-`uc 1 VCFG01 1 0 :1:4 
-`uc 1 VCFG11 1 0 :1:5 
-]
-[u S193 . 1 `S178 1 . 1 0 `S181 1 . 1 0 `S188 1 . 1 0 ]
-[v _ADCON1bits ADCON1bits `VES193  1 e 1 @4033 ]
 "4731
 [v _SSPCON1 SSPCON1 `VEuc  1 e 1 @4038 ]
-[s S521 . 1 `uc 1 SSPM 1 0 :4:0 
+[s S391 . 1 `uc 1 SSPM 1 0 :4:0 
 `uc 1 CKP 1 0 :1:4 
 `uc 1 SSPEN 1 0 :1:5 
 `uc 1 SSPOV 1 0 :1:6 
 `uc 1 WCOL 1 0 :1:7 
 ]
 "4751
-[s S527 . 1 `uc 1 SSPM0 1 0 :1:0 
+[s S397 . 1 `uc 1 SSPM0 1 0 :1:0 
 `uc 1 SSPM1 1 0 :1:1 
 `uc 1 SSPM2 1 0 :1:2 
 `uc 1 SSPM3 1 0 :1:3 
 ]
-[u S532 . 1 `S521 1 . 1 0 `S527 1 . 1 0 ]
-[v _SSPCON1bits SSPCON1bits `VES532  1 e 1 @4038 ]
+[u S402 . 1 `S391 1 . 1 0 `S397 1 . 1 0 ]
+[v _SSPCON1bits SSPCON1bits `VES402  1 e 1 @4038 ]
 "4801
 [v _SSPSTAT SSPSTAT `VEuc  1 e 1 @4039 ]
 "5029
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @4041 ]
 "5224
 [v _T1CON T1CON `VEuc  1 e 1 @4045 ]
-[s S222 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S94 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -293,7 +245,7 @@
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
 "6406
-[s S231 . 1 `uc 1 . 1 0 :1:0 
+[s S103 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 INT0F 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -302,16 +254,28 @@
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S240 . 1 `uc 1 . 1 0 :6:0 
+[s S112 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S244 . 1 `S222 1 . 1 0 `S231 1 . 1 0 `S240 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES244  1 e 1 @4082 ]
-"86 C:\git\can_node_board\CAN WL SIM.X\main.c
-[v _tmr_100ms_next tmr_100ms_next `VEuc  1 s 1 tmr_100ms_next ]
-"88
-[v _spi_ready_to_tx spi_ready_to_tx `VEuc  1 s 1 spi_ready_to_tx ]
+[u S116 . 1 `S94 1 . 1 0 `S103 1 . 1 0 `S112 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES116  1 e 1 @4082 ]
+"104 C:\git\can_node_board\CAN WL SIM.X\main.c
+[v _spi_rx_message_buf spi_rx_message_buf `uc  1 s 1 spi_rx_message_buf ]
+"105
+[v _spi_rx_invalid_flag spi_rx_invalid_flag `uc  1 s 1 spi_rx_invalid_flag ]
+"106
+[v _spi_rx_flag spi_rx_flag `uc  1 s 1 spi_rx_flag ]
+"107
+[v _button1_state button1_state `uc  1 s 1 button1_state ]
+"108
+[v _button2_state button2_state `uc  1 s 1 button2_state ]
+"112
+[v _button1_msg button1_msg `[5]uc  1 s 5 button1_msg ]
+"113
+[v _button2_msg button2_msg `[5]uc  1 s 5 button2_msg ]
+"114
+[v _spi_rx_invalid_msg spi_rx_invalid_msg `C[13]uc  1 s 13 spi_rx_invalid_msg ]
 "13 C:\git\can_node_board\CAN WL SIM.X\src/lcd_driver.c
 [v _init_complete init_complete `uc  1 s 1 init_complete ]
 "17
@@ -323,45 +287,79 @@
 "21
 [v _address_counter address_counter `uc  1 s 1 address_counter ]
 "16 C:\git\can_node_board\CAN WL SIM.X\src/mssp_spi_driver.c
-[v _slave_mode slave_mode `uc  1 e 1 0 ]
+[v _slave_mode slave_mode `uc  1 s 1 slave_mode ]
 "17
 [v _transfer_complete_flag transfer_complete_flag `uc  1 e 1 0 ]
 "18
 [v _manual_transfer manual_transfer `uc  1 e 1 0 ]
-"125 C:\git\can_node_board\CAN WL SIM.X\main.c
+"178 C:\git\can_node_board\CAN WL SIM.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"155
+"297
+[v main@i_198 i `uc  1 a 1 9 ]
+"292
+[v main@i_197 i `uc  1 a 1 8 ]
+"275
+[v main@i i `uc  1 a 1 7 ]
+"313
 } 0
-"20 C:\git\can_node_board\CAN WL SIM.X\src/timer.c
-[v _Timer1_Init_Default Timer1_Init_Default `(v  1 e 1 0 ]
+"69 C:\git\can_node_board\CAN WL SIM.X\src/mssp_spi_driver.c
+[v _SPI_Init_Slave_Default SPI_Init_Slave_Default `(v  1 e 1 0 ]
 {
-[v Timer1_Init_Default@period_val period_val `us  1 p 2 2 ]
-"33
+"91
 } 0
-"21 C:\git\can_node_board\CAN WL SIM.X\src/ccp.c
-[v _CCP2_Init_Default CCP2_Init_Default `(v  1 e 1 0 ]
+"45 C:\git\can_node_board\CAN WL SIM.X\src/lcd_driver.c
+[v _LCD_write_data_byte_4bit LCD_write_data_byte_4bit `(v  1 e 1 0 ]
 {
-"23
+[v LCD_write_data_byte_4bit@data data `uc  1 a 1 wreg ]
+[v LCD_write_data_byte_4bit@data data `uc  1 a 1 wreg ]
+"47
+[v LCD_write_data_byte_4bit@data data `uc  1 a 1 2 ]
+"59
+} 0
+"251
+[v _LCD_set_cursor_position LCD_set_cursor_position `(uc  1 e 1 0 ]
+{
+[v LCD_set_cursor_position@line line `uc  1 a 1 wreg ]
+"257
+[v LCD_set_cursor_position@ddram_addr ddram_addr `uc  1 a 1 5 ]
+"251
+[v LCD_set_cursor_position@line line `uc  1 a 1 wreg ]
+[v LCD_set_cursor_position@pos_on_line pos_on_line `uc  1 p 1 3 ]
+"253
+[v LCD_set_cursor_position@line line `uc  1 a 1 6 ]
+"285
+} 0
+"92
+[v _LCD_write_instr_byte_8bit LCD_write_instr_byte_8bit `(v  1 e 1 0 ]
+{
+[v LCD_write_instr_byte_8bit@instr instr `uc  1 a 1 wreg ]
+[v LCD_write_instr_byte_8bit@instr instr `uc  1 a 1 wreg ]
+"94
+[v LCD_write_instr_byte_8bit@instr instr `uc  1 a 1 2 ]
+"104
+} 0
+"106
+[v _LCD_Init_ECE376 LCD_Init_ECE376 `(v  1 e 1 0 ]
+{
+"142
+} 0
+"76
+[v _LCD_write_instr_byte_4bit LCD_write_instr_byte_4bit `(v  1 e 1 0 ]
+{
+[v LCD_write_instr_byte_4bit@instr instr `uc  1 a 1 wreg ]
+[v LCD_write_instr_byte_4bit@instr instr `uc  1 a 1 wreg ]
+"78
+[v LCD_write_instr_byte_4bit@instr instr `uc  1 a 1 2 ]
+"90
 } 0
 "25
-[v _CCP2_Compare_Val CCP2_Compare_Val `(v  1 e 1 0 ]
+[v _LCD_enable_toggle LCD_enable_toggle `(v  1 s 1 LCD_enable_toggle ]
 {
-[v CCP2_Compare_Val@comp_val comp_val `us  1 p 2 0 ]
-"27
+"32
 } 0
-"35 C:\git\can_node_board\CAN WL SIM.X\src/timer.c
-[v _Timer1_Enable Timer1_Enable `(v  1 e 1 0 ]
-{
-"37
-} 0
-"31 C:\git\can_node_board\CAN WL SIM.X\src/mssp_spi_driver.c
-[v _SPI_Init_Master_Default SPI_Init_Master_Default `(v  1 e 1 0 ]
-{
-"55
-} 0
-"91 C:\git\can_node_board\CAN WL SIM.X\main.c
+"124 C:\git\can_node_board\CAN WL SIM.X\main.c
 [v _isr isr `IIH(v  1 e 1 0 ]
 {
-"122
+"172
 } 0

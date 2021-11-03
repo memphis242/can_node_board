@@ -6,6 +6,10 @@
  *           lines, and RC0, RC1, and RC2 for RS, R/W, and E respectively.
  * 
  * Revision: 0.1
+ * 
+ * TODO:
+ *      - Need to write functions for sending multiple bytes
+ *      - Need to find appropriate initialization sequence for other LCDs
  */
 
 /* Pin descriptions for 1602A Board
@@ -84,9 +88,10 @@
 #define DISP_RS                     LATCbits.LATC0
 #define DISP_RW                     LATCbits.LATC1
 #define DISP_E                      LATCbits.LATC2
-#define DISP_CTRL_LINES_DIR         (TRISC = 0xF8)   // RC0 to RC2 outputs
+#define DISP_CTRL_LINES_DIR         (TRISC &= ~0xF8)   // RC0 to RC2 outputs
 #define DISP_DATA_LINES             PORTD
 #define DISP_DATA_DIR_WRITE_4BIT    (TRISD &= 0x0Fu)
+#define DISP_DATA_DIR_READ_4BIT     (TRISD |= 0xF0u)
 #define DISP_DATA_DIR_WRITE_8BIT    (TRISD = 0x00u)
 #define DISP_DATA_DIR_READ          (TRISD = 0xFFu)
 #define DISP_BF                     PORTDbits.RD7

@@ -7,7 +7,7 @@
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "main.c" 2
-# 12 "main.c"
+# 11 "main.c"
 #pragma config OSC = HSPLL
 #pragma config FCMEN = OFF
 #pragma config IESO = OFF
@@ -61,6 +61,7 @@
 
 
 #pragma config EBTRB = OFF
+
 
 
 
@@ -4528,7 +4529,7 @@ typedef uint32_t uint_fast32_t;
 # 68 "main.c" 2
 
 # 1 "./inc/mssp_spi_driver.h" 1
-# 102 "./inc/mssp_spi_driver.h"
+# 103 "./inc/mssp_spi_driver.h"
 void SPI_Init_Master_Default(void);
 void SPI_Init_Slave_Default(void);
 uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8_t fosc_div, uint8_t slave0_or_master1);
@@ -4544,7 +4545,7 @@ void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size);
 # 69 "main.c" 2
 
 # 1 "./inc/lcd_driver.h" 1
-# 177 "./inc/lcd_driver.h"
+# 182 "./inc/lcd_driver.h"
 void static LCD_enable_toggle(void);
 void static LCD_wait_for_BF(void);
 void LCD_write_data_byte_4bit(uint8_t data);
@@ -4589,86 +4590,110 @@ void CCP2_Compare_Val(uint16_t comp_val);
 
 # 1 "./spi_two_node_test.h" 1
 # 73 "main.c" 2
-
-
-
-
-
-
-
-
+# 91 "main.c"
 extern uint8_t receive_byte;
 extern uint8_t slave_mode;
 extern uint8_t transfer_complete_flag;
 extern uint8_t manual_transfer;
+# 104 "main.c"
+static uint8_t spi_rx_message_buf = 0x00;
+static uint8_t spi_rx_invalid_flag = 0x00;
+static uint8_t spi_rx_flag = 0x00;
+static char button1_state = 0x00;
+static char button2_state = 0x00;
 
-static volatile uint8_t tmr_100ms_next = 0x00;
-static uint8_t spi_tx_test_message = 0x00;
-static volatile uint8_t spi_ready_to_tx = 0x00;
 
 
+static char button1_msg[5] = {'B','1',':',' '};
+static char button2_msg[5] = {'B','2',':',' '};
+static const char spi_rx_invalid_msg[] = "INVALID MSG!";
+# 124 "main.c"
 void __attribute__((picinterrupt(("")))) isr(void){
 
     if(PIR1bits.SSPIF && PIE1bits.SSPIE) {
 
         transfer_complete_flag = 0x01;
 
-        PIR1bits.SSPIF = 0;
-    }
 
-    if(PIR2bits.CCP2IF && PIE2bits.CCP2IE){
-
-        if(tmr_100ms_next){
-
-            tmr_100ms_next = 0x00;
+        spi_rx_message_buf = SSPBUF;
 
 
-            spi_ready_to_tx = 0x01;
+        if((spi_rx_message_buf & 0xC0u) != 0x00u){
 
-            PIR2bits.CCP2IF = 0u;;
+            SSPBUF = (0x40u | 0x2Au);
+            spi_rx_invalid_flag = 0x01;
+            spi_rx_flag = 0x01;
 
         } else{
 
-            tmr_100ms_next = 0x01;
-
-            PIR2bits.CCP2IF = 0u;;
+            SSPBUF = 0x3Fu;
+            spi_rx_flag = 0x01;
         }
 
 
+        PIR1bits.SSPIF = 0;
     }
-
+# 171 "main.c"
     return;
 }
 
 
+
+
+
 void main(void) {
+# 260 "main.c"
+    SPI_Init_Slave_Default();
+    LCD_Init_ECE376();
 
 
-    SPI_Init_Master_Default();
-
-    PORTE = 0x00;
-    TRISEbits.RE0 = 1u;;
-    TRISEbits.RE1 = 1u;;
-
-
-    ADCON1bits.PCFG = 0xE;
-
-
-    Timer1_Init_Default(62500u);
-
-
-
-    Timer1_Enable();
     (INTCONbits.GIE = 1);
-
-
 
 
     while(1){
 
+        if(spi_rx_flag) {
 
+            if(spi_rx_invalid_flag) {
+
+
+                LCD_set_cursor_position(1,1);
+                for(uint8_t i=0; i<12; i++){
+                    LCD_write_data_byte_4bit(spi_rx_invalid_msg[i]);
+                }
+
+                spi_rx_flag = 0x00;
+
+            } else {
+
+
+                button1_state = '0' + (spi_rx_message_buf & (1u << 0u));
+                button2_state = '0' + (spi_rx_message_buf & (1u << 1u));
+                button1_msg[4] = button1_state;
+                button2_msg[4] = button2_state;
+
+
+
+                LCD_set_cursor_position(1,1);
+                for(uint8_t i=0; i<5; i++){
+                    LCD_write_data_byte_4bit(button1_msg[i]);
+                }
+
+                LCD_set_cursor_position(2,1);
+                for(uint8_t i=0; i<5; i++){
+                    LCD_write_data_byte_4bit(button2_msg[i]);
+                }
+
+                spi_rx_flag = 0x00;
+
+            }
+
+
+        }
 
     }
+
+
 
     return;
 }

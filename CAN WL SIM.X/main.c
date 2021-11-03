@@ -6,8 +6,7 @@
  */
 
 
-
-// PIC18F4620 Configuration Bit Settings
+// <editor-fold defaultstate="collapsed" desc="PIC18F4620 Configuration Bit Settings">
 // CONFIG1H
 #pragma config OSC = HSPLL      // Oscillator Selection bits (HS oscillator, PLL enabled (Clock Frequency = 4 x FOSC1))
 #pragma config FCMEN = OFF      // Fail-Safe Clock Monitor Enable bit (Fail-Safe Clock Monitor disabled)
@@ -62,6 +61,7 @@
 
 // CONFIG7H
 #pragma config EBTRB = OFF      // Boot Block Table Read Protection bit (Boot Block (000000-0007FFh) not protected from table reads executed in other blocks)
+// </editor-fold>
 
 
 #include <xc.h>
@@ -78,19 +78,48 @@
 #endif
 
 
+// I will use the following to make it more convenient to write both the code
+// the Test TX Node and the Test RX Node in the same file
+#define TX_NODE         0u
+#define RX_NODE         1u
+//#define CURRENT_NODE    TX_NODE
+#define CURRENT_NODE    RX_NODE
+
+
+
+// External variables
 extern uint8_t receive_byte;    // Used by ISR when SPI mode is slave and receive has occurred
 extern uint8_t slave_mode;  // Flag to indicate current mode --> 0 = master, 1 = slave
 extern uint8_t transfer_complete_flag;
 extern uint8_t manual_transfer; // Flag to indicate when we are manually (i.e., using the functions below) transferring data; may be used in ISR or debugging
 
+#if CURRENT_NODE == TX_NODE
 static volatile uint8_t tmr_100ms_next = 0x00;  // This is used to indicate when 100ms has passed
 static uint8_t spi_tx_test_message = 0x00;  // This holds the test byte to be sent over SPI
 static uint8_t spi_rx_message_buf = 0x00;
 static volatile uint8_t spi_ready_to_tx = 0x00;
+#endif
+
+#if CURRENT_NODE == RX_NODE
+static uint8_t spi_rx_message_buf = 0x00;
+static uint8_t spi_rx_invalid_flag = 0x00;  // Flag to indicate invalid rx
+static uint8_t spi_rx_flag = 0x00;  // Flag to indicate an rx has occured
+static char button1_state = 0x00;
+static char button2_state = 0x00;
+// The following are for the display
+#define NUM_OF_CHAR_USED_PER_LINE   5
+#define BUTTON_STATE_CHAR           4
+static char button1_msg[NUM_OF_CHAR_USED_PER_LINE] = {'B','1',':',' '};
+static char button2_msg[NUM_OF_CHAR_USED_PER_LINE] = {'B','2',':',' '};
+static const char spi_rx_invalid_msg[] = "INVALID MSG!";
+#define LEN_OF_INV_MSG              12  // Not including null-terminator character
+#endif
 
 
 /******************************************************************************
  * Interrupt Routine
+ * 
+ * TODO: 
  */
 void __interrupt() isr(void){
         
@@ -98,9 +127,27 @@ void __interrupt() isr(void){
         // Successful byte TXd and RXd
         transfer_complete_flag = 0x01;  // Set the transf flag
         
+#if CURRENT_NODE == RX_NODE
+        spi_rx_message_buf = SSPBUF;
+        
+        // Check validity of message
+        if((spi_rx_message_buf & SPI_ID_BITS) != SPI_TX_NODE_ID){   // Wrong ID
+            
+            SSPBUF = SPI_RX_NODE_FAIL_MSG;
+            spi_rx_invalid_flag = 0x01; // Set flag
+            spi_rx_flag = 0x01;
+            
+        } else{ // Valid message
+            // Send acknowledge message
+            SSPBUF = SPI_RX_ACK_MSG;
+            spi_rx_flag = 0x01; // Set rx flag
+        }
+#endif
+        
         CLEAR_MSSP_IFLAG;
     }
     
+#if CURRENT_NODE == TX_NODE
     if(CCP2_IF_BIT && CCP2_INT_ENABLE_BIT){
         // On every other compare match, transmit!
         if(tmr_100ms_next){
@@ -118,9 +165,8 @@ void __interrupt() isr(void){
             
             CLEAR_CCP2_IF;
         }
-        
-        
     }
+#endif
     
     return;
 }
@@ -131,23 +177,34 @@ void __interrupt() isr(void){
  */
 void main(void) {
     
+#if CURRENT_NODE == TX_NODE
     /**************************************************************************
      * Code for Test TX Node
+     * The Test TX Node will send a byte every 100ms indicating the state of 
+     * two switches it is connected to. The Test RX Node should then update
+     * its display indicating these states.
+     * 
+     * TODO: INCLUDE TX TIMESTAMPS
      */
     SPI_Init_Master_Default();
-    // Use RD0 and RD1 as button inputs
+    // Use RD0 and RD1 as button inputs --> no need to worry about ADCON here
     PORTE = 0x00;
     BUTTON1_TRIS;
     BUTTON2_TRIS;
     
-    // Use RA0 as analog input (AN0); all other analog channel pins set to digital
-    ADCON1bits.PCFG = 0xE;
+//    // Use RA0 as analog input (AN0); all other analog channel pins set to digital
+//    ADCON1bits.PCFG = 0xE;
     
     // Configure TIMER1 and CCP2 to trigger a transmission every 100ms
     Timer1_Init_Default(DEFAULT_CONFIG_PERIOD_50ms);
     
+    // Give other node(s) 12s to initialize as well
+    __delay_ms(4000);
+    __delay_ms(4000);
+    __delay_ms(4000);
     
-    // Once done with all other initializations, turn on Timer1 and enable all unmasked interrupts
+    // Once done with all other initializations, turn on Timer1 and enable all
+    // unmasked interrupts like from the MSSP module
     Timer1_Enable();
     ei();
     
@@ -183,36 +240,74 @@ void main(void) {
                 }
             }
             
-            spi_ready_to_tx = 0x00; // Reset ready-to-send flag
+            spi_ready_to_tx = 0x00; // Reset ready-to-send flag for next 100ms            
         }
         
     }
     
+#endif
     
+#if CURRENT_NODE == RX_NODE
     /**************************************************************************
      * Code for Test RX Node
+     * The Test RX Node will update a display indicating the state of the two
+     * switches connected to the TX Node. It obtains this state through the
+     * SPI message bytes sent by the TX Node every 100ms.
+     * 
+     * TODO: INCLUDE TX AND RX TIMESTAMPS
      */
-    //// Initialize I/O ports -- PORTC is for control lines, PORTD is for data lines, PORTE for debugging
-//    // Clear all ports just to help with debugging
-//    PORTC = 0x00;
-//    PORTD = 0x00;
-//    PORTE = 0x00;
-//    // Set pin directions
-//    ADCON1bits.PCFG = 0x0F;
-//    TRISC = 0xF8;   // RC0, RC1, RC2 outputs
-//    TRISD = 0xFF;   // All of PORTD inputs for now
-//    TRISE = 0xFC;   // RE0, RE1 outputs
-//    
-//    // For display to initialize, need to have at least a 9s delay...
-//    __delay_ms(4000);
-//    __delay_ms(4000);
-//    __delay_ms(2000);
-//        
-//    // LCD test - ECE376 LCD from ebay
-//    LCD_Init_ECE376();
-//    LCD_set_cursor_position(1,1);   // Row 1, position 1 (NOT 0 indexed)
-//    char message[10u] = {'H', 'i', ' ', 'A', 's', 'h', 'l', 'e', 'y', '!'};
-//    for(uint8_t i=0; i<10; i++) LCD_write_data_byte_4bit(message[i]);
+    // Initialize SPI mode of MSSP module and LCD display
+    SPI_Init_Slave_Default();
+    LCD_Init_ECE376();
+    
+    // Now enable all unmasked interrupts, such as from MSSP
+    ei();
+    
+    // RX Node while(1) loop
+    while(1){
+        
+        if(spi_rx_flag) {   // If a message has been received
+            
+            if(spi_rx_invalid_flag) {   // An invalid message was received
+                
+                // Print out invalid message
+                LCD_set_cursor_position(1,1);
+                for(uint8_t i=0; i<LEN_OF_INV_MSG; i++){
+                    LCD_write_data_byte_4bit(spi_rx_invalid_msg[i]);
+                }
+                
+                spi_rx_flag = 0x00; // Reset rx flag
+                
+            } else {    // A valid message was received
+                
+                // Update button states
+                button1_state = '0' + (spi_rx_message_buf & (1u << SPI_TX_BYTE_BUTTON1_BIT_LOC));
+                button2_state = '0' + (spi_rx_message_buf & (1u << SPI_TX_BYTE_BUTTON2_BIT_LOC));
+                button1_msg[BUTTON_STATE_CHAR] = button1_state;
+                button2_msg[BUTTON_STATE_CHAR] = button2_state;
+
+                // Update display
+                // Line 1
+                LCD_set_cursor_position(1,1);   // Row 1, position 1 (NOT 0 indexed)
+                for(uint8_t i=0; i<NUM_OF_CHAR_USED_PER_LINE; i++){
+                    LCD_write_data_byte_4bit(button1_msg[i]);
+                }
+                // Line 2
+                LCD_set_cursor_position(2,1);
+                for(uint8_t i=0; i<NUM_OF_CHAR_USED_PER_LINE; i++){
+                    LCD_write_data_byte_4bit(button2_msg[i]);
+                }
+
+                spi_rx_flag = 0x00; // Reset rx flag
+                
+            }
+            
+            
+        }
+        
+    }
+    
+#endif
            
     return;
 }

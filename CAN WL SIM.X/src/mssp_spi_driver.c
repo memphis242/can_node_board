@@ -251,6 +251,7 @@ void SPI_Send_Byte(uint8_t tx){
     SSPBUF = tx;
     while(!transfer_complete_flag);     // Wait until data ready variable flag is set
     if(!slave_mode) MASTER_CS_HIGH;  // If in Master Mode...
+    transfer_complete_flag = 0x00;  // Reset transfer_complete_flag
     
     manual_transfer = 0x00; // Indicate the manual transfer is ending.
 }
@@ -291,6 +292,7 @@ void SPI_Receive_Byte(uint8_t * rx){
     
     *rx = SSPBUF;
     manual_transfer = 0x00; // Indicate the manual transfer is ending.
+    transfer_complete_flag = 0x00;  // Reset transfer_complete_flag
 }
 
 /* Function: SPI_Receive_Packet

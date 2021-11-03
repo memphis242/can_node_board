@@ -4392,7 +4392,7 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 9 "src/lcd_driver.c" 2
 
 # 1 "inc\\lcd_driver.h" 1
-# 79 "inc\\lcd_driver.h"
+# 83 "inc\\lcd_driver.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 1 3
 # 22 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 3
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\bits/alltypes.h" 1 3
@@ -4478,8 +4478,8 @@ typedef int32_t int_fast32_t;
 typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
-# 79 "inc\\lcd_driver.h" 2
-# 177 "inc\\lcd_driver.h"
+# 83 "inc\\lcd_driver.h" 2
+# 182 "inc\\lcd_driver.h"
 void static LCD_enable_toggle(void);
 void static LCD_wait_for_BF(void);
 void LCD_write_data_byte_4bit(uint8_t data);
@@ -4545,7 +4545,7 @@ void static LCD_wait_for_BF(void){
 
 void LCD_write_data_byte_4bit(uint8_t data){
 
-    (TRISC = 0xF8);
+    (TRISC &= ~0xF8);
     (TRISD &= 0x0Fu);
     (LATCbits.LATC0 = 1u);
     (LATCbits.LATC1 = 0u);
@@ -4561,7 +4561,7 @@ void LCD_write_data_byte_4bit(uint8_t data){
 
 void LCD_write_data_byte_8bit(uint8_t data){
 
-    (TRISC = 0xF8);
+    (TRISC &= ~0xF8);
     (TRISD = 0x00u);
     (LATCbits.LATC0 = 1u);
     (LATCbits.LATC1 = 0u);
@@ -4576,7 +4576,7 @@ void LCD_write_data_byte_8bit(uint8_t data){
 
 void LCD_write_instr_byte_4bit(uint8_t instr){
 
-    (TRISC = 0xF8);
+    (TRISC &= ~0xF8);
     (TRISD &= 0x0Fu);
     (LATCbits.LATC0 = 0u);
     (LATCbits.LATC1 = 0u);
@@ -4592,7 +4592,7 @@ void LCD_write_instr_byte_4bit(uint8_t instr){
 
 void LCD_write_instr_byte_8bit(uint8_t instr){
 
-    (TRISC = 0xF8);
+    (TRISC &= ~0xF8);
     (TRISD = 0x00u);
     (LATCbits.LATC0 = 0u);
     (LATCbits.LATC1 = 0u);
@@ -4605,6 +4605,20 @@ void LCD_write_instr_byte_8bit(uint8_t instr){
 }
 
 void LCD_Init_ECE376(void){
+
+
+    PORTC = 0x00; PORTD = 0x00;
+
+    (TRISC &= ~0xF8);
+    (TRISD |= 0xF0u);
+
+
+
+    _delay((unsigned long)((4000)*(40000000u/4000.0)));
+    _delay((unsigned long)((4000)*(40000000u/4000.0)));
+    _delay((unsigned long)((2000)*(40000000u/4000.0)));
+
+
 
 
     _delay((unsigned long)((100)*(40000000u/4000.0)));
@@ -4634,7 +4648,7 @@ void LCD_Init(uint8_t entry_mode, uint8_t disp_ctrl, uint8_t func_set){
     _delay((unsigned long)((60)*(40000000u/4000.0)));
 
 
-    (TRISC = 0xF8);
+    (TRISC &= ~0xF8);
     (TRISD &= 0x0Fu);
     (LATCbits.LATC0 = 0u);
     (LATCbits.LATC1 = 0u);
@@ -4850,7 +4864,7 @@ void static LCD_enable_toggle_amazonLCD(void){
 
 void LCD_write_data_byte_4bit_amazonLCD(uint8_t data){
 
-    (TRISC = 0xF8);
+    (TRISC &= ~0xF8);
     (TRISD &= 0x0Fu);
     (LATCbits.LATC0 = 1u);
     (LATCbits.LATC1 = 0u);
@@ -4864,7 +4878,7 @@ void LCD_write_data_byte_4bit_amazonLCD(uint8_t data){
 
 void LCD_write_data_byte_8bit_amazonLCD(uint8_t data){
 
-    (TRISC = 0xF8);
+    (TRISC &= ~0xF8);
     (TRISD = 0x00u);
     (LATCbits.LATC0 = 1u);
     (LATCbits.LATC1 = 0u);
@@ -4876,7 +4890,7 @@ void LCD_write_data_byte_8bit_amazonLCD(uint8_t data){
 
 void LCD_write_instr_byte_4bit_amazonLCD(uint8_t instr){
 
-    (TRISC = 0xF8);
+    (TRISC &= ~0xF8);
     (TRISD &= 0x0Fu);
     (LATCbits.LATC0 = 0u);
     (LATCbits.LATC1 = 0u);
@@ -4890,7 +4904,7 @@ void LCD_write_instr_byte_4bit_amazonLCD(uint8_t instr){
 
 void LCD_write_instr_byte_8bit_amazonLCD(uint8_t instr){
 
-    (TRISC = 0xF8);
+    (TRISC &= ~0xF8);
     (TRISD = 0x00u);
     (LATCbits.LATC0 = 0u);
     (LATCbits.LATC1 = 0u);
@@ -4902,7 +4916,7 @@ void LCD_write_instr_byte_8bit_amazonLCD(uint8_t instr){
 
 void LCD_write_instr_nibble_4bit_amazonLCD(uint8_t instr){
 
-    (TRISC = 0xF8);
+    (TRISC &= ~0xF8);
     (TRISD &= 0x0Fu);
     (LATCbits.LATC0 = 0u);
     (LATCbits.LATC1 = 0u);
