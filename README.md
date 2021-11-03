@@ -11,7 +11,7 @@ I intend to integrate this board with a test bench I built at work for a particu
 ### Structure of This Repo and How To Build
 The directory structure is a pretty standard one, with a main project directory ("CAN WL SIM.X"), an include directory ("./inc") for the header files, and a source directory ("./src") for the .c files that correspond to the header files. Within the main project directory is the main.c file, along with some header files that I used in the process of developing and testing my code.  
 
-The "CAN WL SIM.X" folder has the '.X' extension because this project was done on the MPLAB X IDE. If you download this repo, you can open this project on MPLAB X by selecting this "CAN WL SIM.X" folder. In addition, note that the #include statements made within the various files will work only if you add the "inc" subdirectory under Project Properties > XC8 Compiler > XC8 Compiler > Include Directories > (add the "inc" relative path -- you can use the Browse button). With all that, you should be able to build the project just fine with default XC8 options within MPLAB X.  
+The "CAN WL SIM.X" folder has the '.X' extension because this project was done on the MPLAB X IDE. If you download this repo, you can open this project on MPLAB X by selecting this "CAN WL SIM.X" folder. In addition, note that the #include statements made within the various files will work only if you add the "inc" subdirectory under Project Properties > XC8 Compiler > Include Directories > (add the "inc" relative path -- you can use the Browse button). With all that, you should be able to build the project just fine with default XC8 options within MPLAB X.  
 
 MPLAB X IDE version: v5.45  
 XC8 C Compiler version: v2.31
