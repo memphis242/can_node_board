@@ -82,8 +82,8 @@
 // the Test TX Node and the Test RX Node in the same file
 #define TX_NODE         0u
 #define RX_NODE         1u
-#define CURRENT_NODE    TX_NODE
-//#define CURRENT_NODE    RX_NODE
+//#define CURRENT_NODE    TX_NODE
+#define CURRENT_NODE    RX_NODE
 
 
 // Extra defines
@@ -137,18 +137,17 @@ void __interrupt() isr(void){
         
 #if CURRENT_NODE == RX_NODE
         spi_rx_message_buf = SSPBUF;
+        spi_rx_flag = 0x01;
         
         // Check validity of message
         if((spi_rx_message_buf & SPI_ID_BITS) != SPI_TX_NODE_ID){   // Wrong ID
             
             SSPBUF = SPI_RX_NODE_FAIL_MSG;
             spi_rx_invalid_flag = 0x01; // Set flag
-            spi_rx_flag = 0x01;
             
         } else{ // Valid message
             // Send acknowledge message
             SSPBUF = SPI_RX_ACK_MSG;
-            spi_rx_flag = 0x01; // Set rx flag
         }
 #endif
         
@@ -217,7 +216,7 @@ void main(void) {
     // Configure TIMER1 and CCP2 to trigger a transmission every 100ms
     Timer1_Init_Default(DEFAULT_CONFIG_PERIOD_50ms);
     
-    // Give other node(s) 12s to initialize as well
+////     Give other node(s) 12s to initialize as well
 //    __delay_ms(4000);
 //    __delay_ms(4000);
 //    __delay_ms(4000);
@@ -277,10 +276,12 @@ void main(void) {
      * TODO: INCLUDE TX AND RX TIMESTAMPS
      */
     // Initialize SPI mode of MSSP module and LCD display
+    di();
     LCD_Init_ECE376();
     SPI_Init_Slave_Default();
     
     // Now enable all unmasked interrupts, such as from MSSP
+    ENABLE_PERIPHERAL_INTERRUPTS;
     ei();
     
     LCD_set_cursor_position(1,1);   // Row 1, position 1 (NOT 0 indexed)
@@ -298,6 +299,8 @@ void main(void) {
             
             if(spi_rx_invalid_flag) {   // An invalid message was received
                 
+                LCD_clear_display();
+                
                 // Print out invalid message
                 LCD_set_cursor_position(1,1);
                 for(uint8_t i=0; i<LEN_OF_INV_MSG; i++){
@@ -305,12 +308,16 @@ void main(void) {
                 }
                 
                 spi_rx_flag = 0x00; // Reset rx flag
+                spi_rx_invalid_flag = 0x00u;
                 
             } else {    // A valid message was received
                 
                 // Update button states
-                button1_state = '0' + (spi_rx_message_buf & (1u << SPI_TX_BYTE_BUTTON1_BIT_LOC));
-                button2_state = '0' + (spi_rx_message_buf & (1u << SPI_TX_BYTE_BUTTON2_BIT_LOC));
+                
+                button1_state = (spi_rx_message_buf & (1u << SPI_TX_BYTE_BUTTON1_BIT_LOC)) ? '1' : '0';
+                button2_state = (spi_rx_message_buf & (1u << SPI_TX_BYTE_BUTTON2_BIT_LOC)) ? '1' : '0';
+//                button1_state = '0' + (spi_rx_message_buf & (1u << SPI_TX_BYTE_BUTTON1_BIT_LOC));
+//                button2_state = '0' + (spi_rx_message_buf & (1u << SPI_TX_BYTE_BUTTON2_BIT_LOC));
                 button1_msg[BUTTON_STATE_CHAR] = button1_state;
                 button2_msg[BUTTON_STATE_CHAR] = button2_state;
 

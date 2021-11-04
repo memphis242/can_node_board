@@ -4595,12 +4595,18 @@ extern uint8_t receive_byte;
 extern uint8_t slave_mode;
 extern uint8_t transfer_complete_flag;
 extern uint8_t manual_transfer;
-
-
-static volatile uint8_t tmr_100ms_next = 0x00;
-static uint8_t spi_tx_test_message = 0x00;
+# 106 "main.c"
 static uint8_t spi_rx_message_buf = 0x00;
-static volatile uint8_t spi_ready_to_tx = 0x00;
+static uint8_t spi_rx_invalid_flag = 0x00;
+static uint8_t spi_rx_flag = 0x00;
+static char button1_state = 0x00;
+static char button2_state = 0x00;
+
+
+
+static char button1_msg[5] = {'B','1',':',' '};
+static char button2_msg[5] = {'B','2',':',' '};
+static const char spi_rx_invalid_msg[] = "INVALID MSG!";
 # 126 "main.c"
 void __attribute__((picinterrupt(("")))) isr(void){
 
@@ -4613,39 +4619,26 @@ void __attribute__((picinterrupt(("")))) isr(void){
     if(PIR1bits.SSPIF && PIE1bits.SSPIE) {
 
         transfer_complete_flag = 0x01;
-# 155 "main.c"
-        PIR1bits.SSPIF = 0;
-    }
 
 
+        spi_rx_message_buf = SSPBUF;
+        spi_rx_flag = 0x01;
 
 
+        if((spi_rx_message_buf & 0xC0u) != 0x00u){
 
-
-    if(PIR2bits.CCP2IF && PIE2bits.CCP2IE){
-
-
-        if(tmr_100ms_next){
-
-            tmr_100ms_next = 0x00;
-
-
-            spi_ready_to_tx = 0x01;
-
-            PIR2bits.CCP2IF = 0u;;
+            SSPBUF = (0x40u | 0x2Au);
+            spi_rx_invalid_flag = 0x01;
 
         } else{
 
-            tmr_100ms_next = 0x01;
-            spi_ready_to_tx = 0x00;
-
-            PIR2bits.CCP2IF = 0u;;
+            SSPBUF = 0x3Fu;
         }
+
+
+        PIR1bits.SSPIF = 0;
     }
-
-
-
-
+# 186 "main.c"
     return;
 }
 
@@ -4654,62 +4647,72 @@ void __attribute__((picinterrupt(("")))) isr(void){
 
 
 void main(void) {
-# 205 "main.c"
+# 279 "main.c"
     (INTCONbits.GIE = 0);
-
-    SPI_Init_Master_Default();
-
-    PORTE = 0x00;
-    TRISEbits.RE0 = 1u;
-    TRISEbits.RE1 = 1u;
-    (ADCON1bits.PCFG = 0xA);
+    LCD_Init_ECE376();
+    SPI_Init_Slave_Default();
 
 
-
-
-
-    Timer1_Init_Default(62500u);
-# 227 "main.c"
-    Timer1_Enable();
     (INTCONbits.PEIE = 1u);
     (INTCONbits.GIE = 1);
+
+    LCD_set_cursor_position(1,1);
+    char init_success_msg[] = "Init success!";
+    for(uint8_t i=0; i<13; i++) LCD_write_data_byte_4bit(init_success_msg[i]);
+
+
+    _delay((unsigned long)((2000)*(40000000U/4000.0)));
+    LCD_clear_display();
 
 
     while(1){
 
-        if(spi_ready_to_tx){
+        if(spi_rx_flag) {
 
-            spi_tx_test_message = 0x00;
+            if(spi_rx_invalid_flag) {
 
-
-
-            spi_tx_test_message |= (PORTEbits.RE0 << 0u);
-            spi_tx_test_message |= (PORTEbits.RE1 << 1u);
+                LCD_clear_display();
 
 
-            spi_tx_test_message |= 0x00u;
-
-
-            SPI_Send_Byte(spi_tx_test_message);
-
-
-            SPI_Receive_Byte(&spi_rx_message_buf);
-
-            if(spi_rx_message_buf != (0x40u | 0x3Fu)) {
-
-                SPI_Send_Byte(spi_tx_test_message);
-
-
-                SPI_Receive_Byte(&spi_rx_message_buf);
-                if(spi_rx_message_buf != (0x40u | 0x3Fu)) {
-
+                LCD_set_cursor_position(1,1);
+                for(uint8_t i=0; i<12; i++){
+                    LCD_write_data_byte_4bit(spi_rx_invalid_msg[i]);
                 }
-            }
 
-            spi_ready_to_tx = 0x00;
+                spi_rx_flag = 0x00;
+                spi_rx_invalid_flag = 0x00u;
+
+            } else {
+
+
+
+                button1_state = (spi_rx_message_buf & (1u << 0u)) ? '1' : '0';
+                button2_state = (spi_rx_message_buf & (1u << 1u)) ? '1' : '0';
+
+
+                button1_msg[4] = button1_state;
+                button2_msg[4] = button2_state;
+
+
+
+                LCD_set_cursor_position(1,1);
+                for(uint8_t i=0; i<5; i++){
+                    LCD_write_data_byte_4bit(button1_msg[i]);
+                }
+
+                LCD_set_cursor_position(2,1);
+                for(uint8_t i=0; i<5; i++){
+                    LCD_write_data_byte_4bit(button2_msg[i]);
+                }
+
+                spi_rx_flag = 0x00;
+
+            }
         }
 
     }
-# 338 "main.c"
+
+
+
     return;
 }
