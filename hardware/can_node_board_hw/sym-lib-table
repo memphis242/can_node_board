@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name can_node_board_hw)(type Legacy)(uri ${KIPRJMOD}/can_node_board_hw.lib)(options "")(descr ""))
+)

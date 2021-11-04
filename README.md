@@ -9,12 +9,14 @@ I intend to integrate this board with a test bench I built at work for a particu
 **NOTE!** The actual specific J1939 messages I am sending wil NOT be pushed onto this remote directory, for obvious purposes! *However, example J1939 messages from the SAE J1939-71 standard document are included for demonstration purposes.*
 
 ### Structure of This Repo and How To Build
-The directory structure is a pretty standard one, with a main project directory ("CAN WL SIM.X"), an include directory ("./inc") for the header files, and a source directory ("./src") for the .c files that correspond to the header files. Within the main project directory is the main.c file, along with some header files that I used in the process of developing and testing my code.  
+For the code, the directory structure is a pretty standard one, with a main project directory "CAN WL SIM.X" (which I named after "CAN Wheel Loader Simulator"), an include directory ("./inc") for the header files, and a source directory ("./src") for the .c files that correspond to the header files. Within the main project directory is the main.c file, along with some test source and header files that I used in the process of developing and testing my code.  
 
 The "CAN WL SIM.X" folder has the '.X' extension because this project was done on the MPLAB X IDE. If you download this repo, you can open this project on MPLAB X by selecting this "CAN WL SIM.X" folder. In addition, note that the #include statements made within the various files will work only if you add the "inc" subdirectory under Project Properties > XC8 Compiler > Include Directories > (add the "inc" relative path -- you can use the Browse button). With all that, you should be able to build the project just fine with default XC8 options within MPLAB X.  
 
 MPLAB X IDE version: v5.45  
-XC8 C Compiler version: v2.31
+XC8 C Compiler version: v2.31  
+
+For the hardware, that will be under the "hardware" directory and is where I have the KiCAD files for any relevant schematics, part libraries, and PCB-related files.
 
 ### Hardware Used
 The choice of microcontroller - PIC18F4620 - was because I wanted to use the same microcontroller that I was using for my embedded systems class, which also satisfied my requirements for number of I/O. This microcontroller does not have an integrated CAN controller, so I chose the MCP2515 CAN Controller IC from Microchip. Note, they did have a newer version of the IC - the MCP2518 - but that wasn't available as of October 2021 due to the worldwide chip shortage... Likewise, the MCP2562 CAN Transceiver was selected based on availability and desired package.

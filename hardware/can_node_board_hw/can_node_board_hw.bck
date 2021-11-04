@@ -1,0 +1,7 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP PIC18F4620-IP
+D This particular schematic symbol is supposed to reflect the actual PDIP package pin layout. This is meant to make it easier for breadboarding if you were looking at the schematic.
+$ENDCMP
+#
+#End Doc Library
