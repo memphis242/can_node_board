@@ -385,6 +385,21 @@ void main(void) {
 }
 
 
+/* Function: hex_to_char
+ * --------------------------------------
+ * This is to help with printing out messages in their raw hex form. I use it
+ * in the debug sections of code. You give it a 4-bit hex number (if the number
+ * is greater than 0xF, then you will receive back a ' ' character) and it
+ * returns the ASCII character corresponding to this number.
+ * 
+ * Parameters:
+ *      - uint8_t hex_num --> This should be a 4-bit number so that is fits
+ *                            into one hex numeral.
+ * 
+ * Returns:
+ *      - char --> This char is the ASCII value of the hex numeral parameter.
+ *
+ */
 static char hex_to_char(uint8_t hex_num){
     switch(hex_num){
         
