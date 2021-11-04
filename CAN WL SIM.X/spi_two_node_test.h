@@ -29,7 +29,7 @@
 #define SPI_RX_NODE_ID                      0x40u
 
 // SPI specific messages
-#define SPI_RX_ACK_MSG                      0x3Fu    // This will be used as an "acknowledge" msg from a receiver
+#define SPI_RX_ACK_MSG                      0x3Bu    // This will be used as an "acknowledge" msg from a receiver
 #define SPI_RX_NODE_ACK_MSG                 (SPI_RX_NODE_ID | SPI_RX_ACK_MSG)
 #define SPI_RX_FAIL_MSG                     0x2Au    // This will be used as a "failed to receive" msg from a receiver
 #define SPI_RX_NODE_FAIL_MSG                (SPI_RX_NODE_ID | SPI_RX_FAIL_MSG)
