@@ -571,8 +571,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
 "47
-[; ;src/lcd_driver.c: 47:     (TRISC &= ~0xF8);
-[e =& _TRISC -> ~ -> 248 `i `Vuc ]
+[; ;src/lcd_driver.c: 47:     (TRISC &= 0xF8);
+[e =& _TRISC -> -> 248 `i `Vuc ]
 "48
 [; ;src/lcd_driver.c: 48:     (TRISD &= 0x0Fu);
 [e =& _TRISD -> -> 15 `ui `Vuc ]
@@ -609,8 +609,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
 "63
-[; ;src/lcd_driver.c: 63:     (TRISC &= ~0xF8);
-[e =& _TRISC -> ~ -> 248 `i `Vuc ]
+[; ;src/lcd_driver.c: 63:     (TRISC &= 0xF8);
+[e =& _TRISC -> -> 248 `i `Vuc ]
 "64
 [; ;src/lcd_driver.c: 64:     (TRISD = 0x00u);
 [e = _TRISD -> -> 0 `ui `uc ]
@@ -641,8 +641,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _instr `uc ~T0 @X0 1 r1 ]
 [f ]
 "78
-[; ;src/lcd_driver.c: 78:     (TRISC &= ~0xF8);
-[e =& _TRISC -> ~ -> 248 `i `Vuc ]
+[; ;src/lcd_driver.c: 78:     (TRISC &= 0xF8);
+[e =& _TRISC -> -> 248 `i `Vuc ]
 "79
 [; ;src/lcd_driver.c: 79:     (TRISD &= 0x0Fu);
 [e =& _TRISD -> -> 15 `ui `Vuc ]
@@ -679,8 +679,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _instr `uc ~T0 @X0 1 r1 ]
 [f ]
 "94
-[; ;src/lcd_driver.c: 94:     (TRISC &= ~0xF8);
-[e =& _TRISC -> ~ -> 248 `i `Vuc ]
+[; ;src/lcd_driver.c: 94:     (TRISC &= 0xF8);
+[e =& _TRISC -> -> 248 `i `Vuc ]
 "95
 [; ;src/lcd_driver.c: 95:     (TRISD = 0x00u);
 [e = _TRISD -> -> 0 `ui `uc ]
@@ -714,8 +714,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _PORTC -> -> 0 `i `uc ]
 [e = _PORTD -> -> 0 `i `uc ]
 "111
-[; ;src/lcd_driver.c: 111:     (TRISC &= ~0xF8);
-[e =& _TRISC -> ~ -> 248 `i `Vuc ]
+[; ;src/lcd_driver.c: 111:     (TRISC &= 0xF8);
+[e =& _TRISC -> -> 248 `i `Vuc ]
 "112
 [; ;src/lcd_driver.c: 112:     (TRISD |= 0xF0u);
 [e =| _TRISD -> -> 240 `ui `Vuc ]
@@ -790,8 +790,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/lcd_driver.c: 147:     _delay((unsigned long)((60)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 60 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "150
-[; ;src/lcd_driver.c: 150:     (TRISC &= ~0xF8);
-[e =& _TRISC -> ~ -> 248 `i `Vuc ]
+[; ;src/lcd_driver.c: 150:     (TRISC &= 0xF8);
+[e =& _TRISC -> -> 248 `i `Vuc ]
 "151
 [; ;src/lcd_driver.c: 151:     (TRISD &= 0x0Fu);
 [e =& _TRISD -> -> 15 `ui `Vuc ]
@@ -1317,8 +1317,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
 "366
-[; ;src/lcd_driver.c: 366:     (TRISC &= ~0xF8);
-[e =& _TRISC -> ~ -> 248 `i `Vuc ]
+[; ;src/lcd_driver.c: 366:     (TRISC &= 0xF8);
+[e =& _TRISC -> -> 248 `i `Vuc ]
 "367
 [; ;src/lcd_driver.c: 367:     (TRISD &= 0x0Fu);
 [e =& _TRISD -> -> 15 `ui `Vuc ]
@@ -1352,8 +1352,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
 "380
-[; ;src/lcd_driver.c: 380:     (TRISC &= ~0xF8);
-[e =& _TRISC -> ~ -> 248 `i `Vuc ]
+[; ;src/lcd_driver.c: 380:     (TRISC &= 0xF8);
+[e =& _TRISC -> -> 248 `i `Vuc ]
 "381
 [; ;src/lcd_driver.c: 381:     (TRISD = 0x00u);
 [e = _TRISD -> -> 0 `ui `uc ]
@@ -1381,8 +1381,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _instr `uc ~T0 @X0 1 r1 ]
 [f ]
 "392
-[; ;src/lcd_driver.c: 392:     (TRISC &= ~0xF8);
-[e =& _TRISC -> ~ -> 248 `i `Vuc ]
+[; ;src/lcd_driver.c: 392:     (TRISC &= 0xF8);
+[e =& _TRISC -> -> 248 `i `Vuc ]
 "393
 [; ;src/lcd_driver.c: 393:     (TRISD &= 0x0Fu);
 [e =& _TRISD -> -> 15 `ui `Vuc ]
@@ -1416,8 +1416,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _instr `uc ~T0 @X0 1 r1 ]
 [f ]
 "406
-[; ;src/lcd_driver.c: 406:     (TRISC &= ~0xF8);
-[e =& _TRISC -> ~ -> 248 `i `Vuc ]
+[; ;src/lcd_driver.c: 406:     (TRISC &= 0xF8);
+[e =& _TRISC -> -> 248 `i `Vuc ]
 "407
 [; ;src/lcd_driver.c: 407:     (TRISD = 0x00u);
 [e = _TRISD -> -> 0 `ui `uc ]
@@ -1445,8 +1445,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _instr `uc ~T0 @X0 1 r1 ]
 [f ]
 "418
-[; ;src/lcd_driver.c: 418:     (TRISC &= ~0xF8);
-[e =& _TRISC -> ~ -> 248 `i `Vuc ]
+[; ;src/lcd_driver.c: 418:     (TRISC &= 0xF8);
+[e =& _TRISC -> -> 248 `i `Vuc ]
 "419
 [; ;src/lcd_driver.c: 419:     (TRISD &= 0x0Fu);
 [e =& _TRISD -> -> 15 `ui `Vuc ]

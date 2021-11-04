@@ -82,11 +82,13 @@
 // the Test TX Node and the Test RX Node in the same file
 #define TX_NODE         0u
 #define RX_NODE         1u
-//#define CURRENT_NODE    TX_NODE
-#define CURRENT_NODE    RX_NODE
+#define CURRENT_NODE    TX_NODE
+//#define CURRENT_NODE    RX_NODE
 
 
-
+// Extra defines
+#define ENABLE_PERIPHERAL_INTERRUPTS    (INTCONbits.PEIE = 1u)
+#define DISABLE_PERIPHERAL_INTERRUPTS   (INTCONbits.PEIE = 0u)
 // External variables
 extern uint8_t receive_byte;    // Used by ISR when SPI mode is slave and receive has occurred
 extern uint8_t slave_mode;  // Flag to indicate current mode --> 0 = master, 1 = slave
@@ -122,7 +124,13 @@ static const char spi_rx_invalid_msg[] = "INVALID MSG!";
  * TODO: 
  */
 void __interrupt() isr(void){
-        
+    
+//    LATDbits.LATD3 = 1u;
+    
+    /* ****************************************************
+     * MSSP SPI INTERRUPT
+     * ****************************************************
+     */ 
     if(MSSP_IF_BIT && MSSP_INT_ENABLE_BIT) {
         // Successful byte TXd and RXd
         transfer_complete_flag = 0x01;  // Set the transf flag
@@ -147,8 +155,13 @@ void __interrupt() isr(void){
         CLEAR_MSSP_IFLAG;
     }
     
+    /* ****************************************************
+     * CCP2 INTERRUPT
+     * ****************************************************
+     */
 #if CURRENT_NODE == TX_NODE
     if(CCP2_IF_BIT && CCP2_INT_ENABLE_BIT){
+        
         // On every other compare match, transmit!
         if(tmr_100ms_next){
             // Reset flag
@@ -162,11 +175,14 @@ void __interrupt() isr(void){
         } else{
             // Set flag so next interrupt, we transmit
             tmr_100ms_next = 0x01;
+            spi_ready_to_tx = 0x00; // Just make sure this flag is still cleared
             
             CLEAR_CCP2_IF;
         }
     }
 #endif
+    
+//    LATDbits.LATD3 = 0u;
     
     return;
 }
@@ -185,12 +201,15 @@ void main(void) {
      * its display indicating these states.
      * 
      * TODO: INCLUDE TX TIMESTAMPS
-     */
-    SPI_Init_Master_Default();
-    // Use RD0 and RD1 as button inputs --> no need to worry about ADCON here
-    PORTE = 0x00;
+     */    
+    di();
+    
+    SPI_Init_Master_Default();  // REMEMBER RD2 IS BEING USED AS CS
+    // Use RE0 and RE1 as button inputs
+    BUTTON_PORT = 0x00;
     BUTTON1_TRIS;
     BUTTON2_TRIS;
+    BUTTON_ADCON;
     
 //    // Use RA0 as analog input (AN0); all other analog channel pins set to digital
 //    ADCON1bits.PCFG = 0xE;
@@ -199,18 +218,19 @@ void main(void) {
     Timer1_Init_Default(DEFAULT_CONFIG_PERIOD_50ms);
     
     // Give other node(s) 12s to initialize as well
-    __delay_ms(4000);
-    __delay_ms(4000);
-    __delay_ms(4000);
+//    __delay_ms(4000);
+//    __delay_ms(4000);
+//    __delay_ms(4000);
     
     // Once done with all other initializations, turn on Timer1 and enable all
     // unmasked interrupts like from the MSSP module
     Timer1_Enable();
+    ENABLE_PERIPHERAL_INTERRUPTS;
     ei();
     
     // TX Node while(1) loop
     while(1){
-        
+
         if(spi_ready_to_tx){
             
             spi_tx_test_message = 0x00;
@@ -257,11 +277,19 @@ void main(void) {
      * TODO: INCLUDE TX AND RX TIMESTAMPS
      */
     // Initialize SPI mode of MSSP module and LCD display
-    SPI_Init_Slave_Default();
     LCD_Init_ECE376();
+    SPI_Init_Slave_Default();
     
     // Now enable all unmasked interrupts, such as from MSSP
     ei();
+    
+    LCD_set_cursor_position(1,1);   // Row 1, position 1 (NOT 0 indexed)
+    char init_success_msg[] = "Init success!";
+    for(uint8_t i=0; i<13; i++) LCD_write_data_byte_4bit(init_success_msg[i]);
+    
+    // Just wait a couple more seconds...
+    __delay_ms(2000);
+    LCD_clear_display();
     
     // RX Node while(1) loop
     while(1){
@@ -301,8 +329,6 @@ void main(void) {
                 spi_rx_flag = 0x00; // Reset rx flag
                 
             }
-            
-            
         }
         
     }

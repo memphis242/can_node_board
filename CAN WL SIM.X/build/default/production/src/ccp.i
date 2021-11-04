@@ -4485,14 +4485,15 @@ void CCP2_Compare_Val(uint16_t comp_val);
 # 10 "src/ccp.c" 2
 
 # 1 "inc\\timer.h" 1
-# 58 "inc\\timer.h"
+# 63 "inc\\timer.h"
 void Timer1_Init_Default(uint16_t period_val);
 void Timer1_Enable(void);
 void Timer1_Disable(void);
 # 11 "src/ccp.c" 2
 # 21 "src/ccp.c"
 void CCP2_Init_Default(void){
-    CCP2CON = 0x05;
+    CCP2CON = 0x0A;
+    (PIE2bits.CCP2IE = 1u);
 }
 
 void CCP2_Compare_Val(uint16_t comp_val){

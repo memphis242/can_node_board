@@ -2,6 +2,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 "4155 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 4155: extern volatile unsigned char CCP2CON __attribute__((address(0xFBA)));
 [v _CCP2CON `Vuc ~T0 @X0 0 e@4026 ]
+"2734
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2734:     struct {
+[s S100 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S100 . CCP2IE TMR3IE HLVDIE BCLIE EEIE . CMIE OSCFIE ]
+"2744
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2744:     struct {
+[s S101 :2 `uc 1 :1 `uc 1 ]
+[n S101 . . LVDIE ]
+"2733
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2733: typedef union {
+[u S99 `S100 1 `S101 1 ]
+[n S99 . . . ]
+"2749
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2749: extern volatile PIE2bits_t PIE2bits __attribute__((address(0xFA0)));
+[v _PIE2bits `VS99 ~T0 @X0 0 e@4000 ]
 "4234
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 4234: extern volatile unsigned short CCPR2 __attribute__((address(0xFBB)));
 [v _CCPR2 `Vus ~T0 @X0 0 e@4027 ]
@@ -423,23 +438,26 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _CCP2_Init_Default ]
 [f ]
 "22
-[; ;src/ccp.c: 22:     CCP2CON = 0x05;
-[e = _CCP2CON -> -> 5 `i `uc ]
+[; ;src/ccp.c: 22:     CCP2CON = 0x0A;
+[e = _CCP2CON -> -> 10 `i `uc ]
 "23
-[; ;src/ccp.c: 23: }
+[; ;src/ccp.c: 23:     (PIE2bits.CCP2IE = 1u);
+[e = . . _PIE2bits 0 0 -> -> 1 `ui `uc ]
+"24
+[; ;src/ccp.c: 24: }
 [e :UE 270 ]
 }
-"25
-[; ;src/ccp.c: 25: void CCP2_Compare_Val(uint16_t comp_val){
+"26
+[; ;src/ccp.c: 26: void CCP2_Compare_Val(uint16_t comp_val){
 [v _CCP2_Compare_Val `(v ~T0 @X0 1 ef1`us ]
 {
 [e :U _CCP2_Compare_Val ]
 [v _comp_val `us ~T0 @X0 1 r1 ]
 [f ]
-"26
-[; ;src/ccp.c: 26:     CCPR2 = comp_val;
-[e = _CCPR2 _comp_val ]
 "27
-[; ;src/ccp.c: 27: }
+[; ;src/ccp.c: 27:     CCPR2 = comp_val;
+[e = _CCPR2 _comp_val ]
+"28
+[; ;src/ccp.c: 28: }
 [e :UE 271 ]
 }

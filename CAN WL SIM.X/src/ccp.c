@@ -20,6 +20,7 @@
 // CCP2
 void CCP2_Init_Default(void){
     CCP2M_DEFAULT;
+    ENABLE_CCP2_INTERRUPT;
 }
 
 void CCP2_Compare_Val(uint16_t comp_val){

@@ -88,7 +88,7 @@
 #define DISP_RS                     LATCbits.LATC0
 #define DISP_RW                     LATCbits.LATC1
 #define DISP_E                      LATCbits.LATC2
-#define DISP_CTRL_LINES_DIR         (TRISC &= ~0xF8)   // RC0 to RC2 outputs
+#define DISP_CTRL_LINES_DIR         (TRISC &= 0xF8)   // RC0 to RC2 outputs
 #define DISP_DATA_LINES             PORTD
 #define DISP_DATA_DIR_WRITE_4BIT    (TRISD &= 0x0Fu)
 #define DISP_DATA_DIR_READ_4BIT     (TRISD |= 0xF0u)

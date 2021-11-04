@@ -14,10 +14,12 @@
 
 // Definitions
 // Test inputs
+#define BUTTON_PORT                         PORTE
 #define BUTTON1_PIN                         PORTEbits.RE0
 #define BUTTON2_PIN                         PORTEbits.RE1
-#define BUTTON1_TRIS                        TRISEbits.RE0 = 1u;
-#define BUTTON2_TRIS                        TRISEbits.RE1 = 1u;
+#define BUTTON1_TRIS                        TRISEbits.RE0 = 1u
+#define BUTTON2_TRIS                        TRISEbits.RE1 = 1u
+#define BUTTON_ADCON                        (ADCON1bits.PCFG = 0xA)
 
 // SPI TX Node message format
 #define SPI_TX_BYTE_BUTTON1_BIT_LOC         0u

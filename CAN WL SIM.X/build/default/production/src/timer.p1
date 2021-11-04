@@ -11,21 +11,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "33
 [; ;inc\ccp.h: 33: void CCP2_Compare_Val(uint16_t comp_val);
 [v _CCP2_Compare_Val `(v ~T0 @X0 0 ef1`us ]
-"2734 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2734:     struct {
-[s S100 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S100 . CCP2IE TMR3IE HLVDIE BCLIE EEIE . CMIE OSCFIE ]
-"2744
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2744:     struct {
-[s S101 :2 `uc 1 :1 `uc 1 ]
-[n S101 . . LVDIE ]
-"2733
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2733: typedef union {
-[u S99 `S100 1 `S101 1 ]
-[n S99 . . . ]
-"2749
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2749: extern volatile PIE2bits_t PIE2bits __attribute__((address(0xFA0)));
-[v _PIE2bits `VS99 ~T0 @X0 0 e@4000 ]
 "54 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 54: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -448,44 +433,41 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/timer.c: 23:     T1CON = 0xB0;
 [e = _T1CON -> -> 176 `i `uc ]
 "24
-[; ;src/timer.c: 24:     T3CON &= ~0x48;
-[e =& _T3CON -> ~ -> 72 `i `Vuc ]
+[; ;src/timer.c: 24:     (T3CON = 0xB0);
+[e = _T3CON -> -> 176 `i `uc ]
 "27
 [; ;src/timer.c: 27:     CCP2_Init_Default();
 [e ( _CCP2_Init_Default ..  ]
 "28
 [; ;src/timer.c: 28:     CCP2_Compare_Val(period_val);
 [e ( _CCP2_Compare_Val (1 _period_val ]
-"31
-[; ;src/timer.c: 31:     PIE2bits.CCP2IE = 1u;
-[e = . . _PIE2bits 0 0 -> -> 1 `ui `uc ]
-"33
-[; ;src/timer.c: 33: }
+"32
+[; ;src/timer.c: 32: }
 [e :UE 270 ]
 }
-"35
-[; ;src/timer.c: 35: void Timer1_Enable(void){
+"34
+[; ;src/timer.c: 34: void Timer1_Enable(void){
 [v _Timer1_Enable `(v ~T0 @X0 1 ef ]
 {
 [e :U _Timer1_Enable ]
 [f ]
-"36
-[; ;src/timer.c: 36:     T1CON |= 0x01;
+"35
+[; ;src/timer.c: 35:     T1CON |= 0x01;
 [e =| _T1CON -> -> 1 `i `Vuc ]
-"37
-[; ;src/timer.c: 37: }
+"36
+[; ;src/timer.c: 36: }
 [e :UE 271 ]
 }
-"39
-[; ;src/timer.c: 39: void Timer1_Disable(void){
+"38
+[; ;src/timer.c: 38: void Timer1_Disable(void){
 [v _Timer1_Disable `(v ~T0 @X0 1 ef ]
 {
 [e :U _Timer1_Disable ]
 [f ]
-"40
-[; ;src/timer.c: 40:     T1CON &= ~0x01;
+"39
+[; ;src/timer.c: 39:     T1CON &= ~0x01;
 [e =& _T1CON -> ~ -> 1 `i `Vuc ]
-"41
-[; ;src/timer.c: 41: }
+"40
+[; ;src/timer.c: 40: }
 [e :UE 272 ]
 }

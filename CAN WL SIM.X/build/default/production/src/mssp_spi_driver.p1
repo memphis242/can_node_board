@@ -780,44 +780,47 @@ Version 4.0 HI-TECH Software Intermediate Code
 "205
 [; ;src/mssp_spi_driver.c: 205:     manual_transfer = 0x01;
 [e = _manual_transfer -> -> 1 `i `uc ]
-"207
-[; ;src/mssp_spi_driver.c: 207:     if(!slave_mode) LATDbits.LATD2 = 0;
+"206
+[; ;src/mssp_spi_driver.c: 206:     transfer_complete_flag = 0x00;
+[e = _transfer_complete_flag -> -> 0 `i `uc ]
+"208
+[; ;src/mssp_spi_driver.c: 208:     if(!slave_mode) LATDbits.LATD2 = 0;
 [e $ ! ! != -> _slave_mode `i -> 0 `i 283  ]
 [e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
 [e :U 283 ]
-"208
-[; ;src/mssp_spi_driver.c: 208:     SSPBUF = tx;
-[e = _SSPBUF _tx ]
 "209
-[; ;src/mssp_spi_driver.c: 209:     while(!transfer_complete_flag);
+[; ;src/mssp_spi_driver.c: 209:     SSPBUF = tx;
+[e = _SSPBUF _tx ]
+"210
+[; ;src/mssp_spi_driver.c: 210:     while(!transfer_complete_flag);
 [e $U 284  ]
 [e :U 285 ]
 [e :U 284 ]
 [e $ ! != -> _transfer_complete_flag `i -> 0 `i 285  ]
 [e :U 286 ]
-"210
-[; ;src/mssp_spi_driver.c: 210:     if(!slave_mode) LATDbits.LATD2 = 1;
+"212
+[; ;src/mssp_spi_driver.c: 212:     if(!slave_mode) LATDbits.LATD2 = 1;
 [e $ ! ! != -> _slave_mode `i -> 0 `i 287  ]
 [e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
 [e :U 287 ]
-"211
-[; ;src/mssp_spi_driver.c: 211:     *rx = SSPBUF;
-[e = *U _rx _SSPBUF ]
 "213
-[; ;src/mssp_spi_driver.c: 213:     manual_transfer = 0x00;
+[; ;src/mssp_spi_driver.c: 213:     *rx = SSPBUF;
+[e = *U _rx _SSPBUF ]
+"215
+[; ;src/mssp_spi_driver.c: 215:     manual_transfer = 0x00;
 [e = _manual_transfer -> -> 0 `i `uc ]
-"214
-[; ;src/mssp_spi_driver.c: 214:     transfer_complete_flag = 0x00;
-[e = _transfer_complete_flag -> -> 0 `i `uc ]
 "216
-[; ;src/mssp_spi_driver.c: 216:     return;
+[; ;src/mssp_spi_driver.c: 216:     transfer_complete_flag = 0x00;
+[e = _transfer_complete_flag -> -> 0 `i `uc ]
+"218
+[; ;src/mssp_spi_driver.c: 218:     return;
 [e $UE 282  ]
-"217
-[; ;src/mssp_spi_driver.c: 217: }
+"219
+[; ;src/mssp_spi_driver.c: 219: }
 [e :UE 282 ]
 }
-"231
-[; ;src/mssp_spi_driver.c: 231: void SPI_Transfer_Packet(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_size){
+"233
+[; ;src/mssp_spi_driver.c: 233: void SPI_Transfer_Packet(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_size){
 [v _SPI_Transfer_Packet `(v ~T0 @X0 1 ef3`*uc`*uc`us ]
 {
 [e :U _SPI_Transfer_Packet ]
@@ -825,180 +828,157 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _rx_pack `*uc ~T0 @X0 1 r2 ]
 [v _pack_size `us ~T0 @X0 1 r3 ]
 [f ]
-"232
-[; ;src/mssp_spi_driver.c: 232:     uint16_t i = 0;
+"234
+[; ;src/mssp_spi_driver.c: 234:     uint16_t i = 0;
 [v _i `us ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `us ]
-"233
-[; ;src/mssp_spi_driver.c: 233:     for(i=0; i<pack_size; i++){
+"235
+[; ;src/mssp_spi_driver.c: 235:     for(i=0; i<pack_size; i++){
 {
 [e = _i -> -> 0 `i `us ]
 [e $U 292  ]
 [e :U 289 ]
 {
-"234
-[; ;src/mssp_spi_driver.c: 234:         SPI_Transfer_Byte(tx_pack[i], &rx_pack[i]);
+"236
+[; ;src/mssp_spi_driver.c: 236:         SPI_Transfer_Byte(tx_pack[i], &rx_pack[i]);
 [e ( _SPI_Transfer_Byte (2 , *U + _tx_pack * -> _i `ux -> -> # *U _tx_pack `ui `ux &U *U + _rx_pack * -> _i `ux -> -> # *U _rx_pack `ui `ux ]
-"235
-[; ;src/mssp_spi_driver.c: 235:     }
+"237
+[; ;src/mssp_spi_driver.c: 237:     }
 }
 [e ++ _i -> -> 1 `i `us ]
 [e :U 292 ]
 [e $ < -> _i `ui -> _pack_size `ui 289  ]
 [e :U 290 ]
 }
-"236
-[; ;src/mssp_spi_driver.c: 236: }
+"238
+[; ;src/mssp_spi_driver.c: 238: }
 [e :UE 288 ]
 }
-"247
-[; ;src/mssp_spi_driver.c: 247: void SPI_Send_Byte(uint8_t tx){
+"249
+[; ;src/mssp_spi_driver.c: 249: void SPI_Send_Byte(uint8_t tx){
 [v _SPI_Send_Byte `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _SPI_Send_Byte ]
 [v _tx `uc ~T0 @X0 1 r1 ]
 [f ]
-"248
-[; ;src/mssp_spi_driver.c: 248:     manual_transfer = 0x01;
-[e = _manual_transfer -> -> 1 `i `uc ]
 "250
-[; ;src/mssp_spi_driver.c: 250:     if(!slave_mode) LATDbits.LATD2 = 0;
+[; ;src/mssp_spi_driver.c: 250:     manual_transfer = 0x01;
+[e = _manual_transfer -> -> 1 `i `uc ]
+"251
+[; ;src/mssp_spi_driver.c: 251:     transfer_complete_flag = 0x00;
+[e = _transfer_complete_flag -> -> 0 `i `uc ]
+"253
+[; ;src/mssp_spi_driver.c: 253:     if(!slave_mode) LATDbits.LATD2 = 0;
 [e $ ! ! != -> _slave_mode `i -> 0 `i 294  ]
 [e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
 [e :U 294 ]
-"251
-[; ;src/mssp_spi_driver.c: 251:     SSPBUF = tx;
+"254
+[; ;src/mssp_spi_driver.c: 254:     SSPBUF = tx;
 [e = _SSPBUF _tx ]
-"252
-[; ;src/mssp_spi_driver.c: 252:     while(!transfer_complete_flag);
+"255
+[; ;src/mssp_spi_driver.c: 255:     while(!transfer_complete_flag);
 [e $U 295  ]
 [e :U 296 ]
 [e :U 295 ]
 [e $ ! != -> _transfer_complete_flag `i -> 0 `i 296  ]
 [e :U 297 ]
-"253
-[; ;src/mssp_spi_driver.c: 253:     if(!slave_mode) LATDbits.LATD2 = 1;
+"256
+[; ;src/mssp_spi_driver.c: 256:     if(!slave_mode) LATDbits.LATD2 = 1;
 [e $ ! ! != -> _slave_mode `i -> 0 `i 298  ]
 [e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
 [e :U 298 ]
-"254
-[; ;src/mssp_spi_driver.c: 254:     transfer_complete_flag = 0x00;
-[e = _transfer_complete_flag -> -> 0 `i `uc ]
-"256
-[; ;src/mssp_spi_driver.c: 256:     manual_transfer = 0x00;
-[e = _manual_transfer -> -> 0 `i `uc ]
 "257
-[; ;src/mssp_spi_driver.c: 257: }
+[; ;src/mssp_spi_driver.c: 257:     transfer_complete_flag = 0x00;
+[e = _transfer_complete_flag -> -> 0 `i `uc ]
+"259
+[; ;src/mssp_spi_driver.c: 259:     manual_transfer = 0x00;
+[e = _manual_transfer -> -> 0 `i `uc ]
+"260
+[; ;src/mssp_spi_driver.c: 260:     transfer_complete_flag = 0x00;
+[e = _transfer_complete_flag -> -> 0 `i `uc ]
+"261
+[; ;src/mssp_spi_driver.c: 261: }
 [e :UE 293 ]
 }
-"269
-[; ;src/mssp_spi_driver.c: 269: void SPI_Send_Packet(uint8_t * tx_pack, uint16_t tx_size){
+"273
+[; ;src/mssp_spi_driver.c: 273: void SPI_Send_Packet(uint8_t * tx_pack, uint16_t tx_size){
 [v _SPI_Send_Packet `(v ~T0 @X0 1 ef2`*uc`us ]
 {
 [e :U _SPI_Send_Packet ]
 [v _tx_pack `*uc ~T0 @X0 1 r1 ]
 [v _tx_size `us ~T0 @X0 1 r2 ]
 [f ]
-"270
-[; ;src/mssp_spi_driver.c: 270:     uint16_t i = 0;
+"274
+[; ;src/mssp_spi_driver.c: 274:     uint16_t i = 0;
 [v _i `us ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `us ]
-"271
-[; ;src/mssp_spi_driver.c: 271:     for(i=0; i<tx_size; i++){
+"275
+[; ;src/mssp_spi_driver.c: 275:     for(i=0; i<tx_size; i++){
 {
 [e = _i -> -> 0 `i `us ]
 [e $U 303  ]
 [e :U 300 ]
 {
-"272
-[; ;src/mssp_spi_driver.c: 272:         SPI_Send_Byte(tx_pack[i]);
+"276
+[; ;src/mssp_spi_driver.c: 276:         SPI_Send_Byte(tx_pack[i]);
 [e ( _SPI_Send_Byte (1 *U + _tx_pack * -> _i `ux -> -> # *U _tx_pack `ui `ux ]
-"273
-[; ;src/mssp_spi_driver.c: 273:     }
+"277
+[; ;src/mssp_spi_driver.c: 277:     }
 }
 [e ++ _i -> -> 1 `i `us ]
 [e :U 303 ]
 [e $ < -> _i `ui -> _tx_size `ui 300  ]
 [e :U 301 ]
 }
-"274
-[; ;src/mssp_spi_driver.c: 274: }
+"278
+[; ;src/mssp_spi_driver.c: 278: }
 [e :UE 299 ]
 }
-"285
-[; ;src/mssp_spi_driver.c: 285: void SPI_Receive_Byte(uint8_t * rx){
+"289
+[; ;src/mssp_spi_driver.c: 289: void SPI_Receive_Byte(uint8_t * rx){
 [v _SPI_Receive_Byte `(v ~T0 @X0 1 ef1`*uc ]
 {
 [e :U _SPI_Receive_Byte ]
 [v _rx `*uc ~T0 @X0 1 r1 ]
 [f ]
-"286
-[; ;src/mssp_spi_driver.c: 286:     manual_transfer = 0x01;
-[e = _manual_transfer -> -> 1 `i `uc ]
-"288
-[; ;src/mssp_spi_driver.c: 288:     SSPBUF;
-[e _SSPBUF ]
-"289
-[; ;src/mssp_spi_driver.c: 289:     if(!slave_mode) LATDbits.LATD2 = 0;
-[e $ ! ! != -> _slave_mode `i -> 0 `i 305  ]
-[e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
-[e :U 305 ]
-"290
-[; ;src/mssp_spi_driver.c: 290:     while(!transfer_complete_flag);
-[e $U 306  ]
-[e :U 307 ]
-[e :U 306 ]
-[e $ ! != -> _transfer_complete_flag `i -> 0 `i 307  ]
-[e :U 308 ]
 "291
-[; ;src/mssp_spi_driver.c: 291:     if(!slave_mode) LATDbits.LATD2 = 1;
-[e $ ! ! != -> _slave_mode `i -> 0 `i 309  ]
-[e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
-[e :U 309 ]
+[; ;src/mssp_spi_driver.c: 291:     SPI_Transfer_Byte(0x00, rx);
+[e ( _SPI_Transfer_Byte (2 , -> -> 0 `i `uc _rx ]
 "293
-[; ;src/mssp_spi_driver.c: 293:     *rx = SSPBUF;
-[e = *U _rx _SSPBUF ]
-"294
-[; ;src/mssp_spi_driver.c: 294:     manual_transfer = 0x00;
-[e = _manual_transfer -> -> 0 `i `uc ]
-"295
-[; ;src/mssp_spi_driver.c: 295:     transfer_complete_flag = 0x00;
-[e = _transfer_complete_flag -> -> 0 `i `uc ]
-"296
-[; ;src/mssp_spi_driver.c: 296: }
+[; ;src/mssp_spi_driver.c: 293: }
 [e :UE 304 ]
 }
-"308
-[; ;src/mssp_spi_driver.c: 308: void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size){
+"305
+[; ;src/mssp_spi_driver.c: 305: void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size){
 [v _SPI_Receive_Packet `(v ~T0 @X0 1 ef2`*uc`us ]
 {
 [e :U _SPI_Receive_Packet ]
 [v _rx_pack `*uc ~T0 @X0 1 r1 ]
 [v _rx_size `us ~T0 @X0 1 r2 ]
 [f ]
-"309
-[; ;src/mssp_spi_driver.c: 309:     uint16_t i = 0;
+"306
+[; ;src/mssp_spi_driver.c: 306:     uint16_t i = 0;
 [v _i `us ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `us ]
-"310
-[; ;src/mssp_spi_driver.c: 310:     for(i=0; i<rx_size; i++){
+"307
+[; ;src/mssp_spi_driver.c: 307:     for(i=0; i<rx_size; i++){
 {
 [e = _i -> -> 0 `i `us ]
-[e $U 314  ]
-[e :U 311 ]
+[e $U 309  ]
+[e :U 306 ]
 {
-"311
-[; ;src/mssp_spi_driver.c: 311:         SPI_Receive_Byte(&rx_pack[i]);
+"308
+[; ;src/mssp_spi_driver.c: 308:         SPI_Receive_Byte(&rx_pack[i]);
 [e ( _SPI_Receive_Byte (1 &U *U + _rx_pack * -> _i `ux -> -> # *U _rx_pack `ui `ux ]
-"312
-[; ;src/mssp_spi_driver.c: 312:     }
+"309
+[; ;src/mssp_spi_driver.c: 309:     }
 }
 [e ++ _i -> -> 1 `i `us ]
-[e :U 314 ]
-[e $ < -> _i `ui -> _rx_size `ui 311  ]
-[e :U 312 ]
+[e :U 309 ]
+[e $ < -> _i `ui -> _rx_size `ui 306  ]
+[e :U 307 ]
 }
-"313
-[; ;src/mssp_spi_driver.c: 313: }
-[e :UE 310 ]
+"310
+[; ;src/mssp_spi_driver.c: 310: }
+[e :UE 305 ]
 }

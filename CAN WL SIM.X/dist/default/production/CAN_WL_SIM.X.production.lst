@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.31 build 20201012212115 
-                                                                                               Wed Nov 03 13:32:56 2021
+                                                                                               Wed Nov 03 23:33:01 2021
 
 Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1 
      1                           	processor	18F4620
@@ -9,1670 +9,1318 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
      3                           	pagewidth 120
      4                           	opt	flic
      5                           	psect	idataCOMRAM,global,class=CODE,delta=1,noexec
-     6                           	psect	smallconst,global,reloc=2,class=SMALLCONST,delta=1,noexec
-     7                           	psect	nvCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
-     8                           	psect	cinit,global,reloc=2,class=CODE,delta=1
-     9                           	psect	bssCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
-    10                           	psect	dataCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
-    11                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
-    12                           	psect	text0,global,reloc=2,class=CODE,delta=1
-    13                           	psect	text1,global,reloc=2,class=CODE,delta=1
-    14                           	psect	text2,global,reloc=2,class=CODE,delta=1
-    15                           	psect	text3,global,reloc=2,class=CODE,delta=1
-    16                           	psect	text4,global,reloc=2,class=CODE,delta=1
-    17                           	psect	text5,global,reloc=2,class=CODE,delta=1
-    18                           	psect	text6,global,reloc=2,class=CODE,delta=1
-    19                           	psect	text7,global,reloc=2,class=CODE,delta=1
-    20                           	psect	intcode,global,reloc=2,class=CODE,delta=1
-    21                           	psect	intcode_body,global,reloc=2,class=CODE,delta=1
-    22                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1,noexec
-    23                           	psect	rparam,global,class=COMRAM,space=1,delta=1,noexec
-    24                           	psect	temp,global,ovrld,common,class=COMRAM,space=1,delta=1
-    25                           	psect	idloc,global,abs,ovrld,class=IDLOC,space=5,delta=1,noexec
-    26                           	psect	config,global,abs,ovrld,class=CONFIG,space=4,delta=1,noexec
-    27  0000                     
-    28                           ; Version 2.20
-    29                           ; Generated 12/02/2020 GMT
-    30                           ; 
-    31                           ; Copyright © 2020, Microchip Technology Inc. and its subsidiaries ("Microchip")
-    32                           ; All rights reserved.
-    33                           ; 
-    34                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+     6                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     7                           	psect	bssCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+     8                           	psect	dataCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+     9                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+    10                           	psect	text0,global,reloc=2,class=CODE,delta=1
+    11                           	psect	text1,global,reloc=2,class=CODE,delta=1
+    12                           	psect	text2,global,reloc=2,class=CODE,delta=1
+    13                           	psect	text3,global,reloc=2,class=CODE,delta=1
+    14                           	psect	text4,global,reloc=2,class=CODE,delta=1
+    15                           	psect	text5,global,reloc=2,class=CODE,delta=1
+    16                           	psect	text6,global,reloc=2,class=CODE,delta=1
+    17                           	psect	text7,global,reloc=2,class=CODE,delta=1
+    18                           	psect	text8,global,reloc=2,class=CODE,delta=1
+    19                           	psect	intcode,global,reloc=2,class=CODE,delta=1
+    20                           	psect	intcode_body,global,reloc=2,class=CODE,delta=1
+    21                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1,noexec
+    22                           	psect	rparam,global,class=COMRAM,space=1,delta=1,noexec
+    23                           	psect	temp,global,ovrld,common,class=COMRAM,space=1,delta=1
+    24                           	psect	idloc,global,abs,ovrld,class=IDLOC,space=5,delta=1,noexec
+    25                           	psect	config,global,abs,ovrld,class=CONFIG,space=4,delta=1,noexec
+    26  0000                     
+    27                           ; Version 2.20
+    28                           ; Generated 12/02/2020 GMT
+    29                           ; 
+    30                           ; Copyright © 2020, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    31                           ; All rights reserved.
+    32                           ; 
+    33                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
       +                          ip").
-    35                           ; 
-    36                           ; Redistribution and use in source and binary forms, with or without modification, are
-    37                           ; permitted provided that the following conditions are met:
-    38                           ; 
-    39                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+    34                           ; 
+    35                           ; Redistribution and use in source and binary forms, with or without modification, are
+    36                           ; permitted provided that the following conditions are met:
+    37                           ; 
+    38                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
       +                          t of
-    40                           ;        conditions and the following disclaimer.
-    41                           ; 
-    42                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+    39                           ;        conditions and the following disclaimer.
+    40                           ; 
+    41                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
       +                          list
-    43                           ;        of conditions and the following disclaimer in the documentation and/or other
-    44                           ;        materials provided with the distribution.
-    45                           ; 
-    46                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+    42                           ;        of conditions and the following disclaimer in the documentation and/or other
+    43                           ;        materials provided with the distribution.
+    44                           ; 
+    45                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
       +                          is
-    47                           ;        software without specific prior written permission.
-    48                           ; 
-    49                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
-    50                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+    46                           ;        software without specific prior written permission.
+    47                           ; 
+    48                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    49                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
       +                          OR
-    51                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+    50                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
       +                          T,
-    52                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
-    53                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
-    54                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+    51                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    52                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    53                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
       +                          RICT
-    55                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+    54                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
       +                          SE OF
-    56                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    55                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    56                           ; 
     57                           ; 
-    58                           ; 
-    59                           ; Code-generator required, PIC18F4620 Definitions
-    60                           ; 
-    61                           ; SFR Addresses
-    62  0000                     
-    63                           	psect	idataCOMRAM
-    64  001436                     __pidataCOMRAM:
-    65                           	callstack 0
-    66                           
-    67                           ;initializer for _button2_msg
-    68  001436  42                 	db	66
-    69  001437  32                 	db	50
-    70  001438  3A                 	db	58
-    71  001439  20                 	db	32
-    72  00143A  00                 	db	0
-    73                           
-    74                           ;initializer for _button1_msg
-    75  00143B  42                 	db	66
-    76  00143C  31                 	db	49
-    77  00143D  3A                 	db	58
-    78  00143E  20                 	db	32
-    79  00143F  00                 	db	0
-    80                           
-    81                           ;initializer for _current_func_set
-    82  001440  30                 	db	48
-    83                           
-    84                           ;initializer for _current_entry_mode
-    85  001441  06                 	db	6
-    86                           
-    87                           ;initializer for _disp_16x2
-    88  001442  01                 	db	1
-    89                           
-    90                           ;initializer for _current_disp_ctrl
-    91  001443  08                 	db	8
-    92                           
-    93                           	psect	smallconst
-    94  001000                     __psmallconst:
-    95                           	callstack 0
-    96  001000  00                 	db	0
-    97  001001                     _spi_rx_invalid_msg:
-    98                           	callstack 0
-    99  001001  49                 	db	73
-   100  001002  4E                 	db	78
-   101  001003  56                 	db	86
-   102  001004  41                 	db	65
-   103  001005  4C                 	db	76
-   104  001006  49                 	db	73
-   105  001007  44                 	db	68
-   106  001008  20                 	db	32
-   107  001009  4D                 	db	77
-   108  00100A  53                 	db	83
-   109  00100B  47                 	db	71
-   110  00100C  21                 	db	33
-   111  00100D  00                 	db	0
-   112  00100E                     __end_of_spi_rx_invalid_msg:
-   113                           	callstack 0
-   114  00100E  00                 	db	0	; dummy byte at the end
-   115  0000                     
-   116                           	psect	nvCOMRAM
-   117  000024                     __pnvCOMRAM:
-   118                           	callstack 0
-   119  000024                     _slave_mode:
-   120                           	callstack 0
-   121  000024                     	ds	1
-   122  0000                     _CCPR2	set	4027
-   123  0000                     _PIE2bits	set	4000
-   124  0000                     _T3CON	set	4017
-   125  0000                     _T1CON	set	4045
-   126  0000                     _TRISA	set	3986
-   127  0000                     _LATDbits	set	3980
-   128  0000                     _TRISDbits	set	3989
-   129  0000                     _SSPSTAT	set	4039
-   130  0000                     _SSPCON1	set	4038
-   131  0000                     _SSPCON1bits	set	4038
-   132  0000                     _PORTC	set	3970
-   133  0000                     _PORTD	set	3971
-   134  0000                     _TRISC	set	3988
-   135  0000                     _PORTDbits	set	3971
-   136  0000                     _TRISD	set	3989
-   137  0000                     _LATCbits	set	3979
-   138  0000                     _CCP2CON	set	4026
-   139  0000                     _INTCONbits	set	4082
-   140  0000                     _SSPBUF	set	4041
-   141  0000                     _PIE1bits	set	3997
-   142  0000                     _PIR1bits	set	3998
-   143                           
-   144                           ; #config settings
-   145                           
-   146                           	psect	cinit
-   147  001396                     __pcinit:
-   148                           	callstack 0
-   149  001396                     start_initialization:
-   150                           	callstack 0
-   151  001396                     __initialization:
-   152                           	callstack 0
-   153                           
-   154                           ; Initialize objects allocated to COMRAM (14 bytes)
-   155                           ; load TBLPTR registers with __pidataCOMRAM
-   156  001396  0E36               	movlw	low __pidataCOMRAM
-   157  001398  6EF6               	movwf	tblptrl,c
-   158  00139A  0E14               	movlw	high __pidataCOMRAM
-   159  00139C  6EF7               	movwf	tblptrh,c
-   160  00139E  0E00               	movlw	low (__pidataCOMRAM shr (0+16))
-   161  0013A0  6EF8               	movwf	tblptru,c
-   162  0013A2  EE00  F001         	lfsr	0,__pdataCOMRAM
-   163  0013A6  EE10 F00E          	lfsr	1,14
-   164  0013AA                     copy_data0:
-   165  0013AA  0009               	tblrd		*+
-   166  0013AC  CFF5 FFEE          	movff	tablat,postinc0
-   167  0013B0  50E5               	movf	postdec1,w,c
-   168  0013B2  50E1               	movf	fsr1l,w,c
-   169  0013B4  E1FA               	bnz	copy_data0
-   170                           
-   171                           ; Clear objects allocated to COMRAM (11 bytes)
-   172  0013B6  EE00  F00F         	lfsr	0,__pbssCOMRAM
-   173  0013BA  0E0B               	movlw	11
-   174  0013BC                     clear_0:
-   175  0013BC  6AEE               	clrf	postinc0,c
-   176  0013BE  06E8               	decf	wreg,f,c
-   177  0013C0  E1FD               	bnz	clear_0
-   178  0013C2                     end_of_initialization:
-   179                           	callstack 0
-   180  0013C2                     __end_of__initialization:
+    58                           ; Code-generator required, PIC18F4620 Definitions
+    59                           ; 
+    60                           ; SFR Addresses
+    61  0000                     
+    62                           	psect	idataCOMRAM
+    63  000270                     __pidataCOMRAM:
+    64                           	callstack 0
+    65                           
+    66                           ;initializer for _current_func_set
+    67  000270  30                 	db	48
+    68                           
+    69                           ;initializer for _current_entry_mode
+    70  000271  06                 	db	6
+    71                           
+    72                           ;initializer for _disp_16x2
+    73  000272  01                 	db	1
+    74                           
+    75                           ;initializer for _current_disp_ctrl
+    76  000273  08                 	db	8
+    77  0000                     _CCPR2	set	4027
+    78  0000                     _PORTEbits	set	3972
+    79  0000                     _ADCON1bits	set	4033
+    80  0000                     _TRISEbits	set	3990
+    81  0000                     _PORTE	set	3972
+    82  0000                     _INTCONbits	set	4082
+    83  0000                     _PIR2bits	set	4001
+    84  0000                     _T3CON	set	4017
+    85  0000                     _T1CON	set	4045
+    86  0000                     _TRISA	set	3986
+    87  0000                     _PIE1bits	set	3997
+    88  0000                     _LATDbits	set	3980
+    89  0000                     _PIR1bits	set	3998
+    90  0000                     _SSPBUF	set	4041
+    91  0000                     _TRISDbits	set	3989
+    92  0000                     _SSPSTAT	set	4039
+    93  0000                     _SSPCON1	set	4038
+    94  0000                     _SSPCON1bits	set	4038
+    95  0000                     _PORTC	set	3970
+    96  0000                     _PORTD	set	3971
+    97  0000                     _TRISC	set	3988
+    98  0000                     _PORTDbits	set	3971
+    99  0000                     _TRISD	set	3989
+   100  0000                     _LATCbits	set	3979
+   101  0000                     _PIE2bits	set	4000
+   102  0000                     _CCP2CON	set	4026
+   103                           
+   104                           ; #config settings
+   105                           
+   106                           	psect	cinit
+   107  0001D4                     __pcinit:
+   108                           	callstack 0
+   109  0001D4                     start_initialization:
+   110                           	callstack 0
+   111  0001D4                     __initialization:
+   112                           	callstack 0
+   113                           
+   114                           ; Initialize objects allocated to COMRAM (4 bytes)
+   115                           ; load TBLPTR registers with __pidataCOMRAM
+   116  0001D4  0E70               	movlw	low __pidataCOMRAM
+   117  0001D6  6EF6               	movwf	tblptrl,c
+   118  0001D8  0E02               	movlw	high __pidataCOMRAM
+   119  0001DA  6EF7               	movwf	tblptrh,c
+   120  0001DC  0E00               	movlw	low (__pidataCOMRAM shr (0+16))
+   121  0001DE  6EF8               	movwf	tblptru,c
+   122  0001E0  EE00  F012         	lfsr	0,__pdataCOMRAM
+   123  0001E4  EE10 F004          	lfsr	1,4
+   124  0001E8                     copy_data0:
+   125  0001E8  0009               	tblrd		*+
+   126  0001EA  CFF5 FFEE          	movff	tablat,postinc0
+   127  0001EE  50E5               	movf	postdec1,w,c
+   128  0001F0  50E1               	movf	fsr1l,w,c
+   129  0001F2  E1FA               	bnz	copy_data0
+   130                           
+   131                           ; Clear objects allocated to COMRAM (11 bytes)
+   132  0001F4  EE00  F001         	lfsr	0,__pbssCOMRAM
+   133  0001F8  0E0B               	movlw	11
+   134  0001FA                     clear_0:
+   135  0001FA  6AEE               	clrf	postinc0,c
+   136  0001FC  06E8               	decf	wreg,f,c
+   137  0001FE  E1FD               	bnz	clear_0
+   138  000200                     end_of_initialization:
+   139                           	callstack 0
+   140  000200                     __end_of__initialization:
+   141                           	callstack 0
+   142  000200  9016               	bcf	int$flags,0,c	;clear compiler interrupt flag (level 1)
+   143  000202  9216               	bcf	int$flags,1,c	;clear compiler interrupt flag (level 2)
+   144  000204  0E00               	movlw	low (__Lmediumconst shr (0+16))
+   145  000206  6EF8               	movwf	tblptru,c
+   146  000208  0100               	movlb	0
+   147  00020A  EF09  F000         	goto	_main	;jump to C main() function
+   148                           
+   149                           	psect	bssCOMRAM
+   150  000001                     __pbssCOMRAM:
+   151                           	callstack 0
+   152  000001                     _spi_ready_to_tx:
+   153                           	callstack 0
+   154  000001                     	ds	1
+   155  000002                     _spi_tx_test_message:
+   156                           	callstack 0
+   157  000002                     	ds	1
+   158  000003                     _tmr_100ms_next:
+   159                           	callstack 0
+   160  000003                     	ds	1
+   161  000004                     _manual_transfer:
+   162                           	callstack 0
+   163  000004                     	ds	1
+   164  000005                     _transfer_complete_flag:
+   165                           	callstack 0
+   166  000005                     	ds	1
+   167  000006                     _slave_mode:
+   168                           	callstack 0
+   169  000006                     	ds	1
+   170  000007                     _receive_byte:
+   171                           	callstack 0
+   172  000007                     	ds	1
+   173  000008                     _address_counter:
+   174                           	callstack 0
+   175  000008                     	ds	1
+   176  000009                     	ds	1
+   177  00000A                     _init_complete:
+   178                           	callstack 0
+   179  00000A                     	ds	1
+   180  00000B                     _spi_rx_message_buf:
    181                           	callstack 0
-   182  0013C2  9025               	bcf	int$flags,0,c	;clear compiler interrupt flag (level 1)
-   183  0013C4  9225               	bcf	int$flags,1,c	;clear compiler interrupt flag (level 2)
-   184  0013C6  0E00               	movlw	low (__Lmediumconst shr (0+16))
-   185  0013C8  6EF8               	movwf	tblptru,c
-   186  0013CA  0100               	movlb	0
-   187  0013CC  EF08  F008         	goto	_main	;jump to C main() function
-   188                           
-   189                           	psect	bssCOMRAM
-   190  00000F                     __pbssCOMRAM:
+   182  00000B                     	ds	1
+   183                           
+   184                           	psect	dataCOMRAM
+   185  000012                     __pdataCOMRAM:
+   186                           	callstack 0
+   187  000012                     _current_func_set:
+   188                           	callstack 0
+   189  000012                     	ds	1
+   190  000013                     _current_entry_mode:
    191                           	callstack 0
-   192  00000F                     _manual_transfer:
-   193                           	callstack 0
-   194  00000F                     	ds	1
-   195  000010                     _receive_byte:
-   196                           	callstack 0
-   197  000010                     	ds	1
-   198  000011                     _address_counter:
-   199                           	callstack 0
-   200  000011                     	ds	1
-   201  000012                     	ds	1
-   202  000013                     _init_complete:
-   203                           	callstack 0
-   204  000013                     	ds	1
-   205  000014                     _button2_state:
+   192  000013                     	ds	1
+   193  000014                     	ds	1
+   194  000015                     _current_disp_ctrl:
+   195                           	callstack 0
+   196  000015                     	ds	1
+   197                           
+   198                           	psect	cstackCOMRAM
+   199  00000C                     __pcstackCOMRAM:
+   200                           	callstack 0
+   201  00000C                     SPI_Send_Byte@tx:
+   202                           	callstack 0
+   203  00000C                     CCP2_Compare_Val@comp_val:
+   204                           	callstack 0
+   205  00000C                     SPI_Transfer_Byte@rx:
    206                           	callstack 0
-   207  000014                     	ds	1
-   208  000015                     _button1_state:
-   209                           	callstack 0
-   210  000015                     	ds	1
-   211  000016                     _spi_rx_flag:
-   212                           	callstack 0
-   213  000016                     	ds	1
-   214  000017                     _spi_rx_invalid_flag:
-   215                           	callstack 0
-   216  000017                     	ds	1
-   217  000018                     _spi_rx_message_buf:
+   207                           
+   208                           ; 2 bytes @ 0x0
+   209  00000C                     	ds	2
+   210  00000E                     SPI_Transfer_Byte@tx:
+   211                           	callstack 0
+   212  00000E                     Timer1_Init_Default@period_val:
+   213                           	callstack 0
+   214                           
+   215                           ; 2 bytes @ 0x2
+   216  00000E                     	ds	1
+   217  00000F                     SPI_Receive_Byte@rx:
    218                           	callstack 0
-   219  000018                     	ds	1
-   220  000019                     _transfer_complete_flag:
-   221                           	callstack 0
-   222  000019                     	ds	1
-   223                           
-   224                           	psect	dataCOMRAM
-   225  000001                     __pdataCOMRAM:
-   226                           	callstack 0
-   227  000001                     _button2_msg:
-   228                           	callstack 0
-   229  000001                     	ds	5
-   230  000006                     _button1_msg:
-   231                           	callstack 0
-   232  000006                     	ds	5
-   233  00000B                     _current_func_set:
-   234                           	callstack 0
-   235  00000B                     	ds	1
-   236  00000C                     _current_entry_mode:
-   237                           	callstack 0
-   238  00000C                     	ds	1
-   239  00000D                     	ds	1
-   240  00000E                     _current_disp_ctrl:
-   241                           	callstack 0
-   242  00000E                     	ds	1
-   243                           
-   244                           	psect	cstackCOMRAM
-   245  00001A                     __pcstackCOMRAM:
-   246                           	callstack 0
-   247  00001A                     ??_isr:
-   248  00001A                     
-   249                           ; 1 bytes @ 0x0
-   250  00001A                     	ds	1
-   251  00001B                     ??_LCD_write_data_byte_4bit:
-   252  00001B                     ??_LCD_write_instr_byte_4bit:
-   253  00001B                     ??_LCD_write_instr_byte_8bit:
-   254                           
-   255                           ; 1 bytes @ 0x1
-   256  00001B                     	ds	1
-   257  00001C                     LCD_write_data_byte_4bit@data:
-   258                           	callstack 0
-   259  00001C                     LCD_write_instr_byte_4bit@instr:
-   260                           	callstack 0
-   261  00001C                     LCD_write_instr_byte_8bit@instr:
-   262                           	callstack 0
-   263                           
-   264                           ; 1 bytes @ 0x2
-   265  00001C                     	ds	1
-   266  00001D                     ??_LCD_Init_ECE376:
-   267  00001D                     LCD_set_cursor_position@pos_on_line:
+   219                           
+   220                           ; 2 bytes @ 0x3
+   221  00000F                     	ds	1
+   222  000010                     
+   223                           ; 1 bytes @ 0x4
+   224  000010                     	ds	1
+   225  000011                     ??_main:
+   226                           
+   227                           ; 1 bytes @ 0x5
+   228  000011                     	ds	1
+   229                           
+   230 ;;
+   231 ;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
+   232 ;;
+   233 ;; *************** function _main *****************
+   234 ;; Defined at:
+   235 ;;		line 194 in file "main.c"
+   236 ;; Parameters:    Size  Location     Type
+   237 ;;		None
+   238 ;; Auto vars:     Size  Location     Type
+   239 ;;		None
+   240 ;; Return value:  Size  Location     Type
+   241 ;;                  1    wreg      void 
+   242 ;; Registers used:
+   243 ;;		wreg, fsr2l, fsr2h, status,2, status,0, cstack
+   244 ;; Tracked objects:
+   245 ;;		On entry : 0/0
+   246 ;;		On exit  : 0/0
+   247 ;;		Unchanged: 0/0
+   248 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14  BANK15
+   249 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+   250 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+   251 ;;      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+   252 ;;      Totals:         1       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+   253 ;;Total ram usage:        1 bytes
+   254 ;; Hardware stack levels required when called:    3
+   255 ;; This function calls:
+   256 ;;		_SPI_Init_Master_Default
+   257 ;;		_SPI_Receive_Byte
+   258 ;;		_SPI_Send_Byte
+   259 ;;		_Timer1_Enable
+   260 ;;		_Timer1_Init_Default
+   261 ;; This function is called by:
+   262 ;;		Startup code after reset
+   263 ;; This function uses a non-reentrant model
+   264 ;;
+   265                           
+   266                           	psect	text0
+   267  000012                     __ptext0:
    268                           	callstack 0
-   269                           
-   270                           ; 1 bytes @ 0x3
-   271  00001D                     	ds	1
-   272  00001E                     ??_LCD_set_cursor_position:
-   273                           
-   274                           ; 1 bytes @ 0x4
-   275  00001E                     	ds	1
-   276  00001F                     LCD_set_cursor_position@ddram_addr:
-   277                           	callstack 0
-   278                           
-   279                           ; 1 bytes @ 0x5
-   280  00001F                     	ds	1
-   281  000020                     LCD_set_cursor_position@line:
-   282                           	callstack 0
-   283                           
-   284                           ; 1 bytes @ 0x6
-   285  000020                     	ds	1
-   286  000021                     main@i:
-   287                           	callstack 0
-   288                           
-   289                           ; 1 bytes @ 0x7
-   290  000021                     	ds	1
-   291  000022                     main@i_197:
-   292                           	callstack 0
-   293                           
-   294                           ; 1 bytes @ 0x8
-   295  000022                     	ds	1
-   296  000023                     main@i_198:
-   297                           	callstack 0
-   298                           
-   299                           ; 1 bytes @ 0x9
-   300  000023                     	ds	1
-   301                           
-   302 ;;
-   303 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
-   304 ;;
-   305 ;; *************** function _main *****************
-   306 ;; Defined at:
-   307 ;;		line 178 in file "main.c"
-   308 ;; Parameters:    Size  Location     Type
-   309 ;;		None
-   310 ;; Auto vars:     Size  Location     Type
-   311 ;;  i               1    9[COMRAM] unsigned char 
-   312 ;;  i               1    8[COMRAM] unsigned char 
-   313 ;;  i               1    7[COMRAM] unsigned char 
-   314 ;; Return value:  Size  Location     Type
-   315 ;;                  1    wreg      void 
-   316 ;; Registers used:
-   317 ;;		wreg, fsr2l, fsr2h, status,2, status,0, tblptrl, tblptrh, tblptru, cstack
-   318 ;; Tracked objects:
-   319 ;;		On entry : 0/0
-   320 ;;		On exit  : 0/0
-   321 ;;		Unchanged: 0/0
-   322 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
-      +1  BANK12  BANK13  BANK14  BANK15
-   323 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
-      +0       0       0       0       0
-   324 ;;      Locals:         3       0       0       0       0       0       0       0       0       0       0       0       
-      +0       0       0       0       0
-   325 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
-      +0       0       0       0       0
-   326 ;;      Totals:         3       0       0       0       0       0       0       0       0       0       0       0       
-      +0       0       0       0       0
-   327 ;;Total ram usage:        3 bytes
-   328 ;; Hardware stack levels required when called:    4
-   329 ;; This function calls:
-   330 ;;		_LCD_Init_ECE376
-   331 ;;		_LCD_set_cursor_position
-   332 ;;		_LCD_write_data_byte_4bit
-   333 ;;		_SPI_Init_Slave_Default
-   334 ;; This function is called by:
-   335 ;;		Startup code after reset
-   336 ;; This function uses a non-reentrant model
-   337 ;;
-   338                           
-   339                           	psect	text0
-   340  001010                     __ptext0:
-   341                           	callstack 0
-   342  001010                     _main:
-   343                           	callstack 27
-   344  001010                     
-   345                           ;main.c: 260:     SPI_Init_Slave_Default();
-   346  001010  ECFB  F009         	call	_SPI_Init_Slave_Default	;wreg free
-   347                           
-   348                           ;main.c: 261:     LCD_Init_ECE376();
-   349  001014  EC7D  F008         	call	_LCD_Init_ECE376	;wreg free
-   350  001018                     
-   351                           ;main.c: 264:     (INTCONbits.GIE = 1);
-   352  001018  8EF2               	bsf	242,7,c	;volatile
-   353  00101A                     l1850:
-   354                           
-   355                           ;main.c: 269:         if(spi_rx_flag) {
-   356  00101A  5016               	movf	_spi_rx_flag^0,w,c
-   357  00101C  B4D8               	btfsc	status,2,c
-   358  00101E  EF13  F008         	goto	u731
-   359  001022  EF15  F008         	goto	u730
-   360  001026                     u731:
-   361  001026  EF0D  F008         	goto	l1850
-   362  00102A                     u730:
-   363  00102A                     
-   364                           ;main.c: 271:             if(spi_rx_invalid_flag) {
-   365  00102A  5017               	movf	_spi_rx_invalid_flag^0,w,c
-   366  00102C  B4D8               	btfsc	status,2,c
-   367  00102E  EF1B  F008         	goto	u741
-   368  001032  EF1D  F008         	goto	u740
-   369  001036                     u741:
-   370  001036  EF3B  F008         	goto	l1870
-   371  00103A                     u740:
-   372  00103A                     
-   373                           ;main.c: 274:                 LCD_set_cursor_position(1,1);
-   374  00103A  0E01               	movlw	1
-   375  00103C  6E1D               	movwf	LCD_set_cursor_position@pos_on_line^0,c
-   376  00103E  0E01               	movlw	1
-   377  001040  ECEB  F008         	call	_LCD_set_cursor_position
-   378  001044                     
-   379                           ;main.c: 275:                 for(uint8_t i=0; i<12; i++){
-   380  001044  0E00               	movlw	0
-   381  001046  6E21               	movwf	main@i^0,c
-   382  001048                     l1862:
+   269  000012                     _main:
+   270                           	callstack 28
+   271  000012                     
+   272                           ;main.c: 205:     (INTCONbits.GIE = 0);
+   273  000012  9EF2               	bcf	242,7,c	;volatile
+   274  000014                     
+   275                           ;main.c: 207:     SPI_Init_Master_Default();
+   276  000014  EC07  F001         	call	_SPI_Init_Master_Default	;wreg free
+   277  000018                     
+   278                           ;main.c: 209:     PORTE = 0x00;
+   279  000018  0E00               	movlw	0
+   280  00001A  6E84               	movwf	132,c	;volatile
+   281  00001C                     
+   282                           ;main.c: 210:     TRISEbits.RE0 = 1u;
+   283  00001C  8096               	bsf	150,0,c	;volatile
+   284  00001E                     
+   285                           ;main.c: 211:     TRISEbits.RE1 = 1u;
+   286  00001E  8296               	bsf	150,1,c	;volatile
+   287  000020                     
+   288                           ;main.c: 212:     (ADCON1bits.PCFG = 0xA);
+   289  000020  50C1               	movf	193,w,c	;volatile
+   290  000022  0BF0               	andlw	-16
+   291  000024  090A               	iorlw	10
+   292  000026  6EC1               	movwf	193,c	;volatile
+   293  000028                     
+   294                           ;main.c: 218:     Timer1_Init_Default(62500u);
+   295  000028  0EF4               	movlw	244
+   296  00002A  6E0F               	movwf	(Timer1_Init_Default@period_val+1)^0,c
+   297  00002C  0E24               	movlw	36
+   298  00002E  6E0E               	movwf	Timer1_Init_Default@period_val^0,c
+   299  000030  EC1A  F001         	call	_Timer1_Init_Default	;wreg free
+   300  000034                     
+   301                           ;main.c: 227:     Timer1_Enable();
+   302  000034  EC3A  F001         	call	_Timer1_Enable	;wreg free
+   303  000038                     
+   304                           ;main.c: 228:     (INTCONbits.PEIE = 1u);
+   305  000038  8CF2               	bsf	242,6,c	;volatile
+   306  00003A                     
+   307                           ;main.c: 229:     (INTCONbits.GIE = 1);
+   308  00003A  8EF2               	bsf	242,7,c	;volatile
+   309  00003C                     l1768:
+   310                           
+   311                           ;main.c: 234:         if(spi_ready_to_tx){
+   312  00003C  5001               	movf	_spi_ready_to_tx^0,w,c	;volatile
+   313  00003E  B4D8               	btfsc	status,2,c
+   314  000040  EF24  F000         	goto	u551
+   315  000044  EF26  F000         	goto	u550
+   316  000048                     u551:
+   317  000048  EF1E  F000         	goto	l1768
+   318  00004C                     u550:
+   319  00004C                     
+   320                           ;main.c: 236:             spi_tx_test_message = 0x00;
+   321  00004C  0E00               	movlw	0
+   322  00004E  6E02               	movwf	_spi_tx_test_message^0,c
+   323  000050                     
+   324                           ;main.c: 240:             spi_tx_test_message |= (PORTEbits.RE0 << 0u);
+   325  000050  B084               	btfsc	132,0,c	;volatile
+   326  000052  EF2D  F000         	goto	u561
+   327  000056  EF30  F000         	goto	u560
+   328  00005A                     u561:
+   329  00005A  0E01               	movlw	1
+   330  00005C  EF31  F000         	goto	u566
+   331  000060                     u560:
+   332  000060  0E00               	movlw	0
+   333  000062                     u566:
+   334  000062  1202               	iorwf	_spi_tx_test_message^0,f,c
+   335  000064                     
+   336                           ;main.c: 241:             spi_tx_test_message |= (PORTEbits.RE1 << 1u);
+   337  000064  B284               	btfsc	132,1,c	;volatile
+   338  000066  EF37  F000         	goto	u571
+   339  00006A  EF3B  F000         	goto	u570
+   340  00006E                     u571:
+   341  00006E  6A11               	clrf	??_main^0,c
+   342  000070  2A11               	incf	??_main^0,f,c
+   343  000072  EF3C  F000         	goto	u578
+   344  000076                     u570:
+   345  000076  6A11               	clrf	??_main^0,c
+   346  000078                     u578:
+   347  000078  90D8               	bcf	status,0,c
+   348  00007A  3411               	rlcf	??_main^0,w,c
+   349  00007C  1202               	iorwf	_spi_tx_test_message^0,f,c
+   350  00007E                     
+   351                           ;main.c: 247:             SPI_Send_Byte(spi_tx_test_message);
+   352  00007E  5002               	movf	_spi_tx_test_message^0,w,c
+   353  000080  ECC2  F000         	call	_SPI_Send_Byte
+   354  000084                     
+   355                           ;main.c: 250:             SPI_Receive_Byte(&spi_rx_message_buf);
+   356  000084  0E0B               	movlw	low _spi_rx_message_buf
+   357  000086  6E0F               	movwf	SPI_Receive_Byte@rx^0,c
+   358  000088  0E00               	movlw	high _spi_rx_message_buf
+   359  00008A  6E10               	movwf	(SPI_Receive_Byte@rx+1)^0,c
+   360  00008C  EC27  F001         	call	_SPI_Receive_Byte	;wreg free
+   361  000090                     
+   362                           ;main.c: 252:             if(spi_rx_message_buf != (0x40u | 0x3Fu)) {
+   363  000090  0E7F               	movlw	127
+   364  000092  180B               	xorwf	_spi_rx_message_buf^0,w,c
+   365  000094  B4D8               	btfsc	status,2,c
+   366  000096  EF4F  F000         	goto	u581
+   367  00009A  EF51  F000         	goto	u580
+   368  00009E                     u581:
+   369  00009E  EF5A  F000         	goto	l1788
+   370  0000A2                     u580:
+   371  0000A2                     
+   372                           ;main.c: 254:                 SPI_Send_Byte(spi_tx_test_message);
+   373  0000A2  5002               	movf	_spi_tx_test_message^0,w,c
+   374  0000A4  ECC2  F000         	call	_SPI_Send_Byte
+   375  0000A8                     
+   376                           ;main.c: 257:                 SPI_Receive_Byte(&spi_rx_message_buf);
+   377  0000A8  0E0B               	movlw	low _spi_rx_message_buf
+   378  0000AA  6E0F               	movwf	SPI_Receive_Byte@rx^0,c
+   379  0000AC  0E00               	movlw	high _spi_rx_message_buf
+   380  0000AE  6E10               	movwf	(SPI_Receive_Byte@rx+1)^0,c
+   381  0000B0  EC27  F001         	call	_SPI_Receive_Byte	;wreg free
+   382  0000B4                     l1788:
    383                           
-   384                           ;main.c: 276:                     LCD_write_data_byte_4bit(spi_rx_invalid_msg[i]);
-   385  001048  0E01               	movlw	low _spi_rx_invalid_msg
-   386  00104A  2421               	addwf	main@i^0,w,c
-   387  00104C  6EF6               	movwf	tblptrl,c
-   388  00104E  6AF7               	clrf	tblptrh,c
-   389  001050  0E10               	movlw	high _spi_rx_invalid_msg
-   390  001052  22F7               	addwfc	tblptrh,f,c
-   391  001054                     	if	0	;There are less than 3 active tblptr bytes
-   392  001054                     	endif
-   393  001054  0008               	tblrd		*
-   394  001056  50F5               	movf	tablat,w,c
-   395  001058  EC7F  F009         	call	_LCD_write_data_byte_4bit
-   396  00105C                     
-   397                           ;main.c: 277:                 }
-   398  00105C  2A21               	incf	main@i^0,f,c
-   399  00105E  0E0B               	movlw	11
-   400  001060  6421               	cpfsgt	main@i^0,c
-   401  001062  EF35  F008         	goto	u751
-   402  001066  EF37  F008         	goto	u750
-   403  00106A                     u751:
-   404  00106A  EF24  F008         	goto	l1862
-   405  00106E                     u750:
-   406  00106E                     l1868:
-   407                           
-   408                           ;main.c: 279:                 spi_rx_flag = 0x00;
-   409  00106E  0E00               	movlw	0
-   410  001070  6E16               	movwf	_spi_rx_flag^0,c
-   411                           
-   412                           ;main.c: 281:             } else {
-   413  001072  EF0D  F008         	goto	l1850
-   414  001076                     l1870:
-   415                           
-   416                           ;main.c: 284:                 button1_state = '0' + (spi_rx_message_buf & (1u << 0u));
-   417  001076  5018               	movf	_spi_rx_message_buf^0,w,c
-   418  001078  0B01               	andlw	1
-   419  00107A  0F30               	addlw	48
-   420  00107C  6E15               	movwf	_button1_state^0,c
-   421                           
-   422                           ;main.c: 285:                 button2_state = '0' + (spi_rx_message_buf & (1u << 1u));
-   423  00107E  5018               	movf	_spi_rx_message_buf^0,w,c
-   424  001080  0B02               	andlw	2
-   425  001082  0F30               	addlw	48
-   426  001084  6E14               	movwf	_button2_state^0,c
-   427  001086                     
-   428                           ;main.c: 286:                 button1_msg[4] = button1_state;
-   429  001086  C015  F00A         	movff	_button1_state,_button1_msg+4
-   430  00108A                     
-   431                           ;main.c: 287:                 button2_msg[4] = button2_state;
-   432  00108A  C014  F005         	movff	_button2_state,_button2_msg+4
-   433  00108E                     
-   434                           ;main.c: 291:                 LCD_set_cursor_position(1,1);
-   435  00108E  0E01               	movlw	1
-   436  001090  6E1D               	movwf	LCD_set_cursor_position@pos_on_line^0,c
-   437  001092  0E01               	movlw	1
-   438  001094  ECEB  F008         	call	_LCD_set_cursor_position
-   439  001098                     
-   440                           ;main.c: 292:                 for(uint8_t i=0; i<5; i++){
-   441  001098  0E00               	movlw	0
-   442  00109A  6E22               	movwf	main@i_197^0,c
-   443  00109C                     l1884:
-   444                           
-   445                           ;main.c: 293:                     LCD_write_data_byte_4bit(button1_msg[i]);
-   446  00109C  0E06               	movlw	low _button1_msg
-   447  00109E  2422               	addwf	main@i_197^0,w,c
-   448  0010A0  6ED9               	movwf	fsr2l,c
-   449  0010A2  6ADA               	clrf	fsr2h,c
-   450  0010A4  0E00               	movlw	high _button1_msg
-   451  0010A6  22DA               	addwfc	fsr2h,f,c
-   452  0010A8  50DF               	movf	indf2,w,c
-   453  0010AA  EC7F  F009         	call	_LCD_write_data_byte_4bit
-   454  0010AE                     
-   455                           ;main.c: 294:                 }
-   456  0010AE  2A22               	incf	main@i_197^0,f,c
-   457  0010B0  0E04               	movlw	4
-   458  0010B2  6422               	cpfsgt	main@i_197^0,c
-   459  0010B4  EF5E  F008         	goto	u761
-   460  0010B8  EF60  F008         	goto	u760
-   461  0010BC                     u761:
-   462  0010BC  EF4E  F008         	goto	l1884
-   463  0010C0                     u760:
-   464  0010C0                     
-   465                           ;main.c: 296:                 LCD_set_cursor_position(2,1);
-   466  0010C0  0E01               	movlw	1
-   467  0010C2  6E1D               	movwf	LCD_set_cursor_position@pos_on_line^0,c
-   468  0010C4  0E02               	movlw	2
-   469  0010C6  ECEB  F008         	call	_LCD_set_cursor_position
-   470  0010CA                     
-   471                           ;main.c: 297:                 for(uint8_t i=0; i<5; i++){
-   472  0010CA  0E00               	movlw	0
-   473  0010CC  6E23               	movwf	main@i_198^0,c
-   474  0010CE                     l1898:
-   475                           
-   476                           ;main.c: 298:                     LCD_write_data_byte_4bit(button2_msg[i]);
-   477  0010CE  0E01               	movlw	low _button2_msg
-   478  0010D0  2423               	addwf	main@i_198^0,w,c
-   479  0010D2  6ED9               	movwf	fsr2l,c
-   480  0010D4  6ADA               	clrf	fsr2h,c
-   481  0010D6  0E00               	movlw	high _button2_msg
-   482  0010D8  22DA               	addwfc	fsr2h,f,c
-   483  0010DA  50DF               	movf	indf2,w,c
-   484  0010DC  EC7F  F009         	call	_LCD_write_data_byte_4bit
-   485  0010E0                     
-   486                           ;main.c: 299:                 }
-   487  0010E0  2A23               	incf	main@i_198^0,f,c
-   488  0010E2  0E04               	movlw	4
-   489  0010E4  6423               	cpfsgt	main@i_198^0,c
-   490  0010E6  EF77  F008         	goto	u771
-   491  0010EA  EF79  F008         	goto	u770
-   492  0010EE                     u771:
-   493  0010EE  EF67  F008         	goto	l1898
-   494  0010F2                     u770:
-   495  0010F2  EF37  F008         	goto	l1868
-   496  0010F6  EF07  F000         	goto	start
-   497  0010FA                     __end_of_main:
-   498                           	callstack 0
-   499                           
-   500 ;; *************** function _SPI_Init_Slave_Default *****************
-   501 ;; Defined at:
-   502 ;;		line 69 in file "src/mssp_spi_driver.c"
-   503 ;; Parameters:    Size  Location     Type
+   384                           ;main.c: 263:             spi_ready_to_tx = 0x00;
+   385  0000B4  0E00               	movlw	0
+   386  0000B6  6E01               	movwf	_spi_ready_to_tx^0,c	;volatile
+   387  0000B8  EF1E  F000         	goto	l1768
+   388  0000BC  EF07  F000         	goto	start
+   389  0000C0                     __end_of_main:
+   390                           	callstack 0
+   391                           
+   392 ;; *************** function _Timer1_Init_Default *****************
+   393 ;; Defined at:
+   394 ;;		line 20 in file "src/timer.c"
+   395 ;; Parameters:    Size  Location     Type
+   396 ;;  period_val      2    2[COMRAM] unsigned short 
+   397 ;; Auto vars:     Size  Location     Type
+   398 ;;		None
+   399 ;; Return value:  Size  Location     Type
+   400 ;;                  1    wreg      void 
+   401 ;; Registers used:
+   402 ;;		wreg, status,2, cstack
+   403 ;; Tracked objects:
+   404 ;;		On entry : 0/0
+   405 ;;		On exit  : 0/0
+   406 ;;		Unchanged: 0/0
+   407 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14  BANK15
+   408 ;;      Params:         2       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+   409 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+   410 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+   411 ;;      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+   412 ;;Total ram usage:        2 bytes
+   413 ;; Hardware stack levels used:    1
+   414 ;; Hardware stack levels required when called:    2
+   415 ;; This function calls:
+   416 ;;		_CCP2_Compare_Val
+   417 ;;		_CCP2_Init_Default
+   418 ;; This function is called by:
+   419 ;;		_main
+   420 ;; This function uses a non-reentrant model
+   421 ;;
+   422                           
+   423                           	psect	text1
+   424  000234                     __ptext1:
+   425                           	callstack 0
+   426  000234                     _Timer1_Init_Default:
+   427                           	callstack 28
+   428  000234                     
+   429                           ;src/timer.c: 23:     T1CON = 0xB0;
+   430  000234  0EB0               	movlw	176
+   431  000236  6ECD               	movwf	205,c	;volatile
+   432                           
+   433                           ;src/timer.c: 24:     (T3CON = 0xB0);
+   434  000238  0EB0               	movlw	176
+   435  00023A  6EB1               	movwf	177,c	;volatile
+   436  00023C                     
+   437                           ;src/timer.c: 27:     CCP2_Init_Default();
+   438  00023C  EC34  F001         	call	_CCP2_Init_Default	;wreg free
+   439                           
+   440                           ;src/timer.c: 28:     CCP2_Compare_Val(period_val);
+   441  000240  C00E  F00C         	movff	Timer1_Init_Default@period_val,CCP2_Compare_Val@comp_val
+   442  000244  C00F  F00D         	movff	Timer1_Init_Default@period_val+1,CCP2_Compare_Val@comp_val+1
+   443  000248  EC2F  F001         	call	_CCP2_Compare_Val	;wreg free
+   444  00024C  0012               	return		;funcret
+   445  00024E                     __end_of_Timer1_Init_Default:
+   446                           	callstack 0
+   447                           
+   448 ;; *************** function _CCP2_Init_Default *****************
+   449 ;; Defined at:
+   450 ;;		line 21 in file "src/ccp.c"
+   451 ;; Parameters:    Size  Location     Type
+   452 ;;		None
+   453 ;; Auto vars:     Size  Location     Type
+   454 ;;		None
+   455 ;; Return value:  Size  Location     Type
+   456 ;;                  1    wreg      void 
+   457 ;; Registers used:
+   458 ;;		wreg, status,2
+   459 ;; Tracked objects:
+   460 ;;		On entry : 0/0
+   461 ;;		On exit  : 0/0
+   462 ;;		Unchanged: 0/0
+   463 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14  BANK15
+   464 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+   465 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+   466 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+   467 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+   468 ;;Total ram usage:        0 bytes
+   469 ;; Hardware stack levels used:    1
+   470 ;; Hardware stack levels required when called:    1
+   471 ;; This function calls:
+   472 ;;		Nothing
+   473 ;; This function is called by:
+   474 ;;		_Timer1_Init_Default
+   475 ;; This function uses a non-reentrant model
+   476 ;;
+   477                           
+   478                           	psect	text2
+   479  000268                     __ptext2:
+   480                           	callstack 0
+   481  000268                     _CCP2_Init_Default:
+   482                           	callstack 28
+   483  000268                     
+   484                           ;src/ccp.c: 22:     CCP2CON = 0x0A;
+   485  000268  0E0A               	movlw	10
+   486  00026A  6EBA               	movwf	186,c	;volatile
+   487  00026C                     
+   488                           ;src/ccp.c: 23:     (PIE2bits.CCP2IE = 1u);
+   489  00026C  80A0               	bsf	160,0,c	;volatile
+   490  00026E  0012               	return		;funcret
+   491  000270                     __end_of_CCP2_Init_Default:
+   492                           	callstack 0
+   493                           
+   494 ;; *************** function _CCP2_Compare_Val *****************
+   495 ;; Defined at:
+   496 ;;		line 26 in file "src/ccp.c"
+   497 ;; Parameters:    Size  Location     Type
+   498 ;;  comp_val        2    0[COMRAM] unsigned short 
+   499 ;; Auto vars:     Size  Location     Type
+   500 ;;		None
+   501 ;; Return value:  Size  Location     Type
+   502 ;;                  1    wreg      void 
+   503 ;; Registers used:
    504 ;;		None
-   505 ;; Auto vars:     Size  Location     Type
-   506 ;;		None
-   507 ;; Return value:  Size  Location     Type
-   508 ;;                  1    wreg      void 
-   509 ;; Registers used:
-   510 ;;		wreg, status,2, status,0
-   511 ;; Tracked objects:
-   512 ;;		On entry : 0/0
-   513 ;;		On exit  : 0/0
-   514 ;;		Unchanged: 0/0
-   515 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   505 ;; Tracked objects:
+   506 ;;		On entry : 0/0
+   507 ;;		On exit  : 0/0
+   508 ;;		Unchanged: 0/0
+   509 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   516 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   510 ;;      Params:         2       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   517 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   511 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   518 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   512 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   519 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   513 ;;      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   520 ;;Total ram usage:        0 bytes
-   521 ;; Hardware stack levels used:    1
-   522 ;; Hardware stack levels required when called:    1
-   523 ;; This function calls:
-   524 ;;		Nothing
-   525 ;; This function is called by:
-   526 ;;		_main
-   527 ;; This function uses a non-reentrant model
-   528 ;;
-   529                           
-   530                           	psect	text1
-   531  0013F6                     __ptext1:
-   532                           	callstack 0
-   533  0013F6                     _SPI_Init_Slave_Default:
-   534                           	callstack 29
-   535  0013F6                     
-   536                           ;src/mssp_spi_driver.c: 71:     SSPCON1bits.SSPEN = 0;
-   537  0013F6  9AC6               	bcf	198,5,c	;volatile
-   538  0013F8                     
-   539                           ;src/mssp_spi_driver.c: 74:     SSPCON1 |= 0x00 | 0x04;
-   540  0013F8  84C6               	bsf	198,2,c	;volatile
-   541                           
-   542                           ;src/mssp_spi_driver.c: 76:     SSPSTAT |= 0x40 | 0x00;
-   543  0013FA  8CC7               	bsf	199,6,c	;volatile
-   544  0013FC                     
-   545                           ;src/mssp_spi_driver.c: 79:     TRISC |= 0x18; TRISC &= ~(0x20); TRISA |= 0x20;
-   546  0013FC  0E18               	movlw	24
-   547  0013FE  1294               	iorwf	148,f,c	;volatile
-   548  001400  9A94               	bcf	148,5,c	;volatile
-   549  001402  8A92               	bsf	146,5,c	;volatile
-   550  001404                     
-   551                           ;src/mssp_spi_driver.c: 82:     SSPCON1bits.SSPEN = 1;
-   552  001404  8AC6               	bsf	198,5,c	;volatile
-   553  001406                     
-   554                           ;src/mssp_spi_driver.c: 83:     SSPCON1bits.WCOL = 0;
-   555  001406  9EC6               	bcf	198,7,c	;volatile
-   556  001408                     
-   557                           ;src/mssp_spi_driver.c: 84:     SSPCON1bits.SSPOV = 0;
-   558  001408  9CC6               	bcf	198,6,c	;volatile
-   559                           
-   560                           ;src/mssp_spi_driver.c: 85:     SSPBUF;
-   561  00140A  50C9               	movf	201,w,c	;volatile
-   562  00140C                     
-   563                           ;src/mssp_spi_driver.c: 86:     PIR1bits.SSPIF = 0;
-   564  00140C  969E               	bcf	158,3,c	;volatile
-   565  00140E                     
-   566                           ;src/mssp_spi_driver.c: 87:     slave_mode = 0x01;
-   567  00140E  0E01               	movlw	1
-   568  001410  6E24               	movwf	_slave_mode^0,c
-   569  001412                     
-   570                           ;src/mssp_spi_driver.c: 90:     PIE1bits.SSPIE = 1;
-   571  001412  869D               	bsf	157,3,c	;volatile
-   572  001414  0012               	return		;funcret
-   573  001416                     __end_of_SPI_Init_Slave_Default:
-   574                           	callstack 0
-   575                           
-   576 ;; *************** function _LCD_write_data_byte_4bit *****************
-   577 ;; Defined at:
-   578 ;;		line 45 in file "src/lcd_driver.c"
-   579 ;; Parameters:    Size  Location     Type
-   580 ;;  data            1    wreg     unsigned char 
-   581 ;; Auto vars:     Size  Location     Type
-   582 ;;  data            1    2[COMRAM] unsigned char 
-   583 ;; Return value:  Size  Location     Type
-   584 ;;                  1    wreg      void 
-   585 ;; Registers used:
-   586 ;;		wreg, status,2, status,0, cstack
-   587 ;; Tracked objects:
-   588 ;;		On entry : 0/0
-   589 ;;		On exit  : 0/0
-   590 ;;		Unchanged: 0/0
-   591 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   514 ;;Total ram usage:        2 bytes
+   515 ;; Hardware stack levels used:    1
+   516 ;; Hardware stack levels required when called:    1
+   517 ;; This function calls:
+   518 ;;		Nothing
+   519 ;; This function is called by:
+   520 ;;		_Timer1_Init_Default
+   521 ;; This function uses a non-reentrant model
+   522 ;;
+   523                           
+   524                           	psect	text3
+   525  00025E                     __ptext3:
+   526                           	callstack 0
+   527  00025E                     _CCP2_Compare_Val:
+   528                           	callstack 28
+   529  00025E                     
+   530                           ;src/ccp.c: 27:     CCPR2 = comp_val;
+   531  00025E  C00C  FFBB         	movff	CCP2_Compare_Val@comp_val,4027	;volatile
+   532  000262  C00D  FFBC         	movff	CCP2_Compare_Val@comp_val+1,4028	;volatile
+   533  000266  0012               	return		;funcret
+   534  000268                     __end_of_CCP2_Compare_Val:
+   535                           	callstack 0
+   536                           
+   537 ;; *************** function _Timer1_Enable *****************
+   538 ;; Defined at:
+   539 ;;		line 34 in file "src/timer.c"
+   540 ;; Parameters:    Size  Location     Type
+   541 ;;		None
+   542 ;; Auto vars:     Size  Location     Type
+   543 ;;		None
+   544 ;; Return value:  Size  Location     Type
+   545 ;;                  1    wreg      void 
+   546 ;; Registers used:
+   547 ;;		status,2, status,0
+   548 ;; Tracked objects:
+   549 ;;		On entry : 0/0
+   550 ;;		On exit  : 0/0
+   551 ;;		Unchanged: 0/0
+   552 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   592 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   553 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   593 ;;      Locals:         1       0       0       0       0       0       0       0       0       0       0       0       
+   554 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   594 ;;      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       
+   555 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   595 ;;      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       
+   556 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   596 ;;Total ram usage:        2 bytes
-   597 ;; Hardware stack levels used:    1
-   598 ;; Hardware stack levels required when called:    2
-   599 ;; This function calls:
-   600 ;;		_LCD_enable_toggle
-   601 ;; This function is called by:
-   602 ;;		_main
-   603 ;; This function uses a non-reentrant model
-   604 ;;
-   605                           
-   606                           	psect	text2
-   607  0012FE                     __ptext2:
-   608                           	callstack 0
-   609  0012FE                     _LCD_write_data_byte_4bit:
-   610                           	callstack 28
-   611                           
-   612                           ;incstack = 0
-   613                           ;LCD_write_data_byte_4bit@data stored from wreg
-   614  0012FE  6E1C               	movwf	LCD_write_data_byte_4bit@data^0,c
-   615  001300                     
-   616                           ;src/lcd_driver.c: 47:     (TRISC &= ~0xF8);
-   617  001300  0E07               	movlw	7
-   618  001302  1694               	andwf	148,f,c	;volatile
-   619                           
-   620                           ;src/lcd_driver.c: 48:     (TRISD &= 0x0Fu);
-   621  001304  0E0F               	movlw	15
-   622  001306  1695               	andwf	149,f,c	;volatile
-   623  001308                     
-   624                           ;src/lcd_driver.c: 49:     (LATCbits.LATC0 = 1u);
-   625  001308  808B               	bsf	139,0,c	;volatile
-   626  00130A                     
-   627                           ;src/lcd_driver.c: 50:     (LATCbits.LATC1 = 0u);
-   628  00130A  928B               	bcf	139,1,c	;volatile
-   629                           
-   630                           ;src/lcd_driver.c: 53:     PORTD = (PORTD & 0x0F) | (data & 0xF0);
-   631  00130C  C01C  F01B         	movff	LCD_write_data_byte_4bit@data,??_LCD_write_data_byte_4bit
-   632  001310  0EF0               	movlw	240
-   633  001312  161B               	andwf	??_LCD_write_data_byte_4bit^0,f,c
-   634  001314  5083               	movf	131,w,c	;volatile
-   635  001316  0B0F               	andlw	15
-   636  001318  101B               	iorwf	??_LCD_write_data_byte_4bit^0,w,c
-   637  00131A  6E83               	movwf	131,c	;volatile
-   638  00131C                     
-   639                           ;src/lcd_driver.c: 54:     LCD_enable_toggle();
-   640  00131C  EC0B  F00A         	call	_LCD_enable_toggle	;wreg free
-   641  001320                     
-   642                           ;src/lcd_driver.c: 55:     PORTD = (PORTD & 0x0F) | ((data<<4) & 0xF0);
-   643  001320  C01C  F01B         	movff	LCD_write_data_byte_4bit@data,??_LCD_write_data_byte_4bit
-   644  001324  3A1B               	swapf	??_LCD_write_data_byte_4bit^0,f,c
-   645  001326  0EF0               	movlw	240
-   646  001328  161B               	andwf	??_LCD_write_data_byte_4bit^0,f,c
-   647  00132A  0EF0               	movlw	240
-   648  00132C  161B               	andwf	??_LCD_write_data_byte_4bit^0,f,c
-   649  00132E  5083               	movf	131,w,c	;volatile
-   650  001330  0B0F               	andlw	15
-   651  001332  101B               	iorwf	??_LCD_write_data_byte_4bit^0,w,c
-   652  001334  6E83               	movwf	131,c	;volatile
-   653                           
-   654                           ;src/lcd_driver.c: 56:     LCD_enable_toggle();
-   655  001336  EC0B  F00A         	call	_LCD_enable_toggle	;wreg free
-   656  00133A                     
-   657                           ;src/lcd_driver.c: 58:     _delay((unsigned long)((10)*(40000000u/4000.0)));
-   658  00133A  0E82               	movlw	130
-   659  00133C  6E1B               	movwf	??_LCD_write_data_byte_4bit^0,c
-   660  00133E  0EDE               	movlw	222
-   661  001340                     u817:
-   662  001340  2EE8               	decfsz	wreg,f,c
-   663  001342  D7FE               	bra	u817
-   664  001344  2E1B               	decfsz	??_LCD_write_data_byte_4bit^0,f,c
-   665  001346  D7FC               	bra	u817
-   666  001348  0012               	return		;funcret
-   667  00134A                     __end_of_LCD_write_data_byte_4bit:
-   668                           	callstack 0
-   669                           
-   670 ;; *************** function _LCD_set_cursor_position *****************
-   671 ;; Defined at:
-   672 ;;		line 251 in file "src/lcd_driver.c"
-   673 ;; Parameters:    Size  Location     Type
-   674 ;;  line            1    wreg     unsigned char 
-   675 ;;  pos_on_line     1    3[COMRAM] unsigned char 
-   676 ;; Auto vars:     Size  Location     Type
-   677 ;;  line            1    6[COMRAM] unsigned char 
-   678 ;;  ddram_addr      1    5[COMRAM] unsigned char 
-   679 ;; Return value:  Size  Location     Type
-   680 ;;                  1    wreg      unsigned char 
-   681 ;; Registers used:
-   682 ;;		wreg, status,2, status,0, cstack
-   683 ;; Tracked objects:
-   684 ;;		On entry : 0/0
-   685 ;;		On exit  : 0/0
-   686 ;;		Unchanged: 0/0
-   687 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   557 ;;Total ram usage:        0 bytes
+   558 ;; Hardware stack levels used:    1
+   559 ;; Hardware stack levels required when called:    1
+   560 ;; This function calls:
+   561 ;;		Nothing
+   562 ;; This function is called by:
+   563 ;;		_main
+   564 ;; This function uses a non-reentrant model
+   565 ;;
+   566                           
+   567                           	psect	text4
+   568  000274                     __ptext4:
+   569                           	callstack 0
+   570  000274                     _Timer1_Enable:
+   571                           	callstack 29
+   572  000274                     
+   573                           ;src/timer.c: 35:     T1CON |= 0x01;
+   574  000274  80CD               	bsf	205,0,c	;volatile
+   575  000276  0012               	return		;funcret
+   576  000278                     __end_of_Timer1_Enable:
+   577                           	callstack 0
+   578                           
+   579 ;; *************** function _SPI_Send_Byte *****************
+   580 ;; Defined at:
+   581 ;;		line 249 in file "src/mssp_spi_driver.c"
+   582 ;; Parameters:    Size  Location     Type
+   583 ;;  tx              1    wreg     unsigned char 
+   584 ;; Auto vars:     Size  Location     Type
+   585 ;;  tx              1    0[COMRAM] unsigned char 
+   586 ;; Return value:  Size  Location     Type
+   587 ;;                  1    wreg      void 
+   588 ;; Registers used:
+   589 ;;		wreg, status,2
+   590 ;; Tracked objects:
+   591 ;;		On entry : 0/0
+   592 ;;		On exit  : 0/0
+   593 ;;		Unchanged: 0/0
+   594 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   688 ;;      Params:         1       0       0       0       0       0       0       0       0       0       0       0       
+   595 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   689 ;;      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       
+   596 ;;      Locals:         1       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   690 ;;      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       
+   597 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   691 ;;      Totals:         4       0       0       0       0       0       0       0       0       0       0       0       
+   598 ;;      Totals:         1       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   692 ;;Total ram usage:        4 bytes
-   693 ;; Hardware stack levels used:    1
-   694 ;; Hardware stack levels required when called:    3
-   695 ;; This function calls:
-   696 ;;		_LCD_write_instr_byte_4bit
-   697 ;;		_LCD_write_instr_byte_8bit
-   698 ;; This function is called by:
-   699 ;;		_main
-   700 ;; This function uses a non-reentrant model
-   701 ;;
-   702                           
-   703                           	psect	text3
-   704  0011D6                     __ptext3:
-   705                           	callstack 0
-   706  0011D6                     _LCD_set_cursor_position:
-   707                           	callstack 27
-   708                           
-   709                           ;incstack = 0
-   710                           ;LCD_set_cursor_position@line stored from wreg
-   711  0011D6  6E20               	movwf	LCD_set_cursor_position@line^0,c
-   712  0011D8                     
-   713                           ;src/lcd_driver.c: 253:     if(line > 2u || pos_on_line > 2u * 16u){
-   714  0011D8  0E03               	movlw	3
-   715  0011DA  6020               	cpfslt	LCD_set_cursor_position@line^0,c
-   716  0011DC  EFF2  F008         	goto	u521
-   717  0011E0  EFF4  F008         	goto	u520
-   718  0011E4                     u521:
-   719  0011E4  EF51  F009         	goto	l147
-   720  0011E8                     u520:
-   721  0011E8  0E20               	movlw	32
-   722  0011EA  641D               	cpfsgt	LCD_set_cursor_position@pos_on_line^0,c
-   723  0011EC  EFFA  F008         	goto	u531
-   724  0011F0  EFFC  F008         	goto	u530
-   725  0011F4                     u531:
-   726  0011F4  EFFE  F008         	goto	l1746
-   727  0011F8                     u530:
-   728  0011F8  EF51  F009         	goto	l147
-   729  0011FC                     l1746:
-   730                           
-   731                           ;src/lcd_driver.c: 262:         if(line == 1u && pos_on_line < 16u){
-   732  0011FC  0420               	decf	LCD_set_cursor_position@line^0,w,c
-   733  0011FE  A4D8               	btfss	status,2,c
-   734  001200  EF04  F009         	goto	u541
-   735  001204  EF06  F009         	goto	u540
-   736  001208                     u541:
-   737  001208  EF12  F009         	goto	l1752
-   738  00120C                     u540:
-   739  00120C  0E10               	movlw	16
-   740  00120E  601D               	cpfslt	LCD_set_cursor_position@pos_on_line^0,c
-   741  001210  EF0C  F009         	goto	u551
-   742  001214  EF0E  F009         	goto	u550
-   743  001218                     u551:
-   744  001218  EF12  F009         	goto	l1752
-   745  00121C                     u550:
-   746  00121C                     
-   747                           ;src/lcd_driver.c: 263:             ddram_addr = 0x00u + pos_on_line - 1;
-   748  00121C  041D               	decf	LCD_set_cursor_position@pos_on_line^0,w,c
-   749  00121E  6E1F               	movwf	LCD_set_cursor_position@ddram_addr^0,c
-   750                           
-   751                           ;src/lcd_driver.c: 265:         } else if(line == 2u && pos_on_line < 16u){
-   752  001220  EF3B  F009         	goto	l1764
-   753  001224                     l1752:
-   754  001224  0E02               	movlw	2
-   755  001226  1820               	xorwf	LCD_set_cursor_position@line^0,w,c
-   756  001228  A4D8               	btfss	status,2,c
-   757  00122A  EF19  F009         	goto	u561
-   758  00122E  EF1B  F009         	goto	u560
-   759  001232                     u561:
-   760  001232  EF28  F009         	goto	l1758
-   761  001236                     u560:
-   762  001236  0E10               	movlw	16
-   763  001238  601D               	cpfslt	LCD_set_cursor_position@pos_on_line^0,c
-   764  00123A  EF21  F009         	goto	u571
-   765  00123E  EF23  F009         	goto	u570
-   766  001242                     u571:
-   767  001242  EF28  F009         	goto	l1758
-   768  001246                     u570:
-   769  001246                     
-   770                           ;src/lcd_driver.c: 266:             ddram_addr = 0x40u + pos_on_line - 1;
-   771  001246  501D               	movf	LCD_set_cursor_position@pos_on_line^0,w,c
-   772  001248  0F3F               	addlw	63
-   773  00124A  6E1F               	movwf	LCD_set_cursor_position@ddram_addr^0,c
-   774                           
-   775                           ;src/lcd_driver.c: 268:         } else if(line == 1u && pos_on_line > 16u){
-   776  00124C  EF3B  F009         	goto	l1764
-   777  001250                     l1758:
-   778  001250  0420               	decf	LCD_set_cursor_position@line^0,w,c
-   779  001252  A4D8               	btfss	status,2,c
-   780  001254  EF2E  F009         	goto	u581
-   781  001258  EF30  F009         	goto	u580
-   782  00125C                     u581:
-   783  00125C  EF51  F009         	goto	l147
-   784  001260                     u580:
-   785  001260  0E10               	movlw	16
-   786  001262  641D               	cpfsgt	LCD_set_cursor_position@pos_on_line^0,c
-   787  001264  EF36  F009         	goto	u591
-   788  001268  EF38  F009         	goto	u590
-   789  00126C                     u591:
-   790  00126C  EF51  F009         	goto	l147
-   791  001270                     u590:
-   792  001270                     
-   793                           ;src/lcd_driver.c: 269:             ddram_addr = 0x40u + pos_on_line - 16 - 1;
-   794  001270  501D               	movf	LCD_set_cursor_position@pos_on_line^0,w,c
-   795  001272  0F2F               	addlw	47
-   796  001274  6E1F               	movwf	LCD_set_cursor_position@ddram_addr^0,c
-   797  001276                     l1764:
-   798                           
-   799                           ;src/lcd_driver.c: 276:     if((~current_entry_mode & (1u << 4u))){
-   800  001276  500C               	movf	_current_entry_mode^0,w,c
-   801  001278  0AFF               	xorlw	255
-   802  00127A  6E1E               	movwf	??_LCD_set_cursor_position^0,c
-   803  00127C  A81E               	btfss	??_LCD_set_cursor_position^0,4,c
-   804  00127E  EF43  F009         	goto	u601
-   805  001282  EF45  F009         	goto	u600
-   806  001286                     u601:
-   807  001286  EF4B  F009         	goto	l1768
-   808  00128A                     u600:
-   809  00128A                     
-   810                           ;src/lcd_driver.c: 277:         LCD_write_instr_byte_4bit(0x80u | ddram_addr);
-   811  00128A  501F               	movf	LCD_set_cursor_position@ddram_addr^0,w,c
-   812  00128C  0980               	iorlw	128
-   813  00128E  ECA5  F009         	call	_LCD_write_instr_byte_4bit
-   814                           
-   815                           ;src/lcd_driver.c: 278:     } else{
-   816  001292  EF4F  F009         	goto	l1770
-   817  001296                     l1768:
-   818                           
-   819                           ;src/lcd_driver.c: 279:         LCD_write_instr_byte_8bit(0x80u | ddram_addr);
-   820  001296  501F               	movf	LCD_set_cursor_position@ddram_addr^0,w,c
-   821  001298  0980               	iorlw	128
-   822  00129A  ECE8  F009         	call	_LCD_write_instr_byte_8bit
-   823  00129E                     l1770:
-   824                           
-   825                           ;src/lcd_driver.c: 282:     address_counter = ddram_addr;
-   826  00129E  C01F  F011         	movff	LCD_set_cursor_position@ddram_addr,_address_counter
-   827  0012A2                     l147:
-   828  0012A2  0012               	return		;funcret
-   829  0012A4                     __end_of_LCD_set_cursor_position:
-   830                           	callstack 0
-   831                           
-   832 ;; *************** function _LCD_write_instr_byte_8bit *****************
-   833 ;; Defined at:
-   834 ;;		line 92 in file "src/lcd_driver.c"
-   835 ;; Parameters:    Size  Location     Type
-   836 ;;  instr           1    wreg     unsigned char 
-   837 ;; Auto vars:     Size  Location     Type
-   838 ;;  instr           1    2[COMRAM] unsigned char 
-   839 ;; Return value:  Size  Location     Type
-   840 ;;                  1    wreg      void 
-   841 ;; Registers used:
-   842 ;;		wreg, status,2, status,0, cstack
-   843 ;; Tracked objects:
-   844 ;;		On entry : 0/0
-   845 ;;		On exit  : 0/0
-   846 ;;		Unchanged: 0/0
-   847 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   599 ;;Total ram usage:        1 bytes
+   600 ;; Hardware stack levels used:    1
+   601 ;; Hardware stack levels required when called:    1
+   602 ;; This function calls:
+   603 ;;		Nothing
+   604 ;; This function is called by:
+   605 ;;		_main
+   606 ;;		_SPI_Send_Packet
+   607 ;; This function uses a non-reentrant model
+   608 ;;
+   609                           
+   610                           	psect	text5
+   611  000184                     __ptext5:
+   612                           	callstack 0
+   613  000184                     _SPI_Send_Byte:
+   614                           	callstack 29
+   615                           
+   616                           ;incstack = 0
+   617                           ;SPI_Send_Byte@tx stored from wreg
+   618  000184  6E0C               	movwf	SPI_Send_Byte@tx^0,c
+   619  000186                     
+   620                           ;src/mssp_spi_driver.c: 250:     manual_transfer = 0x01;
+   621  000186  0E01               	movlw	1
+   622  000188  6E04               	movwf	_manual_transfer^0,c
+   623                           
+   624                           ;src/mssp_spi_driver.c: 251:     transfer_complete_flag = 0x00;
+   625  00018A  0E00               	movlw	0
+   626  00018C  6E05               	movwf	_transfer_complete_flag^0,c
+   627  00018E                     
+   628                           ;src/mssp_spi_driver.c: 253:     if(!slave_mode) LATDbits.LATD2 = 0;
+   629  00018E  5006               	movf	_slave_mode^0,w,c
+   630  000190  A4D8               	btfss	status,2,c
+   631  000192  EFCD  F000         	goto	u61
+   632  000196  EFCF  F000         	goto	u60
+   633  00019A                     u61:
+   634  00019A  EFD0  F000         	goto	l223
+   635  00019E                     u60:
+   636  00019E  948C               	bcf	140,2,c	;volatile
+   637  0001A0                     l223:
+   638                           
+   639                           ;src/mssp_spi_driver.c: 254:     SSPBUF = tx;
+   640  0001A0  C00C  FFC9         	movff	SPI_Send_Byte@tx,4041	;volatile
+   641  0001A4                     l1136:
+   642  0001A4  5005               	movf	_transfer_complete_flag^0,w,c
+   643  0001A6  B4D8               	btfsc	status,2,c
+   644  0001A8  EFD8  F000         	goto	u71
+   645  0001AC  EFDA  F000         	goto	u70
+   646  0001B0                     u71:
+   647  0001B0  EFD2  F000         	goto	l1136
+   648  0001B4                     u70:
+   649  0001B4                     
+   650                           ;src/mssp_spi_driver.c: 256:     if(!slave_mode) LATDbits.LATD2 = 1;
+   651  0001B4  5006               	movf	_slave_mode^0,w,c
+   652  0001B6  A4D8               	btfss	status,2,c
+   653  0001B8  EFE0  F000         	goto	u81
+   654  0001BC  EFE2  F000         	goto	u80
+   655  0001C0                     u81:
+   656  0001C0  EFE3  F000         	goto	l1142
+   657  0001C4                     u80:
+   658  0001C4  848C               	bsf	140,2,c	;volatile
+   659  0001C6                     l1142:
+   660                           
+   661                           ;src/mssp_spi_driver.c: 257:     transfer_complete_flag = 0x00;
+   662  0001C6  0E00               	movlw	0
+   663  0001C8  6E05               	movwf	_transfer_complete_flag^0,c
+   664                           
+   665                           ;src/mssp_spi_driver.c: 259:     manual_transfer = 0x00;
+   666  0001CA  0E00               	movlw	0
+   667  0001CC  6E04               	movwf	_manual_transfer^0,c
+   668                           
+   669                           ;src/mssp_spi_driver.c: 260:     transfer_complete_flag = 0x00;
+   670  0001CE  0E00               	movlw	0
+   671  0001D0  6E05               	movwf	_transfer_complete_flag^0,c
+   672  0001D2  0012               	return		;funcret
+   673  0001D4                     __end_of_SPI_Send_Byte:
+   674                           	callstack 0
+   675                           
+   676 ;; *************** function _SPI_Receive_Byte *****************
+   677 ;; Defined at:
+   678 ;;		line 289 in file "src/mssp_spi_driver.c"
+   679 ;; Parameters:    Size  Location     Type
+   680 ;;  rx              2    3[COMRAM] PTR unsigned char 
+   681 ;;		 -> spi_rx_message_buf(1), 
+   682 ;; Auto vars:     Size  Location     Type
+   683 ;;		None
+   684 ;; Return value:  Size  Location     Type
+   685 ;;                  1    wreg      void 
+   686 ;; Registers used:
+   687 ;;		wreg, fsr2l, fsr2h, status,2, status,0, cstack
+   688 ;; Tracked objects:
+   689 ;;		On entry : 0/0
+   690 ;;		On exit  : 0/0
+   691 ;;		Unchanged: 0/0
+   692 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   848 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   693 ;;      Params:         2       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   849 ;;      Locals:         1       0       0       0       0       0       0       0       0       0       0       0       
+   694 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   850 ;;      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       
+   695 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   851 ;;      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       
+   696 ;;      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   852 ;;Total ram usage:        2 bytes
-   853 ;; Hardware stack levels used:    1
-   854 ;; Hardware stack levels required when called:    2
-   855 ;; This function calls:
-   856 ;;		_LCD_enable_toggle
-   857 ;; This function is called by:
-   858 ;;		_LCD_set_cursor_position
-   859 ;;		_LCD_clear_display
-   860 ;;		_LCD_return_home
-   861 ;; This function uses a non-reentrant model
-   862 ;;
-   863                           
-   864                           	psect	text4
-   865  0013D0                     __ptext4:
-   866                           	callstack 0
-   867  0013D0                     _LCD_write_instr_byte_8bit:
-   868                           	callstack 27
-   869                           
-   870                           ;incstack = 0
-   871                           ;LCD_write_instr_byte_8bit@instr stored from wreg
-   872  0013D0  6E1C               	movwf	LCD_write_instr_byte_8bit@instr^0,c
-   873  0013D2                     
-   874                           ;src/lcd_driver.c: 94:     (TRISC &= ~0xF8);
-   875  0013D2  0E07               	movlw	7
-   876  0013D4  1694               	andwf	148,f,c	;volatile
-   877  0013D6                     
-   878                           ;src/lcd_driver.c: 95:     (TRISD = 0x00u);
-   879  0013D6  0E00               	movlw	0
-   880  0013D8  6E95               	movwf	149,c	;volatile
-   881  0013DA                     
-   882                           ;src/lcd_driver.c: 96:     (LATCbits.LATC0 = 0u);
-   883  0013DA  908B               	bcf	139,0,c	;volatile
-   884  0013DC                     
-   885                           ;src/lcd_driver.c: 97:     (LATCbits.LATC1 = 0u);
-   886  0013DC  928B               	bcf	139,1,c	;volatile
-   887  0013DE                     
-   888                           ;src/lcd_driver.c: 100:     PORTD = instr;
-   889  0013DE  C01C  FF83         	movff	LCD_write_instr_byte_8bit@instr,3971	;volatile
-   890  0013E2                     
-   891                           ;src/lcd_driver.c: 101:     LCD_enable_toggle();
-   892  0013E2  EC0B  F00A         	call	_LCD_enable_toggle	;wreg free
-   893  0013E6                     
-   894                           ;src/lcd_driver.c: 103:     _delay((unsigned long)((10)*(40000000u/4000.0)));
-   895  0013E6  0E82               	movlw	130
-   896  0013E8  6E1B               	movwf	??_LCD_write_instr_byte_8bit^0,c
-   897  0013EA  0EDE               	movlw	222
-   898  0013EC                     u827:
-   899  0013EC  2EE8               	decfsz	wreg,f,c
-   900  0013EE  D7FE               	bra	u827
-   901  0013F0  2E1B               	decfsz	??_LCD_write_instr_byte_8bit^0,f,c
-   902  0013F2  D7FC               	bra	u827
-   903  0013F4  0012               	return		;funcret
-   904  0013F6                     __end_of_LCD_write_instr_byte_8bit:
-   905                           	callstack 0
-   906                           
-   907 ;; *************** function _LCD_Init_ECE376 *****************
-   908 ;; Defined at:
-   909 ;;		line 106 in file "src/lcd_driver.c"
-   910 ;; Parameters:    Size  Location     Type
-   911 ;;		None
-   912 ;; Auto vars:     Size  Location     Type
-   913 ;;		None
-   914 ;; Return value:  Size  Location     Type
-   915 ;;                  1    wreg      void 
-   916 ;; Registers used:
-   917 ;;		wreg, status,2, status,0, cstack
-   918 ;; Tracked objects:
-   919 ;;		On entry : 0/0
-   920 ;;		On exit  : 0/0
-   921 ;;		Unchanged: 0/0
-   922 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   697 ;;Total ram usage:        2 bytes
+   698 ;; Hardware stack levels used:    1
+   699 ;; Hardware stack levels required when called:    2
+   700 ;; This function calls:
+   701 ;;		_SPI_Transfer_Byte
+   702 ;; This function is called by:
+   703 ;;		_main
+   704 ;;		_SPI_Receive_Packet
+   705 ;; This function uses a non-reentrant model
+   706 ;;
+   707                           
+   708                           	psect	text6
+   709  00024E                     __ptext6:
+   710                           	callstack 0
+   711  00024E                     _SPI_Receive_Byte:
+   712                           	callstack 28
+   713  00024E                     
+   714                           ;src/mssp_spi_driver.c: 291:     SPI_Transfer_Byte(0x00, rx);
+   715  00024E  C00F  F00C         	movff	SPI_Receive_Byte@rx,SPI_Transfer_Byte@rx
+   716  000252  C010  F00D         	movff	SPI_Receive_Byte@rx+1,SPI_Transfer_Byte@rx+1
+   717  000256  0E00               	movlw	0
+   718  000258  EC96  F000         	call	_SPI_Transfer_Byte
+   719  00025C  0012               	return		;funcret
+   720  00025E                     __end_of_SPI_Receive_Byte:
+   721                           	callstack 0
+   722                           
+   723 ;; *************** function _SPI_Transfer_Byte *****************
+   724 ;; Defined at:
+   725 ;;		line 204 in file "src/mssp_spi_driver.c"
+   726 ;; Parameters:    Size  Location     Type
+   727 ;;  tx              1    wreg     unsigned char 
+   728 ;;  rx              2    0[COMRAM] PTR unsigned char 
+   729 ;;		 -> spi_rx_message_buf(1), 
+   730 ;; Auto vars:     Size  Location     Type
+   731 ;;  tx              1    2[COMRAM] unsigned char 
+   732 ;; Return value:  Size  Location     Type
+   733 ;;                  1    wreg      void 
+   734 ;; Registers used:
+   735 ;;		wreg, fsr2l, fsr2h, status,2
+   736 ;; Tracked objects:
+   737 ;;		On entry : 0/0
+   738 ;;		On exit  : 0/0
+   739 ;;		Unchanged: 0/0
+   740 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   923 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   741 ;;      Params:         2       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   924 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   742 ;;      Locals:         1       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   925 ;;      Temps:          2       0       0       0       0       0       0       0       0       0       0       0       
+   743 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   926 ;;      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       
+   744 ;;      Totals:         3       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   927 ;;Total ram usage:        2 bytes
-   928 ;; Hardware stack levels used:    1
-   929 ;; Hardware stack levels required when called:    3
-   930 ;; This function calls:
-   931 ;;		_LCD_write_instr_byte_4bit
-   932 ;; This function is called by:
-   933 ;;		_main
-   934 ;; This function uses a non-reentrant model
-   935 ;;
-   936                           
-   937                           	psect	text5
-   938  0010FA                     __ptext5:
-   939                           	callstack 0
-   940  0010FA                     _LCD_Init_ECE376:
-   941                           	callstack 27
-   942  0010FA                     
-   943                           ;src/lcd_driver.c: 109:     PORTC = 0x00; PORTD = 0x00;
-   944  0010FA  0E00               	movlw	0
-   945  0010FC  6E82               	movwf	130,c	;volatile
-   946  0010FE  0E00               	movlw	0
-   947  001100  6E83               	movwf	131,c	;volatile
-   948  001102                     
-   949                           ;src/lcd_driver.c: 111:     (TRISC &= ~0xF8);
-   950  001102  0E07               	movlw	7
-   951  001104  1694               	andwf	148,f,c	;volatile
-   952  001106                     
-   953                           ;src/lcd_driver.c: 112:     (TRISD |= 0xF0u);
-   954  001106  0EF0               	movlw	240
-   955  001108  1295               	iorwf	149,f,c	;volatile
-   956  00110A                     
-   957                           ;src/lcd_driver.c: 116:     _delay((unsigned long)((4000)*(40000000u/4000.0)));
-   958  00110A  0ECB               	movlw	203
-   959  00110C  6E1E               	movwf	(??_LCD_Init_ECE376+1)^0,c
-   960  00110E  0EEC               	movlw	236
-   961  001110  6E1D               	movwf	??_LCD_Init_ECE376^0,c
-   962  001112  0E84               	movlw	132
-   963  001114                     u837:
-   964  001114  2EE8               	decfsz	wreg,f,c
-   965  001116  D7FE               	bra	u837
-   966  001118  2E1D               	decfsz	??_LCD_Init_ECE376^0,f,c
-   967  00111A  D7FC               	bra	u837
-   968  00111C  2E1E               	decfsz	(??_LCD_Init_ECE376+1)^0,f,c
-   969  00111E  D7FA               	bra	u837
-   970  001120  D000               	nop2	
-   971  001122                     
-   972                           ;src/lcd_driver.c: 117:     _delay((unsigned long)((4000)*(40000000u/4000.0)));
-   973  001122  0ECB               	movlw	203
-   974  001124  6E1E               	movwf	(??_LCD_Init_ECE376+1)^0,c
-   975  001126  0EEC               	movlw	236
-   976  001128  6E1D               	movwf	??_LCD_Init_ECE376^0,c
-   977  00112A  0E84               	movlw	132
-   978  00112C                     u847:
-   979  00112C  2EE8               	decfsz	wreg,f,c
-   980  00112E  D7FE               	bra	u847
-   981  001130  2E1D               	decfsz	??_LCD_Init_ECE376^0,f,c
-   982  001132  D7FC               	bra	u847
-   983  001134  2E1E               	decfsz	(??_LCD_Init_ECE376+1)^0,f,c
-   984  001136  D7FA               	bra	u847
-   985  001138  D000               	nop2	
-   986  00113A                     
-   987                           ;src/lcd_driver.c: 118:     _delay((unsigned long)((2000)*(40000000u/4000.0)));
-   988  00113A  0E66               	movlw	102
-   989  00113C  6E1E               	movwf	(??_LCD_Init_ECE376+1)^0,c
-   990  00113E  0E76               	movlw	118
-   991  001140  6E1D               	movwf	??_LCD_Init_ECE376^0,c
-   992  001142  0EC1               	movlw	193
-   993  001144                     u857:
-   994  001144  2EE8               	decfsz	wreg,f,c
-   995  001146  D7FE               	bra	u857
-   996  001148  2E1D               	decfsz	??_LCD_Init_ECE376^0,f,c
-   997  00114A  D7FC               	bra	u857
-   998  00114C  2E1E               	decfsz	(??_LCD_Init_ECE376+1)^0,f,c
-   999  00114E  D7FA               	bra	u857
-  1000  001150  F000               	nop	
-  1001  001152                     
-  1002                           ;src/lcd_driver.c: 123:     _delay((unsigned long)((100)*(40000000u/4000.0)));
-  1003  001152  0E06               	movlw	6
-  1004  001154  6E1E               	movwf	(??_LCD_Init_ECE376+1)^0,c
-  1005  001156  0E13               	movlw	19
-  1006  001158  6E1D               	movwf	??_LCD_Init_ECE376^0,c
-  1007  00115A  0EAE               	movlw	174
-  1008  00115C                     u867:
-  1009  00115C  2EE8               	decfsz	wreg,f,c
-  1010  00115E  D7FE               	bra	u867
-  1011  001160  2E1D               	decfsz	??_LCD_Init_ECE376^0,f,c
-  1012  001162  D7FC               	bra	u867
-  1013  001164  2E1E               	decfsz	(??_LCD_Init_ECE376+1)^0,f,c
-  1014  001166  D7FA               	bra	u867
-  1015  001168                     
-  1016                           ;src/lcd_driver.c: 124:     LCD_write_instr_byte_4bit(0x30u);
-  1017  001168  0E30               	movlw	48
-  1018  00116A  ECA5  F009         	call	_LCD_write_instr_byte_4bit
-  1019  00116E                     
-  1020                           ;src/lcd_driver.c: 125:     _delay((unsigned long)((5)*(40000000u/4000.0)));
-  1021  00116E  0E41               	movlw	65
-  1022  001170  6E1D               	movwf	??_LCD_Init_ECE376^0,c
-  1023  001172  0EEE               	movlw	238
-  1024  001174                     u877:
-  1025  001174  2EE8               	decfsz	wreg,f,c
-  1026  001176  D7FE               	bra	u877
-  1027  001178  2E1D               	decfsz	??_LCD_Init_ECE376^0,f,c
-  1028  00117A  D7FC               	bra	u877
-  1029  00117C  D000               	nop2	
-  1030  00117E                     
-  1031                           ;src/lcd_driver.c: 126:     LCD_write_instr_byte_4bit(0x30u);
-  1032  00117E  0E30               	movlw	48
-  1033  001180  ECA5  F009         	call	_LCD_write_instr_byte_4bit
-  1034  001184                     
-  1035                           ;src/lcd_driver.c: 127:     _delay((unsigned long)((150)*(40000000u/4000000.0)));
-  1036  001184  0ED6               	movlw	214
-  1037  001186                     u887:
-  1038  001186  D000               	nop2	
-  1039  001188  D000               	nop2	
-  1040  00118A  2EE8               	decfsz	wreg,f,c
-  1041  00118C  D7FC               	bra	u887
-  1042  00118E  D000               	nop2	
-  1043  001190                     
-  1044                           ;src/lcd_driver.c: 128:     LCD_write_instr_byte_4bit(0x30u);
-  1045  001190  0E30               	movlw	48
-  1046  001192  ECA5  F009         	call	_LCD_write_instr_byte_4bit
-  1047  001196                     
-  1048                           ;src/lcd_driver.c: 130:     LCD_write_instr_byte_4bit(0x28u);
-  1049  001196  0E28               	movlw	40
-  1050  001198  ECA5  F009         	call	_LCD_write_instr_byte_4bit
-  1051  00119C                     
-  1052                           ;src/lcd_driver.c: 131:     LCD_write_instr_byte_4bit(0x0Eu);
-  1053  00119C  0E0E               	movlw	14
-  1054  00119E  ECA5  F009         	call	_LCD_write_instr_byte_4bit
-  1055  0011A2                     
-  1056                           ;src/lcd_driver.c: 132:     LCD_write_instr_byte_4bit(0x01u);
-  1057  0011A2  0E01               	movlw	1
-  1058  0011A4  ECA5  F009         	call	_LCD_write_instr_byte_4bit
-  1059  0011A8                     
-  1060                           ;src/lcd_driver.c: 133:     LCD_write_instr_byte_4bit(0x06u);
-  1061  0011A8  0E06               	movlw	6
-  1062  0011AA  ECA5  F009         	call	_LCD_write_instr_byte_4bit
-  1063  0011AE                     
-  1064                           ;src/lcd_driver.c: 135:     _delay((unsigned long)((100)*(40000000u/4000.0)));
-  1065  0011AE  0E06               	movlw	6
-  1066  0011B0  6E1E               	movwf	(??_LCD_Init_ECE376+1)^0,c
-  1067  0011B2  0E13               	movlw	19
-  1068  0011B4  6E1D               	movwf	??_LCD_Init_ECE376^0,c
-  1069  0011B6  0EAE               	movlw	174
-  1070  0011B8                     u897:
-  1071  0011B8  2EE8               	decfsz	wreg,f,c
-  1072  0011BA  D7FE               	bra	u897
-  1073  0011BC  2E1D               	decfsz	??_LCD_Init_ECE376^0,f,c
-  1074  0011BE  D7FC               	bra	u897
-  1075  0011C0  2E1E               	decfsz	(??_LCD_Init_ECE376+1)^0,f,c
-  1076  0011C2  D7FA               	bra	u897
-  1077  0011C4                     
-  1078                           ;src/lcd_driver.c: 138:     init_complete = 0x01u;
-  1079  0011C4  0E01               	movlw	1
-  1080  0011C6  6E13               	movwf	_init_complete^0,c
-  1081  0011C8                     
-  1082                           ;src/lcd_driver.c: 139:     current_entry_mode = 0x06u;
-  1083  0011C8  0E06               	movlw	6
-  1084  0011CA  6E0C               	movwf	_current_entry_mode^0,c
-  1085  0011CC                     
-  1086                           ;src/lcd_driver.c: 140:     current_disp_ctrl = 0x0Eu;
-  1087  0011CC  0E0E               	movlw	14
-  1088  0011CE  6E0E               	movwf	_current_disp_ctrl^0,c
-  1089  0011D0                     
-  1090                           ;src/lcd_driver.c: 141:     current_func_set = 0x28u;
-  1091  0011D0  0E28               	movlw	40
-  1092  0011D2  6E0B               	movwf	_current_func_set^0,c
-  1093  0011D4  0012               	return		;funcret
-  1094  0011D6                     __end_of_LCD_Init_ECE376:
-  1095                           	callstack 0
-  1096                           
-  1097 ;; *************** function _LCD_write_instr_byte_4bit *****************
-  1098 ;; Defined at:
-  1099 ;;		line 76 in file "src/lcd_driver.c"
-  1100 ;; Parameters:    Size  Location     Type
-  1101 ;;  instr           1    wreg     unsigned char 
-  1102 ;; Auto vars:     Size  Location     Type
-  1103 ;;  instr           1    2[COMRAM] unsigned char 
-  1104 ;; Return value:  Size  Location     Type
-  1105 ;;                  1    wreg      void 
-  1106 ;; Registers used:
-  1107 ;;		wreg, status,2, status,0, cstack
-  1108 ;; Tracked objects:
-  1109 ;;		On entry : 0/0
-  1110 ;;		On exit  : 0/0
-  1111 ;;		Unchanged: 0/0
-  1112 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   745 ;;Total ram usage:        3 bytes
+   746 ;; Hardware stack levels used:    1
+   747 ;; Hardware stack levels required when called:    1
+   748 ;; This function calls:
+   749 ;;		Nothing
+   750 ;; This function is called by:
+   751 ;;		_SPI_Receive_Byte
+   752 ;;		_SPI_Transfer_Packet
+   753 ;; This function uses a non-reentrant model
+   754 ;;
+   755                           
+   756                           	psect	text7
+   757  00012C                     __ptext7:
+   758                           	callstack 0
+   759  00012C                     _SPI_Transfer_Byte:
+   760                           	callstack 28
+   761                           
+   762                           ;incstack = 0
+   763                           ;SPI_Transfer_Byte@tx stored from wreg
+   764  00012C  6E0E               	movwf	SPI_Transfer_Byte@tx^0,c
+   765  00012E                     
+   766                           ;src/mssp_spi_driver.c: 205:     manual_transfer = 0x01;
+   767  00012E  0E01               	movlw	1
+   768  000130  6E04               	movwf	_manual_transfer^0,c
+   769                           
+   770                           ;src/mssp_spi_driver.c: 206:     transfer_complete_flag = 0x00;
+   771  000132  0E00               	movlw	0
+   772  000134  6E05               	movwf	_transfer_complete_flag^0,c
+   773  000136                     
+   774                           ;src/mssp_spi_driver.c: 208:     if(!slave_mode) LATDbits.LATD2 = 0;
+   775  000136  5006               	movf	_slave_mode^0,w,c
+   776  000138  A4D8               	btfss	status,2,c
+   777  00013A  EFA1  F000         	goto	u501
+   778  00013E  EFA3  F000         	goto	u500
+   779  000142                     u501:
+   780  000142  EFA4  F000         	goto	l209
+   781  000146                     u500:
+   782  000146  948C               	bcf	140,2,c	;volatile
+   783  000148                     l209:
+   784                           
+   785                           ;src/mssp_spi_driver.c: 209:     SSPBUF = tx;
+   786  000148  C00E  FFC9         	movff	SPI_Transfer_Byte@tx,4041	;volatile
+   787  00014C                     l1712:
+   788  00014C  5005               	movf	_transfer_complete_flag^0,w,c
+   789  00014E  B4D8               	btfsc	status,2,c
+   790  000150  EFAC  F000         	goto	u511
+   791  000154  EFAE  F000         	goto	u510
+   792  000158                     u511:
+   793  000158  EFA6  F000         	goto	l1712
+   794  00015C                     u510:
+   795  00015C                     
+   796                           ;src/mssp_spi_driver.c: 212:     if(!slave_mode) LATDbits.LATD2 = 1;
+   797  00015C  5006               	movf	_slave_mode^0,w,c
+   798  00015E  A4D8               	btfss	status,2,c
+   799  000160  EFB4  F000         	goto	u521
+   800  000164  EFB6  F000         	goto	u520
+   801  000168                     u521:
+   802  000168  EFB7  F000         	goto	l1718
+   803  00016C                     u520:
+   804  00016C  848C               	bsf	140,2,c	;volatile
+   805  00016E                     l1718:
+   806                           
+   807                           ;src/mssp_spi_driver.c: 213:     *rx = SSPBUF;
+   808  00016E  C00C  FFD9         	movff	SPI_Transfer_Byte@rx,fsr2l
+   809  000172  C00D  FFDA         	movff	SPI_Transfer_Byte@rx+1,fsr2h
+   810  000176  CFC9 FFDF          	movff	4041,indf2	;volatile
+   811  00017A                     
+   812                           ;src/mssp_spi_driver.c: 215:     manual_transfer = 0x00;
+   813  00017A  0E00               	movlw	0
+   814  00017C  6E04               	movwf	_manual_transfer^0,c
+   815  00017E                     
+   816                           ;src/mssp_spi_driver.c: 216:     transfer_complete_flag = 0x00;
+   817  00017E  0E00               	movlw	0
+   818  000180  6E05               	movwf	_transfer_complete_flag^0,c
+   819  000182  0012               	return		;funcret
+   820  000184                     __end_of_SPI_Transfer_Byte:
+   821                           	callstack 0
+   822                           
+   823 ;; *************** function _SPI_Init_Master_Default *****************
+   824 ;; Defined at:
+   825 ;;		line 31 in file "src/mssp_spi_driver.c"
+   826 ;; Parameters:    Size  Location     Type
+   827 ;;		None
+   828 ;; Auto vars:     Size  Location     Type
+   829 ;;		None
+   830 ;; Return value:  Size  Location     Type
+   831 ;;                  1    wreg      void 
+   832 ;; Registers used:
+   833 ;;		wreg, status,2, status,0
+   834 ;; Tracked objects:
+   835 ;;		On entry : 0/0
+   836 ;;		On exit  : 0/0
+   837 ;;		Unchanged: 0/0
+   838 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-  1113 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   839 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-  1114 ;;      Locals:         1       0       0       0       0       0       0       0       0       0       0       0       
+   840 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-  1115 ;;      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       
+   841 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-  1116 ;;      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       
+   842 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-  1117 ;;Total ram usage:        2 bytes
-  1118 ;; Hardware stack levels used:    1
-  1119 ;; Hardware stack levels required when called:    2
-  1120 ;; This function calls:
-  1121 ;;		_LCD_enable_toggle
-  1122 ;; This function is called by:
-  1123 ;;		_LCD_Init_ECE376
-  1124 ;;		_LCD_set_cursor_position
-  1125 ;;		_LCD_clear_display
-  1126 ;;		_LCD_return_home
-  1127 ;; This function uses a non-reentrant model
-  1128 ;;
+   843 ;;Total ram usage:        0 bytes
+   844 ;; Hardware stack levels used:    1
+   845 ;; Hardware stack levels required when called:    1
+   846 ;; This function calls:
+   847 ;;		Nothing
+   848 ;; This function is called by:
+   849 ;;		_main
+   850 ;; This function uses a non-reentrant model
+   851 ;;
+   852                           
+   853                           	psect	text8
+   854  00020E                     __ptext8:
+   855                           	callstack 0
+   856  00020E                     _SPI_Init_Master_Default:
+   857                           	callstack 29
+   858  00020E                     
+   859                           ;src/mssp_spi_driver.c: 33:     SSPCON1bits.SSPEN = 0;
+   860  00020E  9AC6               	bcf	198,5,c	;volatile
+   861  000210                     
+   862                           ;src/mssp_spi_driver.c: 36:     SSPCON1 = 0x01 | 0x00;
+   863  000210  0E01               	movlw	1
+   864  000212  6EC6               	movwf	198,c	;volatile
+   865                           
+   866                           ;src/mssp_spi_driver.c: 37:     SSPSTAT = 0x40 | 0x00;
+   867  000214  0E40               	movlw	64
+   868  000216  6EC7               	movwf	199,c	;volatile
+   869  000218                     
+   870                           ;src/mssp_spi_driver.c: 40:     TRISC |= 0x10; TRISC &= ~(0x28); TRISDbits.RD2 = 0;;
+   871  000218  8894               	bsf	148,4,c	;volatile
+   872  00021A  0ED7               	movlw	215
+   873  00021C  1694               	andwf	148,f,c	;volatile
+   874  00021E  9495               	bcf	149,2,c	;volatile
+   875  000220                     
+   876                           ;src/mssp_spi_driver.c: 43:     SSPCON1bits.SSPEN = 1;
+   877  000220  8AC6               	bsf	198,5,c	;volatile
+   878  000222                     
+   879                           ;src/mssp_spi_driver.c: 44:     SSPCON1bits.WCOL = 0;
+   880  000222  9EC6               	bcf	198,7,c	;volatile
+   881  000224                     
+   882                           ;src/mssp_spi_driver.c: 45:     SSPCON1bits.SSPOV = 0;
+   883  000224  9CC6               	bcf	198,6,c	;volatile
+   884  000226                     
+   885                           ;src/mssp_spi_driver.c: 46:     SSPBUF;
+   886  000226  50C9               	movf	201,w,c	;volatile
+   887  000228                     
+   888                           ;src/mssp_spi_driver.c: 47:     PIR1bits.SSPIF = 0;
+   889  000228  969E               	bcf	158,3,c	;volatile
+   890  00022A                     
+   891                           ;src/mssp_spi_driver.c: 50:     LATDbits.LATD2 = 1;
+   892  00022A  848C               	bsf	140,2,c	;volatile
+   893                           
+   894                           ;src/mssp_spi_driver.c: 52:     slave_mode = 0x00;
+   895  00022C  0E00               	movlw	0
+   896  00022E  6E06               	movwf	_slave_mode^0,c
+   897  000230                     
+   898                           ;src/mssp_spi_driver.c: 55:     PIE1bits.SSPIE = 1;
+   899  000230  869D               	bsf	157,3,c	;volatile
+   900  000232  0012               	return		;funcret
+   901  000234                     __end_of_SPI_Init_Master_Default:
+   902                           	callstack 0
+   903                           
+   904 ;; *************** function _isr *****************
+   905 ;; Defined at:
+   906 ;;		line 126 in file "main.c"
+   907 ;; Parameters:    Size  Location     Type
+   908 ;;		None
+   909 ;; Auto vars:     Size  Location     Type
+   910 ;;		None
+   911 ;; Return value:  Size  Location     Type
+   912 ;;                  1    wreg      void 
+   913 ;; Registers used:
+   914 ;;		wreg, status,2
+   915 ;; Tracked objects:
+   916 ;;		On entry : 0/0
+   917 ;;		On exit  : 0/0
+   918 ;;		Unchanged: 0/0
+   919 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14  BANK15
+   920 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+   921 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+   922 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+   923 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+   924 ;;Total ram usage:        0 bytes
+   925 ;; Hardware stack levels used:    1
+   926 ;; This function calls:
+   927 ;;		Nothing
+   928 ;; This function is called by:
+   929 ;;		Interrupt level 2
+   930 ;; This function uses a non-reentrant model
+   931 ;;
+   932                           
+   933                           	psect	intcode
+   934  000008                     __pintcode:
+   935                           	callstack 0
+   936  000008                     _isr:
+   937                           	callstack 28
+   938                           
+   939                           ;incstack = 0
+   940  000008  8216               	bsf	int$flags,1,c	;set compiler interrupt flag (level 2)
+   941  00000A  ED60  F000         	call	int_func,f	;refresh shadow registers
+   942                           
+   943                           	psect	intcode_body
+   944  0000C0                     __pintcode_body:
+   945                           	callstack 28
+   946  0000C0                     int_func:
+   947                           	callstack 28
+   948  0000C0  0006               	pop		; remove dummy address from shadow register refresh
+   949  0000C2                     
+   950                           ;main.c: 134:     if(PIR1bits.SSPIF && PIE1bits.SSPIE) {
+   951  0000C2  A69E               	btfss	158,3,c	;volatile
+   952  0000C4  EF66  F000         	goto	i2u41_41
+   953  0000C8  EF68  F000         	goto	i2u41_40
+   954  0000CC                     i2u41_41:
+   955  0000CC  EF72  F000         	goto	i2l1646
+   956  0000D0                     i2u41_40:
+   957  0000D0  A69D               	btfss	157,3,c	;volatile
+   958  0000D2  EF6D  F000         	goto	i2u42_41
+   959  0000D6  EF6F  F000         	goto	i2u42_40
+   960  0000DA                     i2u42_41:
+   961  0000DA  EF72  F000         	goto	i2l1646
+   962  0000DE                     i2u42_40:
+   963  0000DE                     
+   964                           ;main.c: 136:         transfer_complete_flag = 0x01;
+   965  0000DE  0E01               	movlw	1
+   966  0000E0  6E05               	movwf	_transfer_complete_flag^0,c
+   967  0000E2                     
+   968                           ;main.c: 155:         PIR1bits.SSPIF = 0;
+   969  0000E2  969E               	bcf	158,3,c	;volatile
+   970  0000E4                     i2l1646:
+   971                           
+   972                           ;main.c: 163:     if(PIR2bits.CCP2IF && PIE2bits.CCP2IE){
+   973  0000E4  A0A1               	btfss	161,0,c	;volatile
+   974  0000E6  EF77  F000         	goto	i2u43_41
+   975  0000EA  EF79  F000         	goto	i2u43_40
+   976  0000EE                     i2u43_41:
+   977  0000EE  EF94  F000         	goto	i2l307
+   978  0000F2                     i2u43_40:
+   979  0000F2  A0A0               	btfss	160,0,c	;volatile
+   980  0000F4  EF7E  F000         	goto	i2u44_41
+   981  0000F8  EF80  F000         	goto	i2u44_40
+   982  0000FC                     i2u44_41:
+   983  0000FC  EF94  F000         	goto	i2l307
+   984  000100                     i2u44_40:
+   985  000100                     
+   986                           ;main.c: 166:         if(tmr_100ms_next){
+   987  000100  5003               	movf	_tmr_100ms_next^0,w,c	;volatile
+   988  000102  B4D8               	btfsc	status,2,c
+   989  000104  EF86  F000         	goto	i2u45_41
+   990  000108  EF88  F000         	goto	i2u45_40
+   991  00010C                     i2u45_41:
+   992  00010C  EF8F  F000         	goto	i2l1656
+   993  000110                     i2u45_40:
+   994  000110                     
+   995                           ;main.c: 168:             tmr_100ms_next = 0x00;
+   996  000110  0E00               	movlw	0
+   997  000112  6E03               	movwf	_tmr_100ms_next^0,c	;volatile
+   998                           
+   999                           ;main.c: 171:             spi_ready_to_tx = 0x01;
+  1000  000114  0E01               	movlw	1
+  1001  000116  6E01               	movwf	_spi_ready_to_tx^0,c	;volatile
+  1002  000118                     
+  1003                           ;main.c: 173:             PIR2bits.CCP2IF = 0u;;
+  1004  000118  90A1               	bcf	161,0,c	;volatile
+  1005                           
+  1006                           ;main.c: 175:         } else{
+  1007  00011A  EF94  F000         	goto	i2l307
+  1008  00011E                     i2l1656:
+  1009                           
+  1010                           ;main.c: 177:             tmr_100ms_next = 0x01;
+  1011  00011E  0E01               	movlw	1
+  1012  000120  6E03               	movwf	_tmr_100ms_next^0,c	;volatile
+  1013                           
+  1014                           ;main.c: 178:             spi_ready_to_tx = 0x00;
+  1015  000122  0E00               	movlw	0
+  1016  000124  6E01               	movwf	_spi_ready_to_tx^0,c	;volatile
+  1017  000126                     
+  1018                           ;main.c: 180:             PIR2bits.CCP2IF = 0u;;
+  1019  000126  90A1               	bcf	161,0,c	;volatile
+  1020  000128                     i2l307:
+  1021  000128  9216               	bcf	int$flags,1,c	;clear compiler interrupt flag (level 2)
+  1022  00012A  0011               	retfie		f
+  1023  00012C                     __end_of_isr:
+  1024                           	callstack 0
+  1025  0000                     
+  1026                           	psect	rparam
+  1027  0000                     
+  1028                           	psect	temp
+  1029  000016                     btemp:
+  1030                           	callstack 0
+  1031  000016                     	ds	1
+  1032  0000                     int$flags	set	btemp
+  1033  0000                     wtemp8	set	btemp+1
+  1034  0000                     ttemp5	set	btemp+1
+  1035  0000                     ttemp6	set	btemp+4
+  1036  0000                     ttemp7	set	btemp+8
+  1037                           
+  1038                           	psect	idloc
+  1039                           
+  1040                           ;Config register IDLOC0 @ 0x200000
+  1041                           ;	unspecified, using default values
+  1042  200000                     	org	2097152
+  1043  200000  FF                 	db	255
+  1044                           
+  1045                           ;Config register IDLOC1 @ 0x200001
+  1046                           ;	unspecified, using default values
+  1047  200001                     	org	2097153
+  1048  200001  FF                 	db	255
+  1049                           
+  1050                           ;Config register IDLOC2 @ 0x200002
+  1051                           ;	unspecified, using default values
+  1052  200002                     	org	2097154
+  1053  200002  FF                 	db	255
+  1054                           
+  1055                           ;Config register IDLOC3 @ 0x200003
+  1056                           ;	unspecified, using default values
+  1057  200003                     	org	2097155
+  1058  200003  FF                 	db	255
+  1059                           
+  1060                           ;Config register IDLOC4 @ 0x200004
+  1061                           ;	unspecified, using default values
+  1062  200004                     	org	2097156
+  1063  200004  FF                 	db	255
+  1064                           
+  1065                           ;Config register IDLOC5 @ 0x200005
+  1066                           ;	unspecified, using default values
+  1067  200005                     	org	2097157
+  1068  200005  FF                 	db	255
+  1069                           
+  1070                           ;Config register IDLOC6 @ 0x200006
+  1071                           ;	unspecified, using default values
+  1072  200006                     	org	2097158
+  1073  200006  FF                 	db	255
+  1074                           
+  1075                           ;Config register IDLOC7 @ 0x200007
+  1076                           ;	unspecified, using default values
+  1077  200007                     	org	2097159
+  1078  200007  FF                 	db	255
+  1079                           
+  1080                           	psect	config
+  1081                           
+  1082                           ; Padding undefined space
+  1083  300000                     	org	3145728
+  1084  300000  FF                 	db	255
+  1085                           
+  1086                           ;Config register CONFIG1H @ 0x300001
+  1087                           ;	Oscillator Selection bits
+  1088                           ;	OSC = HSPLL, HS oscillator, PLL enabled (Clock Frequency = 4 x FOSC1)
+  1089                           ;	Fail-Safe Clock Monitor Enable bit
+  1090                           ;	FCMEN = OFF, Fail-Safe Clock Monitor disabled
+  1091                           ;	Internal/External Oscillator Switchover bit
+  1092                           ;	IESO = OFF, Oscillator Switchover mode disabled
+  1093  300001                     	org	3145729
+  1094  300001  06                 	db	6
+  1095                           
+  1096                           ;Config register CONFIG2L @ 0x300002
+  1097                           ;	Power-up Timer Enable bit
+  1098                           ;	PWRT = OFF, PWRT disabled
+  1099                           ;	Brown-out Reset Enable bits
+  1100                           ;	BOREN = SBORDIS, Brown-out Reset enabled in hardware only (SBOREN is disabled)
+  1101                           ;	Brown Out Reset Voltage bits
+  1102                           ;	BORV = 3, Minimum setting
+  1103  300002                     	org	3145730
+  1104  300002  1F                 	db	31
+  1105                           
+  1106                           ;Config register CONFIG2H @ 0x300003
+  1107                           ;	Watchdog Timer Enable bit
+  1108                           ;	WDT = OFF, WDT disabled (control is placed on the SWDTEN bit)
+  1109                           ;	Watchdog Timer Postscale Select bits
+  1110                           ;	WDTPS = 32768, 1:32768
+  1111  300003                     	org	3145731
+  1112  300003  1E                 	db	30
+  1113                           
+  1114                           ; Padding undefined space
+  1115  300004                     	org	3145732
+  1116  300004  FF                 	db	255
+  1117                           
+  1118                           ;Config register CONFIG3H @ 0x300005
+  1119                           ;	CCP2 MUX bit
+  1120                           ;	CCP2MX = PORTBE, CCP2 input/output is multiplexed with RB3
+  1121                           ;	PORTB A/D Enable bit
+  1122                           ;	PBADEN = OFF, PORTB<4:0> pins are configured as digital I/O on Reset
+  1123                           ;	Low-Power Timer1 Oscillator Enable bit
+  1124                           ;	LPT1OSC = OFF, Timer1 configured for higher power operation
+  1125                           ;	MCLR Pin Enable bit
+  1126                           ;	MCLRE = ON, MCLR pin enabled; RE3 input pin disabled
+  1127  300005                     	org	3145733
+  1128  300005  80                 	db	128
   1129                           
-  1130                           	psect	text6
-  1131  00134A                     __ptext6:
-  1132                           	callstack 0
-  1133  00134A                     _LCD_write_instr_byte_4bit:
-  1134                           	callstack 27
-  1135                           
-  1136                           ;incstack = 0
-  1137                           ;LCD_write_instr_byte_4bit@instr stored from wreg
-  1138  00134A  6E1C               	movwf	LCD_write_instr_byte_4bit@instr^0,c
-  1139  00134C                     
-  1140                           ;src/lcd_driver.c: 78:     (TRISC &= ~0xF8);
-  1141  00134C  0E07               	movlw	7
-  1142  00134E  1694               	andwf	148,f,c	;volatile
-  1143                           
-  1144                           ;src/lcd_driver.c: 79:     (TRISD &= 0x0Fu);
-  1145  001350  0E0F               	movlw	15
-  1146  001352  1695               	andwf	149,f,c	;volatile
-  1147  001354                     
-  1148                           ;src/lcd_driver.c: 80:     (LATCbits.LATC0 = 0u);
-  1149  001354  908B               	bcf	139,0,c	;volatile
-  1150  001356                     
-  1151                           ;src/lcd_driver.c: 81:     (LATCbits.LATC1 = 0u);
-  1152  001356  928B               	bcf	139,1,c	;volatile
-  1153                           
-  1154                           ;src/lcd_driver.c: 84:     PORTD = (PORTD & 0x0F) | (instr & 0xF0);
-  1155  001358  C01C  F01B         	movff	LCD_write_instr_byte_4bit@instr,??_LCD_write_instr_byte_4bit
-  1156  00135C  0EF0               	movlw	240
-  1157  00135E  161B               	andwf	??_LCD_write_instr_byte_4bit^0,f,c
-  1158  001360  5083               	movf	131,w,c	;volatile
-  1159  001362  0B0F               	andlw	15
-  1160  001364  101B               	iorwf	??_LCD_write_instr_byte_4bit^0,w,c
-  1161  001366  6E83               	movwf	131,c	;volatile
-  1162  001368                     
-  1163                           ;src/lcd_driver.c: 85:     LCD_enable_toggle();
-  1164  001368  EC0B  F00A         	call	_LCD_enable_toggle	;wreg free
-  1165  00136C                     
-  1166                           ;src/lcd_driver.c: 86:     PORTD = (PORTD & 0x0F) | ((instr<<4) & 0xF0);
-  1167  00136C  C01C  F01B         	movff	LCD_write_instr_byte_4bit@instr,??_LCD_write_instr_byte_4bit
-  1168  001370  3A1B               	swapf	??_LCD_write_instr_byte_4bit^0,f,c
-  1169  001372  0EF0               	movlw	240
-  1170  001374  161B               	andwf	??_LCD_write_instr_byte_4bit^0,f,c
-  1171  001376  0EF0               	movlw	240
-  1172  001378  161B               	andwf	??_LCD_write_instr_byte_4bit^0,f,c
-  1173  00137A  5083               	movf	131,w,c	;volatile
-  1174  00137C  0B0F               	andlw	15
-  1175  00137E  101B               	iorwf	??_LCD_write_instr_byte_4bit^0,w,c
-  1176  001380  6E83               	movwf	131,c	;volatile
-  1177                           
-  1178                           ;src/lcd_driver.c: 87:     LCD_enable_toggle();
-  1179  001382  EC0B  F00A         	call	_LCD_enable_toggle	;wreg free
-  1180  001386                     
-  1181                           ;src/lcd_driver.c: 89:     _delay((unsigned long)((10)*(40000000u/4000.0)));
-  1182  001386  0E82               	movlw	130
-  1183  001388  6E1B               	movwf	??_LCD_write_instr_byte_4bit^0,c
-  1184  00138A  0EDE               	movlw	222
-  1185  00138C                     u907:
-  1186  00138C  2EE8               	decfsz	wreg,f,c
-  1187  00138E  D7FE               	bra	u907
-  1188  001390  2E1B               	decfsz	??_LCD_write_instr_byte_4bit^0,f,c
-  1189  001392  D7FC               	bra	u907
-  1190  001394  0012               	return		;funcret
-  1191  001396                     __end_of_LCD_write_instr_byte_4bit:
-  1192                           	callstack 0
-  1193                           
-  1194 ;; *************** function _LCD_enable_toggle *****************
-  1195 ;; Defined at:
-  1196 ;;		line 25 in file "src/lcd_driver.c"
-  1197 ;; Parameters:    Size  Location     Type
-  1198 ;;		None
-  1199 ;; Auto vars:     Size  Location     Type
-  1200 ;;		None
-  1201 ;; Return value:  Size  Location     Type
-  1202 ;;                  1    wreg      void 
-  1203 ;; Registers used:
-  1204 ;;		wreg
-  1205 ;; Tracked objects:
-  1206 ;;		On entry : 0/0
-  1207 ;;		On exit  : 0/0
-  1208 ;;		Unchanged: 0/0
-  1209 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
-      +1  BANK12  BANK13  BANK14  BANK15
-  1210 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
-      +0       0       0       0       0
-  1211 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
-      +0       0       0       0       0
-  1212 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
-      +0       0       0       0       0
-  1213 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
-      +0       0       0       0       0
-  1214 ;;Total ram usage:        0 bytes
-  1215 ;; Hardware stack levels used:    1
-  1216 ;; Hardware stack levels required when called:    1
-  1217 ;; This function calls:
-  1218 ;;		Nothing
-  1219 ;; This function is called by:
-  1220 ;;		_LCD_write_data_byte_4bit
-  1221 ;;		_LCD_write_instr_byte_4bit
-  1222 ;;		_LCD_write_instr_byte_8bit
-  1223 ;;		_LCD_wait_for_BF
-  1224 ;;		_LCD_write_data_byte_8bit
-  1225 ;;		_LCD_Init
-  1226 ;;		_LCD_read_current_address_counter
-  1227 ;;		_LCD_write_characters
-  1228 ;;		_LCD_turn_off_cursor
-  1229 ;;		_LCD_turn_on_cursor
-  1230 ;; This function uses a non-reentrant model
-  1231 ;;
-  1232                           
-  1233                           	psect	text7
-  1234  001416                     __ptext7:
-  1235                           	callstack 0
-  1236  001416                     _LCD_enable_toggle:
-  1237                           	callstack 28
-  1238  001416                     
-  1239                           ;src/lcd_driver.c: 26:     (LATCbits.LATC2 = 0u);
-  1240  001416  948B               	bcf	139,2,c	;volatile
-  1241  001418                     
-  1242                           ;src/lcd_driver.c: 27:     _delay((unsigned long)((2u)*(40000000u/4000000.0)));
-  1243  001418  0E06               	movlw	6
-  1244  00141A                     u917:
-  1245  00141A  2EE8               	decfsz	wreg,f,c
-  1246  00141C  D7FE               	bra	u917
-  1247  00141E  D000               	nop2	
-  1248  001420                     
-  1249                           ;src/lcd_driver.c: 28:     (LATCbits.LATC2 = 1u);
-  1250  001420  848B               	bsf	139,2,c	;volatile
-  1251                           
-  1252                           ;src/lcd_driver.c: 29:     _delay((unsigned long)((2u)*(40000000u/4000000.0)));
-  1253  001422  0E06               	movlw	6
-  1254  001424                     u927:
-  1255  001424  2EE8               	decfsz	wreg,f,c
-  1256  001426  D7FE               	bra	u927
-  1257  001428  D000               	nop2	
-  1258  00142A                     
-  1259                           ;src/lcd_driver.c: 30:     (LATCbits.LATC2 = 0u);
-  1260  00142A  948B               	bcf	139,2,c	;volatile
-  1261                           
-  1262                           ;src/lcd_driver.c: 31:     _delay((unsigned long)((2u)*(40000000u/4000000.0)));
-  1263  00142C  0E06               	movlw	6
-  1264  00142E                     u937:
-  1265  00142E  2EE8               	decfsz	wreg,f,c
-  1266  001430  D7FE               	bra	u937
-  1267  001432  D000               	nop2	
-  1268  001434  0012               	return		;funcret
-  1269  001436                     __end_of_LCD_enable_toggle:
-  1270                           	callstack 0
-  1271                           
-  1272 ;; *************** function _isr *****************
-  1273 ;; Defined at:
-  1274 ;;		line 124 in file "main.c"
-  1275 ;; Parameters:    Size  Location     Type
-  1276 ;;		None
-  1277 ;; Auto vars:     Size  Location     Type
-  1278 ;;		None
-  1279 ;; Return value:  Size  Location     Type
-  1280 ;;                  1    wreg      void 
-  1281 ;; Registers used:
-  1282 ;;		wreg, status,2, status,0
-  1283 ;; Tracked objects:
-  1284 ;;		On entry : 0/0
-  1285 ;;		On exit  : 0/0
-  1286 ;;		Unchanged: 0/0
-  1287 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
-      +1  BANK12  BANK13  BANK14  BANK15
-  1288 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
-      +0       0       0       0       0
-  1289 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
-      +0       0       0       0       0
-  1290 ;;      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       
-      +0       0       0       0       0
-  1291 ;;      Totals:         1       0       0       0       0       0       0       0       0       0       0       0       
-      +0       0       0       0       0
-  1292 ;;Total ram usage:        1 bytes
-  1293 ;; Hardware stack levels used:    1
-  1294 ;; This function calls:
-  1295 ;;		Nothing
-  1296 ;; This function is called by:
-  1297 ;;		Interrupt level 2
-  1298 ;; This function uses a non-reentrant model
-  1299 ;;
-  1300                           
-  1301                           	psect	intcode
-  1302  000008                     __pintcode:
-  1303                           	callstack 0
-  1304  000008                     _isr:
-  1305                           	callstack 27
-  1306                           
-  1307                           ;incstack = 0
-  1308  000008  8225               	bsf	int$flags,1,c	;set compiler interrupt flag (level 2)
-  1309  00000A  ED52  F009         	call	int_func,f	;refresh shadow registers
-  1310                           
-  1311                           	psect	intcode_body
-  1312  0012A4                     __pintcode_body:
-  1313                           	callstack 27
-  1314  0012A4                     int_func:
-  1315                           	callstack 27
-  1316  0012A4  0006               	pop		; remove dummy address from shadow register refresh
-  1317  0012A6                     
-  1318                           ;main.c: 126:     if(PIR1bits.SSPIF && PIE1bits.SSPIE) {
-  1319  0012A6  A69E               	btfss	158,3,c	;volatile
-  1320  0012A8  EF58  F009         	goto	i2u70_41
-  1321  0012AC  EF5A  F009         	goto	i2u70_40
-  1322  0012B0                     i2u70_41:
-  1323  0012B0  EF7D  F009         	goto	i2l42
-  1324  0012B4                     i2u70_40:
-  1325  0012B4  A69D               	btfss	157,3,c	;volatile
-  1326  0012B6  EF5F  F009         	goto	i2u71_41
-  1327  0012BA  EF61  F009         	goto	i2u71_40
-  1328  0012BE                     i2u71_41:
-  1329  0012BE  EF7D  F009         	goto	i2l42
-  1330  0012C2                     i2u71_40:
-  1331  0012C2                     
-  1332                           ;main.c: 128:         transfer_complete_flag = 0x01;
-  1333  0012C2  0E01               	movlw	1
-  1334  0012C4  6E19               	movwf	_transfer_complete_flag^0,c
-  1335  0012C6                     
-  1336                           ;main.c: 131:         spi_rx_message_buf = SSPBUF;
-  1337  0012C6  CFC9 F018          	movff	4041,_spi_rx_message_buf	;volatile
-  1338  0012CA                     
-  1339                           ;main.c: 134:         if((spi_rx_message_buf & 0xC0u) != 0x00u){
-  1340  0012CA  C018  F01A         	movff	_spi_rx_message_buf,??_isr
-  1341  0012CE  0EC0               	movlw	192
-  1342  0012D0  161A               	andwf	??_isr^0,f,c
-  1343  0012D2  B4D8               	btfsc	status,2,c
-  1344  0012D4  EF6E  F009         	goto	i2u72_41
-  1345  0012D8  EF70  F009         	goto	i2u72_40
-  1346  0012DC                     i2u72_41:
-  1347  0012DC  EF78  F009         	goto	i2l1840
-  1348  0012E0                     i2u72_40:
-  1349  0012E0                     
-  1350                           ;main.c: 136:             SSPBUF = (0x40u | 0x2Au);
-  1351  0012E0  0E6A               	movlw	106
-  1352  0012E2  6EC9               	movwf	201,c	;volatile
-  1353                           
-  1354                           ;main.c: 137:             spi_rx_invalid_flag = 0x01;
-  1355  0012E4  0E01               	movlw	1
-  1356  0012E6  6E17               	movwf	_spi_rx_invalid_flag^0,c
-  1357                           
-  1358                           ;main.c: 138:             spi_rx_flag = 0x01;
-  1359  0012E8  0E01               	movlw	1
-  1360  0012EA  6E16               	movwf	_spi_rx_flag^0,c
-  1361                           
-  1362                           ;main.c: 140:         } else{
-  1363  0012EC  EF7C  F009         	goto	i2l1842
-  1364  0012F0                     i2l1840:
-  1365                           
-  1366                           ;main.c: 142:             SSPBUF = 0x3Fu;
-  1367  0012F0  0E3F               	movlw	63
-  1368  0012F2  6EC9               	movwf	201,c	;volatile
-  1369                           
-  1370                           ;main.c: 143:             spi_rx_flag = 0x01;
-  1371  0012F4  0E01               	movlw	1
-  1372  0012F6  6E16               	movwf	_spi_rx_flag^0,c
-  1373  0012F8                     i2l1842:
-  1374                           
-  1375                           ;main.c: 147:         PIR1bits.SSPIF = 0;
-  1376  0012F8  969E               	bcf	158,3,c	;volatile
-  1377  0012FA                     i2l42:
-  1378  0012FA  9225               	bcf	int$flags,1,c	;clear compiler interrupt flag (level 2)
-  1379  0012FC  0011               	retfie		f
-  1380  0012FE                     __end_of_isr:
-  1381                           	callstack 0
-  1382                           
-  1383                           	psect	rparam
-  1384  0000                     
-  1385                           	psect	temp
-  1386  000025                     btemp:
-  1387                           	callstack 0
-  1388  000025                     	ds	1
-  1389  0000                     int$flags	set	btemp
-  1390  0000                     wtemp8	set	btemp+1
-  1391  0000                     ttemp5	set	btemp+1
-  1392  0000                     ttemp6	set	btemp+4
-  1393  0000                     ttemp7	set	btemp+8
-  1394                           
-  1395                           	psect	idloc
-  1396                           
-  1397                           ;Config register IDLOC0 @ 0x200000
-  1398                           ;	unspecified, using default values
-  1399  200000                     	org	2097152
-  1400  200000  FF                 	db	255
-  1401                           
-  1402                           ;Config register IDLOC1 @ 0x200001
-  1403                           ;	unspecified, using default values
-  1404  200001                     	org	2097153
-  1405  200001  FF                 	db	255
-  1406                           
-  1407                           ;Config register IDLOC2 @ 0x200002
-  1408                           ;	unspecified, using default values
-  1409  200002                     	org	2097154
-  1410  200002  FF                 	db	255
-  1411                           
-  1412                           ;Config register IDLOC3 @ 0x200003
-  1413                           ;	unspecified, using default values
-  1414  200003                     	org	2097155
-  1415  200003  FF                 	db	255
-  1416                           
-  1417                           ;Config register IDLOC4 @ 0x200004
-  1418                           ;	unspecified, using default values
-  1419  200004                     	org	2097156
-  1420  200004  FF                 	db	255
-  1421                           
-  1422                           ;Config register IDLOC5 @ 0x200005
-  1423                           ;	unspecified, using default values
-  1424  200005                     	org	2097157
-  1425  200005  FF                 	db	255
-  1426                           
-  1427                           ;Config register IDLOC6 @ 0x200006
-  1428                           ;	unspecified, using default values
-  1429  200006                     	org	2097158
-  1430  200006  FF                 	db	255
-  1431                           
-  1432                           ;Config register IDLOC7 @ 0x200007
-  1433                           ;	unspecified, using default values
-  1434  200007                     	org	2097159
-  1435  200007  FF                 	db	255
-  1436                           
-  1437                           	psect	config
-  1438                           
-  1439                           ; Padding undefined space
-  1440  300000                     	org	3145728
-  1441  300000  FF                 	db	255
-  1442                           
-  1443                           ;Config register CONFIG1H @ 0x300001
-  1444                           ;	Oscillator Selection bits
-  1445                           ;	OSC = HSPLL, HS oscillator, PLL enabled (Clock Frequency = 4 x FOSC1)
-  1446                           ;	Fail-Safe Clock Monitor Enable bit
-  1447                           ;	FCMEN = OFF, Fail-Safe Clock Monitor disabled
-  1448                           ;	Internal/External Oscillator Switchover bit
-  1449                           ;	IESO = OFF, Oscillator Switchover mode disabled
-  1450  300001                     	org	3145729
-  1451  300001  06                 	db	6
-  1452                           
-  1453                           ;Config register CONFIG2L @ 0x300002
-  1454                           ;	Power-up Timer Enable bit
-  1455                           ;	PWRT = OFF, PWRT disabled
-  1456                           ;	Brown-out Reset Enable bits
-  1457                           ;	BOREN = SBORDIS, Brown-out Reset enabled in hardware only (SBOREN is disabled)
-  1458                           ;	Brown Out Reset Voltage bits
-  1459                           ;	BORV = 3, Minimum setting
-  1460  300002                     	org	3145730
-  1461  300002  1F                 	db	31
-  1462                           
-  1463                           ;Config register CONFIG2H @ 0x300003
-  1464                           ;	Watchdog Timer Enable bit
-  1465                           ;	WDT = OFF, WDT disabled (control is placed on the SWDTEN bit)
-  1466                           ;	Watchdog Timer Postscale Select bits
-  1467                           ;	WDTPS = 32768, 1:32768
-  1468  300003                     	org	3145731
-  1469  300003  1E                 	db	30
-  1470                           
-  1471                           ; Padding undefined space
-  1472  300004                     	org	3145732
-  1473  300004  FF                 	db	255
-  1474                           
-  1475                           ;Config register CONFIG3H @ 0x300005
-  1476                           ;	CCP2 MUX bit
-  1477                           ;	CCP2MX = PORTBE, CCP2 input/output is multiplexed with RB3
-  1478                           ;	PORTB A/D Enable bit
-  1479                           ;	PBADEN = OFF, PORTB<4:0> pins are configured as digital I/O on Reset
-  1480                           ;	Low-Power Timer1 Oscillator Enable bit
-  1481                           ;	LPT1OSC = OFF, Timer1 configured for higher power operation
-  1482                           ;	MCLR Pin Enable bit
-  1483                           ;	MCLRE = ON, MCLR pin enabled; RE3 input pin disabled
-  1484  300005                     	org	3145733
-  1485  300005  80                 	db	128
-  1486                           
-  1487                           ;Config register CONFIG4L @ 0x300006
-  1488                           ;	Stack Full/Underflow Reset Enable bit
-  1489                           ;	STVREN = ON, Stack full/underflow will cause Reset
-  1490                           ;	Single-Supply ICSP Enable bit
-  1491                           ;	LVP = OFF, Single-Supply ICSP disabled
-  1492                           ;	Extended Instruction Set Enable bit
-  1493                           ;	XINST = OFF, Instruction set extension and Indexed Addressing mode disabled (Legacy mo
+  1130                           ;Config register CONFIG4L @ 0x300006
+  1131                           ;	Stack Full/Underflow Reset Enable bit
+  1132                           ;	STVREN = ON, Stack full/underflow will cause Reset
+  1133                           ;	Single-Supply ICSP Enable bit
+  1134                           ;	LVP = OFF, Single-Supply ICSP disabled
+  1135                           ;	Extended Instruction Set Enable bit
+  1136                           ;	XINST = OFF, Instruction set extension and Indexed Addressing mode disabled (Legacy mo
       +                          de)
-  1494                           ;	Background Debugger Enable bit
-  1495                           ;	DEBUG = 0x1, unprogrammed default
-  1496  300006                     	org	3145734
-  1497  300006  81                 	db	129
-  1498                           
-  1499                           ; Padding undefined space
-  1500  300007                     	org	3145735
-  1501  300007  FF                 	db	255
-  1502                           
-  1503                           ;Config register CONFIG5L @ 0x300008
-  1504                           ;	Code Protection bit
-  1505                           ;	CP0 = OFF, Block 0 (000800-003FFFh) not code-protected
-  1506                           ;	Code Protection bit
-  1507                           ;	CP1 = OFF, Block 1 (004000-007FFFh) not code-protected
-  1508                           ;	Code Protection bit
-  1509                           ;	CP2 = OFF, Block 2 (008000-00BFFFh) not code-protected
-  1510                           ;	Code Protection bit
-  1511                           ;	CP3 = OFF, Block 3 (00C000-00FFFFh) not code-protected
-  1512  300008                     	org	3145736
-  1513  300008  0F                 	db	15
-  1514                           
-  1515                           ;Config register CONFIG5H @ 0x300009
-  1516                           ;	Boot Block Code Protection bit
-  1517                           ;	CPB = OFF, Boot block (000000-0007FFh) not code-protected
-  1518                           ;	Data EEPROM Code Protection bit
-  1519                           ;	CPD = OFF, Data EEPROM not code-protected
-  1520  300009                     	org	3145737
-  1521  300009  C0                 	db	192
-  1522                           
-  1523                           ;Config register CONFIG6L @ 0x30000A
-  1524                           ;	Write Protection bit
-  1525                           ;	WRT0 = OFF, Block 0 (000800-003FFFh) not write-protected
-  1526                           ;	Write Protection bit
-  1527                           ;	WRT1 = OFF, Block 1 (004000-007FFFh) not write-protected
-  1528                           ;	Write Protection bit
-  1529                           ;	WRT2 = OFF, Block 2 (008000-00BFFFh) not write-protected
-  1530                           ;	Write Protection bit
-  1531                           ;	WRT3 = OFF, Block 3 (00C000-00FFFFh) not write-protected
-  1532  30000A                     	org	3145738
-  1533  30000A  0F                 	db	15
-  1534                           
-  1535                           ;Config register CONFIG6H @ 0x30000B
-  1536                           ;	Configuration Register Write Protection bit
-  1537                           ;	WRTC = OFF, Configuration registers (300000-3000FFh) not write-protected
-  1538                           ;	Boot Block Write Protection bit
-  1539                           ;	WRTB = OFF, Boot Block (000000-0007FFh) not write-protected
-  1540                           ;	Data EEPROM Write Protection bit
-  1541                           ;	WRTD = OFF, Data EEPROM not write-protected
-  1542  30000B                     	org	3145739
-  1543  30000B  E0                 	db	224
-  1544                           
-  1545                           ;Config register CONFIG7L @ 0x30000C
-  1546                           ;	Table Read Protection bit
-  1547                           ;	EBTR0 = OFF, Block 0 (000800-003FFFh) not protected from table reads executed in other
+  1137                           ;	Background Debugger Enable bit
+  1138                           ;	DEBUG = 0x1, unprogrammed default
+  1139  300006                     	org	3145734
+  1140  300006  81                 	db	129
+  1141                           
+  1142                           ; Padding undefined space
+  1143  300007                     	org	3145735
+  1144  300007  FF                 	db	255
+  1145                           
+  1146                           ;Config register CONFIG5L @ 0x300008
+  1147                           ;	Code Protection bit
+  1148                           ;	CP0 = OFF, Block 0 (000800-003FFFh) not code-protected
+  1149                           ;	Code Protection bit
+  1150                           ;	CP1 = OFF, Block 1 (004000-007FFFh) not code-protected
+  1151                           ;	Code Protection bit
+  1152                           ;	CP2 = OFF, Block 2 (008000-00BFFFh) not code-protected
+  1153                           ;	Code Protection bit
+  1154                           ;	CP3 = OFF, Block 3 (00C000-00FFFFh) not code-protected
+  1155  300008                     	org	3145736
+  1156  300008  0F                 	db	15
+  1157                           
+  1158                           ;Config register CONFIG5H @ 0x300009
+  1159                           ;	Boot Block Code Protection bit
+  1160                           ;	CPB = OFF, Boot block (000000-0007FFh) not code-protected
+  1161                           ;	Data EEPROM Code Protection bit
+  1162                           ;	CPD = OFF, Data EEPROM not code-protected
+  1163  300009                     	org	3145737
+  1164  300009  C0                 	db	192
+  1165                           
+  1166                           ;Config register CONFIG6L @ 0x30000A
+  1167                           ;	Write Protection bit
+  1168                           ;	WRT0 = OFF, Block 0 (000800-003FFFh) not write-protected
+  1169                           ;	Write Protection bit
+  1170                           ;	WRT1 = OFF, Block 1 (004000-007FFFh) not write-protected
+  1171                           ;	Write Protection bit
+  1172                           ;	WRT2 = OFF, Block 2 (008000-00BFFFh) not write-protected
+  1173                           ;	Write Protection bit
+  1174                           ;	WRT3 = OFF, Block 3 (00C000-00FFFFh) not write-protected
+  1175  30000A                     	org	3145738
+  1176  30000A  0F                 	db	15
+  1177                           
+  1178                           ;Config register CONFIG6H @ 0x30000B
+  1179                           ;	Configuration Register Write Protection bit
+  1180                           ;	WRTC = OFF, Configuration registers (300000-3000FFh) not write-protected
+  1181                           ;	Boot Block Write Protection bit
+  1182                           ;	WRTB = OFF, Boot Block (000000-0007FFh) not write-protected
+  1183                           ;	Data EEPROM Write Protection bit
+  1184                           ;	WRTD = OFF, Data EEPROM not write-protected
+  1185  30000B                     	org	3145739
+  1186  30000B  E0                 	db	224
+  1187                           
+  1188                           ;Config register CONFIG7L @ 0x30000C
+  1189                           ;	Table Read Protection bit
+  1190                           ;	EBTR0 = OFF, Block 0 (000800-003FFFh) not protected from table reads executed in other
       +                           blocks
-  1548                           ;	Table Read Protection bit
-  1549                           ;	EBTR1 = OFF, Block 1 (004000-007FFFh) not protected from table reads executed in other
+  1191                           ;	Table Read Protection bit
+  1192                           ;	EBTR1 = OFF, Block 1 (004000-007FFFh) not protected from table reads executed in other
       +                           blocks
-  1550                           ;	Table Read Protection bit
-  1551                           ;	EBTR2 = OFF, Block 2 (008000-00BFFFh) not protected from table reads executed in other
+  1193                           ;	Table Read Protection bit
+  1194                           ;	EBTR2 = OFF, Block 2 (008000-00BFFFh) not protected from table reads executed in other
       +                           blocks
-  1552                           ;	Table Read Protection bit
-  1553                           ;	EBTR3 = OFF, Block 3 (00C000-00FFFFh) not protected from table reads executed in other
+  1195                           ;	Table Read Protection bit
+  1196                           ;	EBTR3 = OFF, Block 3 (00C000-00FFFFh) not protected from table reads executed in other
       +                           blocks
-  1554  30000C                     	org	3145740
-  1555  30000C  0F                 	db	15
-  1556                           
-  1557                           ;Config register CONFIG7H @ 0x30000D
-  1558                           ;	Boot Block Table Read Protection bit
-  1559                           ;	EBTRB = OFF, Boot Block (000000-0007FFh) not protected from table reads executed in ot
+  1197  30000C                     	org	3145740
+  1198  30000C  0F                 	db	15
+  1199                           
+  1200                           ;Config register CONFIG7H @ 0x30000D
+  1201                           ;	Boot Block Table Read Protection bit
+  1202                           ;	EBTRB = OFF, Boot Block (000000-0007FFh) not protected from table reads executed in ot
       +                          her blocks
-  1560  30000D                     	org	3145741
-  1561  30000D  40                 	db	64
-  1562                           tosu	equ	0xFFF
-  1563                           tosh	equ	0xFFE
-  1564                           tosl	equ	0xFFD
-  1565                           stkptr	equ	0xFFC
-  1566                           pclatu	equ	0xFFB
-  1567                           pclath	equ	0xFFA
-  1568                           pcl	equ	0xFF9
-  1569                           tblptru	equ	0xFF8
-  1570                           tblptrh	equ	0xFF7
-  1571                           tblptrl	equ	0xFF6
-  1572                           tablat	equ	0xFF5
-  1573                           prodh	equ	0xFF4
-  1574                           prodl	equ	0xFF3
-  1575                           indf0	equ	0xFEF
-  1576                           postinc0	equ	0xFEE
-  1577                           postdec0	equ	0xFED
-  1578                           preinc0	equ	0xFEC
-  1579                           plusw0	equ	0xFEB
-  1580                           fsr0h	equ	0xFEA
-  1581                           fsr0l	equ	0xFE9
-  1582                           wreg	equ	0xFE8
-  1583                           indf1	equ	0xFE7
-  1584                           postinc1	equ	0xFE6
-  1585                           postdec1	equ	0xFE5
-  1586                           preinc1	equ	0xFE4
-  1587                           plusw1	equ	0xFE3
-  1588                           fsr1h	equ	0xFE2
-  1589                           fsr1l	equ	0xFE1
-  1590                           bsr	equ	0xFE0
-  1591                           indf2	equ	0xFDF
-  1592                           postinc2	equ	0xFDE
-  1593                           postdec2	equ	0xFDD
-  1594                           preinc2	equ	0xFDC
-  1595                           plusw2	equ	0xFDB
-  1596                           fsr2h	equ	0xFDA
-  1597                           fsr2l	equ	0xFD9
-  1598                           status	equ	0xFD8
+  1203  30000D                     	org	3145741
+  1204  30000D  40                 	db	64
+  1205                           tosu	equ	0xFFF
+  1206                           tosh	equ	0xFFE
+  1207                           tosl	equ	0xFFD
+  1208                           stkptr	equ	0xFFC
+  1209                           pclatu	equ	0xFFB
+  1210                           pclath	equ	0xFFA
+  1211                           pcl	equ	0xFF9
+  1212                           tblptru	equ	0xFF8
+  1213                           tblptrh	equ	0xFF7
+  1214                           tblptrl	equ	0xFF6
+  1215                           tablat	equ	0xFF5
+  1216                           prodh	equ	0xFF4
+  1217                           prodl	equ	0xFF3
+  1218                           indf0	equ	0xFEF
+  1219                           postinc0	equ	0xFEE
+  1220                           postdec0	equ	0xFED
+  1221                           preinc0	equ	0xFEC
+  1222                           plusw0	equ	0xFEB
+  1223                           fsr0h	equ	0xFEA
+  1224                           fsr0l	equ	0xFE9
+  1225                           wreg	equ	0xFE8
+  1226                           indf1	equ	0xFE7
+  1227                           postinc1	equ	0xFE6
+  1228                           postdec1	equ	0xFE5
+  1229                           preinc1	equ	0xFE4
+  1230                           plusw1	equ	0xFE3
+  1231                           fsr1h	equ	0xFE2
+  1232                           fsr1l	equ	0xFE1
+  1233                           bsr	equ	0xFE0
+  1234                           indf2	equ	0xFDF
+  1235                           postinc2	equ	0xFDE
+  1236                           postdec2	equ	0xFDD
+  1237                           preinc2	equ	0xFDC
+  1238                           plusw2	equ	0xFDB
+  1239                           fsr2h	equ	0xFDA
+  1240                           fsr2l	equ	0xFD9
+  1241                           status	equ	0xFD8
 
 Data Sizes:
     Strings     0
-    Constant    13
-    Data        14
+    Constant    0
+    Data        4
     BSS         11
-    Persistent  1
+    Persistent  0
     Stack       0
 
 Auto Spaces:
     Space          Size  Autos    Used
-    COMRAM          126     10      36
+    COMRAM          126      6      21
     BANK0           128      0       0
     BANK1           256      0       0
     BANK2           256      0       0
@@ -1692,14 +1340,18 @@ Auto Spaces:
 
 Pointer List with Targets:
 
-    None.
+    SPI_Receive_Byte@rx	PTR unsigned char  size(2) Largest target is 1
+		 -> spi_rx_message_buf(COMRAM[1]), 
+
+    SPI_Transfer_Byte@rx	PTR unsigned char  size(2) Largest target is 1
+		 -> spi_rx_message_buf(COMRAM[1]), 
+
 
 Critical Paths under _main in COMRAM
 
-    _main->_LCD_set_cursor_position
-    _LCD_set_cursor_position->_LCD_write_instr_byte_4bit
-    _LCD_set_cursor_position->_LCD_write_instr_byte_8bit
-    _LCD_Init_ECE376->_LCD_write_instr_byte_4bit
+    _main->_SPI_Receive_Byte
+    _Timer1_Init_Default->_CCP2_Compare_Val
+    _SPI_Receive_Byte->_SPI_Transfer_Byte
 
 Critical Paths under _isr in COMRAM
 
@@ -1838,62 +1490,58 @@ Call Graph Tables:
  ---------------------------------------------------------------------------------
  (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
  ---------------------------------------------------------------------------------
- (0) _main                                                 3     3      0     848
-                                              7 COMRAM     3     3      0
-                    _LCD_Init_ECE376
-            _LCD_set_cursor_position
-           _LCD_write_data_byte_4bit
-             _SPI_Init_Slave_Default
+ (0) _main                                                 1     1      0     657
+                                              5 COMRAM     1     1      0
+            _SPI_Init_Master_Default
+                   _SPI_Receive_Byte
+                      _SPI_Send_Byte
+                      _Timer1_Enable
+                _Timer1_Init_Default
  ---------------------------------------------------------------------------------
- (1) _SPI_Init_Slave_Default                               0     0      0       0
+ (1) _Timer1_Init_Default                                  2     0      2     196
+                                              2 COMRAM     2     0      2
+                   _CCP2_Compare_Val
+                  _CCP2_Init_Default
  ---------------------------------------------------------------------------------
- (1) _LCD_write_data_byte_4bit                             2     2      0      30
-                                              1 COMRAM     2     2      0
-                  _LCD_enable_toggle
+ (2) _CCP2_Init_Default                                    0     0      0       0
  ---------------------------------------------------------------------------------
- (1) _LCD_set_cursor_position                              4     3      1     584
-                                              3 COMRAM     4     3      1
-          _LCD_write_instr_byte_4bit
-          _LCD_write_instr_byte_8bit
+ (2) _CCP2_Compare_Val                                     2     0      2      98
+                                              0 COMRAM     2     0      2
  ---------------------------------------------------------------------------------
- (2) _LCD_write_instr_byte_8bit                            2     2      0      15
-                                              1 COMRAM     2     2      0
-                  _LCD_enable_toggle
+ (1) _Timer1_Enable                                        0     0      0       0
  ---------------------------------------------------------------------------------
- (1) _LCD_Init_ECE376                                      2     2      0      30
-                                              3 COMRAM     2     2      0
-          _LCD_write_instr_byte_4bit
+ (1) _SPI_Send_Byte                                        1     1      0      15
+                                              0 COMRAM     1     1      0
  ---------------------------------------------------------------------------------
- (2) _LCD_write_instr_byte_4bit                            2     2      0      30
-                                              1 COMRAM     2     2      0
-                  _LCD_enable_toggle
+ (1) _SPI_Receive_Byte                                     2     0      2     446
+                                              3 COMRAM     2     0      2
+                  _SPI_Transfer_Byte
  ---------------------------------------------------------------------------------
- (2) _LCD_enable_toggle                                    0     0      0       0
+ (2) _SPI_Transfer_Byte                                    3     1      2     196
+                                              0 COMRAM     3     1      2
+ ---------------------------------------------------------------------------------
+ (1) _SPI_Init_Master_Default                              0     0      0       0
  ---------------------------------------------------------------------------------
  Estimated maximum stack depth 2
  ---------------------------------------------------------------------------------
  (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
  ---------------------------------------------------------------------------------
- (4) _isr                                                  1     1      0       0
-                                              0 COMRAM     1     1      0
+ (3) _isr                                                  0     0      0       0
  ---------------------------------------------------------------------------------
- Estimated maximum stack depth 4
+ Estimated maximum stack depth 3
  ---------------------------------------------------------------------------------
 
  Call Graph Graphs:
 
  _main (ROOT)
-   _LCD_Init_ECE376
-     _LCD_write_instr_byte_4bit
-       _LCD_enable_toggle
-   _LCD_set_cursor_position
-     _LCD_write_instr_byte_4bit
-       _LCD_enable_toggle
-     _LCD_write_instr_byte_8bit
-       _LCD_enable_toggle
-   _LCD_write_data_byte_4bit
-     _LCD_enable_toggle
-   _SPI_Init_Slave_Default
+   _SPI_Init_Master_Default
+   _SPI_Receive_Byte
+     _SPI_Transfer_Byte
+   _SPI_Send_Byte
+   _Timer1_Enable
+   _Timer1_Init_Default
+     _CCP2_Compare_Val
+     _CCP2_Init_Default
 
  _isr (ROOT)
 
@@ -1934,169 +1582,146 @@ BANK15              80      0       0      36        0.0%
 BITBANK0            80      0       0       4        0.0%
 BANK0               80      0       0       5        0.0%
 BITCOMRAM           7E      0       0       0        0.0%
-COMRAM              7E      A      24       1       28.6%
+COMRAM              7E      6      15       1       16.7%
 BITSFR               0      0       0     200        0.0%
 SFR                  0      0       0     200        0.0%
 STACK                0      0       0       2        0.0%
 NULL                 0      0       0       0        0.0%
-ABS                  0      0      24      34        0.0%
-DATA                 0      0      24       3        0.0%
+ABS                  0      0      15      34        0.0%
+DATA                 0      0      15       3        0.0%
 CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V2.31 build 20201012212115 
-Symbol Table                                                                                   Wed Nov 03 13:32:56 2021
+Symbol Table                                                                                   Wed Nov 03 23:33:01 2021
 
-            _transfer_complete_flag 0019                                 l100 1434  
-                               l121 11D4                                 l115 1394  
-                               l109 1348                                 l118 13F4  
-                               l147 12A2                                 l249 1414  
-                               u600 128A                                 u520 11E8  
-                               u601 1286                                 u521 11E4  
-                               u530 11F8                                 u531 11F4  
-                               u540 120C                                 u541 1208  
-                               u550 121C                                 u551 1218  
-                               u560 1236                                 u561 1232  
-                               u570 1246                                 u730 102A  
-                               u571 1242                                 u731 1026  
-                               u580 1260                                 u740 103A  
-                               u581 125C                                 u741 1036  
-                               u590 1270                                 u750 106E  
-                               u591 126C                                 u751 106A  
-                               u760 10C0                                 u817 1340  
-                               u761 10BC                                 u770 10F2  
-                               u907 138C                                 u827 13EC  
-                               u771 10EE                                 u917 141A  
-                               u837 1114                                 u927 1424  
-                               u847 112C                                 u937 142E  
-                               u857 1144                                 u867 115C  
-                               u877 1174                                 u887 1186  
-                               u897 11B8                                 _isr 0008  
-                               wreg 000FE8                  _current_entry_mode 000C  
-                              l1000 1416                                l1002 1418  
-                              l1010 1354                                l1004 1420  
-                              l1012 1356                                l1100 11C8  
-                              l1020 13D2                                l1006 142A  
-                              l1014 1368                                l1102 11CC  
-                              l1030 13E2                                l1022 13D6  
-                              l1016 136C                                l1008 134C  
-                              l1104 11D0                                l1032 13E6  
-                              l1024 13DA                                l1018 1386  
-                              l1026 13DC                                l1050 1402  
-                              l1042 13F6                                l1028 13DE  
-                              l1140 1308                                l1060 140E  
-                              l1052 1404                                l1044 13F8  
-                              l1070 110A                                l1142 130A  
-                              l1062 1412                                l1054 1406  
-                              l1046 13FC                                l1080 116E  
-                              l1072 1122                                l1064 10FA  
-                              l1144 131C                                l1056 1408  
-                              l1048 1400                                l1090 119C  
-                              l1082 117E                                l1074 113A  
-                              l1066 1102                                l1146 1320  
-                              l1138 1300                                l1058 140C  
-                              l1092 11A2                                l1084 1184  
-                              l1076 1152                                l1068 1106  
-                              l1148 133A                                l1094 11A8  
-                              l1086 1190                                l1078 1168  
-                              l1096 11AE                                l1088 1196  
-                              l1098 11C4                                l1900 10E0  
-                              l1750 121C                                l1742 11D8  
-                              l1902 10E2                                l1760 1260  
-                              l1752 1224                                l1744 11E8  
-                              l1770 129E                                l1762 1270  
-                              l1754 1236                                l1746 11FC  
-                              l1850 101A                                l1756 1246  
-                              l1764 1276                                l1748 120C  
-                              l1852 102A                                l1766 128A  
-                              l1758 1250                                l1862 1048  
-                              l1854 103A                                l1870 1076  
-                              l1846 1010                                l1768 1296  
-                              l1872 1086                                l1864 105C  
-                              l1856 1044                                l1848 1018  
-                              l1890 10C0                                l1874 108A  
-                              l1866 105E                                l1892 10CA  
-                              l1884 109C                                l1876 108E  
-                              l1868 106E                                l1886 10AE  
-                              l1878 1098                                l1888 10B0  
-                              l1898 10CE                                ?_isr 001A  
-                              i2l42 12FA                                _main 1010  
-                              indf2 000FDF                                fsr1l 000FE1  
-                              fsr2l 000FD9                                btemp 0025  
-                              start 000E                        ___param_bank 000000  
-                             ??_isr 001A             __end_of_LCD_Init_ECE376 11D6  
-                             ?_main 001A                               _CCPR2 000FBB  
-                             _T1CON 000FCD                               _T3CON 000FB1  
-                             _PORTC 000F82                               _PORTD 000F83  
-                             _TRISA 000F92                               _TRISC 000F94  
-                             _TRISD 000F95   LCD_set_cursor_position@ddram_addr 001F  
-                             main@i 0021    __size_of_LCD_set_cursor_position 00CE  
-                             tablat 000FF5        LCD_write_data_byte_4bit@data 001C  
-                             ttemp5 0026                               ttemp6 0029  
-                             ttemp7 002D                               status 000FD8  
-                             wtemp8 0026         LCD_set_cursor_position@line 0020  
-                   __initialization 1396                        __end_of_main 10FA  
-                            ??_main 0021         ??_LCD_write_instr_byte_4bit 001B  
-       ??_LCD_write_instr_byte_8bit 001B                       __activetblptr 000002  
-                            i2l1830 12B4                              i2l1840 12F0  
-                            i2l1832 12C2                              i2l1842 12F8  
-                            i2l1834 12C6                              i2l1836 12CA  
-                            i2l1828 12A6                              i2l1838 12E0  
-                            _SSPBUF 000FC9                  _spi_rx_invalid_msg 1001  
-                            clear_0 13BC                  _spi_rx_message_buf 0018  
-                  ?_LCD_Init_ECE376 001A    __end_of_LCD_write_data_byte_4bit 134A  
-                      __pdataCOMRAM 0001                        __mediumconst 0000  
-                            tblptrh 000FF7                              tblptrl 000FF6  
-                            tblptru 000FF8                          __accesstop 0080  
-           __end_of__initialization 13C2           _LCD_write_instr_byte_4bit 134A  
-         _LCD_write_instr_byte_8bit 13D0                       ___rparam_used 000001  
-                    __pcstackCOMRAM 001A                       _button1_state 0015  
-                     _button2_state 0014                       _init_complete 0013  
-           _LCD_set_cursor_position 11D6                          __pnvCOMRAM 0024  
-          ??_SPI_Init_Slave_Default 001B                             _CCP2CON 000FBA  
-                           i2u70_40 12B4                             i2u70_41 12B0  
-                           i2u71_40 12C2                             i2u71_41 12BE  
-                           i2u72_40 12E0                             i2u72_41 12DC  
-          _LCD_write_data_byte_4bit 12FE                             _SSPCON1 000FC6  
-                           _SSPSTAT 000FC7                             __Hparam 0000  
-                           __Lparam 0000                        __psmallconst 1000  
-                           __pcinit 1396                             __ramtop 1000  
-                           __ptext0 1010                             __ptext1 13F6  
-                           __ptext2 12FE                             __ptext3 11D6  
-                           __ptext4 13D0                             __ptext5 10FA  
-                           __ptext6 134A                             __ptext7 1416  
-               _spi_rx_invalid_flag 0017                        __size_of_isr 12F6  
-         ??_LCD_set_cursor_position 001E                      __pintcode_body 12A4  
-              end_of_initialization 13C2                       __Lmediumconst 0000  
-                           int_func 12A4                          _shift_mode 0012  
-                           postdec1 000FE5                             postinc0 000FEE  
-                        _slave_mode 0024     __size_of_SPI_Init_Slave_Default 0020  
-                         _PORTDbits 000F83  LCD_set_cursor_position@pos_on_line 001D  
-                   _address_counter 0011                           _TRISDbits 000F95  
-                  _current_func_set 000B                       __pidataCOMRAM 1436  
-               start_initialization 1396                         __end_of_isr 12FE  
-          __size_of_LCD_Init_ECE376 00DC              _SPI_Init_Slave_Default 13F6  
-        ??_LCD_write_data_byte_4bit 001B                         __pbssCOMRAM 000F  
-                         __pintcode 0008                           _disp_16x2 000D  
-                 _LCD_enable_toggle 1416                  ?_LCD_enable_toggle 001A  
-                       __smallconst 1000                 ??_LCD_enable_toggle 001B  
-                      _receive_byte 0010                            _LATCbits 000F8B  
-                          _LATDbits 000F8C                   ??_LCD_Init_ECE376 001D  
-                          _PIE1bits 000F9D                            _PIE2bits 000FA0  
-         __end_of_LCD_enable_toggle 1436                            _PIR1bits 000F9E  
-                         main@i_197 0022                           main@i_198 0023  
-    LCD_write_instr_byte_4bit@instr 001C                           copy_data0 13AA  
-    LCD_write_instr_byte_8bit@instr 001C                            __Hrparam 0000  
-                          __Lrparam 0000            ?_LCD_set_cursor_position 001D  
-                       _button1_msg 0006                         _button2_msg 0001  
-           ?_SPI_Init_Slave_Default 001A                       __size_of_main 00EA  
-        __size_of_LCD_enable_toggle 0020                            int$flags 0025  
-__size_of_LCD_write_instr_byte_4bit 004C  __size_of_LCD_write_instr_byte_8bit 0026  
-        ?_LCD_write_instr_byte_4bit 001A          ?_LCD_write_instr_byte_8bit 001A  
-    __end_of_SPI_Init_Slave_Default 1416                          _INTCONbits 000FF2  
-                          intlevel2 0000          __end_of_spi_rx_invalid_msg 100E  
-   __end_of_LCD_set_cursor_position 12A4   __end_of_LCD_write_instr_byte_4bit 1396  
- __end_of_LCD_write_instr_byte_8bit 13F6                     _manual_transfer 000F  
-                   _LCD_Init_ECE376 10FA                         _SSPCON1bits 000FC6  
- __size_of_LCD_write_data_byte_4bit 004C           ?_LCD_write_data_byte_4bit 001A  
-                       _spi_rx_flag 0016                   _current_disp_ctrl 000E  
+                               l9 026E                                l12 0266  
+                              u60 019E                                u61 019A  
+                              u70 01B4                                u71 01B0  
+                              u80 01C4                                u81 01C0  
+        __end_of_CCP2_Compare_Val 0268                     _SPI_Send_Byte 0184  
+          _transfer_complete_flag 0005                               l214 0182  
+                             l223 01A0                               l209 0148  
+                             l228 01D2                               l237 025C  
+                             l254 024C                               l257 0276  
+                             l189 0232                               l994 0268  
+                             l996 026C                               u500 0146  
+                             u501 0142                               u510 015C  
+                             u511 0158                               u520 016C  
+                             u521 0168                               u550 004C  
+                             u551 0048                               u560 0060  
+                             u561 005A                               u570 0076  
+                             u571 006E                               u580 00A2  
+                             u581 009E                               u566 0062  
+                             u578 0078                               _isr 0008  
+                             wreg 000FE8                _current_entry_mode 0013  
+                            l1110 0218                              l1120 0224  
+                            l1112 021A                              l1122 0226  
+                            l1114 021E                              l1106 020E  
+                            l1130 0186                              l1124 0228  
+                            l1116 0220                              l1108 0210  
+                            l1140 01C4                              l1132 018E  
+                            l1126 022A                              l1118 0222  
+                            l1142 01C6                              l1134 019E  
+                            l1150 0274                              l1128 0230  
+                            l1136 01A4                              l1138 01B4  
+                            l1710 0146                              l1720 017A  
+                            l1712 014C                              l1704 025E  
+                            l1722 017E                              l1714 015C  
+                            l1706 012E                              l1730 023C  
+                            l1716 016C                              l1708 0136  
+                            l1718 016E                              l1726 024E  
+                            l1750 0014                              l1728 0234  
+                            l1760 0028                              l1752 0018  
+                            l1770 004C                              l1762 0034  
+                            l1754 001C                              l1780 0090  
+                            l1772 0050                              l1764 0038  
+                            l1756 001E                              l1748 0012  
+                            l1782 00A2                              l1774 0064  
+                            l1766 003A                              l1758 0020  
+                            l1784 00A8                              l1776 007E  
+                            l1768 003C                              l1778 0084  
+                            l1788 00B4                              ?_isr 000C  
+                            _main 0012                              fsr2h 000FDA  
+                            indf2 000FDF                              fsr1l 000FE1  
+                            fsr2l 000FD9                              btemp 0016  
+                            start 000E                  _SPI_Receive_Byte 024E  
+                    ___param_bank 000000  __size_of_SPI_Init_Master_Default 0026  
+                           ??_isr 000C                    ?_SPI_Send_Byte 000C  
+                           ?_main 000C                             _CCPR2 000FBB  
+                           _T1CON 000FCD                             _T3CON 000FB1  
+                           i2l307 0128                             _PORTC 000F82  
+                           _PORTD 000F83                             _PORTE 000F84  
+                           _TRISA 000F92                             _TRISC 000F94  
+                           _TRISD 000F95                             tablat 000FF5  
+           __end_of_Timer1_Enable 0278                             ttemp5 0017  
+                           ttemp6 001A                             ttemp7 001E  
+                           status 000FD8                             wtemp8 0017  
+     __end_of_Timer1_Init_Default 024E                   __initialization 01D4  
+                    __end_of_main 00C0                            ??_main 0011  
+                   __activetblptr 000002                SPI_Receive_Byte@rx 000F  
+                          i2l1640 00D0                            i2l1650 0100  
+                          i2l1642 00DE                            i2l1652 0110  
+                          i2l1644 00E2                            i2l1654 0118  
+                          i2l1646 00E4                            i2l1638 00C2  
+                          i2l1656 011E                            i2l1648 00F2  
+                          i2l1658 0126                            _SSPBUF 000FC9  
+                 ??_SPI_Send_Byte 000C                   SPI_Send_Byte@tx 000C  
+                          clear_0 01FA                _spi_rx_message_buf 000B  
+             _spi_tx_test_message 0002                      __pdataCOMRAM 0012  
+                          tblptrh 000FF7                            tblptrl 000FF6  
+                          tblptru 000FF8                    _tmr_100ms_next 0003  
+                      __accesstop 0080           __end_of__initialization 0200  
+                   ___rparam_used 000001           _SPI_Init_Master_Default 020E  
+                  __pcstackCOMRAM 000C                 ?_CCP2_Compare_Val 000C  
+              ??_CCP2_Compare_Val 000E     Timer1_Init_Default@period_val 000E  
+        __end_of_SPI_Receive_Byte 025E                     _init_complete 000A  
+                         _CCP2CON 000FBA                           i2u41_40 00D0  
+                         i2u41_41 00CC                           i2u42_40 00DE  
+                         i2u42_41 00DA                           i2u43_40 00F2  
+                         i2u43_41 00EE                           i2u44_40 0100  
+                         i2u44_41 00FC                           i2u45_40 0110  
+                         i2u45_41 010C                           _SSPCON1 000FC6  
+                         _SSPSTAT 000FC7         ??_SPI_Init_Master_Default 000C  
+                         __Hparam 0000                           __Lparam 0000  
+                         __pcinit 01D4                           __ramtop 1000  
+                         __ptext0 0012                           __ptext1 0234  
+                         __ptext2 0268                           __ptext3 025E  
+                         __ptext4 0274                           __ptext5 0184  
+                         __ptext6 024E                           __ptext7 012C  
+                         __ptext8 020E                      __size_of_isr 0124  
+             SPI_Transfer_Byte@rx 000C               SPI_Transfer_Byte@tx 000E  
+                  __pintcode_body 00C0              end_of_initialization 0200  
+                   __Lmediumconst 0000                           int_func 00C0  
+                      _shift_mode 0009                           postdec1 000FE5  
+                         postinc0 000FEE                        _slave_mode 0006  
+    __size_of_Timer1_Init_Default 001A                         _PORTDbits 000F83  
+                       _PORTEbits 000F84            __size_of_Timer1_Enable 0004  
+                 _address_counter 0008                         _TRISDbits 000F95  
+                       _TRISEbits 000F96                  _current_func_set 0012  
+           __end_of_SPI_Send_Byte 01D4                     __pidataCOMRAM 0270  
+             start_initialization 01D4                       __end_of_isr 012C  
+               ?_SPI_Receive_Byte 000F                ??_SPI_Receive_Byte 0011  
+       __size_of_CCP2_Compare_Val 000A                     _Timer1_Enable 0274  
+                     __pbssCOMRAM 0001                    ?_Timer1_Enable 000C  
+        CCP2_Compare_Val@comp_val 000C                         __pintcode 0008  
+                       _disp_16x2 0014                 _CCP2_Init_Default 0268  
+              ?_CCP2_Init_Default 000C               ??_CCP2_Init_Default 000C  
+             _Timer1_Init_Default 0234                      _receive_byte 0007  
+                        _LATCbits 000F8B                          _LATDbits 000F8C  
+                        _PIE1bits 000F9D                          _PIE2bits 000FA0  
+                        _PIR1bits 000F9E                          _PIR2bits 000FA1  
+       __end_of_CCP2_Init_Default 0270              ?_Timer1_Init_Default 000E  
+                 _spi_ready_to_tx 0001                        _ADCON1bits 000FC1  
+               _SPI_Transfer_Byte 012C                   ??_Timer1_Enable 000C  
+                       copy_data0 01E8                ?_SPI_Transfer_Byte 000C  
+        ?_SPI_Init_Master_Default 000C                  _CCP2_Compare_Val 025E  
+             ??_SPI_Transfer_Byte 000E                          __Hrparam 0000  
+                        __Lrparam 0000             ??_Timer1_Init_Default 0010  
+       __end_of_SPI_Transfer_Byte 0184                     __size_of_main 00AE  
+       __size_of_SPI_Receive_Byte 0010                          int$flags 0016  
+      __size_of_CCP2_Init_Default 0008                        _INTCONbits 000FF2  
+ __end_of_SPI_Init_Master_Default 0234                          intlevel2 0000  
+          __size_of_SPI_Send_Byte 0050                   _manual_transfer 0004  
+      __size_of_SPI_Transfer_Byte 0058                       _SSPCON1bits 000FC6  
+               _current_disp_ctrl 0015  

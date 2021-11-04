@@ -107,10 +107,10 @@ void LCD_Init_ECE376(void){
     // Initialize I/O ports -- PORTC is for control lines, PORTD is for data lines, PORTE for debugging
     // Clear all ports
     PORTC = 0x00; PORTD = 0x00; // PORTE = 0x00;
-    // Set pin directions
+//    // Set pin directions
     DISP_CTRL_LINES_DIR;   // RC0, RC1, RC2 outputs
     DISP_DATA_DIR_READ_4BIT;   // All relevant PORTD pins as inputs for now
-//    TRISE = 0xFC;   // RE0, RE1 outputs
+
     
     // For display to initialize, need to have at least a 9s delay...
     __delay_ms(4000);
@@ -118,7 +118,7 @@ void LCD_Init_ECE376(void){
     __delay_ms(2000);
     
     // We're gonna assume the Power Conditions for Internal Reset Circuitry
-    //have not happened, so I'll be following page 45 of the HDD44780U datasheet    
+    // have not happened, so I'll be following page 45 of the HDD44780U datasheet    
     // Perform initialization by instructions:
     __delay_ms(100);     // Initial wait after Power On
     LCD_write_instr_byte_4bit(FUNCTION_SET_DEFAULT); // 0x30

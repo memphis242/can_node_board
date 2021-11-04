@@ -15,14 +15,14 @@
 
 // Definitions
 //CCP2CON - CCP2 Control Register
-#define CCP2M       0x0F    // CCPx Module Mode Select bits; 1010 for Compare mode w/o affecting CCP2 pin, 1011 for A/D
+#define CCP2M       0x0F    // CCPx Module Mode Select bits;
 
-#define CCP2M_DEFAULT   CCP2CON = 0x05
+#define CCP2M_DEFAULT   CCP2CON = 0x0A  // 1010 for Compare mode w/o affecting CCP2 pin, 1011 for A/D
 
 // Interrupt-Related
 #define CCP2_IF_BIT                 PIR2bits.CCP2IF
 #define CCP2_INT_ENABLE_BIT         PIE2bits.CCP2IE
-#define ENABLE_CCP2_INTERRUPT       CCP2_INT_ENABLE_BIT = 1u
+#define ENABLE_CCP2_INTERRUPT       (CCP2_INT_ENABLE_BIT = 1u)
 #define CLEAR_CCP2_IF               PIR2bits.CCP2IF = 0u;
 
 

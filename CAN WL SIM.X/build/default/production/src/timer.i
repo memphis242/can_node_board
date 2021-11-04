@@ -4479,7 +4479,7 @@ typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
 # 15 "inc\\timer.h" 2
-# 58 "inc\\timer.h"
+# 63 "inc\\timer.h"
 void Timer1_Init_Default(uint16_t period_val);
 void Timer1_Enable(void);
 void Timer1_Disable(void);
@@ -4495,14 +4495,13 @@ void Timer1_Init_Default(uint16_t period_val){
 
 
     T1CON = 0xB0;
-    T3CON &= ~0x48;
+    (T3CON = 0xB0);
 
 
     CCP2_Init_Default();
     CCP2_Compare_Val(period_val);
 
 
-    PIE2bits.CCP2IE = 1u;
 
 }
 

@@ -4576,7 +4576,7 @@ uint8_t LCD_set_cursor_position_amazonLCD(uint8_t line, uint8_t pos_on_line);
 # 70 "main.c" 2
 
 # 1 "./inc/timer.h" 1
-# 58 "./inc/timer.h"
+# 63 "./inc/timer.h"
 void Timer1_Init_Default(uint16_t period_val);
 void Timer1_Enable(void);
 void Timer1_Disable(void);
@@ -4590,50 +4590,62 @@ void CCP2_Compare_Val(uint16_t comp_val);
 
 # 1 "./spi_two_node_test.h" 1
 # 73 "main.c" 2
-# 91 "main.c"
+# 93 "main.c"
 extern uint8_t receive_byte;
 extern uint8_t slave_mode;
 extern uint8_t transfer_complete_flag;
 extern uint8_t manual_transfer;
-# 104 "main.c"
+
+
+static volatile uint8_t tmr_100ms_next = 0x00;
+static uint8_t spi_tx_test_message = 0x00;
 static uint8_t spi_rx_message_buf = 0x00;
-static uint8_t spi_rx_invalid_flag = 0x00;
-static uint8_t spi_rx_flag = 0x00;
-static char button1_state = 0x00;
-static char button2_state = 0x00;
-
-
-
-static char button1_msg[5] = {'B','1',':',' '};
-static char button2_msg[5] = {'B','2',':',' '};
-static const char spi_rx_invalid_msg[] = "INVALID MSG!";
-# 124 "main.c"
+static volatile uint8_t spi_ready_to_tx = 0x00;
+# 126 "main.c"
 void __attribute__((picinterrupt(("")))) isr(void){
+
+
+
+
+
+
 
     if(PIR1bits.SSPIF && PIE1bits.SSPIE) {
 
         transfer_complete_flag = 0x01;
+# 155 "main.c"
+        PIR1bits.SSPIF = 0;
+    }
 
 
-        spi_rx_message_buf = SSPBUF;
 
 
-        if((spi_rx_message_buf & 0xC0u) != 0x00u){
 
-            SSPBUF = (0x40u | 0x2Au);
-            spi_rx_invalid_flag = 0x01;
-            spi_rx_flag = 0x01;
+
+    if(PIR2bits.CCP2IF && PIE2bits.CCP2IE){
+
+
+        if(tmr_100ms_next){
+
+            tmr_100ms_next = 0x00;
+
+
+            spi_ready_to_tx = 0x01;
+
+            PIR2bits.CCP2IF = 0u;;
 
         } else{
 
-            SSPBUF = 0x3Fu;
-            spi_rx_flag = 0x01;
+            tmr_100ms_next = 0x01;
+            spi_ready_to_tx = 0x00;
+
+            PIR2bits.CCP2IF = 0u;;
         }
-
-
-        PIR1bits.SSPIF = 0;
     }
-# 171 "main.c"
+
+
+
+
     return;
 }
 
@@ -4642,58 +4654,62 @@ void __attribute__((picinterrupt(("")))) isr(void){
 
 
 void main(void) {
-# 260 "main.c"
-    SPI_Init_Slave_Default();
-    LCD_Init_ECE376();
+# 205 "main.c"
+    (INTCONbits.GIE = 0);
+
+    SPI_Init_Master_Default();
+
+    PORTE = 0x00;
+    TRISEbits.RE0 = 1u;
+    TRISEbits.RE1 = 1u;
+    (ADCON1bits.PCFG = 0xA);
 
 
+
+
+
+    Timer1_Init_Default(62500u);
+# 227 "main.c"
+    Timer1_Enable();
+    (INTCONbits.PEIE = 1u);
     (INTCONbits.GIE = 1);
 
 
     while(1){
 
-        if(spi_rx_flag) {
+        if(spi_ready_to_tx){
 
-            if(spi_rx_invalid_flag) {
+            spi_tx_test_message = 0x00;
 
 
-                LCD_set_cursor_position(1,1);
-                for(uint8_t i=0; i<12; i++){
-                    LCD_write_data_byte_4bit(spi_rx_invalid_msg[i]);
+
+            spi_tx_test_message |= (PORTEbits.RE0 << 0u);
+            spi_tx_test_message |= (PORTEbits.RE1 << 1u);
+
+
+            spi_tx_test_message |= 0x00u;
+
+
+            SPI_Send_Byte(spi_tx_test_message);
+
+
+            SPI_Receive_Byte(&spi_rx_message_buf);
+
+            if(spi_rx_message_buf != (0x40u | 0x3Fu)) {
+
+                SPI_Send_Byte(spi_tx_test_message);
+
+
+                SPI_Receive_Byte(&spi_rx_message_buf);
+                if(spi_rx_message_buf != (0x40u | 0x3Fu)) {
+
                 }
-
-                spi_rx_flag = 0x00;
-
-            } else {
-
-
-                button1_state = '0' + (spi_rx_message_buf & (1u << 0u));
-                button2_state = '0' + (spi_rx_message_buf & (1u << 1u));
-                button1_msg[4] = button1_state;
-                button2_msg[4] = button2_state;
-
-
-
-                LCD_set_cursor_position(1,1);
-                for(uint8_t i=0; i<5; i++){
-                    LCD_write_data_byte_4bit(button1_msg[i]);
-                }
-
-                LCD_set_cursor_position(2,1);
-                for(uint8_t i=0; i<5; i++){
-                    LCD_write_data_byte_4bit(button2_msg[i]);
-                }
-
-                spi_rx_flag = 0x00;
-
             }
 
-
+            spi_ready_to_tx = 0x00;
         }
 
     }
-
-
-
+# 338 "main.c"
     return;
 }

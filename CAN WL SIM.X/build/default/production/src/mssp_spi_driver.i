@@ -4658,10 +4658,12 @@ void SPI_Disable(void){
 # 204 "src/mssp_spi_driver.c"
 void SPI_Transfer_Byte(uint8_t tx, uint8_t * rx){
     manual_transfer = 0x01;
+    transfer_complete_flag = 0x00;
 
     if(!slave_mode) LATDbits.LATD2 = 0;
     SSPBUF = tx;
     while(!transfer_complete_flag);
+
     if(!slave_mode) LATDbits.LATD2 = 1;
     *rx = SSPBUF;
 
@@ -4670,16 +4672,17 @@ void SPI_Transfer_Byte(uint8_t tx, uint8_t * rx){
 
     return;
 }
-# 231 "src/mssp_spi_driver.c"
+# 233 "src/mssp_spi_driver.c"
 void SPI_Transfer_Packet(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_size){
     uint16_t i = 0;
     for(i=0; i<pack_size; i++){
         SPI_Transfer_Byte(tx_pack[i], &rx_pack[i]);
     }
 }
-# 247 "src/mssp_spi_driver.c"
+# 249 "src/mssp_spi_driver.c"
 void SPI_Send_Byte(uint8_t tx){
     manual_transfer = 0x01;
+    transfer_complete_flag = 0x00;
 
     if(!slave_mode) LATDbits.LATD2 = 0;
     SSPBUF = tx;
@@ -4688,28 +4691,22 @@ void SPI_Send_Byte(uint8_t tx){
     transfer_complete_flag = 0x00;
 
     manual_transfer = 0x00;
+    transfer_complete_flag = 0x00;
 }
-# 269 "src/mssp_spi_driver.c"
+# 273 "src/mssp_spi_driver.c"
 void SPI_Send_Packet(uint8_t * tx_pack, uint16_t tx_size){
     uint16_t i = 0;
     for(i=0; i<tx_size; i++){
         SPI_Send_Byte(tx_pack[i]);
     }
 }
-# 285 "src/mssp_spi_driver.c"
+# 289 "src/mssp_spi_driver.c"
 void SPI_Receive_Byte(uint8_t * rx){
-    manual_transfer = 0x01;
 
-    SSPBUF;
-    if(!slave_mode) LATDbits.LATD2 = 0;
-    while(!transfer_complete_flag);
-    if(!slave_mode) LATDbits.LATD2 = 1;
+    SPI_Transfer_Byte(0x00, rx);
 
-    *rx = SSPBUF;
-    manual_transfer = 0x00;
-    transfer_complete_flag = 0x00;
 }
-# 308 "src/mssp_spi_driver.c"
+# 305 "src/mssp_spi_driver.c"
 void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size){
     uint16_t i = 0;
     for(i=0; i<rx_size; i++){

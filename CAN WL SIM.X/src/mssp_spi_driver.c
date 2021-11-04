@@ -203,10 +203,12 @@ void SPI_Disable(void){
  */
 void SPI_Transfer_Byte(uint8_t tx, uint8_t * rx){
     manual_transfer = 0x01; // Indicate the manual transfer is beginning.
+    transfer_complete_flag = 0x00;
     
     if(!slave_mode) MASTER_CS_LOW;  // If in Master Mode...
     SSPBUF = tx;
     while(!transfer_complete_flag);     // Wait until data ready variable flag is set
+//    while(!PIR1bits.SSPIF)
     if(!slave_mode) MASTER_CS_HIGH;  // If in Master Mode...MASTER_CS_HIGH;    
     *rx = SSPBUF;
     
@@ -246,6 +248,7 @@ void SPI_Transfer_Packet(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_siz
  */
 void SPI_Send_Byte(uint8_t tx){
     manual_transfer = 0x01; // Indicate the manual transfer is beginning.
+    transfer_complete_flag = 0x00;
     
     if(!slave_mode) MASTER_CS_LOW;  // If in Master Mode...
     SSPBUF = tx;
@@ -254,6 +257,7 @@ void SPI_Send_Byte(uint8_t tx){
     transfer_complete_flag = 0x00;  // Reset transfer_complete_flag
     
     manual_transfer = 0x00; // Indicate the manual transfer is ending.
+    transfer_complete_flag = 0x00;
 }
 
 /* Function: SPI_Send_Packet
@@ -283,16 +287,9 @@ void SPI_Send_Packet(uint8_t * tx_pack, uint16_t tx_size){
  * Returns: none
  */
 void SPI_Receive_Byte(uint8_t * rx){
-    manual_transfer = 0x01; // Indicate the manual transfer is beginning.
     
-    SSPBUF;
-    if(!slave_mode) MASTER_CS_LOW;  // If in Master Mode...
-    while(!transfer_complete_flag);     // Wait until data ready variable flag is set
-    if(!slave_mode) MASTER_CS_HIGH;  // If in Master Mode...
+    SPI_Transfer_Byte(0x00, rx);
     
-    *rx = SSPBUF;
-    manual_transfer = 0x00; // Indicate the manual transfer is ending.
-    transfer_complete_flag = 0x00;  // Reset transfer_complete_flag
 }
 
 /* Function: SPI_Receive_Packet
@@ -320,13 +317,16 @@ void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size){
 
 
 
-// Example test code:
-//    SPI_Init();
+//// Debug pin
+//    TRISDbits.RD3 = 0u;
+//    LATDbits.LATD3 = 0u;
 //    
-//    // Indicate initialization done
-//    PORTD = 0;
-//    TRISDbits.RD3 = 0;      // Have RD3 be output
-//    PORTDbits.RD3 = 0;      // Set pin HIGH
+//    di();
+//    SPI_Init_Master_Default();
+//    Timer1_Init_Default(DEFAULT_CONFIG_PERIOD_50ms);
+//    Timer1_Enable();
+//    ENABLE_PERIPHERAL_INTERRUPTS;
+//    ei();
 //    
 //    // Test message
 //    uint8_t tx_data[14] = {0xA2, 0x27, 0xFE, 0x11, 0x3C, 0x12, 0x23, 0x34, 0x45, 0x56, 0x67, 0x21, 0xAE, 0xF1};
@@ -336,11 +336,7 @@ void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size){
 //    while(1){
 //        
 ////        SPI_Write(0xA2, &RX_result);
-//        SPI_Transfer(tx_data, message_size, rx_data, message_size);
-//        
-//        // Debug LEDs
-//        PORTDbits.RD2 = SSPSTATbits.BF  |   SSPCON1bits.WCOL;
-//        PORTDbits.RD3 = PIR1bits.SSPIF;
+//        SPI_Transfer_Packet(tx_data, rx_data, message_size);
 //
 //        __delay_ms(500);
 //    }

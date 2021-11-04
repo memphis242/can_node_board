@@ -27,8 +27,7 @@ void Timer1_Init_Default(uint16_t period_val){
     CCP2_Init_Default();
     CCP2_Compare_Val(period_val);
     
-    // Enable CCP2 interrupt
-    ENABLE_CCP2_INTERRUPT;
+//    TMR1_ENABLE_INTERRUPT;
     
 }
 
@@ -39,3 +38,12 @@ void Timer1_Enable(void){
 void Timer1_Disable(void){
     TMR1_OFF;
 }
+
+
+//    // Timer1 Overflow Interrupt
+//    if(TMR1_IF && TMR1_ENABLE_BIT) {
+//        
+//        spi_ready_to_tx = 0x01;
+//        
+//        TMR1_CLEAR_IF;
+//    }
