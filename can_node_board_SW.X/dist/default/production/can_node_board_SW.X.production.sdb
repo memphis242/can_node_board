@@ -27,15 +27,15 @@
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "91 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c99\common\Umul64.c
 [v ___omul __omul `(uo  1 e 8 0 ]
-"134 C:\git\can_node_board\CAN WL SIM.X\spi_test.c
+"134 C:\git\can_node_board\can_node_board_SW.X\spi_test.c
 [v _isr isr `IIH(v  1 e 1 0 ]
 "199
 [v _main main `(v  1 e 1 0 ]
-"21 C:\git\can_node_board\CAN WL SIM.X\src/ccp.c
+"21 C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
 [v _CCP2_Init_Default CCP2_Init_Default `(v  1 e 1 0 ]
 "26
 [v _CCP2_Compare_Val CCP2_Compare_Val `(v  1 e 1 0 ]
-"25 C:\git\can_node_board\CAN WL SIM.X\src/lcd_driver.c
+"25 C:\git\can_node_board\can_node_board_SW.X\src/lcd_driver.c
 [v _LCD_enable_toggle LCD_enable_toggle `(v  1 s 1 LCD_enable_toggle ]
 "35
 [v _LCD_wait_for_BF LCD_wait_for_BF `(v  1 s 1 LCD_wait_for_BF ]
@@ -53,7 +53,7 @@
 [v _LCD_write_instr_nibble_4bit_amazonLCD LCD_write_instr_nibble_4bit_amazonLCD `(v  1 e 1 0 ]
 "428
 [v _LCD_clear_display_amazonLCD LCD_clear_display_amazonLCD `(uc  1 e 1 0 ]
-"31 C:\git\can_node_board\CAN WL SIM.X\src/mssp_spi_driver.c
+"31 C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi_driver.c
 [v _SPI_Init_Master_Default SPI_Init_Master_Default `(v  1 e 1 0 ]
 "204
 [v _SPI_Transfer_Byte SPI_Transfer_Byte `(v  1 e 1 0 ]
@@ -61,7 +61,7 @@
 [v _SPI_Send_Byte SPI_Send_Byte `(v  1 e 1 0 ]
 "289
 [v _SPI_Receive_Byte SPI_Receive_Byte `(v  1 e 1 0 ]
-"20 C:\git\can_node_board\CAN WL SIM.X\src/timer.c
+"20 C:\git\can_node_board\can_node_board_SW.X\src/timer.c
 [v _Timer1_Init_Default Timer1_Init_Default `(v  1 e 1 0 ]
 "34
 [v _Timer1_Enable Timer1_Enable `(v  1 e 1 0 ]
@@ -349,13 +349,13 @@
 ]
 [u S607 . 1 `S585 1 . 1 0 `S594 1 . 1 0 `S603 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES607  1 e 1 @4082 ]
-"101 C:\git\can_node_board\CAN WL SIM.X\spi_test.c
+"101 C:\git\can_node_board\can_node_board_SW.X\spi_test.c
 [v _tmr_100ms_next tmr_100ms_next `VEuc  1 s 1 tmr_100ms_next ]
 "102
 [v _spi_tx_test_msg spi_tx_test_msg `uc  1 s 1 spi_tx_test_msg ]
 "104
 [v _spi_ready_to_tx spi_ready_to_tx `VEuc  1 s 1 spi_ready_to_tx ]
-"13 C:\git\can_node_board\CAN WL SIM.X\src/lcd_driver.c
+"13 C:\git\can_node_board\can_node_board_SW.X\src/lcd_driver.c
 [v _init_complete init_complete `uc  1 s 1 init_complete ]
 "17
 [v _current_entry_mode current_entry_mode `uc  1 s 1 current_entry_mode ]
@@ -365,24 +365,24 @@
 [v _current_func_set current_func_set `uc  1 s 1 current_func_set ]
 "21
 [v _address_counter address_counter `uc  1 s 1 address_counter ]
-"16 C:\git\can_node_board\CAN WL SIM.X\src/mssp_spi_driver.c
+"16 C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi_driver.c
 [v _slave_mode slave_mode `uc  1 s 1 slave_mode ]
 "17
 [v _transfer_complete_flag transfer_complete_flag `uc  1 e 1 0 ]
 "18
 [v _manual_transfer manual_transfer `uc  1 e 1 0 ]
-"199 C:\git\can_node_board\CAN WL SIM.X\spi_test.c
+"199 C:\git\can_node_board\can_node_board_SW.X\spi_test.c
 [v _main main `(v  1 e 1 0 ]
 {
 "385
 } 0
-"20 C:\git\can_node_board\CAN WL SIM.X\src/timer.c
+"20 C:\git\can_node_board\can_node_board_SW.X\src/timer.c
 [v _Timer1_Init_Default Timer1_Init_Default `(v  1 e 1 0 ]
 {
 [v Timer1_Init_Default@period_val period_val `us  1 p 2 2 ]
 "32
 } 0
-"21 C:\git\can_node_board\CAN WL SIM.X\src/ccp.c
+"21 C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
 [v _CCP2_Init_Default CCP2_Init_Default `(v  1 e 1 0 ]
 {
 "24
@@ -393,12 +393,12 @@
 [v CCP2_Compare_Val@comp_val comp_val `us  1 p 2 0 ]
 "28
 } 0
-"34 C:\git\can_node_board\CAN WL SIM.X\src/timer.c
+"34 C:\git\can_node_board\can_node_board_SW.X\src/timer.c
 [v _Timer1_Enable Timer1_Enable `(v  1 e 1 0 ]
 {
 "36
 } 0
-"249 C:\git\can_node_board\CAN WL SIM.X\src/mssp_spi_driver.c
+"249 C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi_driver.c
 [v _SPI_Send_Byte SPI_Send_Byte `(v  1 e 1 0 ]
 {
 [v SPI_Send_Byte@tx tx `uc  1 a 1 wreg ]
@@ -411,7 +411,7 @@
 {
 "57
 } 0
-"134 C:\git\can_node_board\CAN WL SIM.X\spi_test.c
+"134 C:\git\can_node_board\can_node_board_SW.X\spi_test.c
 [v _isr isr `IIH(v  1 e 1 0 ]
 {
 "193

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-  <executable name="dist/default/production\CAN_WL_SIM.X.production.hex">
+  <executable name="dist/default/production\can_node_board_SW.X.production.hex">
     <memory name="program">
       <units>bytes</units>
       <length>65536</length>

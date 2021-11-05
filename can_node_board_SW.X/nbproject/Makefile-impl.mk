@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=CAN WL SIM.X
+PROJECTNAME=can_node_board_SW.X
 
 # Active Configuration
 DEFAULTCONF=default

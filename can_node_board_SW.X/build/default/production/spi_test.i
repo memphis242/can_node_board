@@ -4709,8 +4709,7 @@ void main(void) {
 # 384 "spi_test.c"
     return;
 }
-
-
+# 403 "spi_test.c"
 static char hex_to_char(uint8_t hex_num){
     switch(hex_num){
 

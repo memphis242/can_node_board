@@ -829,138 +829,138 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;spi_test.c: 385: }
 [e :UE 275 ]
 }
-"388
-[; ;spi_test.c: 388: static char hex_to_char(uint8_t hex_num){
+"403
+[; ;spi_test.c: 403: static char hex_to_char(uint8_t hex_num){
 [v _hex_to_char `(uc ~T0 @X0 1 sf1`uc ]
 {
 [e :U _hex_to_char ]
 [v _hex_num `uc ~T0 @X0 1 r1 ]
 [f ]
-"389
-[; ;spi_test.c: 389:     switch(hex_num){
+"404
+[; ;spi_test.c: 404:     switch(hex_num){
 [e $U 282  ]
 {
-"391
-[; ;spi_test.c: 391:         case 0x0:
+"406
+[; ;spi_test.c: 406:         case 0x0:
 [e :U 283 ]
-"392
-[; ;spi_test.c: 392:             return '0';
+"407
+[; ;spi_test.c: 407:             return '0';
 [e ) -> -> 48 `ui `uc ]
 [e $UE 280  ]
-"394
-[; ;spi_test.c: 394:         case 0x1:
+"409
+[; ;spi_test.c: 409:         case 0x1:
 [e :U 284 ]
-"395
-[; ;spi_test.c: 395:             return '1';
+"410
+[; ;spi_test.c: 410:             return '1';
 [e ) -> -> 49 `ui `uc ]
 [e $UE 280  ]
-"397
-[; ;spi_test.c: 397:         case 0x2:
+"412
+[; ;spi_test.c: 412:         case 0x2:
 [e :U 285 ]
-"398
-[; ;spi_test.c: 398:             return '2';
+"413
+[; ;spi_test.c: 413:             return '2';
 [e ) -> -> 50 `ui `uc ]
 [e $UE 280  ]
-"400
-[; ;spi_test.c: 400:         case 0x3:
+"415
+[; ;spi_test.c: 415:         case 0x3:
 [e :U 286 ]
-"401
-[; ;spi_test.c: 401:             return '3';
+"416
+[; ;spi_test.c: 416:             return '3';
 [e ) -> -> 51 `ui `uc ]
 [e $UE 280  ]
-"403
-[; ;spi_test.c: 403:         case 0x4:
+"418
+[; ;spi_test.c: 418:         case 0x4:
 [e :U 287 ]
-"404
-[; ;spi_test.c: 404:             return '4';
+"419
+[; ;spi_test.c: 419:             return '4';
 [e ) -> -> 52 `ui `uc ]
 [e $UE 280  ]
-"406
-[; ;spi_test.c: 406:         case 0x5:
+"421
+[; ;spi_test.c: 421:         case 0x5:
 [e :U 288 ]
-"407
-[; ;spi_test.c: 407:             return '5';
+"422
+[; ;spi_test.c: 422:             return '5';
 [e ) -> -> 53 `ui `uc ]
 [e $UE 280  ]
-"409
-[; ;spi_test.c: 409:         case 0x6:
+"424
+[; ;spi_test.c: 424:         case 0x6:
 [e :U 289 ]
-"410
-[; ;spi_test.c: 410:             return '6';
+"425
+[; ;spi_test.c: 425:             return '6';
 [e ) -> -> 54 `ui `uc ]
 [e $UE 280  ]
-"412
-[; ;spi_test.c: 412:         case 0x7:
+"427
+[; ;spi_test.c: 427:         case 0x7:
 [e :U 290 ]
-"413
-[; ;spi_test.c: 413:             return '7';
+"428
+[; ;spi_test.c: 428:             return '7';
 [e ) -> -> 55 `ui `uc ]
 [e $UE 280  ]
-"415
-[; ;spi_test.c: 415:         case 0x8:
+"430
+[; ;spi_test.c: 430:         case 0x8:
 [e :U 291 ]
-"416
-[; ;spi_test.c: 416:             return '8';
+"431
+[; ;spi_test.c: 431:             return '8';
 [e ) -> -> 56 `ui `uc ]
 [e $UE 280  ]
-"418
-[; ;spi_test.c: 418:         case 0x9:
+"433
+[; ;spi_test.c: 433:         case 0x9:
 [e :U 292 ]
-"419
-[; ;spi_test.c: 419:             return '9';
+"434
+[; ;spi_test.c: 434:             return '9';
 [e ) -> -> 57 `ui `uc ]
 [e $UE 280  ]
-"421
-[; ;spi_test.c: 421:         case 0xA:
+"436
+[; ;spi_test.c: 436:         case 0xA:
 [e :U 293 ]
-"422
-[; ;spi_test.c: 422:             return 'A';
+"437
+[; ;spi_test.c: 437:             return 'A';
 [e ) -> -> 65 `ui `uc ]
 [e $UE 280  ]
-"424
-[; ;spi_test.c: 424:         case 0xB:
+"439
+[; ;spi_test.c: 439:         case 0xB:
 [e :U 294 ]
-"425
-[; ;spi_test.c: 425:             return 'B';
+"440
+[; ;spi_test.c: 440:             return 'B';
 [e ) -> -> 66 `ui `uc ]
 [e $UE 280  ]
-"427
-[; ;spi_test.c: 427:         case 0xC:
+"442
+[; ;spi_test.c: 442:         case 0xC:
 [e :U 295 ]
-"428
-[; ;spi_test.c: 428:             return 'C';
+"443
+[; ;spi_test.c: 443:             return 'C';
 [e ) -> -> 67 `ui `uc ]
 [e $UE 280  ]
-"430
-[; ;spi_test.c: 430:         case 0xD:
+"445
+[; ;spi_test.c: 445:         case 0xD:
 [e :U 296 ]
-"431
-[; ;spi_test.c: 431:             return 'D';
+"446
+[; ;spi_test.c: 446:             return 'D';
 [e ) -> -> 68 `ui `uc ]
 [e $UE 280  ]
-"433
-[; ;spi_test.c: 433:         case 0xE:
+"448
+[; ;spi_test.c: 448:         case 0xE:
 [e :U 297 ]
-"434
-[; ;spi_test.c: 434:             return 'E';
+"449
+[; ;spi_test.c: 449:             return 'E';
 [e ) -> -> 69 `ui `uc ]
 [e $UE 280  ]
-"436
-[; ;spi_test.c: 436:         case 0xF:
+"451
+[; ;spi_test.c: 451:         case 0xF:
 [e :U 298 ]
-"437
-[; ;spi_test.c: 437:             return 'F';
+"452
+[; ;spi_test.c: 452:             return 'F';
 [e ) -> -> 70 `ui `uc ]
 [e $UE 280  ]
-"439
-[; ;spi_test.c: 439:         default:
+"454
+[; ;spi_test.c: 454:         default:
 [e :U 299 ]
-"440
-[; ;spi_test.c: 440:             return ' ';
+"455
+[; ;spi_test.c: 455:             return ' ';
 [e ) -> -> 32 `ui `uc ]
 [e $UE 280  ]
-"442
-[; ;spi_test.c: 442:     }
+"457
+[; ;spi_test.c: 457:     }
 }
 [e $U 281  ]
 [e :U 282 ]
@@ -982,7 +982,7 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> 15 `i 298
  299 ]
 [e :U 281 ]
-"443
-[; ;spi_test.c: 443: }
+"458
+[; ;spi_test.c: 458: }
 [e :UE 280 ]
 }

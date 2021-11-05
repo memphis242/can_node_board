@@ -3,10 +3,11 @@ Microchip MPLAB XC8 Compiler V2.31
 Linker command line:
 
 -W-3 --edf=C:\Program Files\Microchip\xc8\v2.31\pic\dat\en_msgs.txt -cn \
-  -h+dist/default/production\CAN_WL_SIM.X.production.sym \
-  --cmf=dist/default/production\CAN_WL_SIM.X.production.cmf -z -Q18F4620 \
-  -oC:\Users\almos\AppData\Local\Temp\sgvs.2 --defsym=__MPLAB_BUILD=1 \
-  -Mdist/default/production/CAN_WL_SIM.X.production.map -E1 \
+  -h+dist/default/production\can_node_board_SW.X.production.sym \
+  --cmf=dist/default/production\can_node_board_SW.X.production.cmf -z \
+  -Q18F4620 -oC:\Users\almos\AppData\Local\Temp\si58.2 \
+  --defsym=__MPLAB_BUILD=1 \
+  -Mdist/default/production/can_node_board_SW.X.production.map -E1 \
   -ver=XC8 Compiler --acfsm=1493 -ASTACK=080h-0F7Fh -pstack=STACK \
   -ACODE=00h-0FFFFh -ACONST=00h-0FFFFh -ASMALLCONST=01000h-010FFhx240 \
   -AMEDIUMCONST=01000h-0FFFFh -ACOMRAM=01h-07Fh -AABS1=00h-0F7Fh \
@@ -25,8 +26,8 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\almos\AppData\Local\Temp\sgvs.o \
-  dist/default/production\CAN_WL_SIM.X.production.o 
+  C:\Users\almos\AppData\Local\Temp\si58.o \
+  dist/default/production\can_node_board_SW.X.production.o 
 
 Object code version is 3.11
 
@@ -35,12 +36,12 @@ Machine type is 18F4620
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\almos\AppData\Local\Temp\sgvs.o
+C:\Users\almos\AppData\Local\Temp\si58.o
                 idloc                            200000   200000        8        0       5
                 config                           300000   300000        E        0       4
                 init                                  E        E        4        4       0
                 reset_vec                             0        0        4        0       0
-dist/default/production\CAN_WL_SIM.X.production.o
+dist/default/production\can_node_board_SW.X.production.o
                 intcode                               8        8        6        4       0
                 idloc                            200000   200000        8        0       5
                 config                           300000   300000        E        0       4

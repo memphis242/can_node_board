@@ -6,7 +6,7 @@
   200008h - 2FFFFFh
   30000Eh - 30003Fh
   
- dist/default/production\CAN_WL_SIM.X.production.hex ranges:
+ dist/default/production\can_node_board_SW.X.production.hex ranges:
   0h - 3h
   8h - 1DFh
   200000h - 200007h
@@ -23,7 +23,7 @@
   T = Trailing code
   & = Find & replace opcode
   X = Find & delete opcode
-  1 = dist/default/production\CAN_WL_SIM.X.production.hex
+  1 = dist/default/production\can_node_board_SW.X.production.hex
 00000000: 1111----11111111111111111111111111111111111111111111111111111111
 00000040: 1111111111111111111111111111111111111111111111111111111111111111
 00000080: 1111111111111111111111111111111111111111111111111111111111111111
