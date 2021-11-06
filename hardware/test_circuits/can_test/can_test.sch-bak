@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 2
+Sheet 1 1
 Title "CAN Test Circuit"
 Date "2021-11-06"
 Rev "Ver. 1"
@@ -1236,10 +1236,4 @@ Text Notes 6450 1050 0    100  ~ 20
 CAN CONTROLLER +\nTRANSCEIVER
 Text Notes 6500 4150 0    50   ~ 0
 CAN Bus Format: CAN 2.0B Extended Frame\nCAN Bus Baud Rate: 250kbps
-$Sheet
-S 8950 5100 1850 1000
-U 619B39CA
-F0 "CAN Node 2" 50
-F1 "can_node_2sch.sch" 50
-$EndSheet
 $EndSCHEMATC
