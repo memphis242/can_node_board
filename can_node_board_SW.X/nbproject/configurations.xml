@@ -9,6 +9,7 @@
         <itemPath>inc/lcd_driver.h</itemPath>
         <itemPath>inc/mssp_spi_driver.h</itemPath>
         <itemPath>inc/timer.h</itemPath>
+        <itemPath>inc/mcp2515.h</itemPath>
       </logicalFolder>
       <itemPath>spi_test.h</itemPath>
     </logicalFolder>
@@ -24,6 +25,7 @@
         <itemPath>src/lcd_driver.c</itemPath>
         <itemPath>src/mssp_spi_driver.c</itemPath>
         <itemPath>src/timer.c</itemPath>
+        <itemPath>src/mcp2515.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
       <itemPath>spi_test.c</itemPath>
