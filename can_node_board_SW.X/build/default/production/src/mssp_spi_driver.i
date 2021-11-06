@@ -4479,10 +4479,15 @@ typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
 # 35 "inc\\mssp_spi_driver.h" 2
-# 103 "inc\\mssp_spi_driver.h"
+# 104 "inc\\mssp_spi_driver.h"
+enum spi_actor_t { SPI_MASTER, SPI_SLAVE };
+enum spi_mode_t { SPI_MODE_00, SPI_MODE_01, SPI_MODE_10, SPI_MODE_11 };
+
+
+
 void SPI_Init_Master_Default(void);
 void SPI_Init_Slave_Default(void);
-uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8_t fosc_div, uint8_t slave0_or_master1);
+uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8_t fosc_div, enum spi_actor_t spi_actor_type);
 
 void SPI_Disable(void);
 
@@ -4495,15 +4500,34 @@ void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size);
 # 10 "src/mssp_spi_driver.c" 2
 
 # 1 "inc\\lcd_driver.h" 1
-# 182 "inc\\lcd_driver.h"
+# 206 "inc\\lcd_driver.h"
+enum lcd_display_t {
+    QAPASS_EBAY,
+    QAPASS_AMAZON,
+    ADAFRUIT_STANDARD_16x2,
+    ADAFRUIT_STANDARD_20x4
+};
+enum lcd_bit_mode_t {
+    MODE_4BIT,
+    MODE_8BIT
+};
+
+
+
+
+
 void static LCD_enable_toggle(void);
 void static LCD_wait_for_BF(void);
+
 void LCD_write_data_byte_4bit(uint8_t data);
 void LCD_write_data_byte_8bit(uint8_t data);
 void LCD_write_instr_byte_4bit(uint8_t instr);
 void LCD_write_instr_byte_8bit(uint8_t instr);
 void LCD_Init_ECE376(void);
-void LCD_Init(uint8_t entry_mode, uint8_t disp_ctrl, uint8_t func_set);
+void LCD_Init_amazonLCD(uint8_t mode_4bit);
+void LCD_Init(uint8_t entry_mode, uint8_t disp_ctrl, uint8_t func_set, enum lcd_display_t disp_to_be_used);
+
+
 uint8_t LCD_isInit(void);
 uint8_t LCD_clear_display(void);
 uint8_t LCD_return_home(void);
@@ -4512,27 +4536,17 @@ uint8_t LCD_set_cursor_position(uint8_t line, uint8_t pos_on_line);
 uint8_t LCD_write_characters(char * toWrite, uint8_t size);
 uint8_t LCD_turn_off_cursor(void);
 uint8_t LCD_turn_on_cursor(void);
-
-
-void static LCD_enable_toggle_amazonLCD(void);
-void LCD_write_data_byte_4bit_amazonLCD(uint8_t data);
-void LCD_write_data_byte_8bit_amazonLCD(uint8_t data);
-void LCD_write_instr_byte_4bit_amazonLCD(uint8_t instr);
-void LCD_write_instr_byte_8bit_amazonLCD(uint8_t instr);
-void LCD_write_instr_nibble_4bit_amazonLCD(uint8_t instr);
-uint8_t LCD_clear_display_amazonLCD(void);
-void LCD_Init_amazonLCD(uint8_t mode_4bit);
-uint8_t LCD_set_cursor_position_amazonLCD(uint8_t line, uint8_t pos_on_line);
 # 11 "src/mssp_spi_driver.c" 2
 
 
 
 
 uint8_t receive_byte = 0x00;
+static enum spi_actor_t spi_actor = SPI_MASTER;
 static uint8_t slave_mode = 0x00;
 uint8_t transfer_complete_flag = 0x00;
 uint8_t manual_transfer = 0x00;
-# 31 "src/mssp_spi_driver.c"
+# 32 "src/mssp_spi_driver.c"
 void SPI_Init_Master_Default(void){
 
     SSPCON1bits.SSPEN = 0;
@@ -4554,13 +4568,13 @@ void SPI_Init_Master_Default(void){
 
     LATDbits.LATD2 = 1;
 
-    slave_mode = 0x00;
+    spi_actor = SPI_MASTER;
 
 
     PIE1bits.SSPIE = 1;
 
 }
-# 69 "src/mssp_spi_driver.c"
+# 70 "src/mssp_spi_driver.c"
 void SPI_Init_Slave_Default(void){
 
     SSPCON1bits.SSPEN = 0;
@@ -4579,19 +4593,19 @@ void SPI_Init_Slave_Default(void){
     SSPCON1bits.SSPOV = 0;
     SSPBUF;
     PIR1bits.SSPIF = 0;
-    slave_mode = 0x01;
+    spi_actor = SPI_SLAVE;
 
 
     PIE1bits.SSPIE = 1;
 }
-# 109 "src/mssp_spi_driver.c"
-uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8_t fosc_div, uint8_t slave0_or_master1){
+# 110 "src/mssp_spi_driver.c"
+uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8_t fosc_div, enum spi_actor_t spi_actor_type){
 
     SSPCON1bits.SSPEN = 0;
     SSPCON1 = 0x00;
     SSPSTAT = 0x00;
 
-    if(slave0_or_master1){
+    if(spi_actor_type == SPI_MASTER){
 
 
 
@@ -4622,7 +4636,7 @@ uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8
 
         LATDbits.LATD2 = 1;
 
-        slave_mode = 0x00;
+        spi_actor = SPI_MASTER;
 
     } else {
 
@@ -4635,7 +4649,7 @@ uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8
 
         TRISC |= 0x18; TRISC &= ~(0x20); TRISA |= 0x20;
 
-        slave_mode = 0x01;
+        spi_actor = SPI_SLAVE;
     }
 
 
@@ -4651,16 +4665,16 @@ uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8
 
     return 1u;
 }
-# 184 "src/mssp_spi_driver.c"
+# 185 "src/mssp_spi_driver.c"
 void SPI_Disable(void){
     SSPCON1bits.SSPEN = 0;
 }
-# 204 "src/mssp_spi_driver.c"
+# 205 "src/mssp_spi_driver.c"
 void SPI_Transfer_Byte(uint8_t tx, uint8_t * rx){
     manual_transfer = 0x01;
     transfer_complete_flag = 0x00;
 
-    if(!slave_mode) LATDbits.LATD2 = 0;
+    if(spi_actor == SPI_MASTER) LATDbits.LATD2 = 0;
     SSPBUF = tx;
     while(!transfer_complete_flag);
 
@@ -4672,19 +4686,19 @@ void SPI_Transfer_Byte(uint8_t tx, uint8_t * rx){
 
     return;
 }
-# 233 "src/mssp_spi_driver.c"
+# 234 "src/mssp_spi_driver.c"
 void SPI_Transfer_Packet(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_size){
     uint16_t i = 0;
     for(i=0; i<pack_size; i++){
         SPI_Transfer_Byte(tx_pack[i], &rx_pack[i]);
     }
 }
-# 249 "src/mssp_spi_driver.c"
+# 250 "src/mssp_spi_driver.c"
 void SPI_Send_Byte(uint8_t tx){
     manual_transfer = 0x01;
     transfer_complete_flag = 0x00;
 
-    if(!slave_mode) LATDbits.LATD2 = 0;
+    if(spi_actor == SPI_MASTER) LATDbits.LATD2 = 0;
     SSPBUF = tx;
     while(!transfer_complete_flag);
     if(!slave_mode) LATDbits.LATD2 = 1;
@@ -4693,20 +4707,20 @@ void SPI_Send_Byte(uint8_t tx){
     manual_transfer = 0x00;
     transfer_complete_flag = 0x00;
 }
-# 273 "src/mssp_spi_driver.c"
+# 274 "src/mssp_spi_driver.c"
 void SPI_Send_Packet(uint8_t * tx_pack, uint16_t tx_size){
     uint16_t i = 0;
     for(i=0; i<tx_size; i++){
         SPI_Send_Byte(tx_pack[i]);
     }
 }
-# 289 "src/mssp_spi_driver.c"
+# 290 "src/mssp_spi_driver.c"
 void SPI_Receive_Byte(uint8_t * rx){
 
     SPI_Transfer_Byte(0x00, rx);
 
 }
-# 305 "src/mssp_spi_driver.c"
+# 306 "src/mssp_spi_driver.c"
 void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size){
     uint16_t i = 0;
     for(i=0; i<rx_size; i++){

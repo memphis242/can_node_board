@@ -70,7 +70,7 @@
 #include "inc/lcd_driver.h"
 #include "inc/timer.h"
 #include "inc/ccp.h"
-#include "spi_two_node_test.h"
+#include "spi_test.h"
 
 
 #ifndef _XTAL_FREQ

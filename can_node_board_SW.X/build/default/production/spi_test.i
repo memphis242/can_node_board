@@ -4529,10 +4529,15 @@ typedef uint32_t uint_fast32_t;
 # 68 "spi_test.c" 2
 
 # 1 "./inc/mssp_spi_driver.h" 1
-# 103 "./inc/mssp_spi_driver.h"
+# 104 "./inc/mssp_spi_driver.h"
+enum spi_actor_t { SPI_MASTER, SPI_SLAVE };
+enum spi_mode_t { SPI_MODE_00, SPI_MODE_01, SPI_MODE_10, SPI_MODE_11 };
+
+
+
 void SPI_Init_Master_Default(void);
 void SPI_Init_Slave_Default(void);
-uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8_t fosc_div, uint8_t slave0_or_master1);
+uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8_t fosc_div, enum spi_actor_t spi_actor_type);
 
 void SPI_Disable(void);
 
@@ -4545,15 +4550,34 @@ void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size);
 # 69 "spi_test.c" 2
 
 # 1 "./inc/lcd_driver.h" 1
-# 182 "./inc/lcd_driver.h"
+# 206 "./inc/lcd_driver.h"
+enum lcd_display_t {
+    QAPASS_EBAY,
+    QAPASS_AMAZON,
+    ADAFRUIT_STANDARD_16x2,
+    ADAFRUIT_STANDARD_20x4
+};
+enum lcd_bit_mode_t {
+    MODE_4BIT,
+    MODE_8BIT
+};
+
+
+
+
+
 void static LCD_enable_toggle(void);
 void static LCD_wait_for_BF(void);
+
 void LCD_write_data_byte_4bit(uint8_t data);
 void LCD_write_data_byte_8bit(uint8_t data);
 void LCD_write_instr_byte_4bit(uint8_t instr);
 void LCD_write_instr_byte_8bit(uint8_t instr);
 void LCD_Init_ECE376(void);
-void LCD_Init(uint8_t entry_mode, uint8_t disp_ctrl, uint8_t func_set);
+void LCD_Init_amazonLCD(uint8_t mode_4bit);
+void LCD_Init(uint8_t entry_mode, uint8_t disp_ctrl, uint8_t func_set, enum lcd_display_t disp_to_be_used);
+
+
 uint8_t LCD_isInit(void);
 uint8_t LCD_clear_display(void);
 uint8_t LCD_return_home(void);
@@ -4562,17 +4586,6 @@ uint8_t LCD_set_cursor_position(uint8_t line, uint8_t pos_on_line);
 uint8_t LCD_write_characters(char * toWrite, uint8_t size);
 uint8_t LCD_turn_off_cursor(void);
 uint8_t LCD_turn_on_cursor(void);
-
-
-void static LCD_enable_toggle_amazonLCD(void);
-void LCD_write_data_byte_4bit_amazonLCD(uint8_t data);
-void LCD_write_data_byte_8bit_amazonLCD(uint8_t data);
-void LCD_write_instr_byte_4bit_amazonLCD(uint8_t instr);
-void LCD_write_instr_byte_8bit_amazonLCD(uint8_t instr);
-void LCD_write_instr_nibble_4bit_amazonLCD(uint8_t instr);
-uint8_t LCD_clear_display_amazonLCD(void);
-void LCD_Init_amazonLCD(uint8_t mode_4bit);
-uint8_t LCD_set_cursor_position_amazonLCD(uint8_t line, uint8_t pos_on_line);
 # 70 "spi_test.c" 2
 
 # 1 "./inc/timer.h" 1
@@ -4583,12 +4596,12 @@ void Timer1_Disable(void);
 # 71 "spi_test.c" 2
 
 # 1 "./inc/ccp.h" 1
-# 32 "./inc/ccp.h"
+# 50 "./inc/ccp.h"
 void CCP2_Init_Default(void);
 void CCP2_Compare_Val(uint16_t comp_val);
 # 72 "spi_test.c" 2
 
-# 1 "./spi_two_node_test.h" 1
+# 1 "./spi_test.h" 1
 # 73 "spi_test.c" 2
 # 95 "spi_test.c"
 extern uint8_t receive_byte;

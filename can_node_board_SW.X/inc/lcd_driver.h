@@ -5,11 +5,22 @@
  *           the HITACHI HD44780U Driver. Also, PORTD is used for the data
  *           lines, and RC0, RC1, and RC2 for RS, R/W, and E respectively.
  * 
+ * NOTE: As I have come to discover, even displays claiming to utilize the
+ *       HITACHI HD44780U Driver will have differences in their initilization
+ *       sequence and the amount of time you wait between different operations.
+ *       As annoying as this is, it must be dealt with and so the code is meant
+ *       to reflect several possible displays I might use...
+ * 
  * Revision: 0.1
  * 
  * TODO:
- *      - Need to write functions for sending multiple bytes
- *      - Need to find appropriate initialization sequence for other LCDs
+ *      1- Need to write functions for sending multiple bytes
+ *      2- Need to find appropriate initialization sequence for other LCDs
+ *      3- Need to write function that takes in an integer and converts that to 
+ *        needed string value to display
+ *      4- Same as the previous point but with a double
+ *      5- Initialization routines should probably return an EXEC_SUCCESS or
+ *         EXEC_FAIL. Set that!
  */
 
 /* Pin descriptions for 1602A Board
@@ -75,14 +86,19 @@
 
 #ifndef _XTAL_FREQ
 // 40MHz --> Defining this will allow use of __delay_ms()
+/* The implementation of the initialization routines as well as ennable toggle
+ * and writing/reading from the display makes heavy use of __delay_ms() and
+ *  __delay_us()
+ */
 #define _XTAL_FREQ  40000000u
 #endif
+
 
 // Includes
 #include <xc.h> // include processor files - each processor file is guarded.
 #include <stdint.h>
 
-
+// <editor-fold defaultstate="collapsed" desc="DEFINITIONS">
 // Definitions
 //Pin Setups
 #define DISP_RS                     LATCbits.LATC0
@@ -173,20 +189,47 @@
  *          is incremented/decremented depending on the I/D bit, which is configured in the "ENTRY_MODE_SET_xx" instructions.
  * If RS = 1 (DR) and RW = 1 (read), the data lines will read whatever from DDRAM or CGRAM whatever AC is currently pointed at.
  */
+// </editor-fold>
+
+
+/* Enumerated constants
+ * The following is used to indicate what display is currently being driven.
+ * Even if all these displays claim to use the HD44780 display driver IC, in my
+ * experience, they still differ wildly in what they need to get properly
+ * initialized as well as in the wait times...
+ * Links for each display type:
+ *  - QAPASS_EBAY: https://www.ebay.com/itm/16X2-1602LCD-Blue-Yellow-HD44780-Character-Display-Module-5V-for-Arduino/182723001237?hash=item2a8b23bb95:m:mLKfB9cKobTfoeiuRzByfFA
+ *  - QAPASS_AMAZON: https://www.amazon.com/dp/B019D9TYMI?psc=1&ref=ppx_yo2_dt_b_product_details
+ *  - ADAFRUIT_STANDARD_16x2: https://www.adafruit.com/product/181
+ *  - ADAFRUIT_STANDARD_20x4: https://www.adafruit.com/product/198
+ */
+enum lcd_display_t {
+    QAPASS_EBAY,
+    QAPASS_AMAZON,
+    ADAFRUIT_STANDARD_16x2,
+    ADAFRUIT_STANDARD_20x4        
+};
+enum lcd_bit_mode_t {
+    MODE_4BIT,
+    MODE_8BIT
+};
 
 
 // Function prototypes
 // NOTE: Recall for 16x2 non-shift operation, DDRAM address 0x00 to 0x0F are for line 1, 0x40 to 0x4F are for line 2.
 // NOTE: The return type for some is uint8_t to indicate whether the function was carried out successfully (0x1) or not (0x0)
-// LCD display from ECE376 (it's off of ebay)
 void static LCD_enable_toggle(void);
 void static LCD_wait_for_BF(void);
+
 void LCD_write_data_byte_4bit(uint8_t data);
 void LCD_write_data_byte_8bit(uint8_t data);
 void LCD_write_instr_byte_4bit(uint8_t instr);
 void LCD_write_instr_byte_8bit(uint8_t instr);
 void LCD_Init_ECE376(void);
-void LCD_Init(uint8_t entry_mode, uint8_t disp_ctrl, uint8_t func_set);
+void LCD_Init_amazonLCD(uint8_t mode_4bit);
+void LCD_Init(uint8_t entry_mode, uint8_t disp_ctrl, uint8_t func_set, enum lcd_display_t disp_to_be_used);
+
+// Basic LCD operations/instructions
 uint8_t LCD_isInit(void);
 uint8_t LCD_clear_display(void);
 uint8_t LCD_return_home(void);
@@ -195,17 +238,6 @@ uint8_t LCD_set_cursor_position(uint8_t line, uint8_t pos_on_line);
 uint8_t LCD_write_characters(char * toWrite, uint8_t size);
 uint8_t LCD_turn_off_cursor(void);
 uint8_t LCD_turn_on_cursor(void);
-
-// Amazon-purchased LCD Display
-void static LCD_enable_toggle_amazonLCD(void);
-void LCD_write_data_byte_4bit_amazonLCD(uint8_t data);
-void LCD_write_data_byte_8bit_amazonLCD(uint8_t data);
-void LCD_write_instr_byte_4bit_amazonLCD(uint8_t instr);
-void LCD_write_instr_byte_8bit_amazonLCD(uint8_t instr);
-void LCD_write_instr_nibble_4bit_amazonLCD(uint8_t instr);
-uint8_t LCD_clear_display_amazonLCD(void);
-void LCD_Init_amazonLCD(uint8_t mode_4bit);
-uint8_t LCD_set_cursor_position_amazonLCD(uint8_t line, uint8_t pos_on_line);
 
 
 

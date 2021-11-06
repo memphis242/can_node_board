@@ -2,9 +2,26 @@
  * File: ccp.h
  * Author: Abdullah Almosalami
  * Comments: This, along with the accompanying .c file, is meant to
- *           configure the CCP module of the PIC18F4620.
+ *           configure the CCP module of the PIC18F4620 to work with the
+ *           Timer1 peripheral so that I can generate periodic interrupts.
  * Revision history: 0.1
  */
+
+/* ----------------------------------------------------------------------------
+ * Brief Description of the CCP (Capture, Compare, PWM) Peripheral
+ * ----------------------------------------------------------------------------
+ * The PIC18F4620 has two CCP modules, and each module has a 16-bit Capture
+ * register, a 16-bit Compare register, and a PWM Master/Slave Duty Cycle
+ * register. The CCP modules are configured through their respective CCPxCON
+ * registers. For the purpose of this project, the CCP module is used to reset
+ * Timer1 whenever Timer1 reaches the value placed in the Compare register. On
+ * this reset, an interrupt flag is set, and if enabled, an interrupt is
+ * generated. This is called a Special Event Trigger. The Compare register is
+ * called CCPR, so a write to CCPR sets this compare value. Also, the CCP module
+ * can be configured to do additional things when this event occurs, like
+ * toggle a pin (the corresponding CCPx pin) and/or start an A/D conversion.
+ */
+
 
 #ifndef CCP_HEADER
 #define	CCP_HEADER
@@ -14,10 +31,11 @@
 
 
 // Definitions
-//CCP2CON - CCP2 Control Register
-#define CCP2M       0x0F    // CCPx Module Mode Select bits;
-
-#define CCP2M_DEFAULT   CCP2CON = 0x0A  // 1010 for Compare mode w/o affecting CCP2 pin, 1011 for A/D
+// COMMENT: For now, I am just using the CCP2 module.
+// CCP2CON - CCP2 Control Register
+#define CCP2M           0x0F    // CCPx Module Mode Select bits;
+#define CCP2M_DEFAULT   (CCP2CON = 0x0A)  // 1010 for Compare mode w/o affecting
+                                          // the CCP2 pin, 1011 for A/D
 
 // Interrupt-Related
 #define CCP2_IF_BIT                 PIR2bits.CCP2IF

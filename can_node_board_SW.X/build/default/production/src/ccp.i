@@ -4392,7 +4392,7 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 9 "src/ccp.c" 2
 
 # 1 "inc\\ccp.h" 1
-# 13 "inc\\ccp.h"
+# 30 "inc\\ccp.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 1 3
 # 22 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 3
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\bits/alltypes.h" 1 3
@@ -4478,8 +4478,8 @@ typedef int32_t int_fast32_t;
 typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
-# 13 "inc\\ccp.h" 2
-# 32 "inc\\ccp.h"
+# 30 "inc\\ccp.h" 2
+# 50 "inc\\ccp.h"
 void CCP2_Init_Default(void);
 void CCP2_Compare_Val(uint16_t comp_val);
 # 10 "src/ccp.c" 2
@@ -4490,12 +4490,12 @@ void Timer1_Init_Default(uint16_t period_val);
 void Timer1_Enable(void);
 void Timer1_Disable(void);
 # 11 "src/ccp.c" 2
-# 21 "src/ccp.c"
+# 37 "src/ccp.c"
 void CCP2_Init_Default(void){
-    CCP2CON = 0x0A;
+    (CCP2CON = 0x0A);
     (PIE2bits.CCP2IE = 1u);
 }
-
+# 51 "src/ccp.c"
 void CCP2_Compare_Val(uint16_t comp_val){
     CCPR2 = comp_val;
 }

@@ -10,7 +10,7 @@
         <itemPath>inc/mssp_spi_driver.h</itemPath>
         <itemPath>inc/timer.h</itemPath>
       </logicalFolder>
-      <itemPath>spi_two_node_test.h</itemPath>
+      <itemPath>spi_test.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"

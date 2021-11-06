@@ -431,33 +431,33 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6715
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6715: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"21 src/ccp.c
-[; ;src/ccp.c: 21: void CCP2_Init_Default(void){
+"37 src/ccp.c
+[; ;src/ccp.c: 37: void CCP2_Init_Default(void){
 [v _CCP2_Init_Default `(v ~T0 @X0 1 ef ]
 {
 [e :U _CCP2_Init_Default ]
 [f ]
-"22
-[; ;src/ccp.c: 22:     CCP2CON = 0x0A;
+"38
+[; ;src/ccp.c: 38:     (CCP2CON = 0x0A);
 [e = _CCP2CON -> -> 10 `i `uc ]
-"23
-[; ;src/ccp.c: 23:     (PIE2bits.CCP2IE = 1u);
+"39
+[; ;src/ccp.c: 39:     (PIE2bits.CCP2IE = 1u);
 [e = . . _PIE2bits 0 0 -> -> 1 `ui `uc ]
-"24
-[; ;src/ccp.c: 24: }
+"40
+[; ;src/ccp.c: 40: }
 [e :UE 270 ]
 }
-"26
-[; ;src/ccp.c: 26: void CCP2_Compare_Val(uint16_t comp_val){
+"51
+[; ;src/ccp.c: 51: void CCP2_Compare_Val(uint16_t comp_val){
 [v _CCP2_Compare_Val `(v ~T0 @X0 1 ef1`us ]
 {
 [e :U _CCP2_Compare_Val ]
 [v _comp_val `us ~T0 @X0 1 r1 ]
 [f ]
-"27
-[; ;src/ccp.c: 27:     CCPR2 = comp_val;
+"52
+[; ;src/ccp.c: 52:     CCPR2 = comp_val;
 [e = _CCPR2 _comp_val ]
-"28
-[; ;src/ccp.c: 28: }
+"53
+[; ;src/ccp.c: 53: }
 [e :UE 271 ]
 }

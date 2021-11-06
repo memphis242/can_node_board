@@ -45,6 +45,7 @@
 #define EXEC_FAIL       0u
 #endif
 
+// <editor-fold defaultstate="collapsed" desc="DEFINITIONS">
 // Definitions
 // NOTE: The xx_xx_BIT macros are for holding a constant with a 1 at the location of the bit
 //       The xx_xx_BIT_LOC macros are for what you'd use with the left shift << to get to the correct bit location
@@ -97,12 +98,17 @@
 #define ENABLE_BCLIE_INTERRUPT      PIE2bits.BCLIE = 1
 #define CLEAR_MSSP_IFLAG            PIR1bits.SSPIF = 0      // Clear interrupt flag for MSSP
 #define CLEAR_BCLIE_IFLAG           PIR2bits.BCLIF = 0;
+// </editor-fold>
+
+
+enum spi_actor_t { SPI_MASTER, SPI_SLAVE };
+enum spi_mode_t { SPI_MODE_00, SPI_MODE_01, SPI_MODE_10, SPI_MODE_11 };   // Standard (x,y) terminology, where x is clock polarity and y is what edge is for reading data (phase)
 
 
 // Function declarations
 void SPI_Init_Master_Default(void);     // I'll default to SPI 0,0,  mid-SMP, FOSC/16, interrupt from SSPIF enabled to indicate when transmit has completed
 void SPI_Init_Slave_Default(void);      // I'll default to SPI 0,0, mid-SMP, SS pin as RA5, interrupt from SSPIF enabled to indicate receive
-uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8_t fosc_div, uint8_t slave0_or_master1);
+uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8_t fosc_div, enum spi_actor_t spi_actor_type);
 
 void SPI_Disable(void);
 

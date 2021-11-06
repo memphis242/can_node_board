@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files\Microchip\xc8\v2.31\pic\dat\en_msgs.txt -cn \
   -h+dist/default/production\can_node_board_SW.X.production.sym \
   --cmf=dist/default/production\can_node_board_SW.X.production.cmf -z \
-  -Q18F4620 -oC:\Users\almos\AppData\Local\Temp\si58.2 \
+  -Q18F4620 -oC:\Users\almos\AppData\Local\Temp\s5u8.2 \
   --defsym=__MPLAB_BUILD=1 \
   -Mdist/default/production/can_node_board_SW.X.production.map -E1 \
   -ver=XC8 Compiler --acfsm=1493 -ASTACK=080h-0F7Fh -pstack=STACK \
@@ -26,7 +26,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\almos\AppData\Local\Temp\si58.o \
+  C:\Users\almos\AppData\Local\Temp\s5u8.o \
   dist/default/production\can_node_board_SW.X.production.o 
 
 Object code version is 3.11
@@ -36,7 +36,7 @@ Machine type is 18F4620
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\almos\AppData\Local\Temp\si58.o
+C:\Users\almos\AppData\Local\Temp\s5u8.o
                 idloc                            200000   200000        8        0       5
                 config                           300000   300000        E        0       4
                 init                                  E        E        4        4       0
@@ -45,20 +45,20 @@ dist/default/production\can_node_board_SW.X.production.o
                 intcode                               8        8        6        4       0
                 idloc                            200000   200000        8        0       5
                 config                           300000   300000        E        0       4
-                temp                                 15       15        1        1       1
+                temp                                 18       18        1        1       1
                 intcode_body                         90       90       6C        4       0
-                text6                               186      186       26        4       0
-                text5                                FC       FC       50        4       0
-                text4                               1DC      1DC        4        4       0
-                text3                               1C6      1C6        A        4       0
-                text2                               1D0      1D0        8        4       0
-                text1                               1AC      1AC       1A        4       0
+                text6                               176      176       26        4       0
+                text5                                FC       FC       40        4       0
+                text4                               1CC      1CC        4        4       0
+                text3                               1B6      1B6        A        4       0
+                text2                               1C0      1C0        8        4       0
+                text1                               19C      19C       1A        4       0
                 text0                                12       12       7E        4       0
-                cstackCOMRAM                          C        C        5        1       1
-                dataCOMRAM                           11       11        4        1       1
-                bssCOMRAM                             1        1        B        1       1
-                cinit                               14C      14C       3A        4       0
-                idataCOMRAM                         1D8      1D8        4        4       0
+                cstackCOMRAM                          F        F        5        1       1
+                dataCOMRAM                           14       14        4        1       1
+                bssCOMRAM                             1        1        E        1       1
+                cinit                               13C      13C       3A        4       0
+                idataCOMRAM                         1C8      1C8        4        4       0
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   STACK          
@@ -68,15 +68,15 @@ TOTAL           Name                               Link     Load   Length     Sp
                 init                                  E        E        4         0
                 reset_vec                             0        0        4         0
                 intcode_body                         90       90       6C         0
-                text6                               186      186       26         0
-                text5                                FC       FC       50         0
-                text4                               1DC      1DC        4         0
-                text3                               1C6      1C6        A         0
-                text2                               1D0      1D0        8         0
-                text1                               1AC      1AC       1A         0
+                text6                               176      176       26         0
+                text5                                FC       FC       40         0
+                text4                               1CC      1CC        4         0
+                text3                               1B6      1B6        A         0
+                text2                               1C0      1C0        8         0
+                text1                               19C      19C       1A         0
                 text0                                12       12       7E         0
-                cinit                               14C      14C       3A         0
-                idataCOMRAM                         1D8      1D8        4         0
+                cinit                               13C      13C       3A         0
+                idataCOMRAM                         1C8      1C8        4         0
 
         CLASS   CONST          
 
@@ -85,10 +85,10 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   MEDIUMCONST    
 
         CLASS   COMRAM         
-                temp                                 15       15        1         1
-                cstackCOMRAM                          C        C        5         1
-                dataCOMRAM                           11       11        4         1
-                bssCOMRAM                             1        1        B         1
+                temp                                 18       18        1         1
+                cstackCOMRAM                          F        F        5         1
+                dataCOMRAM                           14       14        4         1
+                bssCOMRAM                             1        1        E         1
 
         CLASS   ABS1           
 
@@ -145,8 +145,8 @@ TOTAL           Name                               Link     Load   Length     Sp
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class
 
                 reset_vec                      000000  000004  000004         0       0  CODE    
-                bssCOMRAM                      000001  000015  000016         1       1  COMRAM  
-                intcode                        000008  0001D8  0001E0         4       0  CODE    
+                bssCOMRAM                      000001  000018  000019         1       1  COMRAM  
+                intcode                        000008  0001C8  0001D0         4       0  CODE    
 
 
 UNUSED ADDRESS RANGES
@@ -168,12 +168,12 @@ UNUSED ADDRESS RANGES
         BANK7            000700-0007FF              100
         BANK8            000800-0008FF              100
         BANK9            000900-0009FF              100
-        BIGRAM           000016-000F7F              F6A
+        BIGRAM           000019-000F7F              F67
         CODE             000004-000007                4
-                         0001E0-00FFFF             FE20
-        COMRAM           000016-00007F               6A
+                         0001D0-00FFFF             FE30
+        COMRAM           000019-00007F               67
         CONST            000004-000007                4
-                         0001E0-00FFFF             FE20
+                         0001D0-00FFFF             FE30
         EEDATA           F00000-F003FF              400
         MEDIUMCONST      001000-00FFFF             F000
         RAM              000080-000F7F              100
@@ -183,14 +183,16 @@ UNUSED ADDRESS RANGES
 
                                   Symbol Table
 
-CCP2_Compare_Val@comp_val         cstackCOMRAM 00000C
-SPI_Send_Byte@tx                  cstackCOMRAM 00000C
-Timer1_Init_Default@period_val    cstackCOMRAM 00000E
+CCP2_Compare_Val@comp_val         cstackCOMRAM 00000F
+SPI_Send_Byte@tx                  cstackCOMRAM 00000F
+Timer1_Init_Default@period_val    cstackCOMRAM 000011
 _ADCON1bits                       (abs)        000FC1
 _CCP2CON                          (abs)        000FBA
-_CCP2_Compare_Val                 text3        0001C6
-_CCP2_Init_Default                text2        0001D0
+_CCP2_Compare_Val                 text3        0001B6
+_CCP2_Init_Default                text2        0001C0
 _CCPR2                            (abs)        000FBB
+_CURRENT_DISP                     bssCOMRAM    00000E
+_DISP_BIT_MODE                    bssCOMRAM    00000D
 _INTCONbits                       (abs)        000FF2
 _LATCbits                         (abs)        000F8B
 _LATDbits                         (abs)        000F8C
@@ -203,7 +205,7 @@ _PORTD                            (abs)        000F83
 _PORTDbits                        (abs)        000F83
 _PORTE                            (abs)        000F84
 _PORTEbits                        (abs)        000F84
-_SPI_Init_Master_Default          text6        000186
+_SPI_Init_Master_Default          text6        000176
 _SPI_Send_Byte                    text5        0000FC
 _SSPBUF                           (abs)        000FC9
 _SSPCON1                          (abs)        000FC6
@@ -216,8 +218,8 @@ _TRISC                            (abs)        000F94
 _TRISD                            (abs)        000F95
 _TRISDbits                        (abs)        000F95
 _TRISEbits                        (abs)        000F96
-_Timer1_Enable                    text4        0001DC
-_Timer1_Init_Default              text1        0001AC
+_Timer1_Enable                    text4        0001CC
+_Timer1_Init_Default              text1        00019C
 __HRAM                            (abs)        000000
 __Habs1                           abs1         000000
 __Hbank0                          bank0        000000
@@ -281,12 +283,12 @@ __Hrparam                         rparam       000000
 __Hsfr                            sfr          000000
 __Hsmallconst                     smallconst   000000
 __Hspace_0                        (abs)        001000
-__Hspace_1                        (abs)        000016
+__Hspace_1                        (abs)        000019
 __Hspace_2                        (abs)        000000
 __Hspace_4                        (abs)        60000E
 __Hstack                          stack        000000
 __Hstruct                         struct       000000
-__Htemp                           temp         000016
+__Htemp                           temp         000019
 __Htext                           text         000000
 __Htext0                          text0        000000
 __Htext1                          text1        000000
@@ -363,7 +365,7 @@ __Lspace_2                        (abs)        000000
 __Lspace_4                        (abs)        000000
 __Lstack                          stack        000000
 __Lstruct                         struct       000000
-__Ltemp                           temp         000015
+__Ltemp                           temp         000018
 __Ltext                           text         000000
 __Ltext0                          text0        000000
 __Ltext1                          text1        000000
@@ -372,8 +374,8 @@ __Ltext3                          text3        000000
 __Ltext4                          text4        000000
 __Ltext5                          text5        000000
 __Ltext6                          text6        000000
-__S0                              (abs)        0001E0
-__S1                              (abs)        000016
+__S0                              (abs)        0001D0
+__S1                              (abs)        000019
 __S2                              (abs)        000000
 __S4                              (abs)        000000
 __S5                              (abs)        000000
@@ -384,31 +386,31 @@ ___rparam_used                    (abs)        000001
 ___sp                             stack        000000
 __accesstop                       (abs)        000080
 __activetblptr                    (abs)        000002
-__end_of_CCP2_Compare_Val         text3        0001D0
-__end_of_CCP2_Init_Default        text2        0001D8
-__end_of_SPI_Init_Master_Default  text6        0001AC
-__end_of_SPI_Send_Byte            text5        00014C
-__end_of_Timer1_Enable            text4        0001E0
-__end_of_Timer1_Init_Default      text1        0001C6
-__end_of__initialization          cinit        000178
+__end_of_CCP2_Compare_Val         text3        0001C0
+__end_of_CCP2_Init_Default        text2        0001C8
+__end_of_SPI_Init_Master_Default  text6        00019C
+__end_of_SPI_Send_Byte            text5        00013C
+__end_of_Timer1_Enable            text4        0001D0
+__end_of_Timer1_Init_Default      text1        0001B6
+__end_of__initialization          cinit        000168
 __end_of_isr                      intcode_body 0000FC
 __end_of_main                     text0        000090
-__initialization                  cinit        00014C
+__initialization                  cinit        00013C
 __mediumconst                     mediumconst  000000
 __pbssCOMRAM                      bssCOMRAM    000001
-__pcinit                          cinit        00014C
-__pcstackCOMRAM                   cstackCOMRAM 00000C
-__pdataCOMRAM                     dataCOMRAM   000011
-__pidataCOMRAM                    idataCOMRAM  0001D8
+__pcinit                          cinit        00013C
+__pcstackCOMRAM                   cstackCOMRAM 00000F
+__pdataCOMRAM                     dataCOMRAM   000014
+__pidataCOMRAM                    idataCOMRAM  0001C8
 __pintcode                        intcode      000008
 __pintcode_body                   intcode_body 000090
 __ptext0                          text0        000012
-__ptext1                          text1        0001AC
-__ptext2                          text2        0001D0
-__ptext3                          text3        0001C6
-__ptext4                          text4        0001DC
+__ptext1                          text1        00019C
+__ptext2                          text2        0001C0
+__ptext3                          text3        0001B6
+__ptext4                          text4        0001CC
 __ptext5                          text5        0000FC
-__ptext6                          text6        000186
+__ptext6                          text6        000176
 __ramtop                          ramtop       001000
 __size_of_CCP2_Compare_Val        (abs)        000000
 __size_of_CCP2_Init_Default       (abs)        000000
@@ -419,23 +421,23 @@ __size_of_Timer1_Init_Default     (abs)        000000
 __size_of_isr                     (abs)        000000
 __size_of_main                    (abs)        000000
 __smallconst                      smallconst   000000
-_address_counter                  bssCOMRAM    000009
-_current_disp_ctrl                dataCOMRAM   000014
-_current_entry_mode               dataCOMRAM   000012
-_current_func_set                 dataCOMRAM   000011
-_init_complete                    bssCOMRAM    00000B
+_address_counter                  bssCOMRAM    00000A
+_current_disp_ctrl                dataCOMRAM   000017
+_current_entry_mode               dataCOMRAM   000015
+_current_func_set                 dataCOMRAM   000014
+_init_complete                    bssCOMRAM    00000C
 _isr                              intcode      000008
 _main                             text0        000012
 _manual_transfer                  bssCOMRAM    000005
-_receive_byte                     bssCOMRAM    000008
-_slave_mode                       bssCOMRAM    000007
+_receive_byte                     bssCOMRAM    000009
+_spi_actor                        bssCOMRAM    000008
 _spi_ready_to_tx                  bssCOMRAM    000001
 _spi_tx_test_msg                  bssCOMRAM    000003
 _tmr_100ms_next                   bssCOMRAM    000004
 _transfer_complete_flag           bssCOMRAM    000006
-btemp                             temp         000015
-end_of_initialization             cinit        000178
-int$flags                         temp         000015
+btemp                             temp         000018
+end_of_initialization             cinit        000168
+int$flags                         temp         000018
 int_func                          intcode_body 000090
 intlevel0                         text         000000
 intlevel1                         text         000000
@@ -444,11 +446,11 @@ intlevel3                         text         000000
 stackhi                           (abs)        000F7F
 stacklo                           (abs)        000080
 start                             init         00000E
-start_initialization              cinit        00014C
-ttemp5                            temp         000016
-ttemp6                            temp         000019
-ttemp7                            temp         00001D
-wtemp8                            temp         000016
+start_initialization              cinit        00013C
+ttemp5                            temp         000019
+ttemp6                            temp         00001C
+ttemp7                            temp         000020
+wtemp8                            temp         000019
 
 
 FUNCTION INFORMATION:
@@ -487,7 +489,7 @@ Total ram usage:        1 bytes
 
  *************** function _Timer1_Init_Default *****************
  Defined at:
-		line 20 in file "src/timer.c"
+		line 31 in file "src/timer.c"
  Parameters:    Size  Location     Type
   period_val      2    2[COMRAM] unsigned short 
  Auto vars:     Size  Location     Type
@@ -518,7 +520,7 @@ Total ram usage:        2 bytes
 
  *************** function _CCP2_Init_Default *****************
  Defined at:
-		line 21 in file "src/ccp.c"
+		line 37 in file "src/ccp.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -548,7 +550,7 @@ Total ram usage:        0 bytes
 
  *************** function _CCP2_Compare_Val *****************
  Defined at:
-		line 26 in file "src/ccp.c"
+		line 51 in file "src/ccp.c"
  Parameters:    Size  Location     Type
   comp_val        2    0[COMRAM] unsigned short 
  Auto vars:     Size  Location     Type
@@ -578,7 +580,7 @@ Total ram usage:        2 bytes
 
  *************** function _Timer1_Enable *****************
  Defined at:
-		line 34 in file "src/timer.c"
+		line 53 in file "src/timer.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -608,7 +610,7 @@ Total ram usage:        0 bytes
 
  *************** function _SPI_Send_Byte *****************
  Defined at:
-		line 249 in file "src/mssp_spi_driver.c"
+		line 250 in file "src/mssp_spi_driver.c"
  Parameters:    Size  Location     Type
   tx              1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -639,7 +641,7 @@ Total ram usage:        1 bytes
 
  *************** function _SPI_Init_Master_Default *****************
  Defined at:
-		line 31 in file "src/mssp_spi_driver.c"
+		line 32 in file "src/mssp_spi_driver.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -701,19 +703,19 @@ MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
 src/ccp.c
-		_CCP2_Init_Default		CODE           	01D0	0000	8
-		_CCP2_Compare_Val		CODE           	01C6	0000	10
+		_CCP2_Init_Default		CODE           	01C0	0000	8
+		_CCP2_Compare_Val		CODE           	01B6	0000	10
 
 src/ccp.c estimated size: 18
 
 src/mssp_spi_driver.c
-		_SPI_Init_Master_Default		CODE           	0186	0000	38
-		_SPI_Send_Byte 		CODE           	00FC	0000	80
+		_SPI_Init_Master_Default		CODE           	0176	0000	38
+		_SPI_Send_Byte 		CODE           	00FC	0000	64
 
-src/mssp_spi_driver.c estimated size: 118
+src/mssp_spi_driver.c estimated size: 102
 
 shared
-		__initialization		CODE           	014C	0000	44
+		__initialization		CODE           	013C	0000	44
 
 shared estimated size: 44
 
@@ -724,8 +726,8 @@ spi_test.c
 spi_test.c estimated size: 240
 
 src/timer.c
-		_Timer1_Init_Default		CODE           	01AC	0000	26
-		_Timer1_Enable 		CODE           	01DC	0000	4
+		_Timer1_Init_Default		CODE           	019C	0000	26
+		_Timer1_Enable 		CODE           	01CC	0000	4
 
 src/timer.c estimated size: 30
 

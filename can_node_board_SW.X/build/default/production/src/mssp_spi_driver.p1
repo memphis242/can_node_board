@@ -1,4 +1,8 @@
 Version 4.0 HI-TECH Software Intermediate Code
+"16 src/mssp_spi_driver.c
+[; ;src/mssp_spi_driver.c: 16: static enum spi_actor_t spi_actor = SPI_MASTER;
+[c E2464 0 1 .. ]
+[n E2464 spi_actor_t SPI_MASTER SPI_SLAVE  ]
 "4737 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 4737:     struct {
 [s S190 :4 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -507,183 +511,189 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ]
 "16
-[; ;src/mssp_spi_driver.c: 16: static uint8_t slave_mode = 0x00;
+[; ;src/mssp_spi_driver.c: 16: static enum spi_actor_t spi_actor = SPI_MASTER;
+[v _spi_actor `E2464 ~T0 @X0 1 s ]
+[i _spi_actor
+. `E2464 0
+]
+"17
+[; ;src/mssp_spi_driver.c: 17: static uint8_t slave_mode = 0x00;
 [v _slave_mode `uc ~T0 @X0 1 s ]
 [i _slave_mode
 -> -> 0 `i `uc
 ]
-"17
-[; ;src/mssp_spi_driver.c: 17: uint8_t transfer_complete_flag = 0x00;
+"18
+[; ;src/mssp_spi_driver.c: 18: uint8_t transfer_complete_flag = 0x00;
 [v _transfer_complete_flag `uc ~T0 @X0 1 e ]
 [i _transfer_complete_flag
 -> -> 0 `i `uc
 ]
-"18
-[; ;src/mssp_spi_driver.c: 18: uint8_t manual_transfer = 0x00;
+"19
+[; ;src/mssp_spi_driver.c: 19: uint8_t manual_transfer = 0x00;
 [v _manual_transfer `uc ~T0 @X0 1 e ]
 [i _manual_transfer
 -> -> 0 `i `uc
 ]
-"31
-[; ;src/mssp_spi_driver.c: 31: void SPI_Init_Master_Default(void){
+"32
+[; ;src/mssp_spi_driver.c: 32: void SPI_Init_Master_Default(void){
 [v _SPI_Init_Master_Default `(v ~T0 @X0 1 ef ]
 {
 [e :U _SPI_Init_Master_Default ]
 [f ]
-"33
-[; ;src/mssp_spi_driver.c: 33:     SSPCON1bits.SSPEN = 0;
+"34
+[; ;src/mssp_spi_driver.c: 34:     SSPCON1bits.SSPEN = 0;
 [e = . . _SSPCON1bits 0 2 -> -> 0 `i `uc ]
-"36
-[; ;src/mssp_spi_driver.c: 36:     SSPCON1 = 0x01 | 0x00;
-[e = _SSPCON1 -> | -> 1 `i -> 0 `i `uc ]
 "37
-[; ;src/mssp_spi_driver.c: 37:     SSPSTAT = 0x40 | 0x00;
+[; ;src/mssp_spi_driver.c: 37:     SSPCON1 = 0x01 | 0x00;
+[e = _SSPCON1 -> | -> 1 `i -> 0 `i `uc ]
+"38
+[; ;src/mssp_spi_driver.c: 38:     SSPSTAT = 0x40 | 0x00;
 [e = _SSPSTAT -> | -> 64 `i -> 0 `i `uc ]
-"40
-[; ;src/mssp_spi_driver.c: 40:     TRISC |= 0x10; TRISC &= ~(0x28); TRISDbits.RD2 = 0;;
+"41
+[; ;src/mssp_spi_driver.c: 41:     TRISC |= 0x10; TRISC &= ~(0x28); TRISDbits.RD2 = 0;;
 [e =| _TRISC -> -> 16 `i `Vuc ]
 [e =& _TRISC -> ~ -> 40 `i `Vuc ]
 [e = . . _TRISDbits 1 2 -> -> 0 `i `uc ]
-"43
-[; ;src/mssp_spi_driver.c: 43:     SSPCON1bits.SSPEN = 1;
-[e = . . _SSPCON1bits 0 2 -> -> 1 `i `uc ]
 "44
-[; ;src/mssp_spi_driver.c: 44:     SSPCON1bits.WCOL = 0;
-[e = . . _SSPCON1bits 0 4 -> -> 0 `i `uc ]
+[; ;src/mssp_spi_driver.c: 44:     SSPCON1bits.SSPEN = 1;
+[e = . . _SSPCON1bits 0 2 -> -> 1 `i `uc ]
 "45
-[; ;src/mssp_spi_driver.c: 45:     SSPCON1bits.SSPOV = 0;
-[e = . . _SSPCON1bits 0 3 -> -> 0 `i `uc ]
+[; ;src/mssp_spi_driver.c: 45:     SSPCON1bits.WCOL = 0;
+[e = . . _SSPCON1bits 0 4 -> -> 0 `i `uc ]
 "46
-[; ;src/mssp_spi_driver.c: 46:     SSPBUF;
-[e _SSPBUF ]
+[; ;src/mssp_spi_driver.c: 46:     SSPCON1bits.SSPOV = 0;
+[e = . . _SSPCON1bits 0 3 -> -> 0 `i `uc ]
 "47
-[; ;src/mssp_spi_driver.c: 47:     PIR1bits.SSPIF = 0;
+[; ;src/mssp_spi_driver.c: 47:     SSPBUF;
+[e _SSPBUF ]
+"48
+[; ;src/mssp_spi_driver.c: 48:     PIR1bits.SSPIF = 0;
 [e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
-"50
-[; ;src/mssp_spi_driver.c: 50:     LATDbits.LATD2 = 1;
+"51
+[; ;src/mssp_spi_driver.c: 51:     LATDbits.LATD2 = 1;
 [e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
-"52
-[; ;src/mssp_spi_driver.c: 52:     slave_mode = 0x00;
-[e = _slave_mode -> -> 0 `i `uc ]
-"55
-[; ;src/mssp_spi_driver.c: 55:     PIE1bits.SSPIE = 1;
+"53
+[; ;src/mssp_spi_driver.c: 53:     spi_actor = SPI_MASTER;
+[e = _spi_actor . `E2464 0 ]
+"56
+[; ;src/mssp_spi_driver.c: 56:     PIE1bits.SSPIE = 1;
 [e = . . _PIE1bits 0 3 -> -> 1 `i `uc ]
-"57
-[; ;src/mssp_spi_driver.c: 57: }
+"58
+[; ;src/mssp_spi_driver.c: 58: }
 [e :UE 270 ]
 }
-"69
-[; ;src/mssp_spi_driver.c: 69: void SPI_Init_Slave_Default(void){
+"70
+[; ;src/mssp_spi_driver.c: 70: void SPI_Init_Slave_Default(void){
 [v _SPI_Init_Slave_Default `(v ~T0 @X0 1 ef ]
 {
 [e :U _SPI_Init_Slave_Default ]
 [f ]
-"71
-[; ;src/mssp_spi_driver.c: 71:     SSPCON1bits.SSPEN = 0;
+"72
+[; ;src/mssp_spi_driver.c: 72:     SSPCON1bits.SSPEN = 0;
 [e = . . _SSPCON1bits 0 2 -> -> 0 `i `uc ]
-"74
-[; ;src/mssp_spi_driver.c: 74:     SSPCON1 |= 0x00 | 0x04;
+"75
+[; ;src/mssp_spi_driver.c: 75:     SSPCON1 |= 0x00 | 0x04;
 [e =| _SSPCON1 -> | -> 0 `i -> 4 `i `Vuc ]
-"76
-[; ;src/mssp_spi_driver.c: 76:     SSPSTAT |= 0x40 | 0x00;
+"77
+[; ;src/mssp_spi_driver.c: 77:     SSPSTAT |= 0x40 | 0x00;
 [e =| _SSPSTAT -> | -> 64 `i -> 0 `i `Vuc ]
-"79
-[; ;src/mssp_spi_driver.c: 79:     TRISC |= 0x18; TRISC &= ~(0x20); TRISA |= 0x20;
+"80
+[; ;src/mssp_spi_driver.c: 80:     TRISC |= 0x18; TRISC &= ~(0x20); TRISA |= 0x20;
 [e =| _TRISC -> -> 24 `i `Vuc ]
 [e =& _TRISC -> ~ -> 32 `i `Vuc ]
 [e =| _TRISA -> -> 32 `i `Vuc ]
-"82
-[; ;src/mssp_spi_driver.c: 82:     SSPCON1bits.SSPEN = 1;
-[e = . . _SSPCON1bits 0 2 -> -> 1 `i `uc ]
 "83
-[; ;src/mssp_spi_driver.c: 83:     SSPCON1bits.WCOL = 0;
-[e = . . _SSPCON1bits 0 4 -> -> 0 `i `uc ]
+[; ;src/mssp_spi_driver.c: 83:     SSPCON1bits.SSPEN = 1;
+[e = . . _SSPCON1bits 0 2 -> -> 1 `i `uc ]
 "84
-[; ;src/mssp_spi_driver.c: 84:     SSPCON1bits.SSPOV = 0;
-[e = . . _SSPCON1bits 0 3 -> -> 0 `i `uc ]
+[; ;src/mssp_spi_driver.c: 84:     SSPCON1bits.WCOL = 0;
+[e = . . _SSPCON1bits 0 4 -> -> 0 `i `uc ]
 "85
-[; ;src/mssp_spi_driver.c: 85:     SSPBUF;
-[e _SSPBUF ]
+[; ;src/mssp_spi_driver.c: 85:     SSPCON1bits.SSPOV = 0;
+[e = . . _SSPCON1bits 0 3 -> -> 0 `i `uc ]
 "86
-[; ;src/mssp_spi_driver.c: 86:     PIR1bits.SSPIF = 0;
-[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+[; ;src/mssp_spi_driver.c: 86:     SSPBUF;
+[e _SSPBUF ]
 "87
-[; ;src/mssp_spi_driver.c: 87:     slave_mode = 0x01;
-[e = _slave_mode -> -> 1 `i `uc ]
-"90
-[; ;src/mssp_spi_driver.c: 90:     PIE1bits.SSPIE = 1;
-[e = . . _PIE1bits 0 3 -> -> 1 `i `uc ]
+[; ;src/mssp_spi_driver.c: 87:     PIR1bits.SSPIF = 0;
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+"88
+[; ;src/mssp_spi_driver.c: 88:     spi_actor = SPI_SLAVE;
+[e = _spi_actor . `E2464 1 ]
 "91
-[; ;src/mssp_spi_driver.c: 91: }
+[; ;src/mssp_spi_driver.c: 91:     PIE1bits.SSPIE = 1;
+[e = . . _PIE1bits 0 3 -> -> 1 `i `uc ]
+"92
+[; ;src/mssp_spi_driver.c: 92: }
 [e :UE 271 ]
 }
-"109
-[; ;src/mssp_spi_driver.c: 109: uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8_t fosc_div, uint8_t slave0_or_master1){
-[v _SPI_Init `(uc ~T0 @X0 1 ef5`uc`uc`uc`uc`uc ]
+"110
+[; ;src/mssp_spi_driver.c: 110: uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8_t fosc_div, enum spi_actor_t spi_actor_type){
+[v _SPI_Init `(uc ~T0 @X0 1 ef5`uc`uc`uc`uc`E2464 ]
 {
 [e :U _SPI_Init ]
 [v _clock_pol `uc ~T0 @X0 1 r1 ]
 [v _clock_tx_pha `uc ~T0 @X0 1 r2 ]
 [v _smp_bit `uc ~T0 @X0 1 r3 ]
 [v _fosc_div `uc ~T0 @X0 1 r4 ]
-[v _slave0_or_master1 `uc ~T0 @X0 1 r5 ]
+[v _spi_actor_type `E2464 ~T0 @X0 1 r5 ]
 [f ]
-"111
-[; ;src/mssp_spi_driver.c: 111:     SSPCON1bits.SSPEN = 0;
-[e = . . _SSPCON1bits 0 2 -> -> 0 `i `uc ]
 "112
-[; ;src/mssp_spi_driver.c: 112:     SSPCON1 = 0x00;
-[e = _SSPCON1 -> -> 0 `i `uc ]
+[; ;src/mssp_spi_driver.c: 112:     SSPCON1bits.SSPEN = 0;
+[e = . . _SSPCON1bits 0 2 -> -> 0 `i `uc ]
 "113
-[; ;src/mssp_spi_driver.c: 113:     SSPSTAT = 0x00;
+[; ;src/mssp_spi_driver.c: 113:     SSPCON1 = 0x00;
+[e = _SSPCON1 -> -> 0 `i `uc ]
+"114
+[; ;src/mssp_spi_driver.c: 114:     SSPSTAT = 0x00;
 [e = _SSPSTAT -> -> 0 `i `uc ]
-"115
-[; ;src/mssp_spi_driver.c: 115:     if(slave0_or_master1){
-[e $ ! != -> _slave0_or_master1 `i -> 0 `i 273  ]
+"116
+[; ;src/mssp_spi_driver.c: 116:     if(spi_actor_type == SPI_MASTER){
+[e $ ! == -> _spi_actor_type `ui -> . `E2464 0 `ui 273  ]
 {
-"119
-[; ;src/mssp_spi_driver.c: 119:         SSPCON1 |= (clock_pol << 4u);
-[e =| _SSPCON1 -> << -> _clock_pol `i -> 4 `ui `Vuc ]
 "120
-[; ;src/mssp_spi_driver.c: 120:         switch(fosc_div){
+[; ;src/mssp_spi_driver.c: 120:         SSPCON1 |= (clock_pol << 4u);
+[e =| _SSPCON1 -> << -> _clock_pol `i -> 4 `ui `Vuc ]
+"121
+[; ;src/mssp_spi_driver.c: 121:         switch(fosc_div){
 [e $U 275  ]
 {
-"121
-[; ;src/mssp_spi_driver.c: 121:             case 4u:
-[e :U 276 ]
 "122
-[; ;src/mssp_spi_driver.c: 122:                 SSPCON1 |= 0x00;
-[e =| _SSPCON1 -> -> 0 `i `Vuc ]
+[; ;src/mssp_spi_driver.c: 122:             case 4u:
+[e :U 276 ]
 "123
-[; ;src/mssp_spi_driver.c: 123:                 break;
+[; ;src/mssp_spi_driver.c: 123:                 SSPCON1 |= 0x00;
+[e =| _SSPCON1 -> -> 0 `i `Vuc ]
+"124
+[; ;src/mssp_spi_driver.c: 124:                 break;
 [e $U 274  ]
-"125
-[; ;src/mssp_spi_driver.c: 125:             case 16u:
-[e :U 277 ]
 "126
-[; ;src/mssp_spi_driver.c: 126:                 SSPCON1 |= 0x01;
-[e =| _SSPCON1 -> -> 1 `i `Vuc ]
+[; ;src/mssp_spi_driver.c: 126:             case 16u:
+[e :U 277 ]
 "127
-[; ;src/mssp_spi_driver.c: 127:                 break;
+[; ;src/mssp_spi_driver.c: 127:                 SSPCON1 |= 0x01;
+[e =| _SSPCON1 -> -> 1 `i `Vuc ]
+"128
+[; ;src/mssp_spi_driver.c: 128:                 break;
 [e $U 274  ]
-"129
-[; ;src/mssp_spi_driver.c: 129:             case 64u:
-[e :U 278 ]
 "130
-[; ;src/mssp_spi_driver.c: 130:                 SSPCON1 |= 0x02;
-[e =| _SSPCON1 -> -> 2 `i `Vuc ]
+[; ;src/mssp_spi_driver.c: 130:             case 64u:
+[e :U 278 ]
 "131
-[; ;src/mssp_spi_driver.c: 131:                 break;
+[; ;src/mssp_spi_driver.c: 131:                 SSPCON1 |= 0x02;
+[e =| _SSPCON1 -> -> 2 `i `Vuc ]
+"132
+[; ;src/mssp_spi_driver.c: 132:                 break;
 [e $U 274  ]
-"133
-[; ;src/mssp_spi_driver.c: 133:             default:
-[e :U 279 ]
 "134
-[; ;src/mssp_spi_driver.c: 134:                 return 0u;
+[; ;src/mssp_spi_driver.c: 134:             default:
+[e :U 279 ]
+"135
+[; ;src/mssp_spi_driver.c: 135:                 return 0u;
 [e ) -> -> 0 `ui `uc ]
 [e $UE 272  ]
-"135
-[; ;src/mssp_spi_driver.c: 135:         }
+"136
+[; ;src/mssp_spi_driver.c: 136:         }
 }
 [e $U 274  ]
 [e :U 275 ]
@@ -692,135 +702,135 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> -> 64 `ui `i 278
  279 ]
 [e :U 274 ]
-"138
-[; ;src/mssp_spi_driver.c: 138:         SSPSTAT |= (clock_tx_pha << 6u) | (smp_bit << 7u);
+"139
+[; ;src/mssp_spi_driver.c: 139:         SSPSTAT |= (clock_tx_pha << 6u) | (smp_bit << 7u);
 [e =| _SSPSTAT -> | << -> _clock_tx_pha `i -> 6 `ui << -> _smp_bit `i -> 7 `ui `Vuc ]
-"141
-[; ;src/mssp_spi_driver.c: 141:         TRISC |= 0x10; TRISC &= ~(0x28); TRISDbits.RD2 = 0;;
+"142
+[; ;src/mssp_spi_driver.c: 142:         TRISC |= 0x10; TRISC &= ~(0x28); TRISDbits.RD2 = 0;;
 [e =| _TRISC -> -> 16 `i `Vuc ]
 [e =& _TRISC -> ~ -> 40 `i `Vuc ]
 [e = . . _TRISDbits 1 2 -> -> 0 `i `uc ]
-"144
-[; ;src/mssp_spi_driver.c: 144:         LATDbits.LATD2 = 1;
+"145
+[; ;src/mssp_spi_driver.c: 145:         LATDbits.LATD2 = 1;
 [e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
-"146
-[; ;src/mssp_spi_driver.c: 146:         slave_mode = 0x00;
-[e = _slave_mode -> -> 0 `i `uc ]
-"148
-[; ;src/mssp_spi_driver.c: 148:     } else {
+"147
+[; ;src/mssp_spi_driver.c: 147:         spi_actor = SPI_MASTER;
+[e = _spi_actor . `E2464 0 ]
+"149
+[; ;src/mssp_spi_driver.c: 149:     } else {
 }
 [e $U 280  ]
 [e :U 273 ]
 {
-"152
-[; ;src/mssp_spi_driver.c: 152:         SSPCON1 |= (clock_pol << 4u) | 0x04;
+"153
+[; ;src/mssp_spi_driver.c: 153:         SSPCON1 |= (clock_pol << 4u) | 0x04;
 [e =| _SSPCON1 -> | << -> _clock_pol `i -> 4 `ui -> 4 `i `Vuc ]
-"154
-[; ;src/mssp_spi_driver.c: 154:         SSPSTAT |= (clock_tx_pha << 6u) | 0x00;
+"155
+[; ;src/mssp_spi_driver.c: 155:         SSPSTAT |= (clock_tx_pha << 6u) | 0x00;
 [e =| _SSPSTAT -> | << -> _clock_tx_pha `i -> 6 `ui -> 0 `i `Vuc ]
-"157
-[; ;src/mssp_spi_driver.c: 157:         TRISC |= 0x18; TRISC &= ~(0x20); TRISA |= 0x20;
+"158
+[; ;src/mssp_spi_driver.c: 158:         TRISC |= 0x18; TRISC &= ~(0x20); TRISA |= 0x20;
 [e =| _TRISC -> -> 24 `i `Vuc ]
 [e =& _TRISC -> ~ -> 32 `i `Vuc ]
 [e =| _TRISA -> -> 32 `i `Vuc ]
-"159
-[; ;src/mssp_spi_driver.c: 159:         slave_mode = 0x01;
-[e = _slave_mode -> -> 1 `i `uc ]
 "160
-[; ;src/mssp_spi_driver.c: 160:     }
+[; ;src/mssp_spi_driver.c: 160:         spi_actor = SPI_SLAVE;
+[e = _spi_actor . `E2464 1 ]
+"161
+[; ;src/mssp_spi_driver.c: 161:     }
 }
 [e :U 280 ]
-"164
-[; ;src/mssp_spi_driver.c: 164:     SSPCON1bits.SSPEN = 1;
-[e = . . _SSPCON1bits 0 2 -> -> 1 `i `uc ]
 "165
-[; ;src/mssp_spi_driver.c: 165:     SSPCON1bits.WCOL = 0;
-[e = . . _SSPCON1bits 0 4 -> -> 0 `i `uc ]
+[; ;src/mssp_spi_driver.c: 165:     SSPCON1bits.SSPEN = 1;
+[e = . . _SSPCON1bits 0 2 -> -> 1 `i `uc ]
 "166
-[; ;src/mssp_spi_driver.c: 166:     SSPCON1bits.SSPOV = 0;
-[e = . . _SSPCON1bits 0 3 -> -> 0 `i `uc ]
+[; ;src/mssp_spi_driver.c: 166:     SSPCON1bits.WCOL = 0;
+[e = . . _SSPCON1bits 0 4 -> -> 0 `i `uc ]
 "167
-[; ;src/mssp_spi_driver.c: 167:     SSPBUF;
-[e _SSPBUF ]
+[; ;src/mssp_spi_driver.c: 167:     SSPCON1bits.SSPOV = 0;
+[e = . . _SSPCON1bits 0 3 -> -> 0 `i `uc ]
 "168
-[; ;src/mssp_spi_driver.c: 168:     PIR1bits.SSPIF = 0;
+[; ;src/mssp_spi_driver.c: 168:     SSPBUF;
+[e _SSPBUF ]
+"169
+[; ;src/mssp_spi_driver.c: 169:     PIR1bits.SSPIF = 0;
 [e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
-"171
-[; ;src/mssp_spi_driver.c: 171:     PIE1bits.SSPIE = 1;
+"172
+[; ;src/mssp_spi_driver.c: 172:     PIE1bits.SSPIE = 1;
 [e = . . _PIE1bits 0 3 -> -> 1 `i `uc ]
-"173
-[; ;src/mssp_spi_driver.c: 173:     return 1u;
+"174
+[; ;src/mssp_spi_driver.c: 174:     return 1u;
 [e ) -> -> 1 `ui `uc ]
 [e $UE 272  ]
-"174
-[; ;src/mssp_spi_driver.c: 174: }
+"175
+[; ;src/mssp_spi_driver.c: 175: }
 [e :UE 272 ]
 }
-"184
-[; ;src/mssp_spi_driver.c: 184: void SPI_Disable(void){
+"185
+[; ;src/mssp_spi_driver.c: 185: void SPI_Disable(void){
 [v _SPI_Disable `(v ~T0 @X0 1 ef ]
 {
 [e :U _SPI_Disable ]
 [f ]
-"185
-[; ;src/mssp_spi_driver.c: 185:     SSPCON1bits.SSPEN = 0;
-[e = . . _SSPCON1bits 0 2 -> -> 0 `i `uc ]
 "186
-[; ;src/mssp_spi_driver.c: 186: }
+[; ;src/mssp_spi_driver.c: 186:     SSPCON1bits.SSPEN = 0;
+[e = . . _SSPCON1bits 0 2 -> -> 0 `i `uc ]
+"187
+[; ;src/mssp_spi_driver.c: 187: }
 [e :UE 281 ]
 }
-"204
-[; ;src/mssp_spi_driver.c: 204: void SPI_Transfer_Byte(uint8_t tx, uint8_t * rx){
+"205
+[; ;src/mssp_spi_driver.c: 205: void SPI_Transfer_Byte(uint8_t tx, uint8_t * rx){
 [v _SPI_Transfer_Byte `(v ~T0 @X0 1 ef2`uc`*uc ]
 {
 [e :U _SPI_Transfer_Byte ]
 [v _tx `uc ~T0 @X0 1 r1 ]
 [v _rx `*uc ~T0 @X0 1 r2 ]
 [f ]
-"205
-[; ;src/mssp_spi_driver.c: 205:     manual_transfer = 0x01;
-[e = _manual_transfer -> -> 1 `i `uc ]
 "206
-[; ;src/mssp_spi_driver.c: 206:     transfer_complete_flag = 0x00;
+[; ;src/mssp_spi_driver.c: 206:     manual_transfer = 0x01;
+[e = _manual_transfer -> -> 1 `i `uc ]
+"207
+[; ;src/mssp_spi_driver.c: 207:     transfer_complete_flag = 0x00;
 [e = _transfer_complete_flag -> -> 0 `i `uc ]
-"208
-[; ;src/mssp_spi_driver.c: 208:     if(!slave_mode) LATDbits.LATD2 = 0;
-[e $ ! ! != -> _slave_mode `i -> 0 `i 283  ]
+"209
+[; ;src/mssp_spi_driver.c: 209:     if(spi_actor == SPI_MASTER) LATDbits.LATD2 = 0;
+[e $ ! == -> _spi_actor `ui -> . `E2464 0 `ui 283  ]
 [e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
 [e :U 283 ]
-"209
-[; ;src/mssp_spi_driver.c: 209:     SSPBUF = tx;
-[e = _SSPBUF _tx ]
 "210
-[; ;src/mssp_spi_driver.c: 210:     while(!transfer_complete_flag);
+[; ;src/mssp_spi_driver.c: 210:     SSPBUF = tx;
+[e = _SSPBUF _tx ]
+"211
+[; ;src/mssp_spi_driver.c: 211:     while(!transfer_complete_flag);
 [e $U 284  ]
 [e :U 285 ]
 [e :U 284 ]
 [e $ ! != -> _transfer_complete_flag `i -> 0 `i 285  ]
 [e :U 286 ]
-"212
-[; ;src/mssp_spi_driver.c: 212:     if(!slave_mode) LATDbits.LATD2 = 1;
+"213
+[; ;src/mssp_spi_driver.c: 213:     if(!slave_mode) LATDbits.LATD2 = 1;
 [e $ ! ! != -> _slave_mode `i -> 0 `i 287  ]
 [e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
 [e :U 287 ]
-"213
-[; ;src/mssp_spi_driver.c: 213:     *rx = SSPBUF;
+"214
+[; ;src/mssp_spi_driver.c: 214:     *rx = SSPBUF;
 [e = *U _rx _SSPBUF ]
-"215
-[; ;src/mssp_spi_driver.c: 215:     manual_transfer = 0x00;
-[e = _manual_transfer -> -> 0 `i `uc ]
 "216
-[; ;src/mssp_spi_driver.c: 216:     transfer_complete_flag = 0x00;
+[; ;src/mssp_spi_driver.c: 216:     manual_transfer = 0x00;
+[e = _manual_transfer -> -> 0 `i `uc ]
+"217
+[; ;src/mssp_spi_driver.c: 217:     transfer_complete_flag = 0x00;
 [e = _transfer_complete_flag -> -> 0 `i `uc ]
-"218
-[; ;src/mssp_spi_driver.c: 218:     return;
-[e $UE 282  ]
 "219
-[; ;src/mssp_spi_driver.c: 219: }
+[; ;src/mssp_spi_driver.c: 219:     return;
+[e $UE 282  ]
+"220
+[; ;src/mssp_spi_driver.c: 220: }
 [e :UE 282 ]
 }
-"233
-[; ;src/mssp_spi_driver.c: 233: void SPI_Transfer_Packet(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_size){
+"234
+[; ;src/mssp_spi_driver.c: 234: void SPI_Transfer_Packet(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_size){
 [v _SPI_Transfer_Packet `(v ~T0 @X0 1 ef3`*uc`*uc`us ]
 {
 [e :U _SPI_Transfer_Packet ]
@@ -828,157 +838,157 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _rx_pack `*uc ~T0 @X0 1 r2 ]
 [v _pack_size `us ~T0 @X0 1 r3 ]
 [f ]
-"234
-[; ;src/mssp_spi_driver.c: 234:     uint16_t i = 0;
+"235
+[; ;src/mssp_spi_driver.c: 235:     uint16_t i = 0;
 [v _i `us ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `us ]
-"235
-[; ;src/mssp_spi_driver.c: 235:     for(i=0; i<pack_size; i++){
+"236
+[; ;src/mssp_spi_driver.c: 236:     for(i=0; i<pack_size; i++){
 {
 [e = _i -> -> 0 `i `us ]
 [e $U 292  ]
 [e :U 289 ]
 {
-"236
-[; ;src/mssp_spi_driver.c: 236:         SPI_Transfer_Byte(tx_pack[i], &rx_pack[i]);
-[e ( _SPI_Transfer_Byte (2 , *U + _tx_pack * -> _i `ux -> -> # *U _tx_pack `ui `ux &U *U + _rx_pack * -> _i `ux -> -> # *U _rx_pack `ui `ux ]
 "237
-[; ;src/mssp_spi_driver.c: 237:     }
+[; ;src/mssp_spi_driver.c: 237:         SPI_Transfer_Byte(tx_pack[i], &rx_pack[i]);
+[e ( _SPI_Transfer_Byte (2 , *U + _tx_pack * -> _i `ux -> -> # *U _tx_pack `ui `ux &U *U + _rx_pack * -> _i `ux -> -> # *U _rx_pack `ui `ux ]
+"238
+[; ;src/mssp_spi_driver.c: 238:     }
 }
 [e ++ _i -> -> 1 `i `us ]
 [e :U 292 ]
 [e $ < -> _i `ui -> _pack_size `ui 289  ]
 [e :U 290 ]
 }
-"238
-[; ;src/mssp_spi_driver.c: 238: }
+"239
+[; ;src/mssp_spi_driver.c: 239: }
 [e :UE 288 ]
 }
-"249
-[; ;src/mssp_spi_driver.c: 249: void SPI_Send_Byte(uint8_t tx){
+"250
+[; ;src/mssp_spi_driver.c: 250: void SPI_Send_Byte(uint8_t tx){
 [v _SPI_Send_Byte `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _SPI_Send_Byte ]
 [v _tx `uc ~T0 @X0 1 r1 ]
 [f ]
-"250
-[; ;src/mssp_spi_driver.c: 250:     manual_transfer = 0x01;
-[e = _manual_transfer -> -> 1 `i `uc ]
 "251
-[; ;src/mssp_spi_driver.c: 251:     transfer_complete_flag = 0x00;
+[; ;src/mssp_spi_driver.c: 251:     manual_transfer = 0x01;
+[e = _manual_transfer -> -> 1 `i `uc ]
+"252
+[; ;src/mssp_spi_driver.c: 252:     transfer_complete_flag = 0x00;
 [e = _transfer_complete_flag -> -> 0 `i `uc ]
-"253
-[; ;src/mssp_spi_driver.c: 253:     if(!slave_mode) LATDbits.LATD2 = 0;
-[e $ ! ! != -> _slave_mode `i -> 0 `i 294  ]
+"254
+[; ;src/mssp_spi_driver.c: 254:     if(spi_actor == SPI_MASTER) LATDbits.LATD2 = 0;
+[e $ ! == -> _spi_actor `ui -> . `E2464 0 `ui 294  ]
 [e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
 [e :U 294 ]
-"254
-[; ;src/mssp_spi_driver.c: 254:     SSPBUF = tx;
-[e = _SSPBUF _tx ]
 "255
-[; ;src/mssp_spi_driver.c: 255:     while(!transfer_complete_flag);
+[; ;src/mssp_spi_driver.c: 255:     SSPBUF = tx;
+[e = _SSPBUF _tx ]
+"256
+[; ;src/mssp_spi_driver.c: 256:     while(!transfer_complete_flag);
 [e $U 295  ]
 [e :U 296 ]
 [e :U 295 ]
 [e $ ! != -> _transfer_complete_flag `i -> 0 `i 296  ]
 [e :U 297 ]
-"256
-[; ;src/mssp_spi_driver.c: 256:     if(!slave_mode) LATDbits.LATD2 = 1;
+"257
+[; ;src/mssp_spi_driver.c: 257:     if(!slave_mode) LATDbits.LATD2 = 1;
 [e $ ! ! != -> _slave_mode `i -> 0 `i 298  ]
 [e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
 [e :U 298 ]
-"257
-[; ;src/mssp_spi_driver.c: 257:     transfer_complete_flag = 0x00;
+"258
+[; ;src/mssp_spi_driver.c: 258:     transfer_complete_flag = 0x00;
 [e = _transfer_complete_flag -> -> 0 `i `uc ]
-"259
-[; ;src/mssp_spi_driver.c: 259:     manual_transfer = 0x00;
-[e = _manual_transfer -> -> 0 `i `uc ]
 "260
-[; ;src/mssp_spi_driver.c: 260:     transfer_complete_flag = 0x00;
-[e = _transfer_complete_flag -> -> 0 `i `uc ]
+[; ;src/mssp_spi_driver.c: 260:     manual_transfer = 0x00;
+[e = _manual_transfer -> -> 0 `i `uc ]
 "261
-[; ;src/mssp_spi_driver.c: 261: }
+[; ;src/mssp_spi_driver.c: 261:     transfer_complete_flag = 0x00;
+[e = _transfer_complete_flag -> -> 0 `i `uc ]
+"262
+[; ;src/mssp_spi_driver.c: 262: }
 [e :UE 293 ]
 }
-"273
-[; ;src/mssp_spi_driver.c: 273: void SPI_Send_Packet(uint8_t * tx_pack, uint16_t tx_size){
+"274
+[; ;src/mssp_spi_driver.c: 274: void SPI_Send_Packet(uint8_t * tx_pack, uint16_t tx_size){
 [v _SPI_Send_Packet `(v ~T0 @X0 1 ef2`*uc`us ]
 {
 [e :U _SPI_Send_Packet ]
 [v _tx_pack `*uc ~T0 @X0 1 r1 ]
 [v _tx_size `us ~T0 @X0 1 r2 ]
 [f ]
-"274
-[; ;src/mssp_spi_driver.c: 274:     uint16_t i = 0;
+"275
+[; ;src/mssp_spi_driver.c: 275:     uint16_t i = 0;
 [v _i `us ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `us ]
-"275
-[; ;src/mssp_spi_driver.c: 275:     for(i=0; i<tx_size; i++){
+"276
+[; ;src/mssp_spi_driver.c: 276:     for(i=0; i<tx_size; i++){
 {
 [e = _i -> -> 0 `i `us ]
 [e $U 303  ]
 [e :U 300 ]
 {
-"276
-[; ;src/mssp_spi_driver.c: 276:         SPI_Send_Byte(tx_pack[i]);
-[e ( _SPI_Send_Byte (1 *U + _tx_pack * -> _i `ux -> -> # *U _tx_pack `ui `ux ]
 "277
-[; ;src/mssp_spi_driver.c: 277:     }
+[; ;src/mssp_spi_driver.c: 277:         SPI_Send_Byte(tx_pack[i]);
+[e ( _SPI_Send_Byte (1 *U + _tx_pack * -> _i `ux -> -> # *U _tx_pack `ui `ux ]
+"278
+[; ;src/mssp_spi_driver.c: 278:     }
 }
 [e ++ _i -> -> 1 `i `us ]
 [e :U 303 ]
 [e $ < -> _i `ui -> _tx_size `ui 300  ]
 [e :U 301 ]
 }
-"278
-[; ;src/mssp_spi_driver.c: 278: }
+"279
+[; ;src/mssp_spi_driver.c: 279: }
 [e :UE 299 ]
 }
-"289
-[; ;src/mssp_spi_driver.c: 289: void SPI_Receive_Byte(uint8_t * rx){
+"290
+[; ;src/mssp_spi_driver.c: 290: void SPI_Receive_Byte(uint8_t * rx){
 [v _SPI_Receive_Byte `(v ~T0 @X0 1 ef1`*uc ]
 {
 [e :U _SPI_Receive_Byte ]
 [v _rx `*uc ~T0 @X0 1 r1 ]
 [f ]
-"291
-[; ;src/mssp_spi_driver.c: 291:     SPI_Transfer_Byte(0x00, rx);
+"292
+[; ;src/mssp_spi_driver.c: 292:     SPI_Transfer_Byte(0x00, rx);
 [e ( _SPI_Transfer_Byte (2 , -> -> 0 `i `uc _rx ]
-"293
-[; ;src/mssp_spi_driver.c: 293: }
+"294
+[; ;src/mssp_spi_driver.c: 294: }
 [e :UE 304 ]
 }
-"305
-[; ;src/mssp_spi_driver.c: 305: void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size){
+"306
+[; ;src/mssp_spi_driver.c: 306: void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size){
 [v _SPI_Receive_Packet `(v ~T0 @X0 1 ef2`*uc`us ]
 {
 [e :U _SPI_Receive_Packet ]
 [v _rx_pack `*uc ~T0 @X0 1 r1 ]
 [v _rx_size `us ~T0 @X0 1 r2 ]
 [f ]
-"306
-[; ;src/mssp_spi_driver.c: 306:     uint16_t i = 0;
+"307
+[; ;src/mssp_spi_driver.c: 307:     uint16_t i = 0;
 [v _i `us ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `us ]
-"307
-[; ;src/mssp_spi_driver.c: 307:     for(i=0; i<rx_size; i++){
+"308
+[; ;src/mssp_spi_driver.c: 308:     for(i=0; i<rx_size; i++){
 {
 [e = _i -> -> 0 `i `us ]
 [e $U 309  ]
 [e :U 306 ]
 {
-"308
-[; ;src/mssp_spi_driver.c: 308:         SPI_Receive_Byte(&rx_pack[i]);
-[e ( _SPI_Receive_Byte (1 &U *U + _rx_pack * -> _i `ux -> -> # *U _rx_pack `ui `ux ]
 "309
-[; ;src/mssp_spi_driver.c: 309:     }
+[; ;src/mssp_spi_driver.c: 309:         SPI_Receive_Byte(&rx_pack[i]);
+[e ( _SPI_Receive_Byte (1 &U *U + _rx_pack * -> _i `ux -> -> # *U _rx_pack `ui `ux ]
+"310
+[; ;src/mssp_spi_driver.c: 310:     }
 }
 [e ++ _i -> -> 1 `i `us ]
 [e :U 309 ]
 [e $ < -> _i `ui -> _rx_size `ui 306  ]
 [e :U 307 ]
 }
-"310
-[; ;src/mssp_spi_driver.c: 310: }
+"311
+[; ;src/mssp_spi_driver.c: 311: }
 [e :UE 305 ]
 }

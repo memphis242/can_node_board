@@ -7,14 +7,7 @@
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "src/lcd_driver.c" 2
-
-
-
-
-
-
-
-
+# 10 "src/lcd_driver.c"
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -4389,10 +4382,10 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 33 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 2 3
-# 9 "src/lcd_driver.c" 2
+# 10 "src/lcd_driver.c" 2
 
 # 1 "inc\\lcd_driver.h" 1
-# 83 "inc\\lcd_driver.h"
+# 99 "inc\\lcd_driver.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 1 3
 # 22 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 3
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\bits/alltypes.h" 1 3
@@ -4478,16 +4471,35 @@ typedef int32_t int_fast32_t;
 typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
-# 83 "inc\\lcd_driver.h" 2
-# 182 "inc\\lcd_driver.h"
+# 99 "inc\\lcd_driver.h" 2
+# 206 "inc\\lcd_driver.h"
+enum lcd_display_t {
+    QAPASS_EBAY,
+    QAPASS_AMAZON,
+    ADAFRUIT_STANDARD_16x2,
+    ADAFRUIT_STANDARD_20x4
+};
+enum lcd_bit_mode_t {
+    MODE_4BIT,
+    MODE_8BIT
+};
+
+
+
+
+
 void static LCD_enable_toggle(void);
 void static LCD_wait_for_BF(void);
+
 void LCD_write_data_byte_4bit(uint8_t data);
 void LCD_write_data_byte_8bit(uint8_t data);
 void LCD_write_instr_byte_4bit(uint8_t instr);
 void LCD_write_instr_byte_8bit(uint8_t instr);
 void LCD_Init_ECE376(void);
-void LCD_Init(uint8_t entry_mode, uint8_t disp_ctrl, uint8_t func_set);
+void LCD_Init_amazonLCD(uint8_t mode_4bit);
+void LCD_Init(uint8_t entry_mode, uint8_t disp_ctrl, uint8_t func_set, enum lcd_display_t disp_to_be_used);
+
+
 uint8_t LCD_isInit(void);
 uint8_t LCD_clear_display(void);
 uint8_t LCD_return_home(void);
@@ -4496,21 +4508,14 @@ uint8_t LCD_set_cursor_position(uint8_t line, uint8_t pos_on_line);
 uint8_t LCD_write_characters(char * toWrite, uint8_t size);
 uint8_t LCD_turn_off_cursor(void);
 uint8_t LCD_turn_on_cursor(void);
-
-
-void static LCD_enable_toggle_amazonLCD(void);
-void LCD_write_data_byte_4bit_amazonLCD(uint8_t data);
-void LCD_write_data_byte_8bit_amazonLCD(uint8_t data);
-void LCD_write_instr_byte_4bit_amazonLCD(uint8_t instr);
-void LCD_write_instr_byte_8bit_amazonLCD(uint8_t instr);
-void LCD_write_instr_nibble_4bit_amazonLCD(uint8_t instr);
-uint8_t LCD_clear_display_amazonLCD(void);
-void LCD_Init_amazonLCD(uint8_t mode_4bit);
-uint8_t LCD_set_cursor_position_amazonLCD(uint8_t line, uint8_t pos_on_line);
-# 10 "src/lcd_driver.c" 2
+# 11 "src/lcd_driver.c" 2
 
 
 
+
+
+static enum lcd_display_t CURRENT_DISP = QAPASS_EBAY;
+static enum lcd_bit_mode_t DISP_BIT_MODE = MODE_4BIT;
 static uint8_t init_complete = 0x00;
 static uint8_t shift_mode = 0x0u;
 static uint8_t disp_16x2 = 0x1u;
@@ -4520,19 +4525,50 @@ static uint8_t current_disp_ctrl = 0x08u;
 static uint8_t current_func_set = 0x30u;
 
 static uint8_t address_counter = 0x00;
-
-
-
+# 45 "src/lcd_driver.c"
 void static LCD_enable_toggle(void){
-    (LATCbits.LATC2 = 0u);
-    _delay((unsigned long)((2u)*(40000000u/4000000.0)));
-    (LATCbits.LATC2 = 1u);
-    _delay((unsigned long)((2u)*(40000000u/4000000.0)));
-    (LATCbits.LATC2 = 0u);
-    _delay((unsigned long)((2u)*(40000000u/4000000.0)));
+    switch(CURRENT_DISP){
+
+        case QAPASS_EBAY:
+            (LATCbits.LATC2 = 0u);
+            _delay((unsigned long)((2u)*(40000000u/4000000.0)));
+            (LATCbits.LATC2 = 1u);
+            _delay((unsigned long)((2u)*(40000000u/4000000.0)));
+            (LATCbits.LATC2 = 0u);
+            _delay((unsigned long)((2u)*(40000000u/4000000.0)));
+            break;
+
+        case QAPASS_AMAZON:
+            (LATCbits.LATC2 = 0u);
+            _delay((unsigned long)((1u)*(40000000u/4000000.0)));
+            (LATCbits.LATC2 = 1u);
+            _delay((unsigned long)((1u)*(40000000u/4000000.0)));
+            (LATCbits.LATC2 = 0u);
+            _delay((unsigned long)((100u)*(40000000u/4000000.0)));
+            break;
+
+        case ADAFRUIT_STANDARD_16x2:
+            (LATCbits.LATC2 = 0u);
+            _delay((unsigned long)((2u)*(40000000u/4000000.0)));
+            (LATCbits.LATC2 = 1u);
+            _delay((unsigned long)((2u)*(40000000u/4000000.0)));
+            (LATCbits.LATC2 = 0u);
+            _delay((unsigned long)((2u)*(40000000u/4000000.0)));
+            break;
+
+        case ADAFRUIT_STANDARD_20x4:
+            (LATCbits.LATC2 = 0u);
+            _delay((unsigned long)((2u)*(40000000u/4000000.0)));
+            (LATCbits.LATC2 = 1u);
+            _delay((unsigned long)((2u)*(40000000u/4000000.0)));
+            (LATCbits.LATC2 = 0u);
+            _delay((unsigned long)((2u)*(40000000u/4000000.0)));
+            break;
+
+    }
+
 }
-
-
+# 107 "src/lcd_driver.c"
 void static LCD_wait_for_BF(void){
 
     (TRISD = 0xFFu);
@@ -4541,8 +4577,7 @@ void static LCD_wait_for_BF(void){
     LCD_enable_toggle();
     while(PORTDbits.RD7);
 }
-
-
+# 126 "src/lcd_driver.c"
 void LCD_write_data_byte_4bit(uint8_t data){
 
     (TRISC &= 0xF8);
@@ -4558,7 +4593,7 @@ void LCD_write_data_byte_4bit(uint8_t data){
 
     _delay((unsigned long)((10)*(40000000u/4000.0)));
 }
-
+# 152 "src/lcd_driver.c"
 void LCD_write_data_byte_8bit(uint8_t data){
 
     (TRISC &= 0xF8);
@@ -4572,8 +4607,7 @@ void LCD_write_data_byte_8bit(uint8_t data){
 
     _delay((unsigned long)((10)*(40000000u/4000.0)));
 }
-
-
+# 175 "src/lcd_driver.c"
 void LCD_write_instr_byte_4bit(uint8_t instr){
 
     (TRISC &= 0xF8);
@@ -4589,7 +4623,7 @@ void LCD_write_instr_byte_4bit(uint8_t instr){
 
     _delay((unsigned long)((10)*(40000000u/4000.0)));
 }
-
+# 200 "src/lcd_driver.c"
 void LCD_write_instr_byte_8bit(uint8_t instr){
 
     (TRISC &= 0xF8);
@@ -4603,7 +4637,7 @@ void LCD_write_instr_byte_8bit(uint8_t instr){
 
     _delay((unsigned long)((10)*(40000000u/4000.0)));
 }
-
+# 224 "src/lcd_driver.c"
 void LCD_Init_ECE376(void){
 
 
@@ -4636,13 +4670,63 @@ void LCD_Init_ECE376(void){
     _delay((unsigned long)((100)*(40000000u/4000.0)));
 
 
+    CURRENT_DISP = QAPASS_EBAY;
+    DISP_BIT_MODE = MODE_4BIT;
     init_complete = 0x01u;
     current_entry_mode = 0x06u;
     current_disp_ctrl = 0x0Eu;
     current_func_set = 0x28u;
 }
+# 275 "src/lcd_driver.c"
+void LCD_Init_amazonLCD(uint8_t mode_4bit){
+    _delay((unsigned long)((50)*(40000000u/4000.0)));
 
-void LCD_Init(uint8_t entry_mode, uint8_t disp_ctrl, uint8_t func_set){
+    if(mode_4bit){
+        (current_func_set &= ~(1u << 4u));
+
+        LCD_write_instr_byte_4bit(0x03);
+        _delay((unsigned long)((4500)*(40000000u/4000000.0)));
+        LCD_write_instr_byte_4bit(0x03);
+        _delay((unsigned long)((450)*(40000000u/4000000.0)));
+        LCD_write_instr_byte_4bit(0x03);
+        _delay((unsigned long)((150)*(40000000u/4000000.0)));
+        LCD_write_instr_byte_4bit(0x02);
+
+        LCD_write_instr_byte_4bit(0x28u);
+        LCD_write_instr_byte_4bit(0x0A);
+        LCD_clear_display();
+        LCD_write_instr_byte_4bit(0x06u);
+
+        current_func_set = 0x28u;
+        current_disp_ctrl = 0x0A;
+        current_entry_mode = 0x06u;
+        DISP_BIT_MODE = MODE_4BIT;
+
+    } else{
+        (current_func_set |= (1u << 4u));
+
+        LCD_write_instr_byte_8bit(0x38u);
+        _delay((unsigned long)((4500)*(40000000u/4000000.0)));
+        LCD_write_instr_byte_8bit(0x38u);
+        _delay((unsigned long)((150)*(40000000u/4000000.0)));
+        LCD_write_instr_byte_8bit(0x38u);
+
+        LCD_write_instr_byte_8bit(0x38u);
+        LCD_write_instr_byte_8bit(0x0A);
+        LCD_clear_display();
+        LCD_write_instr_byte_8bit(0x06u);
+
+
+        CURRENT_DISP = QAPASS_AMAZON;
+        init_complete = 0x01u;
+        current_func_set = 0x38u;
+        current_disp_ctrl = 0x0A;
+        current_entry_mode = 0x06u;
+        DISP_BIT_MODE = MODE_8BIT;
+    }
+}
+# 335 "src/lcd_driver.c"
+void LCD_Init(uint8_t entry_mode, uint8_t disp_ctrl, uint8_t func_set, enum lcd_display_t disp_to_be_used){
 
 
     _delay((unsigned long)((60)*(40000000u/4000.0)));
@@ -4697,20 +4781,26 @@ void LCD_Init(uint8_t entry_mode, uint8_t disp_ctrl, uint8_t func_set){
     PORTD = disp_ctrl;
     LCD_enable_toggle();
 
+    if((~entry_mode & (1u << 4u))){
+        DISP_BIT_MODE = MODE_4BIT;
+    } else{
+        DISP_BIT_MODE = MODE_8BIT;
+    }
 
+
+    CURRENT_DISP = disp_to_be_used;
     init_complete = 0x01u;
-
     current_entry_mode = entry_mode;
     current_disp_ctrl = disp_ctrl;
     current_func_set = func_set;
 }
-
+# 415 "src/lcd_driver.c"
 uint8_t LCD_isInit(void){
     return init_complete;
 }
-
+# 427 "src/lcd_driver.c"
 uint8_t LCD_clear_display(void){
-    if((~current_entry_mode & (1u << 4u))){
+    if(DISP_BIT_MODE == MODE_4BIT){
         LCD_write_instr_byte_4bit(0x01u);
     } else{
         LCD_write_instr_byte_8bit(0x01u);
@@ -4720,22 +4810,19 @@ uint8_t LCD_clear_display(void){
 
     return 1;
 }
-
+# 451 "src/lcd_driver.c"
 uint8_t LCD_return_home(void){
-    if(!(current_entry_mode & (1u << 4u))){
+    uint8_t succ_or_fail = 0x00;
+    if(DISP_BIT_MODE == MODE_4BIT){
         LCD_write_instr_byte_4bit(0x02u);
     } else{
         LCD_write_instr_byte_8bit(0x02u);
     }
-
-    return 1;
-
-
     address_counter = 0x00;
 
     return 1;
 }
-
+# 475 "src/lcd_driver.c"
 uint8_t LCD_read_current_address_counter(void){
 
     if(!init_complete) { return 0; }
@@ -4747,8 +4834,7 @@ uint8_t LCD_read_current_address_counter(void){
 
     return address_counter;
 }
-
-
+# 500 "src/lcd_driver.c"
 uint8_t LCD_set_cursor_position(uint8_t line, uint8_t pos_on_line){
 
     if(line > 2u || pos_on_line > 2u * 16u){
@@ -4774,7 +4860,7 @@ uint8_t LCD_set_cursor_position(uint8_t line, uint8_t pos_on_line){
         }
     }
 
-    if((~current_entry_mode & (1u << 4u))){
+    if(DISP_BIT_MODE == MODE_4BIT){
         LCD_write_instr_byte_4bit(0x80u | ddram_addr);
     } else{
         LCD_write_instr_byte_8bit(0x80u | ddram_addr);
@@ -4784,8 +4870,7 @@ uint8_t LCD_set_cursor_position(uint8_t line, uint8_t pos_on_line){
 
     return 1;
 }
-
-
+# 548 "src/lcd_driver.c"
 uint8_t LCD_write_characters(char * toWrite, uint8_t size){
 
     if(size > 80u) { return 0; }
@@ -4794,226 +4879,55 @@ uint8_t LCD_write_characters(char * toWrite, uint8_t size){
     if(!init_complete) { return 0; }
 
 
-    for(uint8_t i=0u; i<size; i++){
-        LCD_wait_for_BF();
+    if(DISP_BIT_MODE == MODE_4BIT){
+        LCD_write_instr_byte_4bit(0x01u);
+    } else{
+        LCD_write_instr_byte_8bit(0x01u);
+    }
 
-        (TRISD &= 0x0Fu);
-        (LATCbits.LATC0 = 1u);
-        (LATCbits.LATC1 = 0u);
-        PORTD = toWrite[i];
-        LCD_enable_toggle();
+
+    for(uint8_t i=0u; i<size; i++){
+
+        if(DISP_BIT_MODE == MODE_4BIT){
+            LCD_write_data_byte_4bit(toWrite[i]);
+        } else {
+            LCD_write_data_byte_8bit(toWrite[i]);
+        }
 
         address_counter++;
     }
 
     return 1;
 }
-
+# 585 "src/lcd_driver.c"
 uint8_t LCD_turn_off_cursor(void){
 
     if(!init_complete) { return 0; }
 
 
-    LCD_wait_for_BF();
-
-
-    (TRISD &= 0x0Fu);
-    (LATCbits.LATC0 = 0u);
-    (LATCbits.LATC1 = 0u);
-
-
-    PORTD = current_disp_ctrl & ~(0x02u);
-    LCD_enable_toggle();
+    if(DISP_BIT_MODE == MODE_4BIT){
+        LCD_write_instr_byte_4bit(current_disp_ctrl & ~(0x02u));
+    } else{
+        LCD_write_instr_byte_8bit(current_disp_ctrl & ~(0x02u));
+    }
 
     current_disp_ctrl &= ~(0x02u);
 
     return 1;
 }
-
+# 609 "src/lcd_driver.c"
 uint8_t LCD_turn_on_cursor(void){
 
     if(!init_complete) { return 0; }
 
 
-    LCD_wait_for_BF();
-
-
-    (TRISD &= 0x0Fu);
-    (LATCbits.LATC0 = 0u);
-    (LATCbits.LATC1 = 0u);
-
-
-    PORTD = current_disp_ctrl | 0x02u;
-    LCD_enable_toggle();
+    if(DISP_BIT_MODE == MODE_4BIT){
+        LCD_write_instr_byte_4bit(current_disp_ctrl | 0x02u);
+    } else{
+        LCD_write_instr_byte_8bit(current_disp_ctrl | 0x02u);
+    }
 
     current_disp_ctrl |= 0x02u;
-
-    return 1;
-}
-
-
-
-void static LCD_enable_toggle_amazonLCD(void){
-    (LATCbits.LATC2 = 0u);
-    _delay((unsigned long)((1u)*(40000000u/4000000.0)));
-    (LATCbits.LATC2 = 1u);
-    _delay((unsigned long)((1u)*(40000000u/4000000.0)));
-    (LATCbits.LATC2 = 0u);
-    _delay((unsigned long)((100u)*(40000000u/4000000.0)));
-}
-
-void LCD_write_data_byte_4bit_amazonLCD(uint8_t data){
-
-    (TRISC &= 0xF8);
-    (TRISD &= 0x0Fu);
-    (LATCbits.LATC0 = 1u);
-    (LATCbits.LATC1 = 0u);
-
-
-    PORTD = (PORTD & 0x0F) | (data & 0xF0);
-    LCD_enable_toggle_amazonLCD();
-    PORTD = (PORTD & 0x0F) | ((data<<4) & 0xF0);
-    LCD_enable_toggle_amazonLCD();
-}
-
-void LCD_write_data_byte_8bit_amazonLCD(uint8_t data){
-
-    (TRISC &= 0xF8);
-    (TRISD = 0x00u);
-    (LATCbits.LATC0 = 1u);
-    (LATCbits.LATC1 = 0u);
-
-
-    PORTD = data;
-    LCD_enable_toggle_amazonLCD();
-}
-
-void LCD_write_instr_byte_4bit_amazonLCD(uint8_t instr){
-
-    (TRISC &= 0xF8);
-    (TRISD &= 0x0Fu);
-    (LATCbits.LATC0 = 0u);
-    (LATCbits.LATC1 = 0u);
-
-
-    PORTD = (PORTD & 0x0F) | (instr & 0xF0);
-    LCD_enable_toggle_amazonLCD();
-    PORTD = (PORTD & 0x0F) | ((instr<<4) & 0xF0);
-    LCD_enable_toggle_amazonLCD();
-}
-
-void LCD_write_instr_byte_8bit_amazonLCD(uint8_t instr){
-
-    (TRISC &= 0xF8);
-    (TRISD = 0x00u);
-    (LATCbits.LATC0 = 0u);
-    (LATCbits.LATC1 = 0u);
-
-
-    PORTD = instr;
-    LCD_enable_toggle_amazonLCD();
-}
-
-void LCD_write_instr_nibble_4bit_amazonLCD(uint8_t instr){
-
-    (TRISC &= 0xF8);
-    (TRISD &= 0x0Fu);
-    (LATCbits.LATC0 = 0u);
-    (LATCbits.LATC1 = 0u);
-
-
-    PORTD = (PORTD & 0x0F) | ((instr<<4) & 0xF0);
-    LCD_enable_toggle_amazonLCD();
-}
-
-uint8_t LCD_clear_display_amazonLCD(void){
-    if((~current_entry_mode & (1u << 4u))){
-        LCD_write_instr_byte_4bit_amazonLCD(0x01u);
-    } else{
-        LCD_write_instr_byte_8bit_amazonLCD(0x01u);
-    }
-    _delay((unsigned long)((2)*(40000000u/4000.0)));
-
-    return 1;
-}
-
-void LCD_Init_amazonLCD(uint8_t mode_4bit){
-    _delay((unsigned long)((50)*(40000000u/4000.0)));
-
-    if(mode_4bit){
-        (current_func_set &= ~(1u << 4u));
-
-        LCD_write_instr_nibble_4bit_amazonLCD(0x03);
-        _delay((unsigned long)((4500)*(40000000u/4000000.0)));
-        LCD_write_instr_nibble_4bit_amazonLCD(0x03);
-        _delay((unsigned long)((450)*(40000000u/4000000.0)));
-        LCD_write_instr_nibble_4bit_amazonLCD(0x03);
-        _delay((unsigned long)((150)*(40000000u/4000000.0)));
-        LCD_write_instr_nibble_4bit_amazonLCD(0x02);
-
-        LCD_write_instr_byte_4bit_amazonLCD(0x28u);
-        LCD_write_instr_byte_4bit_amazonLCD(0x0A);
-        LCD_clear_display_amazonLCD();
-        LCD_write_instr_byte_4bit_amazonLCD(0x06u);
-
-        current_func_set = 0x28u;
-        current_disp_ctrl = 0x0A;
-        current_entry_mode = 0x06u;
-
-    } else{
-        (current_func_set |= (1u << 4u));
-
-        LCD_write_instr_byte_8bit_amazonLCD(0x38u);
-        _delay((unsigned long)((4500)*(40000000u/4000000.0)));
-        LCD_write_instr_byte_8bit_amazonLCD(0x38u);
-        _delay((unsigned long)((150)*(40000000u/4000000.0)));
-        LCD_write_instr_byte_8bit_amazonLCD(0x38u);
-
-        LCD_write_instr_byte_8bit_amazonLCD(0x38u);
-        LCD_write_instr_byte_8bit_amazonLCD(0x0A);
-        LCD_clear_display_amazonLCD();
-        LCD_write_instr_byte_8bit_amazonLCD(0x06u);
-
-
-        init_complete = 0x01u;
-        current_func_set = 0x38u;
-        current_disp_ctrl = 0x0A;
-        current_entry_mode = 0x06u;
-    }
-}
-
-uint8_t LCD_set_cursor_position_amazonLCD(uint8_t line, uint8_t pos_on_line){
-
-    if(line > 2u || pos_on_line > 2u * 16u){
-        return 0;
-    }
-
-    uint8_t ddram_addr;
-
-
-    if(!shift_mode && disp_16x2){
-
-        if(line == 1u && pos_on_line < 16u){
-            ddram_addr = 0x00u + pos_on_line - 1;
-
-        } else if(line == 2u && pos_on_line < 16u){
-            ddram_addr = 0x40u + pos_on_line - 1;
-
-        } else if(line == 1u && pos_on_line > 16u){
-            ddram_addr = 0x40u + pos_on_line - 16 - 1;
-
-        } else{
-            return 0;
-        }
-    }
-
-    if((~current_entry_mode & (1u << 4u))){
-        LCD_write_instr_byte_4bit_amazonLCD(0x80u | ddram_addr);
-    } else{
-        LCD_write_instr_byte_8bit_amazonLCD(0x80u | ddram_addr);
-    }
-
-    address_counter = ddram_addr;
 
     return 1;
 }
