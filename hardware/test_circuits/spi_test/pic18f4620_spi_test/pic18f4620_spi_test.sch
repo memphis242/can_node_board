@@ -3,10 +3,10 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 1
+Sheet 1 4
 Title "PIC18F4620 - MSSP SPI Test Circuit"
 Date "2021-11-04"
-Rev "Ver. 1"
+Rev "1.0"
 Comp "Personal Project"
 Comment1 ""
 Comment2 ""
@@ -763,7 +763,7 @@ ICSP Header
 Text Notes 1150 1800 1    30   ~ 0
 Use with something like\na PICkit4.
 Wire Notes Line
-	5950 550  5950 7600
+	5950 550  5900 6600
 $Comp
 L can_node_board_hw:PIC18F4620-IP U3
 U 1 1 6194E699
@@ -1506,14 +1506,6 @@ Text GLabel 4600 5600 2    50   Input ~ 0
 ~SS
 Text GLabel 2150 4700 0    40   Input ~ 0
 OSC2
-Wire Bus Line
-	6950 3800 6950 4900
-Wire Bus Line
-	6950 4900 8150 4900
-Wire Bus Line
-	8950 4900 10200 4900
-Wire Bus Line
-	9950 3200 9950 3850
 $Comp
 L Switch:SW_SPDT SW3
 U 1 1 61D41444
@@ -1536,4 +1528,30 @@ F 3 "" H 3000 1200 50  0001 C CNN
 	1    3000 1200
 	1    0    0    -1  
 $EndComp
+$Sheet
+S 5550 7450 500  150 
+U 619FAD4D
+F0 "PIC18F4620 TX Node Setup" 50
+F1 "pic18f4620_tx_node.sch" 50
+$EndSheet
+$Sheet
+S 5550 7100 500  150 
+U 61A0C441
+F0 "PIC18F4620 RX Node Setup" 50
+F1 "pic18f4620_rx_node.sch" 50
+$EndSheet
+$Sheet
+S 5550 6750 500  150 
+U 61A1D4A2
+F0 "Power 5V 7805" 50
+F1 "pwr_5V_7805.sch" 50
+$EndSheet
+Wire Bus Line
+	6950 3800 6950 4900
+Wire Bus Line
+	6950 4900 8150 4900
+Wire Bus Line
+	8950 4900 10200 4900
+Wire Bus Line
+	9950 3200 9950 3850
 $EndSCHEMATC
