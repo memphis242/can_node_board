@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files\Microchip\xc8\v2.31\pic\dat\en_msgs.txt -cn \
   -h+dist/default/production\can_node_board_SW.X.production.sym \
   --cmf=dist/default/production\can_node_board_SW.X.production.cmf -z \
-  -Q18F4620 -oC:\Users\almos\AppData\Local\Temp\s5r4.3 \
+  -Q18F4620 -oC:\Users\almos\AppData\Local\Temp\shsk.2 \
   --defsym=__MPLAB_BUILD=1 \
   -Mdist/default/production/can_node_board_SW.X.production.map -E1 \
   -ver=XC8 Compiler --acfsm=1493 -ASTACK=080h-0F7Fh -pstack=STACK \
@@ -26,7 +26,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\almos\AppData\Local\Temp\s5r4.o \
+  C:\Users\almos\AppData\Local\Temp\shsk.o \
   dist/default/production\can_node_board_SW.X.production.o 
 
 Object code version is 3.11
@@ -36,7 +36,7 @@ Machine type is 18F4620
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\almos\AppData\Local\Temp\s5r4.o
+C:\Users\almos\AppData\Local\Temp\shsk.o
                 idloc                            200000   200000        8        0       5
                 config                           300000   300000        E        0       4
                 init                                  E        E        4        4       0

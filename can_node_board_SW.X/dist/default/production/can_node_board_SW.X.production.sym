@@ -302,7 +302,7 @@ text0 1010 15F3 CODE 1010 0
 %locals
 dist/default/production\can_node_board_SW.X.production.o
 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
-C:\Users\almos\AppData\Local\Temp\s5r4.s
+C:\Users\almos\AppData\Local\Temp\shsk.s
 1992 1544 0 CODE 0
 1994 1544 0 CODE 0
 1997 1544 0 CODE 0
@@ -501,7 +501,7 @@ src/lcd_driver.c
 82 13DA 0 CODE 0
 84 13DE 0 CODE 0
 86 1418 0 CODE 0
-C:\Users\almos\AppData\Local\Temp\s5r4.s
+C:\Users\almos\AppData\Local\Temp\shsk.s
 4323 8 0 CODE 0
 spi_test.c
 134 8 0 CODE 0
