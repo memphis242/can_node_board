@@ -4486,29 +4486,30 @@ void Timer1_Disable(void);
 # 10 "src/timer.c" 2
 
 # 1 "inc\\ccp.h" 1
-# 50 "inc\\ccp.h"
-void CCP2_Init_Default(void);
-void CCP2_Compare_Val(uint16_t comp_val);
+# 64 "inc\\ccp.h"
+void CCP1_Init_Default(uint16_t comp_val);
+void CCP2_Init_Default(uint16_t comp_val);
 # 11 "src/timer.c" 2
 # 31 "src/timer.c"
 void Timer1_Init_Default(uint16_t period_val){
 
 
     T1CON = 0xB0;
-    (T3CON = 0xB0);
+    (T3CON = 0x00);
 
 
-    CCP2_Init_Default();
-    CCP2_Compare_Val(period_val);
 
 
+
+
+    CCP1_Init_Default(period_val);
 
 }
-# 53 "src/timer.c"
+# 54 "src/timer.c"
 void Timer1_Enable(void){
     T1CON |= 0x01;
 }
-# 65 "src/timer.c"
+# 66 "src/timer.c"
 void Timer1_Disable(void){
     T1CON &= ~0x01;
 }

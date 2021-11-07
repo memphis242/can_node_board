@@ -12,7 +12,7 @@
 
 
 // <editor-fold defaultstate="collapsed" desc="GLOBAL & STATIC VARIABLES">
-#define 
+
 // </editor-fold>
 
 

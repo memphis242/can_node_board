@@ -30,7 +30,7 @@
 
 
 // <editor-fold defaultstate="collapsed" desc="DEFINITIONS">
-#define 
+
 // </editor-fold>
 
 

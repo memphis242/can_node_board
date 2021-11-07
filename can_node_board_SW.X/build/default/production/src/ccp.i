@@ -4479,9 +4479,9 @@ typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
 # 30 "inc\\ccp.h" 2
-# 50 "inc\\ccp.h"
-void CCP2_Init_Default(void);
-void CCP2_Compare_Val(uint16_t comp_val);
+# 64 "inc\\ccp.h"
+void CCP1_Init_Default(uint16_t comp_val);
+void CCP2_Init_Default(uint16_t comp_val);
 # 10 "src/ccp.c" 2
 
 # 1 "inc\\timer.h" 1
@@ -4490,12 +4490,14 @@ void Timer1_Init_Default(uint16_t period_val);
 void Timer1_Enable(void);
 void Timer1_Disable(void);
 # 11 "src/ccp.c" 2
-# 37 "src/ccp.c"
-void CCP2_Init_Default(void){
-    (CCP2CON = 0x0A);
-    (PIE2bits.CCP2IE = 1u);
+# 41 "src/ccp.c"
+void CCP1_Init_Default(uint16_t comp_val){
+    (CCP1CON = 0x0B);
+    (CCPR1 = comp_val);
+    (PIE1bits.CCP1IE = 1u);
 }
-# 51 "src/ccp.c"
-void CCP2_Compare_Val(uint16_t comp_val){
-    CCPR2 = comp_val;
+void CCP2_Init_Default(uint16_t comp_val){
+    (CCP2CON = 0x0B);
+    (CCPR2 = comp_val);
+    (PIE2bits.CCP2IE = 1u);
 }

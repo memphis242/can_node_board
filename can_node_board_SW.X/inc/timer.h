@@ -47,7 +47,7 @@
 // T3CON - Timer3 Control Register
 #define T3CON_T3CCP_BITS    0x48    // Timer3 and Timer1 CCPx Enable bits --> BITS NOT NEXT TO EACH OTHER!
 
-#define TMR1_FOR_COMP_CCP2  (T3CON = 0xB0)
+#define TMR1_FOR_COMP_CCP  (T3CON = 0x00)
 
 // Interrupt-related
 

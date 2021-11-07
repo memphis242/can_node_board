@@ -82,8 +82,8 @@
 // the Test TX Node and the Test RX Node in the same file
 #define TX_NODE         0u
 #define RX_NODE         1u
-#define CURRENT_NODE    TX_NODE
-//#define CURRENT_NODE    RX_NODE
+//#define CURRENT_NODE    TX_NODE
+#define CURRENT_NODE    RX_NODE
 
 //#define TX_RX_DEBUG
 
@@ -161,11 +161,11 @@ void __interrupt() isr(void){
     }
     
     /* ****************************************************
-     * CCP2 INTERRUPT
+     * CCP1 INTERRUPT
      * ****************************************************
      */
 #if CURRENT_NODE == TX_NODE
-    if(CCP2_IF_BIT && CCP2_INT_ENABLE_BIT){
+    if(CCP1_IF_BIT && CCP1_INT_ENABLE_BIT){
         
         // On every other compare match, transmit!
         if(tmr_100ms_next){
@@ -175,14 +175,14 @@ void __interrupt() isr(void){
             // Set flag to indicate ready to transmit
             spi_ready_to_tx = 0x01;
             
-            CLEAR_CCP2_IF;
+            CLEAR_CCP1_IF;
             
         } else{
             // Set flag so next interrupt, we transmit
             tmr_100ms_next = 0x01;
             spi_ready_to_tx = 0x00; // Just make sure this flag is still cleared
             
-            CLEAR_CCP2_IF;
+            CLEAR_CCP1_IF;
         }
     }
 #endif
@@ -206,8 +206,7 @@ void main(void) {
      * its display indicating these states.
      * 
      * TODO: INCLUDE TX TIMESTAMPS
-     */    
-    di();
+     */
     
     SPI_Init_Master_Default();  // REMEMBER RD2 IS BEING USED AS CS
     // Use RE0 and RE1 as button inputs
@@ -286,7 +285,6 @@ void main(void) {
      * TODO: INCLUDE TX AND RX TIMESTAMPS
      */
     // Initialize SPI mode of MSSP module and LCD display
-    di();
     LCD_Init_ECE376();
     SPI_Init_Slave_Default();
     

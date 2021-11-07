@@ -33,23 +33,36 @@
 // Definitions
 // COMMENT: For now, I am just using the CCP2 module.
 // CCP2CON - CCP2 Control Register
-#define CCP2M           0x0F    // CCPx Module Mode Select bits;
-#define CCP2M_DEFAULT   (CCP2CON = 0x0A)  // 1010 for Compare mode w/o affecting
-                                          // the CCP2 pin, 1011 for A/D
+#define CCPxM           0x0F    // CCPx Module Mode Select bits;
+#define CCP1M_DEFAULT   (CCP1CON = 0x0B)  // 1011 for Compare mode /w Special
+                                          // Trigger Event
+#define CCP2M_DEFAULT   (CCP2CON = 0x0B)
 
 // Interrupt-Related
+#define CCP1_IF_BIT                 PIR1bits.CCP1IF
 #define CCP2_IF_BIT                 PIR2bits.CCP2IF
+#define CCP1_INT_ENABLE_BIT         PIE1bits.CCP1IE
 #define CCP2_INT_ENABLE_BIT         PIE2bits.CCP2IE
+#define ENABLE_CCP1_INTERRUPT       (CCP1_INT_ENABLE_BIT = 1u)
 #define ENABLE_CCP2_INTERRUPT       (CCP2_INT_ENABLE_BIT = 1u)
-#define CLEAR_CCP2_IF               PIR2bits.CCP2IF = 0u;
+#define CLEAR_CCP1_IF               (CCP1_IF_BIT = 0u)
+#define CLEAR_CCP2_IF               (CCP2_IF_BIT = 0u)
+
+#ifndef ENABLE_PERIPHERAL_INTERRUPTS
+#define ENABLE_PERIPHERAL_INTERRUPTS    (INTCONbits.PEIE = 1u)
+#define DISABLE_PERIPHERAL_INTERRUPTS   (INTCONbits.PEIE = 0u)
+#endif
+
+// Macros
+#define CCP1_SET_COMP_VAL(x)    (CCPR1 = x)
+#define CCP2_SET_COMP_VAL(x)    (CCPR2 = x)
 
 
 // Function declarations
 
 // CCP2
-void CCP2_Init_Default(void);
-void CCP2_Compare_Val(uint16_t comp_val);
-
+void CCP1_Init_Default(uint16_t comp_val);
+void CCP2_Init_Default(uint16_t comp_val);
 
 
 #endif	/* CCP_HEADER */

@@ -1,7 +1,31 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"4155 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
+"4255 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 4255: extern volatile unsigned char CCP1CON __attribute__((address(0xFBD)));
+[v _CCP1CON `Vuc ~T0 @X0 0 e@4029 ]
+"4352
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 4352: extern volatile unsigned short CCPR1 __attribute__((address(0xFBE)));
+[v _CCPR1 `Vus ~T0 @X0 0 e@4030 ]
+"2503
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2503:     struct {
+[s S91 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S91 . TMR1IE TMR2IE CCP1IE SSPIE TXIE RCIE ADIE PSPIE ]
+"2513
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2513:     struct {
+[s S92 :4 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S92 . . TX1IE RC1IE ]
+"2502
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2502: typedef union {
+[u S90 `S91 1 `S92 1 ]
+[n S90 . . . ]
+"2519
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2519: extern volatile PIE1bits_t PIE1bits __attribute__((address(0xF9D)));
+[v _PIE1bits `VS90 ~T0 @X0 0 e@3997 ]
+"4155
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 4155: extern volatile unsigned char CCP2CON __attribute__((address(0xFBA)));
 [v _CCP2CON `Vuc ~T0 @X0 0 e@4026 ]
+"4234
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 4234: extern volatile unsigned short CCPR2 __attribute__((address(0xFBB)));
+[v _CCPR2 `Vus ~T0 @X0 0 e@4027 ]
 "2734
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2734:     struct {
 [s S100 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -17,9 +41,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2749
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2749: extern volatile PIE2bits_t PIE2bits __attribute__((address(0xFA0)));
 [v _PIE2bits `VS99 ~T0 @X0 0 e@4000 ]
-"4234
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 4234: extern volatile unsigned short CCPR2 __attribute__((address(0xFBB)));
-[v _CCPR2 `Vus ~T0 @X0 0 e@4027 ]
 "54 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 54: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -431,33 +452,43 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6715
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6715: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"37 src/ccp.c
-[; ;src/ccp.c: 37: void CCP2_Init_Default(void){
-[v _CCP2_Init_Default `(v ~T0 @X0 1 ef ]
+"41 src/ccp.c
+[; ;src/ccp.c: 41: void CCP1_Init_Default(uint16_t comp_val){
+[v _CCP1_Init_Default `(v ~T0 @X0 1 ef1`us ]
 {
-[e :U _CCP2_Init_Default ]
-[f ]
-"38
-[; ;src/ccp.c: 38:     (CCP2CON = 0x0A);
-[e = _CCP2CON -> -> 10 `i `uc ]
-"39
-[; ;src/ccp.c: 39:     (PIE2bits.CCP2IE = 1u);
-[e = . . _PIE2bits 0 0 -> -> 1 `ui `uc ]
-"40
-[; ;src/ccp.c: 40: }
-[e :UE 270 ]
-}
-"51
-[; ;src/ccp.c: 51: void CCP2_Compare_Val(uint16_t comp_val){
-[v _CCP2_Compare_Val `(v ~T0 @X0 1 ef1`us ]
-{
-[e :U _CCP2_Compare_Val ]
+[e :U _CCP1_Init_Default ]
 [v _comp_val `us ~T0 @X0 1 r1 ]
 [f ]
-"52
-[; ;src/ccp.c: 52:     CCPR2 = comp_val;
+"42
+[; ;src/ccp.c: 42:     (CCP1CON = 0x0B);
+[e = _CCP1CON -> -> 11 `i `uc ]
+"43
+[; ;src/ccp.c: 43:     (CCPR1 = comp_val);
+[e = _CCPR1 _comp_val ]
+"44
+[; ;src/ccp.c: 44:     (PIE1bits.CCP1IE = 1u);
+[e = . . _PIE1bits 0 2 -> -> 1 `ui `uc ]
+"45
+[; ;src/ccp.c: 45: }
+[e :UE 270 ]
+}
+"46
+[; ;src/ccp.c: 46: void CCP2_Init_Default(uint16_t comp_val){
+[v _CCP2_Init_Default `(v ~T0 @X0 1 ef1`us ]
+{
+[e :U _CCP2_Init_Default ]
+[v _comp_val `us ~T0 @X0 1 r1 ]
+[f ]
+"47
+[; ;src/ccp.c: 47:     (CCP2CON = 0x0B);
+[e = _CCP2CON -> -> 11 `i `uc ]
+"48
+[; ;src/ccp.c: 48:     (CCPR2 = comp_val);
 [e = _CCPR2 _comp_val ]
-"53
-[; ;src/ccp.c: 53: }
+"49
+[; ;src/ccp.c: 49:     (PIE2bits.CCP2IE = 1u);
+[e = . . _PIE2bits 0 0 -> -> 1 `ui `uc ]
+"50
+[; ;src/ccp.c: 50: }
 [e :UE 271 ]
 }

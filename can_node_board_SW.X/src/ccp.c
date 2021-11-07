@@ -18,36 +18,33 @@
 // Functions
 
 // CCP2
-/* Function: CCP2_Init_Default
+/* Function: CCPx_Init_Default
  * ---------------------------------
- * Initialize the CCP2 module to a default state. For this project, that means
- * setting the CCP2M[3:0] bits to 1010 (i.e., 0xA), which sets the CCP2 module
- * in Compare mode, generate interrupt on compare match, and leave the CCP2 pin
- * as is. The CCP2 pin on the PIC18F4620 is on pin 36, multiplexed with RB3 and
- * AN9. I also enable (unmask) the CCP2 interrupt because otherwise, there's no
- * point of using this peripheral.
+ * Initialize the CCPx module to a default state. For this project, that means
+ * setting the CCP2M[3:0] bits to 1010 (i.e., 0xB), which sets the CCPx module
+ * in Compare mode, generates interrupt on compare match, and leaves the CCPx pin
+ * as is. It also triggers a Special Trigger Event; for CCP1, this means
+ * resetting the Timer registers associated with CCP1; for CCP2, this means
+ * resetting the timer and starting an A/D conversion.
+ * I also enable (unmask) the CCP2 interrupt because otherwise, there's
+ * no point of using this peripheral.
+ * 
  * NOTE: The timer that is used with the CCP module is NOT configured in the
  * CCPxCON register --> instead, it is in T3CON with the T3CCP2:T3CC1 bits, with
  * 00b representing Timer1 being the compare source for the CCP2 module.
+ * 
  * 
  * Parameters: none
  * 
  * Returns: none
  */
-void CCP2_Init_Default(void){
-    CCP2M_DEFAULT;
-    ENABLE_CCP2_INTERRUPT;
+void CCP1_Init_Default(uint16_t comp_val){
+    CCP1M_DEFAULT;
+    CCP1_SET_COMP_VAL(comp_val);
+    ENABLE_CCP1_INTERRUPT;
 }
-
-/* Function: CCP2_Compare_Val
- * ---------------------------------
- * Sets the Compare register (CCPR2) of the CCP2 module.
- * 
- * Parameters: uint16_t comp_val --> The 16-bit value to place into the CCPR2
- *                                   register.
- * 
- * Returns: none
- */
-void CCP2_Compare_Val(uint16_t comp_val){
-    CCPR2 = comp_val;    
+void CCP2_Init_Default(uint16_t comp_val){
+    CCP2M_DEFAULT;
+    CCP2_SET_COMP_VAL(comp_val);
+    ENABLE_CCP2_INTERRUPT;
 }
