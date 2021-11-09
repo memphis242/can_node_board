@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\almos\AppData\Local\Temp\shsk.o
+$C:\Users\almos\AppData\Local\Temp\skkk.o
 idloc IDLOC 5 200000 200000 8 1
 init CODE 0 E E 4 1
 reset_vec CODE 0 0 0 4 1
@@ -87,7 +87,7 @@ MEDIUMCONST 15F4-FFFF 1
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\can_node_board_SW.X.production.o
-8 intcode CODE >4323:C:\Users\almos\AppData\Local\Temp\shsk.s
+8 intcode CODE >4323:C:\Users\almos\AppData\Local\Temp\skkk.s
 8 intcode CODE >134:C:\git\can_node_board\can_node_board_SW.X\spi_test.c
 141A intcode_body CODE >134:C:\git\can_node_board\can_node_board_SW.X\spi_test.c
 141C intcode_body CODE >142:C:\git\can_node_board\can_node_board_SW.X\spi_test.c
@@ -260,36 +260,36 @@ $dist/default/production\can_node_board_SW.X.production.o
 1174 text0 CODE >368:C:\git\can_node_board\can_node_board_SW.X\spi_test.c
 1186 text0 CODE >369:C:\git\can_node_board\can_node_board_SW.X\spi_test.c
 1198 text0 CODE >371:C:\git\can_node_board\can_node_board_SW.X\spi_test.c
-1544 cinit CODE >1992:C:\Users\almos\AppData\Local\Temp\shsk.s
-1544 cinit CODE >1994:C:\Users\almos\AppData\Local\Temp\shsk.s
-1544 cinit CODE >1997:C:\Users\almos\AppData\Local\Temp\shsk.s
-1544 cinit CODE >2088:C:\Users\almos\AppData\Local\Temp\shsk.s
-1546 cinit CODE >2089:C:\Users\almos\AppData\Local\Temp\shsk.s
-1548 cinit CODE >2090:C:\Users\almos\AppData\Local\Temp\shsk.s
-154A cinit CODE >2091:C:\Users\almos\AppData\Local\Temp\shsk.s
-154C cinit CODE >2092:C:\Users\almos\AppData\Local\Temp\shsk.s
-154E cinit CODE >2093:C:\Users\almos\AppData\Local\Temp\shsk.s
-1550 cinit CODE >2094:C:\Users\almos\AppData\Local\Temp\shsk.s
-1554 cinit CODE >2095:C:\Users\almos\AppData\Local\Temp\shsk.s
-1558 cinit CODE >2096:C:\Users\almos\AppData\Local\Temp\shsk.s
-1558 cinit CODE >2097:C:\Users\almos\AppData\Local\Temp\shsk.s
-155A cinit CODE >2098:C:\Users\almos\AppData\Local\Temp\shsk.s
-155E cinit CODE >2099:C:\Users\almos\AppData\Local\Temp\shsk.s
-1560 cinit CODE >2100:C:\Users\almos\AppData\Local\Temp\shsk.s
-1562 cinit CODE >2101:C:\Users\almos\AppData\Local\Temp\shsk.s
-1564 cinit CODE >2105:C:\Users\almos\AppData\Local\Temp\shsk.s
-1568 cinit CODE >2106:C:\Users\almos\AppData\Local\Temp\shsk.s
-156A cinit CODE >2107:C:\Users\almos\AppData\Local\Temp\shsk.s
-156A cinit CODE >2108:C:\Users\almos\AppData\Local\Temp\shsk.s
-156C cinit CODE >2109:C:\Users\almos\AppData\Local\Temp\shsk.s
-156E cinit CODE >2110:C:\Users\almos\AppData\Local\Temp\shsk.s
-1570 cinit CODE >2116:C:\Users\almos\AppData\Local\Temp\shsk.s
-1570 cinit CODE >2118:C:\Users\almos\AppData\Local\Temp\shsk.s
-1572 cinit CODE >2119:C:\Users\almos\AppData\Local\Temp\shsk.s
-1574 cinit CODE >2121:C:\Users\almos\AppData\Local\Temp\shsk.s
-1576 cinit CODE >2122:C:\Users\almos\AppData\Local\Temp\shsk.s
-1578 cinit CODE >2123:C:\Users\almos\AppData\Local\Temp\shsk.s
-157A cinit CODE >2124:C:\Users\almos\AppData\Local\Temp\shsk.s
+1544 cinit CODE >1992:C:\Users\almos\AppData\Local\Temp\skkk.s
+1544 cinit CODE >1994:C:\Users\almos\AppData\Local\Temp\skkk.s
+1544 cinit CODE >1997:C:\Users\almos\AppData\Local\Temp\skkk.s
+1544 cinit CODE >2088:C:\Users\almos\AppData\Local\Temp\skkk.s
+1546 cinit CODE >2089:C:\Users\almos\AppData\Local\Temp\skkk.s
+1548 cinit CODE >2090:C:\Users\almos\AppData\Local\Temp\skkk.s
+154A cinit CODE >2091:C:\Users\almos\AppData\Local\Temp\skkk.s
+154C cinit CODE >2092:C:\Users\almos\AppData\Local\Temp\skkk.s
+154E cinit CODE >2093:C:\Users\almos\AppData\Local\Temp\skkk.s
+1550 cinit CODE >2094:C:\Users\almos\AppData\Local\Temp\skkk.s
+1554 cinit CODE >2095:C:\Users\almos\AppData\Local\Temp\skkk.s
+1558 cinit CODE >2096:C:\Users\almos\AppData\Local\Temp\skkk.s
+1558 cinit CODE >2097:C:\Users\almos\AppData\Local\Temp\skkk.s
+155A cinit CODE >2098:C:\Users\almos\AppData\Local\Temp\skkk.s
+155E cinit CODE >2099:C:\Users\almos\AppData\Local\Temp\skkk.s
+1560 cinit CODE >2100:C:\Users\almos\AppData\Local\Temp\skkk.s
+1562 cinit CODE >2101:C:\Users\almos\AppData\Local\Temp\skkk.s
+1564 cinit CODE >2105:C:\Users\almos\AppData\Local\Temp\skkk.s
+1568 cinit CODE >2106:C:\Users\almos\AppData\Local\Temp\skkk.s
+156A cinit CODE >2107:C:\Users\almos\AppData\Local\Temp\skkk.s
+156A cinit CODE >2108:C:\Users\almos\AppData\Local\Temp\skkk.s
+156C cinit CODE >2109:C:\Users\almos\AppData\Local\Temp\skkk.s
+156E cinit CODE >2110:C:\Users\almos\AppData\Local\Temp\skkk.s
+1570 cinit CODE >2116:C:\Users\almos\AppData\Local\Temp\skkk.s
+1570 cinit CODE >2118:C:\Users\almos\AppData\Local\Temp\skkk.s
+1572 cinit CODE >2119:C:\Users\almos\AppData\Local\Temp\skkk.s
+1574 cinit CODE >2121:C:\Users\almos\AppData\Local\Temp\skkk.s
+1576 cinit CODE >2122:C:\Users\almos\AppData\Local\Temp\skkk.s
+1578 cinit CODE >2123:C:\Users\almos\AppData\Local\Temp\skkk.s
+157A cinit CODE >2124:C:\Users\almos\AppData\Local\Temp\skkk.s
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -312,18 +312,18 @@ __Hspace_2 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __Hspace_4 60000E 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __Hibigdata 0 0 CODE 0 ibigdata dist/default/production\can_node_board_SW.X.production.o
 _spi_rx_msg_buf 61 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
-__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\almos\AppData\Local\Temp\shsk.o
+__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\almos\AppData\Local\Temp\skkk.o
 __Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\can_node_board_SW.X.production.o
 _spi_rx_flag 5F 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __size_of_LCD_set_cursor_position 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 main@i 59 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
 _current_func_set 39 0 COMRAM 1 dataCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Lsmallconst 1000 0 SMALLCONST 0 smallconst dist/default/production\can_node_board_SW.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\almos\AppData\Local\Temp\shsk.o
+___sp 0 0 STACK 2 stack C:\Users\almos\AppData\Local\Temp\skkk.o
 _main 1010 0 CODE 0 text0 dist/default/production\can_node_board_SW.X.production.o
 btemp 6C 0 COMRAM 1 temp dist/default/production\can_node_board_SW.X.production.o
 LCD_set_cursor_position@line 44 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
-start E 0 CODE 0 init C:\Users\almos\AppData\Local\Temp\shsk.o
+start E 0 CODE 0 init C:\Users\almos\AppData\Local\Temp\skkk.o
 __size_of_main 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __HbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
 LCD_set_cursor_position@pos_on_line 42 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
@@ -335,11 +335,11 @@ __end_of_LCD_enable_toggle 141A 0 CODE 0 text8 dist/default/production\can_node_
 __HdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __end_of_LCD_write_instr_byte_4bit 1508 0 CODE 0 text7 dist/default/production\can_node_board_SW.X.production.o
 __end_of_LCD_write_instr_byte_8bit 15D4 0 CODE 0 text5 dist/default/production\can_node_board_SW.X.production.o
-__accesstop 80 0 ABS 0 - C:\Users\almos\AppData\Local\Temp\shsk.o
-intlevel0 0 0 CODE 0 text C:\Users\almos\AppData\Local\Temp\shsk.o
-intlevel1 0 0 CODE 0 text C:\Users\almos\AppData\Local\Temp\shsk.o
-intlevel2 0 0 CODE 0 text C:\Users\almos\AppData\Local\Temp\shsk.o
-intlevel3 0 0 CODE 0 text C:\Users\almos\AppData\Local\Temp\shsk.o
+__accesstop 80 0 ABS 0 - C:\Users\almos\AppData\Local\Temp\skkk.o
+intlevel0 0 0 CODE 0 text C:\Users\almos\AppData\Local\Temp\skkk.o
+intlevel1 0 0 CODE 0 text C:\Users\almos\AppData\Local\Temp\skkk.o
+intlevel2 0 0 CODE 0 text C:\Users\almos\AppData\Local\Temp\skkk.o
+intlevel3 0 0 CODE 0 text C:\Users\almos\AppData\Local\Temp\skkk.o
 __LbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
 _receive_byte 66 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __LnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\can_node_board_SW.X.production.o
@@ -350,8 +350,8 @@ __Hclrtext 0 0 ABS 0 clrtext dist/default/production\can_node_board_SW.X.product
 __pidataCOMRAM 1508 0 CODE 0 idataCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __end_of_LCD_write_data_byte_4bit 14BC 0 CODE 0 text2 dist/default/production\can_node_board_SW.X.production.o
 __end_of_LCD_Init_ECE376 1288 0 CODE 0 text6 dist/default/production\can_node_board_SW.X.production.o
-___inthi_sp 0 0 STACK 2 stack C:\Users\almos\AppData\Local\Temp\shsk.o
-___intlo_sp 0 0 STACK 2 stack C:\Users\almos\AppData\Local\Temp\shsk.o
+___inthi_sp 0 0 STACK 2 stack C:\Users\almos\AppData\Local\Temp\skkk.o
+___intlo_sp 0 0 STACK 2 stack C:\Users\almos\AppData\Local\Temp\skkk.o
 __LdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Hintcode_body 0 0 ABS 0 intcode_body dist/default/production\can_node_board_SW.X.production.o
 __Lintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/production\can_node_board_SW.X.production.o
@@ -410,7 +410,7 @@ __Hbank14 0 0 ABS 0 bank14 dist/default/production\can_node_board_SW.X.productio
 __Hbank15 0 0 ABS 0 bank15 dist/default/production\can_node_board_SW.X.production.o
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\can_node_board_SW.X.production.o
 __Hbigram 0 0 ABS 0 bigram dist/default/production\can_node_board_SW.X.production.o
-__smallconst 1000 0 SMALLCONST 0 smallconst C:\Users\almos\AppData\Local\Temp\shsk.o
+__smallconst 1000 0 SMALLCONST 0 smallconst C:\Users\almos\AppData\Local\Temp\skkk.o
 _current_entry_mode 3A 0 COMRAM 1 dataCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Hcomram 0 0 ABS 0 comram dist/default/production\can_node_board_SW.X.production.o
 __Hconfig 30000E 0 CONFIG 4 config dist/default/production\can_node_board_SW.X.production.o
@@ -516,8 +516,8 @@ main@i_650 5A 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.
 main@i_653 5B 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
 main@i_654 5C 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Lfardata 0 0 FARRAM 0 fardata dist/default/production\can_node_board_SW.X.production.o
-stackhi F7F 0 ABS 0 - C:\Users\almos\AppData\Local\Temp\shsk.o
-stacklo 80 0 ABS 0 - C:\Users\almos\AppData\Local\Temp\shsk.o
+stackhi F7F 0 ABS 0 - C:\Users\almos\AppData\Local\Temp\skkk.o
+stacklo 80 0 ABS 0 - C:\Users\almos\AppData\Local\Temp\skkk.o
 __Lintcode 8 0 CODE 0 intcode dist/default/production\can_node_board_SW.X.production.o
 __Lintret 0 0 ABS 0 intret dist/default/production\can_node_board_SW.X.production.o
 __Lirdata 0 0 CODE 0 irdata dist/default/production\can_node_board_SW.X.production.o
@@ -549,7 +549,7 @@ __ptext7 14BC 0 CODE 0 text7 dist/default/production\can_node_board_SW.X.product
 __ptext8 1352 0 CODE 0 text8 dist/default/production\can_node_board_SW.X.production.o
 __Lstruct 0 0 COMRAM 1 struct dist/default/production\can_node_board_SW.X.production.o
 __end_of_LCD_clear_display 15AE 0 CODE 0 text4 dist/default/production\can_node_board_SW.X.production.o
-__ramtop 1000 0 RAM 0 ramtop C:\Users\almos\AppData\Local\Temp\shsk.o
+__ramtop 1000 0 RAM 0 ramtop C:\Users\almos\AppData\Local\Temp\skkk.o
 __Lpowerup E 0 CODE 0 powerup dist/default/production\can_node_board_SW.X.production.o
 __Leeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\can_node_board_SW.X.production.o
 __psmallconst 1000 0 SMALLCONST 0 smallconst dist/default/production\can_node_board_SW.X.production.o

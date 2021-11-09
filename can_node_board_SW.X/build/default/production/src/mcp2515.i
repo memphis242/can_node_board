@@ -4385,5 +4385,164 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 10 "src/mcp2515.c" 2
 
 # 1 "inc\\mcp2515.h" 1
+# 67 "inc\\mcp2515.h"
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 1 3
+# 22 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 3
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\bits/alltypes.h" 1 3
+# 127 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned long uintptr_t;
+# 142 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long intptr_t;
+# 158 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef signed char int8_t;
+
+
+
+
+typedef short int16_t;
+# 173 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long int32_t;
+
+
+
+
+
+typedef long long int64_t;
+# 188 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long long intmax_t;
+
+
+
+
+
+typedef unsigned char uint8_t;
+
+
+
+
+typedef unsigned short uint16_t;
+# 209 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned long uint32_t;
+
+
+
+
+
+typedef unsigned long long uint64_t;
+# 229 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned long long uintmax_t;
+# 22 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
+
+
+typedef int8_t int_fast8_t;
+
+typedef int64_t int_fast64_t;
+
+
+typedef int8_t int_least8_t;
+typedef int16_t int_least16_t;
+
+typedef int24_t int_least24_t;
+typedef int24_t int_fast24_t;
+
+typedef int32_t int_least32_t;
+
+typedef int64_t int_least64_t;
+
+
+typedef uint8_t uint_fast8_t;
+
+typedef uint64_t uint_fast64_t;
+
+
+typedef uint8_t uint_least8_t;
+typedef uint16_t uint_least16_t;
+
+typedef uint24_t uint_least24_t;
+typedef uint24_t uint_fast24_t;
+
+typedef uint32_t uint_least32_t;
+
+typedef uint64_t uint_least64_t;
+# 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 3
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\bits/stdint.h" 1 3
+typedef int16_t int_fast16_t;
+typedef int32_t int_fast32_t;
+typedef uint16_t uint_fast16_t;
+typedef uint32_t uint_fast32_t;
+# 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
+# 67 "inc\\mcp2515.h" 2
+# 875 "inc\\mcp2515.h"
+typedef enum { SPI_READ_RXB0_ID, SPI_READ_RXB0_D, SPI_READ_RXB1_ID, SPI_READ_RXB1_D } spi_read_rxb_inst_t;
+
+
+typedef enum { SPI_LOAD_TXB0_ID, SPI_LOAD_TXB0_D, SPI_LOAD_TXB1_ID, SPI_LOAD_TXB1_D, SPI_LOAD_TXB2_ID, SPI_LOAD_TXB2_D } spi_load_txb_inst_t;
+# 899 "inc\\mcp2515.h"
+typedef enum { TXB0, TXB1, TXB2 } txbuf_t;
+typedef enum { RXB0, RXB1 } rxbuf_t;
+typedef enum { RX_MASK0, RX_MASK1 } rx_mask_t;
+typedef enum { RX_FILT0, RX_FILT1, RX_FILT2, RX_FILT3, RX_FILT4, RX_FILT5 } rx_filt_t;
+typedef enum { MCP2515_OPTION_ROLLOVER } mcp_2515_options_t;
+# 928 "inc\\mcp2515.h"
+typedef struct {
+    uint16_t sid;
+    uint8_t ide;
+    uint32_t eid;
+    uint8_t rtr;
+} can_msg_arb_field;
+
+typedef struct {
+    uint8_t dlc;
+} can_msg_ctrl_field;
+
+typedef struct {
+    uint8_t data0;
+    uint8_t data1;
+    uint8_t data2;
+    uint8_t data3;
+    uint8_t data4;
+    uint8_t data5;
+    uint8_t data6;
+    uint8_t data7;
+} can_msg_data_field;
+
+typedef struct {
+    can_msg_arb_field arb_field;
+    can_msg_ctrl_field ctrl_field;
+    can_msg_data_field data_field;
+} can_msg;
+
+
+
+void can_spi_command(uint8_t cmd);
+uint8_t can_spi_query(uint8_t query);
+void can_read_reg(uint8_t reg, uint8_t * rxbuf);
+void can_read_successive_reg(uint8_t start_reg, uint8_t * rxbuf, uint8_t len);
+void can_write_reg(uint8_t reg, uint8_t value);
+void can_write_successive_reg(uint8_t start_reg, uint8_t * txbuf, uint8_t len);
+void can_write_bit(uint8_t reg, uint8_t mask, uint8_t val);
+# 975 "inc\\mcp2515.h"
+void can_write_txbuf(txbuf_t txb, uint8_t * mcp2515_tx_buf, uint8_t len);
+void can_read_rxbuf(rxbuf_t rxb, uint8_t * mcp2515_rx_buf, uint8_t len);
+
+void can_init(void);
+void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump);
+void can_compose_msg_std(can_msg * msg, uint8_t * mcp2515_tx_buf);
+void can_parse_msg_std(can_msg * msg, uint8_t * mcp2515_rx_buf);
+void can_compose_msg_ext(can_msg * msg, uint8_t * mcp2515_tx_buf);
+void can_parse_msg_ext(can_msg * msg, uint8_t * mcp2515_rx_buf);
+
+uint8_t can_send(can_msg * msg);
+uint8_t can_remot_frame(can_msg_arb_field arb_field);
+uint8_t can_tx_cancel(void);
+uint8_t can_tx_available(void);
+uint8_t can_receive(can_msg * msg);
+uint8_t can_rx_pending(void);
+uint8_t can_rx_setmask(rx_mask_t mask_id, uint32_t mask, uint8_t is_extended);
+uint8_t can_rx_setfilter(rx_filt_t filt_id, uint32_t filter);
+uint8_t can_rx_mode(void);
+uint8_t can_mcp2515_config_options(mcp_2515_options_t option, uint8_t val);
+uint8_t can_read_error(uint8_t reg);
+uint8_t can_clear_bus_error(void);
 # 11 "src/mcp2515.c" 2
 

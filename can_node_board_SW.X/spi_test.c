@@ -66,7 +66,7 @@
 
 #include <xc.h>
 #include <stdint.h>
-#include "inc/mssp_spi_driver.h"
+#include "inc/mssp_spi.h"
 #include "inc/lcd_driver.h"
 #include "inc/timer.h"
 #include "inc/ccp.h"

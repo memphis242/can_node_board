@@ -7,9 +7,9 @@
       <logicalFolder name="inc" displayName="inc" projectFiles="true">
         <itemPath>inc/ccp.h</itemPath>
         <itemPath>inc/lcd_driver.h</itemPath>
-        <itemPath>inc/mssp_spi_driver.h</itemPath>
         <itemPath>inc/timer.h</itemPath>
         <itemPath>inc/mcp2515.h</itemPath>
+        <itemPath>inc/mssp_spi.h</itemPath>
       </logicalFolder>
       <itemPath>spi_test.h</itemPath>
     </logicalFolder>

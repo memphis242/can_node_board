@@ -7,7 +7,7 @@
 
 
 #include <xc.h>
-#include "mssp_spi_driver.h"
+#include "mssp_spi.h"
 #include "lcd_driver.h"
 
 

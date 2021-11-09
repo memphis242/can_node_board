@@ -4391,8 +4391,8 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 33 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 2 3
 # 9 "src/mssp_spi_driver.c" 2
 
-# 1 "inc\\mssp_spi_driver.h" 1
-# 35 "inc\\mssp_spi_driver.h"
+# 1 "inc\\mssp_spi.h" 1
+# 35 "inc\\mssp_spi.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 1 3
 # 22 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 3
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\bits/alltypes.h" 1 3
@@ -4478,8 +4478,8 @@ typedef int32_t int_fast32_t;
 typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
-# 35 "inc\\mssp_spi_driver.h" 2
-# 104 "inc\\mssp_spi_driver.h"
+# 35 "inc\\mssp_spi.h" 2
+# 104 "inc\\mssp_spi.h"
 enum spi_actor_t { SPI_MASTER, SPI_SLAVE };
 enum spi_mode_t { SPI_MODE_00, SPI_MODE_01, SPI_MODE_10, SPI_MODE_11 };
 

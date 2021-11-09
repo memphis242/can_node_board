@@ -4528,8 +4528,8 @@ typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
 # 68 "spi_test.c" 2
 
-# 1 "./inc/mssp_spi_driver.h" 1
-# 104 "./inc/mssp_spi_driver.h"
+# 1 "./inc/mssp_spi.h" 1
+# 104 "./inc/mssp_spi.h"
 enum spi_actor_t { SPI_MASTER, SPI_SLAVE };
 enum spi_mode_t { SPI_MODE_00, SPI_MODE_01, SPI_MODE_10, SPI_MODE_11 };
 

@@ -63,11 +63,13 @@
 #define	MCP2515_HEADER
 
 
-#include <xc.h> // include processor files - each processor file is guarded.  
+#include <xc.h> // include processor files - each processor file is guarded.
+#include <stdint.h>
 
 
 // <editor-fold defaultstate="collapsed" desc="DEFINITIONS - Registers and Macros">
 
+// <editor-fold defaultstate="collapsed" desc="CANCTRL & CANSTAT">
 /* Control Register - CANCTRL - Register 10-1 in Datasheet
  * NOTE: It appears the register is repeated (?) or that all addresses in
  *       the range 0xXF map to the same register. So for example, 0x0F, 0x1F,
@@ -147,8 +149,9 @@
 #define MCP2515_CANSTAT                 0x0E    // could also do 0x1E, 0x2E, ..., 0xEE
 #define MCP2515_CANSTAT_OPMODE_BITS     0xE0
 #define MCP2515_CANSTAT_ICOD_BITS       0x0E    // ICOD = "Interrupt CODe"
+// </editor-fold>
 
-
+// <editor-fold defaultstate="collapsed" desc="TX-RELATED">
 /* ****************************************************************************
  * Transmit-Related
  * ****************************************************************************
@@ -345,23 +348,549 @@
  * And then come 8 registers for the data bytes...
  * 
  */
+// </editor-fold>
 
-
+// <editor-fold defaultstate="collapsed" desc="RX-RELATED">
 /* ****************************************************************************
  * Receive-Related
  * ****************************************************************************
+ * There are two receive buffers, RXB0 and RXB1, similarly laid out in memory 
+ * like the transmission buffers. The RXB0 registers start from 0x60 and go to
+ * 0x6D, with 0x60 being RXB0CTRL and 0x61 to 0x6D being RXB0SIDH, SIDL, EID8,
+ * EID0, DLC, D0, D1, ..., D7. Likewise, RXB1 starts at 0x70 and goes through to
+ * 0x7D. By the way, the register map stops at 0x7F (i.e., 128 registers total).
+ * 
+ * In addition, however, there are also acceptance filters and masks associated
+ * with the receive buffers. Also, before a message is transferred into either
+ * buffer, incoming messages are assembled by the Message Assembly Buffer (MAB).
+ * Only when the message in the MAB meets filter criteria for a buffer will the
+ * message be transferred over. When such a transfer occurs, the RXnIF bit in
+ * CANINTF is set, and this bit must be cleared by the uC in order to allow
+ * another message to be received into the buffer.
+ * 
+ * RXB0 has one mask and two acceptance filters associated with it - I will call
+ * these RX_MASK0 and RXFILT0 and RXFILT1 respectively. RXB1 has one mask and
+ * four acceptance filters associated with it - I will call these RX_MASK1 and
+ * RXFILT2, RXFILT3, RXFILT4, and RXFILT5. When a message is received, the
+ * RXBnCTRL[3:0} bits will indicate the acceptance filter number that enabled
+ * reception and whether the received message is a Remote Transfer Request. It
+ * should be noted that if a message matches filters for both RXB0 and RXB1,
+ * RXB0 has higher priority and only it gets loaded with the message.
+ * 
+ * GENERAL STEPS FOR RECEPTION:
+ * SoF detected --> Load MAB (if invalid message, generate error frame and go
+ * back to start)
+ *      --> Meets filter criteria for RXB0?
+ *          Y --> Is RX0IF = 0?
+ *              Y --> Move message into RXB0 --> Set RX0IF --> Set FILHIT0 based
+ *                    on which filter hit matched --> If RX0IE is set, generate
+ *                    interrupt on ~INT pin and set CANSTAT::ICOD accordingly
+ *                    --> If B0BFM and B0BFE are set, pull ~RXBF0 low
+ *                    --> Back to start
+ *              N --> Is BUKT (RXB0CTRL[2]) set?
+ *                    Y --> Is RX1IF = 0?
+ *                          Y --> Move message into RXB1 and go through similar
+ *                                checks as outlined for RXB0
+ *                          N --> Generate overflow error : set RX1OVR (EGLF[7]),
+ *                                and generate interrupt on ~INT if ERRIE
+ *                    N --> Generate overflow error and ... ""
  * 
  * 
-*/
+ */
+/* Receive Buffer 0 Control Register - RXB0CTRL - Register 4-1 in Datasheet
+ * NOTE: There are two receive buffers, RXB0 and RXB1.
+ * Default/POR: 0 00 0 0 00 0
+ * +--------------- ---------------------------------------------------------------------------------+
+ * |    bit 7   |    bit 6   |   bit 5   |   bit 4   |   bit 3   |   bit 2   |   bit 1   |   bit 0   |
+ * +-------------------------------------------------------------------------------------------------+
+ * |....undef...|.........RXM............|...undef...|....RXRTR..|...BUKT....|...BUKT1...|..FILHIT0..|
+ * +-------------------------------------------------------------------------------------------------+
+ * In this register, we have,
+ *      (R/W) - RXM : Receive Buffer Operating mode bits
+ *              * 11 = Turns masks/filters off, receives all messages
+ *              * 10, 01 = Reserved
+ *              * 00 = Receives all valid messages that meet filter criteria
+ *
+ *      (R) - RXRTR : Received Remote Transfer Request
+ *      (R/W) - BUKT : Rollover enable --> BUKT1 is a copy of BUKT, used internally by MCP2515
+ *      (R) - FILHIT0 : Filter Hit bit (indicates which acceptance filter enabled reception of message)
+ *              * 1 = Acceptance filter 1 RXF1 --> for me, RX_FILT1
+ *              * = = Acceptance filter 0 RXF0 --> for me, RX_FILT0
+ * 
+ */
+/* Receive Buffer 1 Control Register - RXB1CTRL - Register 4-2 in Datasheet
+ * NOTE: There are two receive buffers, RXB0 and RXB1.
+ * Default/POR: 0 00 0 0 000
+ * +--------------- ---------------------------------------------------------------------------------+
+ * |    bit 7   |    bit 6   |   bit 5   |   bit 4   |   bit 3   |   bit 2   |   bit 1   |   bit 0   |
+ * +-------------------------------------------------------------------------------------------------+
+ * |....undef...|.........RXM............|...undef...|....RXRTR..|.............FILHIT................|
+ * +-------------------------------------------------------------------------------------------------+
+ * In this register, we have,
+ *      (R/W) - RXM : Receive Buffer Operating mode bits
+ *              * 11 = Turns masks/filters off, receives all messages
+ *              * 10, 01 = Reserved
+ *              * 00 = Receives all valid messages that meet filter criteria
+ *
+ *      (R) - RXRTR : Received Remote Transfer Request
+ *      (R) - FILHIT : Filter Hit bit (indicates which acceptance filter enabled reception of message)
+ *              * 101, 100, 011, 010 for RXF5, RXF4, RXF3, and RXF2 (RX_FILT5, RX_FILT4, RX_FILT3, RX_FILT2)
+ *              * 001, 000 for RXF1 and RXF0 only if BUKT is set in RXB0CTRL and a message came through from RXB0's side
+ * 
+ */
+#define MCP2515_RXB0CTRL                    0x60
+#define MCP2515_RXB1CTRL                    0x70
+#define MCP2515_RXBnCTRL_RXM                0x60
+#define MCP2515_RXBnCTRL_RXM_RX_ALL         0x00
+#define MCP2515_RXBnCTRL_RXM_RX_FILT        0x60
+#define MCP2515_RXB0CTRL_BUKT               0x04
+#define MCP2515_RX_ROLLOVER                 0x04
+#define MCP2515_RXBnCTRL_RTR                0x08
+#define MCP2515_RXB0CTRL_FILHIT0            0x01
+#define MCP2515_RXB0_WHICH_FILT(rxb0_reg)    (rxb0_reg & 0x01)
+#define MCP2515_RXB1CTRL_FILHIT             0x07
 
+/* ~RXnBF Pin Control and Status Register - BFPCTRL - Register 4-3 in Datasheet
+ * Default/POR: 0 0 0000 00
+ * +--------------- ---------------------------------------------------------------------------------+
+ * |    bit 7   |    bit 6   |   bit 5   |   bit 4   |   bit 3   |   bit 2   |   bit 1   |   bit 0   |
+ * +-------------------------------------------------------------------------------------------------+
+ * |....undef...|...undef....|....B1BFS..|...B0BFS...|...B1BFE...|...B0BFE...|...B1BFM...|...B0BFM...|
+ * +-------------------------------------------------------------------------------------------------+
+ * In this register, we have,
+ *      (R/W) - B1BFS : ~RX1BF Pin state bit (digital output mode only)
+ *      (R/W) - B0BFS : ~RX0BF Pin state bit (digital output mode only)
+ *      (R/W) - B1BFE : ~RX1BF Pin function enable bit
+ *                      * 1 = pin function is enabled, op mode is determined by B1BFM bit
+ *                      * 0 = pin function disabled, pin goes high-impedance
+ *      (R/W) - B0BFE : "" same but for ~RX0BF
+ *      (R/W) - B1BFM : Pin is used as an interrupt (1) or digital output (0)
+ *      (R/W) - B0BFM : ""
+ * 
+ */
+#define MCP2515_BFPCTRL             0x0D
+// not yet planning on using ~RXnBF pins as outputs, so I'll leave def's and macros out for that for now...
+#define MCP2515_BFPCTRL_B1BFE       0x08
+#define MCP2515_BFPCTRL_B0BFE       0x04
+#define ENABLE_RX1BF_PIN            0x08
+#define ENABLE_RX0BF_PIN            0x04
+#define MCP2515_BFPCTRL_B1BFM       0x02
+#define MCP2515_BFPCTRL_B0BFM       0X01
+#define SET_RX1BF_AS_INTERRUPT      0x02
+#define SET_RX0BF_AS_INTERRUPT      0x01
+
+/* As stated earlier, RXB0 content goes from 0x61 to 0x6D, and RXB1 content goes from 0x71 to 0x7D
+ * Refer to the comments I made earlier laying out the registers for TXBnSIDH, ..., TXBnD7; RXBn's
+ * are the same.
+ */
+// RXB0
+#define MCP2515_RXB0SIDH        0x61
+#define MCP2515_RXB0SIDL        0x62
+#define MCP2515_RXB0EID8        0x63
+#define MCP2515_RXB0EID0        0x64
+#define MCP2515_RXB0DLC         0x65
+#define MCP2515_RXB0D0          0x66
+#define MCP2515_RXB0D1          0x67
+#define MCP2515_RXB0D2          0x68
+#define MCP2515_RXB0D3          0x69
+#define MCP2515_RXB0D4          0x6A
+#define MCP2515_RXB0D5          0x6B
+#define MCP2515_RXB0D6          0x6C
+#define MCP2515_RXB0D7          0x6D
+// RXB1
+#define MCP2515_RXB1SIDH        0x71
+#define MCP2515_RXB1SIDL        0x72
+#define MCP2515_RXB1EID8        0x73
+#define MCP2515_RXB1EID0        0x74
+#define MCP2515_RXB1DLC         0x75
+#define MCP2515_RXB1D0          0x76
+#define MCP2515_RXB1D1          0x77
+#define MCP2515_RXB1D2          0x78
+#define MCP2515_RXB1D3          0x79
+#define MCP2515_RXB1D4          0x7A
+#define MCP2515_RXB1D5          0x7B
+#define MCP2515_RXB1D6          0x7C
+#define MCP2515_RXB1D7          0x7D
+
+/* How the Filters & Masks Interact
+ * The masks determine which bits in the filter are actually compared to a message.
+ * If a mask bit is 1, the corresponding filter bit WILL be compared.
+ * If a mask bit is 0, the correspodning filter bit will be IGNORED.
+ */
 // Filters
-// Filter 0
+/* NOTE! The filter and mask registers can only be modified in Configuration mode.
+ * NOTE: The filter & mask register layout is exactly the same as the RXBn register 
+ * layout except for the CTRL register and data bytes, which is not surprising.
+ * Hence, each filter and mask register-set is four registers.
+ */
+// Filter 0 --> RXB0
 #define MCP2515_RXF0SIDH    0x00
 #define MCP2515_RXF0SIDL    0x01
 #define MCP2515_RXF0EID8    0x02
 #define MCP2515_RXF0EID0    0x03
+// Filter 1 --> RXB0
+#define MCP2515_RXF1SIDH    0x04
+#define MCP2515_RXF1SIDL    0x05
+#define MCP2515_RXF1EID8    0x06
+#define MCP2515_RXF1EID0    0x07
+// Filter 2 --> RXB1
+#define MCP2515_RXF2SIDH    0x08
+#define MCP2515_RXF2SIDL    0x09
+#define MCP2515_RXF2EID8    0x0A
+#define MCP2515_RXF2EID0    0x0B
+// Filter 3 --> RXB1
+#define MCP2515_RXF3SIDH    0x10
+#define MCP2515_RXF3SIDL    0x11
+#define MCP2515_RXF3EID8    0x12
+#define MCP2515_RXF3EID0    0x13
+// Filter 4 --> RXB1
+#define MCP2515_RXF4SIDH    0x14
+#define MCP2515_RXF4SIDL    0x15
+#define MCP2515_RXF4EID8    0x16
+#define MCP2515_RXF4EID0    0x17
+// Filter 4 --> RXB1
+#define MCP2515_RXF5SIDH    0x18
+#define MCP2515_RXF5SIDL    0x19
+#define MCP2515_RXF5EID8    0x1A
+#define MCP2515_RXF5EID0    0x1B
 
+// Masks
+// Mask 0 --> RXB0
+#define MCP2515_RXM0SIDH    0x20
+#define MCP2515_RXM0SIDL    0x21
+#define MCP2515_RXM0EID8    0x22
+#define MCP2515_RXM0EID0    0x23
+// Mask 1 --> RXB1
+#define MCP2515_RXM1SIDH    0x24
+#define MCP2515_RXM1SIDL    0x25
+#define MCP2515_RXM1EID8    0x26
+#define MCP2515_RXM1EID0    0x27
 
+// </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="BIT-TIMING RELATED">
+/* The CNF1, CNF2, and CNF3 registers are those that set the bit-timing for the
+ * device (and also how you set the bus rate). I'll briefly summarize what
+ * bit-timing is and how you might want to configure these registers, but there's
+ * more detail to it and I would at least refer to the MCP2515 datasheet (I also
+ * think the MCP2518FD datasheet's section on bit-timing is pretty good).
+ * 
+ * ----------------------------------------------------------------------------
+ * BIT-TIMING QUICK-NOTES
+ * ---------------------------------------------------------------------------- 
+ * Bit-timing has to do with how the fact that CAN is asynchronous - there is no
+ * clock line. So how do we know when a bit ends or starts? Well, all nodes agree
+ * to a rate, such as 250kbps. Ok, but how do we know all the clocks are in phase?
+ * Aha! This is where bit-timing comes in. In general, asynchronous comm controllers
+ * sync up on an data-line edge, and for CAN, that's the SoF 1->0 transition. The
+ * syncing is done using a PLL, and the controller sets its clock phase forward
+ * or backward a certain amount of time to sync up. As a part of this, every bit
+ * time (i.e., the period of the bus rate) is split up into many sections called
+ * Time Quanta (TQ). This depends largely on what the controller's system clock
+ * is at - the higher its freq, the more sections can be split up, and in the end,
+ * the more resolution in adjustment can be done in a given bit-time. For the
+ * MCP2515, TQ = 2 * (BRP[5:0] + 1) / FOSC, where BRP[5:0] is in the CNF1 register.
+ * The controller bit-rate is in turn set by how many TQ's the controller assumes
+ * for a given bit-time. So for example, if TQ = 200ns and we set 20 quanta per
+ * bit time, that gives us 4us per bit, which amounts to 250kbps.
+ * 
+ * Now these individual time-quanta are grouped together into four main segments:
+ * a sync segment (always 1 TQ), a propagation segment, a phase 1 segment, and a
+ * phase 2 segment. I will call these NSYNC, NPROPSEG, NPH1, and NPH2. NSYNC is,
+ * as stated earlier, when the controller syncs up its clock with the SoF transition.
+ * NPROPSEG is for giving enough time for a bit to be sent through the bus (you
+ * want to at least give enough time for 2 * (t_txd_rxd + t_bus), where t_txd_rxd
+ * is the tx to rx loop delay of the transceiver and t_bus is the amount of time
+ * it takes for a signal to propagate to the other side of the bus --> you can
+ * roughly estimate this to be [5 ns/m of wire] x [the length of the wire]).
+ * NPH1 gives a little more time for propagation delays and right after NPH1 is
+ * when the bit is actually sampled by the controller. It is often reported in
+ * CAN configurations what the nominal sample point (NSMP) % is, which is to say at 
+ * what point in the bit-time does the sample point occur, and obviously this is
+ * (NSYNC + NPROPSEC + NPH1) / (NT), where I'll use NT to designate the total
+ * number of TQ per bit time. Indeed it is usually this percentage that is
+ * specified, and accordingly you compute the amount of TQ to give to NPH1, after
+ * determining a minimum for NPROPSEG based on the propagation delay calculations
+ * you made earlier. Finally, NPH2 is the tail-half of this bit-time grouping, and
+ * gives enough time to controllers to process before beginning another message.
+ * As part of the NPH2 segment, we have a SJW section, which is also used to
+ * re-synchronize based on misalignments detected during this bit.
+ * 
+ * It is generally recommended to make Fosc as high as possible to make TQ small
+ * and allow for finer resolution and adjustment. It is also recommended to
+ * maximize SJW and minimize BRP. Also, all nodes on the bus should agree on
+ * NSMP %.
+ * 
+ * Note that for the MCP2515, the maximum number of TQ per bit-time is 25, where
+ * NSYNC = 1TQ, NPROPSEG = 8TQ, NPH1 = 8TQ, AND NPH2 = 8TQ.
+ * 
+ * ----------------------------------------------------------------------------
+ * I will show my calculations for 250kbps bus rate example, with a nominal
+ * sample point of 70% and 2m of bus length. Assume Fosc = 40MHz. Assume you
+ * are using the MCP2562 transceiver, which has a t_tx_rx of 235ns.
+ * 
+ * 250kbps means a bit time of 4us. I'll chose NT to be 20 (i.e., 20 TQ per bit-time).
+ * That means TQ = 200ns. With Fosc = 40MHz, BRP = 3. Ok, this has set the bit-rate.
+ * To get NSMP to be 70%, NPROPSEG + NPH1 needs to be 13. With 2m of bus length,
+ * t_bus ~ 10ns. t_tx_rx is given as 235ns. This makes 2 * (t_tx_rx + t_bus) to
+ * be around 490ns. This is the worst-case propagation delay. So, NPROPSEG needs
+ * to be at least 3TQ. I'll choose it to be 5TQ, which sets NPH1 = 8TQ. This leaves
+ * over NPH2 = 6TQ to complete the 20TQ for this bit-time split.
+ * ----------------------------------------------------------------------------
+ * So, with that, it becomes straightforward to configure CNF1, CNF2, and CNF3.
+ * 
+ */
+
+/* CNF1 Configuration Register 1 - Register 5-1 in Datasheet
+ * Address 0x2A
+ * Default/POR: 00 000000
+ * +-------------------------------------------------------------------------------------------------+
+ * |    bit 7   |    bit 6   |   bit 5   |   bit 4   |   bit 3   |   bit 2   |   bit 1   |   bit 0   |
+ * +-------------------------------------------------------------------------------------------------+
+ * |...........SJW...........|..........................BRP..........................................|
+ * +-------------------------------------------------------------------------------------------------+
+ * This registers contains:
+ *      (R/W) - SJW[1:0] : Synchronization Jump Width bits
+ *                      * 11 = 4 TQ
+ *                      * 10 = 3 TQ
+ *                      * 01 = 2 TQ
+ *                      * 00 = 1 TQ
+ *      (R/W) - BRP[5:0] : Baud Rate Prescaler bits
+ *                      * TQ = 2 x (BRP[5:0] + 1) / FOSC
+ * 
+ * CNF2 Configuration Register 2 - Register 5-2 in Datasheet
+ * Address 0x29
+ * Default/POR: 0 0 000 0 0 0
+ * +-------------------------------------------------------------------------------------------------+
+ * |    bit 7   |    bit 6   |   bit 5   |   bit 4   |   bit 3   |   bit 2   |   bit 1   |   bit 0   |
+ * +-------------------------------------------------------------------------------------------------+
+ * |...BTLMODE..|...SAM......|................PHSEG1.............|..............PRSEG................|
+ * +-------------------------------------------------------------------------------------------------+
+ * This registers contains:
+ *      (R/W) - BTLMODE : PS2 Bit Time length (PS2 is the same as NPH2)
+ *                      * 1 = length of PS2 is determined by the PHSEG2 bits of CNF3
+ *                      * 0 = length of PS2 is the greater of PS1 and IPT (2TQ)
+ *      (R/W) - SAM : Sample bit configuration
+ *                      * 1 = Bus line is sampled three times
+ *                      * 0 = Bus line is sampled once
+ *      (R/W) - PHSEG1 : PS1 length bits    (PHSEG1[2:0] + 1) x TQ
+ *      (R/W) - PRSEG : Propagation Segment length bits (PRSEG[2:0] + 1) x TQ
+ * 
+ * CNF3 Configuration Register 3 - Register 5-3 in Datasheet
+ * Address 0x28
+ * Default/POR: 00 0 0 0 000
+ * +-------------------------------------------------------------------------------------------------+
+ * |    bit 7   |    bit 6   |   bit 5   |   bit 4   |   bit 3   |   bit 2   |   bit 1   |   bit 0   |
+ * +-------------------------------------------------------------------------------------------------+
+ * |....SOF.....|...WAKFIL...|..............undef................|.............PHSEG2................|
+ * +-------------------------------------------------------------------------------------------------+
+ * This registers contains:
+ *      (R/W) - SOF : Start-of-Frame signal bit -- if CLKEN, 1 = CLKOUT pin is used for SOF
+ *      (R/W) - WAKFIL : Wake-up Filter bit enable
+ *      (R/W) - PHSEG2[2:0] : PS2 length bits (PHSEG2[2:0] + 1) x TQ -- minimum 2TQ
+ * 
+ */
+
+#define MCP2515_CNF1            0x2A
+#define MCP2515_CNF2            0x29
+#define MCP2515_CNF3            0x28
+
+#define CNF1_SET_SJW_4TQ             0xC0
+#define CNF1_SET_SJW_3TQ             0x80
+#define CNF1_SET_SJW_2TQ             0x40
+#define CNF1_SET_SJW_1TQ             0x00
+
+#define CNF2_SET_BRP(x)              (0x3F & x)
+#define CNF2_SET_BTLMODE_CNF3        0x80
+#define CNF2_SET_SAM(x)              (x << 6u)
+#define CNF2_SET_PS1(x)              (x << 3u)
+#define CNF2_SET_PROPSEG(x)          (x)
+
+#define CNF3_SET_PS2(x)              (x)
+// don't care about SoF or Wake-up filter for now
+
+// </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="ERROR-RELATED">
+/* There are five main types of errors in CAN:
+ *  1- CRC Error - When the CRC computed on the received frame does not match the
+ *                 CRC field of the frame
+ *  2- ACK Error - In the ACK field of a message, the transmitting node checks if
+ *                 if the ACK bit bit - which is always sent out as recessive with
+ *                 the expectation that receiving nodes pull the lines dominant to
+ *                 acknowledge - contains a dominant bit. If not, the transmitting
+ *                 node assumes no node has received the message and an error occurs.
+ *  3- Form Error - If a dominant bit is detected for any of the normally recessive
+ *                  bits (EoF, IFS, ACK DEL, CRC DEL) ...
+ *  4- Bit Error - If a transmitting node detects a bit level opposite to what it
+ *                 sent (other than arbitration loss in the arbitration field)
+ *  5- Stuff Error - If more than six consecutive bits of the same polarity are
+ *                   detected. Normally, a tx node will add a complement bit after
+ *                   5 consecutive bits to follow the stuffing rule and all receiving
+ *                   nodes expect this complemented bit and ignore it.
+ * 
+ * If any of these errors are detected, as part of the CAN protocol, an error frame
+ * is generated and the typical error-response on the bus will be observed. Usually,
+ * a node will re-attempt its message if an error occurs. If too many error frames
+ * in a row keep happening, either on the tx or rx side, then CAN has some rules
+ * for this and each node takes on what are called error states. There are three:
+ * Error-active, Error-passive, and Bus-off. Moving in between states generally
+ * depends on internal counters in each CAN Controller - Receive Error Counter (REC)
+ * and Transmit Error Counter (TEC). The way they increment/decrement is specified
+ * in IS0-11898.
+ * 
+ * Upon reset, the MCP2515 starts in the Error-active state, where it is able to
+ * send dominant error frames if it detects an error. Once REC or TEC pass 127,
+ * the node goes into Error-passive state where it can only send passive error frames.
+ * Once REC or TEC pass 255, the node goes into the Bus-off state, where it dettaches
+ * itself from the bus, and only after 128 occurrences of 11 consecutive recessive bits
+ * will it go back to Error-active.
+ * 
+ * To this end, the MCP2515 has three registers:
+ *      1- TEC at 0x1C
+ *      2- REC at 0x1D
+ *      3- EFLG at 0x2D
+ * 
+ * EFLG Error Flag Register - Register 6-3 in Datasheet
+ * Address 0x2D
+ * Default/POR: 0 0 0 0 0 0 0 0
+ * +-------------------------------------------------------------------------------------------------+
+ * |    bit 7   |    bit 6   |   bit 5   |   bit 4   |   bit 3   |   bit 2   |   bit 1   |   bit 0   |
+ * +-------------------------------------------------------------------------------------------------+
+ * |..RX1OVR....|...RX0OVR...|....TXBO...|...TXEP....|....RXEP...|...TXWAR...|....RXWAR..|...EWARN...|
+ * +-------------------------------------------------------------------------------------------------+
+ * This registers contains:
+ *      (R/W) - RX1OVR : Sets when a valid message is received but both receive buffers are full (CANTINTF is 1)
+ *                       Must be reset by MCU, hence it is R/W.
+ *      (R/W) - RX0OVR : ""
+ *      (R) - TXBO : Bus-off state flag
+ *      (R) - TXEP : Error-passive state flag from TEC
+ *      (R) - RXEP : Error-passive state flag from REC
+ *      (R) - TXWAR : Transmit Error warning flag -- TEC > 96
+ *      (R) - RXWAR : Receive Error warning flag -- REC > 96
+ *      (R) - EWARN : Error Warning flag -- when either TEC or REC > 96
+ */
+
+#define MCP2515_EFLG            0x2D
+#define MCP2515_EFLG_RX1OVR     0x80
+#define MCP2515_EFLG_RX0OVR     0x40
+#define MCP2515_EFLG_TXBO       0x20
+#define MCP2515_EFLG_TXEP       0x10
+#define MCP2515_EFLG_RXEP       0x08
+#define MCP2515_EFLG_TXWARN     0x04
+#define MCP2515_EFLG_RXWARN     0x02
+#define MCP2515_EFLG_EARN       0x01
+
+// </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="INTERRUPT-RELATED">
+
+/* For interrupts, as you've probably seen by now if you've gone through the
+ * previous comments, we have CANINTE for enabling on ~INT pin and CANINTF for
+ * the flags.
+ * 
+ * CANINTE CAN Interrupt Enable Register - Register 7-1 in Datasheet
+ * Address 0x2B
+ * Default/POR: 0 0 0 0 0 0 0 0
+ * +-------------------------------------------------------------------------------------------------+
+ * |    bit 7   |    bit 6   |   bit 5   |   bit 4   |   bit 3   |   bit 2   |   bit 1   |   bit 0   |
+ * +-------------------------------------------------------------------------------------------------+
+ * |...MERRE....|....WAKIE...|...ERRIE...|...TX2IE...|...TX1IE...|...TX0IE...|...RX1IE...|...RX0IE...|
+ * +-------------------------------------------------------------------------------------------------+
+ * 
+ * CANINTf CAN Interrupt Flag Register - Register 7-2 in Datasheet
+ * Address 0x2C
+ * Default/POR: 0 0 0 0 0 0 0 0
+ * +-------------------------------------------------------------------------------------------------+
+ * |    bit 7   |    bit 6   |   bit 5   |   bit 4   |   bit 3   |   bit 2   |   bit 1   |   bit 0   |
+ * +-------------------------------------------------------------------------------------------------+
+ * |...MERRF....|....WAKIF...|...ERRIF...|...TX2IF...|...TX1IF...|...TX0IF...|...RX1IF...|...RX0IF...|
+ * +-------------------------------------------------------------------------------------------------+
+ * 
+ */
+
+#define MCP2515_CANINTE         0x2B
+#define MCP2515_CANINTF         0x2C
+// For either register, the interrupt positions are the same, so:
+#define MCP2515_MERR            0x80
+#define MCP2515_WAKI            0x40
+#define MCP2515_ERRI            0x20
+#define MCP2515_TX2I            0x10
+#define MCP2515_TX1I            0x08
+#define MCP2515_TX0I            0x04
+#define MCP2515_RX1I            0x02
+#define MCP2515_RX0I            0x01
+
+// </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="SPI-RELATED">
+/* The MCP2515 accepts 9 different SPI instructions:
+ * 1- RESET -- 1100 0000 : 0xC0 -- Resets internal registers and goes into Config mode
+ * 
+ * 2- READ -- 0000 0011 : 0x03 -- Reads data from the register beginning at the selected address
+ *      The general flow of this operation goes:
+ *          Set ~CS low --> Send READ instruction --> Send 8-bit address -->
+ *          Read in addresses (sequential reading supported) --> Terminate with ~CS high
+ * 
+ * 3- READ RX BUFFER -- 1001 0nm0 : 0x9X -- Reads a receive buffer. This is equiv. to
+ *                                          the READ instruction but without having to
+ *                                          send the address. So just
+ *                                          SEND READ RX BUFFER --> Read in bytes --> Terminate
+ * 
+ *                          nm: 00 = RXB0 starting at RXB0SIDH (0x61)
+ *                              01 = RXB0 starting at RXB0D0 (0x66)
+ *                              10 = RXB1 starting at RXB1SIDH (0x71)
+ *                              11 = RXB1 starting at RXB1D0 (0x76)
+ * 
+ * 4- WRITE -- 0000 0010 : 0x02 -- Writes data to the register starting at the given address.
+ *              CS LOW --> Send WRITE --> Send address --> Send bytes --> CS HIGH
+ * 
+ * 5- LOAD TX BUFFER -- 0100 0abc : 0x4X -- Writes to a TX buffer. Similar idea to READ RX BUFFER.
+ * 
+ *                          abc: 000 = TXB0 starting at TXB0SIDH (0x31)
+ *                               001 = TXB0 starting at TXB0D0 (0x36)
+ *                               010 = TXB1 starting at TXB1SIDH (0x41)
+ *                               011 = TXB1 starting at TXB1D0 (0x46)
+ *                               100 = TXB2 starting at TXB2SIDH (0x51)
+ *                               101 = TXB2 starting at TXB2D0 (0x56)
+ * 
+ * 6- RTS - 1000 0nnn : 0x8X -- Instructs controller to begin message tx for the specific TX buffer
+ *                              nnn: left bit is for TXB2, middle TXB1, right for TXB0 (can do multiple)
+ * 
+ * 7- READ STATUS -- 1010 0000 : 0xA0 -- Polls several status-type bits, including
+ *                7      6      5               4     3                2      1               0
+ *              RX0IF--RX1IF--TXREQ for TXB0--TX0IF--TXREQ for TXB1--TX1IF--TXREQ for TXB2--TX2IF
+ * 
+ * 8- RX STATUS -- 1011 0000 : 0xB0 -- Polls for filter match and message type of received message
+ *                                     (see datasheet for details)
+ * 
+ * 9- BIT MODIFY -- 0000 0101 : 0x05 -- Similar to WRITE, however not sure how this works exactly...
+ *                                      Datasheet shows: START --> BIT MODIFY --> Address --> Mask --> Data
+ * 
+ */
+
+#define MCP2515_SPI_RESET           0xC0
+#define MCP2515_SPI_READ            0x03
+#define MCP2515_SPI_READ_RXBUF(X)   (0x90 | (X << 1))   // Use with below enum spi_read_rxb_inst_t
+typedef enum { SPI_READ_RXB0_ID, SPI_READ_RXB0_D, SPI_READ_RXB1_ID, SPI_READ_RXB1_D } spi_read_rxb_inst_t;
+#define MCP2515_SPI_WRITE           0x02
+#define MCP2515_SPI_LOAD_TXBUF(X)   (0x40 | X)  // Use with below enum spi_load_txb_inst_t
+typedef enum { SPI_LOAD_TXB0_ID, SPI_LOAD_TXB0_D, SPI_LOAD_TXB1_ID, SPI_LOAD_TXB1_D, SPI_LOAD_TXB2_ID, SPI_LOAD_TXB2_D } spi_load_txb_inst_t;
+//ignoring RTS for now
+#define MCP2515_SPI_READ_STATUS         0xA0
+#define MCP2515_SPI_READ_STATUS_RX0IF   (1u << 0u)
+#define MCP2515_SPI_READ_STATUS_RX1IF   (1u << 1u)
+#define MCP2515_SPI_READ_STATUS_TXREQ0  (1u << 2u)
+#define MCP2515_SPI_READ_STATUS_TX0IF   (1u << 3u)
+#define MCP2515_SPI_READ_STATUS_TXREQ1  (1u << 4u)
+#define MCP2515_SPI_READ_STATUS_TX1IF   (1u << 5u)
+#define MCP2515_SPI_READ_STATUS_TXREQ2  (1u << 6u)
+#define MCP2515_SPI_READ_STATUS_TX2IF   (1u << 7u)
+#define MCP2515_SPI_RX_STATUS           0xB0
+// need a LOT of #defines for this instruction...
+#define MCP2515_SPI_BIT_MODIFY          0x05
+
+// </editor-fold>
 
 // </editor-fold>
 
@@ -416,7 +945,7 @@ typedef struct {
     uint8_t data5;
     uint8_t data6;
     uint8_t data7;
-} can_msg_data_field;   // Can also just use array
+} can_msg_data_field;   // Can also just use a uint8_t array of length 8
 
 typedef struct {
     can_msg_arb_field arb_field;
@@ -436,9 +965,9 @@ void can_write_bit(uint8_t reg, uint8_t mask, uint8_t val);
 /* Use the below functions at border between PIC and MCP2515. As in to say...
  *      - For a transmit, you may construct the message first using the structs
  *        defined above, which are more intuitive to work with, and then translate
- *        those structs into uint32_t id and data bytes to be placed into uint8_t * txb_buf
+ *        those structs into uint32_t id and data bytes to be placed into uint8_t * tx_buf
  * 
- *      - For a receive, you get the message into the uint8_t * rxb_buf, translate
+ *      - For a receive, you get the message into the uint8_t * rx_buf, translate
  *        that into structs to work with internally more intuitively.
  * This is what the can_compose_msg_xx and can_parse_msg_xx functions below are for
  * --> the translating to and from structs.

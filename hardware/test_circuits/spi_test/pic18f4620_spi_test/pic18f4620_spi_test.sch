@@ -1554,4 +1554,6 @@ Wire Bus Line
 	8950 4900 10200 4900
 Wire Bus Line
 	9950 3200 9950 3850
+Text Notes 11100 3850 1    40   ~ 0
+Also note that in slave mode, once CS goes high (i.e., disabled),\nthen SDO goes floating. So it MAY be desired to have pull-up\nor pull-down resistors! This behavior seems common among\nSPI slave devices in general.
 $EndSCHEMATC
