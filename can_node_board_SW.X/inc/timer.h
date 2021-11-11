@@ -36,12 +36,12 @@
 #define TMR1_INT_OSC        T1CON &= ~0x02
 #define TMR1_ON             T1CON |= T1CON_TMR1ON_BIT
 #define TMR1_OFF            T1CON &= ~T1CON_TMR1ON_BIT
-#define TMR1_DEFAULT        T1CON = 0xB0        // 16-bit, prescaler of 8, tmr1 osc off, internal clock, tmr1 off
+#define TMR1_DEFAULT        T1CON = 0x80        // 16-bit, prescaler of 1, tmr1 osc off, internal clock, tmr1 off
 
 #define TMR1_ENABLE_INTERRUPT   (PIE1bits.TMR1IE = 1u)
 #define TMR1_IF                 PIR1bits.TMR1IF
 #define TMR1_ENABLE_BIT         PIE1bits.TMR1IE
-#define TMR1_CLEAR_IF           (TMR1_IF = 0u)
+#define CLEAR_TMR1_IF           (TMR1_IF = 0u)
 
 // TIMER3 MODULE
 // T3CON - Timer3 Control Register
@@ -60,7 +60,7 @@
 // Function declaration
 
 // Timer1
-void Timer1_Init_Default(uint16_t period_val);
+void Timer1_Init_Default(void);
 void Timer1_Enable(void);
 void Timer1_Disable(void);
 

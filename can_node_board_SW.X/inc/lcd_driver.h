@@ -103,8 +103,9 @@
 //Pin Setups
 #define DISP_RS                     LATCbits.LATC0
 #define DISP_RW                     LATCbits.LATC1
-#define DISP_E                      LATCbits.LATC2
-#define DISP_CTRL_LINES_DIR         (TRISC &= 0xF8)   // RC0 to RC2 outputs
+//#define DISP_E                      LATCbits.LATC2
+#define DISP_E                      LATDbits.LATD1
+#define DISP_CTRL_LINES_DIR         TRISC &= 0xFC; TRISD &= ~(1u << 1)  // RC0, RC1, RD1 outputs
 #define DISP_DATA_LINES             PORTD
 #define DISP_DATA_DIR_WRITE_4BIT    (TRISD &= 0x0Fu)
 #define DISP_DATA_DIR_READ_4BIT     (TRISD |= 0xF0u)
@@ -238,6 +239,9 @@ uint8_t LCD_set_cursor_position(uint8_t line, uint8_t pos_on_line);
 uint8_t LCD_write_characters(char * toWrite, uint8_t size);
 uint8_t LCD_turn_off_cursor(void);
 uint8_t LCD_turn_on_cursor(void);
+
+// Higher level functions
+void LCD_write_uint32_number(uint32_t num);
 
 
 

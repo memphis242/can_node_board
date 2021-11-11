@@ -623,6 +623,38 @@ uint8_t LCD_turn_on_cursor(void){
 }
 
 
+// Higher-level functions
+void LCD_write_uint32_number(uint32_t num){
+    
+    // Get numbers of digits --> uint32_t can only go as high as 4 billion, so 10 digits max
+    uint8_t num_of_digits = 0u;
+    if(num < 10u) num_of_digits = 1u;
+    else if(num < 100u) num_of_digits = 2u;
+    else if(num < 1000u) num_of_digits = 3u;
+    else if(num < 10000u) num_of_digits = 4u;
+    else if(num < 100000u) num_of_digits = 5u;
+    else if(num < 1000000u) num_of_digits = 6u;
+    else if(num < 10000000u) num_of_digits = 7u;
+    else if(num < 100000000u) num_of_digits = 8u;
+    else if(num < 1000000000u) num_of_digits = 9u;
+    else num_of_digits = 10u;
+    
+    // Now get the individual digits into an array where each entry is a digit, starting from least significant digit
+    uint8_t digits[10] = {0u};
+    for(uint8_t i=0; i<num_of_digits; i++){
+        digits[i] = num % 10;
+        num /= 10;
+    }
+    
+    // Now print out each digit, going in reverse order through the array
+    for(int8_t i=((int8_t)num_of_digits-1); i>=0; i--){
+        LCD_write_data_byte_4bit( (char) digits[i] + '0');
+    }
+    
+}
+
+
+
 //// Initialize I/O ports -- PORTC is for control lines, PORTD is for data lines, PORTE for debugging
 //    // Clear all ports just to help with debugging
 //    PORTC = 0x00;

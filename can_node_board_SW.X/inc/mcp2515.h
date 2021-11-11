@@ -962,6 +962,11 @@ void can_read_successive_reg(uint8_t start_reg, uint8_t * rxbuf, uint8_t len);
 void can_write_reg(uint8_t reg, uint8_t value);
 void can_write_successive_reg(uint8_t start_reg, uint8_t * txbuf, uint8_t len);
 void can_write_bit(uint8_t reg, uint8_t mask, uint8_t val);
+void can_write_txbuf(txbuf_t txb,  uint8_t * mcp2515_tx_buf, uint8_t len);
+void can_read_rxbuf(rxbuf_t rxb,  uint8_t * mcp2515_rx_buf, uint8_t len);
+
+void can_init(void);
+void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump);
 /* Use the below functions at border between PIC and MCP2515. As in to say...
  *      - For a transmit, you may construct the message first using the structs
  *        defined above, which are more intuitive to work with, and then translate
@@ -972,11 +977,6 @@ void can_write_bit(uint8_t reg, uint8_t mask, uint8_t val);
  * This is what the can_compose_msg_xx and can_parse_msg_xx functions below are for
  * --> the translating to and from structs.
  */
-void can_write_txbuf(txbuf_t txb,  uint8_t * mcp2515_tx_buf, uint8_t len);
-void can_read_rxbuf(rxbuf_t rxb,  uint8_t * mcp2515_rx_buf, uint8_t len);
-
-void can_init(void);
-void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump);
 void can_compose_msg_std(can_msg * msg, uint8_t * mcp2515_tx_buf);
 void can_parse_msg_std(can_msg * msg, uint8_t * mcp2515_rx_buf);
 void can_compose_msg_ext(can_msg * msg, uint8_t * mcp2515_tx_buf);
