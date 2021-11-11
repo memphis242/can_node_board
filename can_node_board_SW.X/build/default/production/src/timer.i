@@ -4480,36 +4480,34 @@ typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
 # 15 "inc\\timer.h" 2
 # 63 "inc\\timer.h"
-void Timer1_Init_Default(uint16_t period_val);
+void Timer1_Init_Default(void);
 void Timer1_Enable(void);
 void Timer1_Disable(void);
 # 10 "src/timer.c" 2
 
 # 1 "inc\\ccp.h" 1
-# 64 "inc\\ccp.h"
-void CCP1_Init_Default(uint16_t comp_val);
-void CCP2_Init_Default(uint16_t comp_val);
+# 154 "inc\\ccp.h"
+typedef enum { TMR1_CCP1, TMR1_CCPx, TM3_CCP2, TM3_CCPx} tmr_ccp_pair_t;
+
+
+
+
+
+void CCP1_Compare_Init_Default(uint16_t comp_val);
+void CCP2_Compare_Init_Default(uint16_t comp_val);
+void CCP1_Capture_Init_Default(void);
+void CCP2_Capture_Init_Default(void);
 # 11 "src/timer.c" 2
 # 31 "src/timer.c"
-void Timer1_Init_Default(uint16_t period_val){
-
-
-    T1CON = 0xB0;
-    (T3CON = 0x00);
-
-
-
-
-
-
-    CCP1_Init_Default(period_val);
-
+void Timer1_Init_Default(void){
+    T1CON = 0x80;
+    (PIE1bits.TMR1IE = 1u);
 }
-# 54 "src/timer.c"
+# 44 "src/timer.c"
 void Timer1_Enable(void){
     T1CON |= 0x01;
 }
-# 66 "src/timer.c"
+# 56 "src/timer.c"
 void Timer1_Disable(void){
     T1CON &= ~0x01;
 }

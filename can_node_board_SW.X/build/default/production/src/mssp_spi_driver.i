@@ -4500,7 +4500,7 @@ void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size);
 # 10 "src/mssp_spi_driver.c" 2
 
 # 1 "inc\\lcd_driver.h" 1
-# 206 "inc\\lcd_driver.h"
+# 207 "inc\\lcd_driver.h"
 enum lcd_display_t {
     QAPASS_EBAY,
     QAPASS_AMAZON,
@@ -4536,6 +4536,9 @@ uint8_t LCD_set_cursor_position(uint8_t line, uint8_t pos_on_line);
 uint8_t LCD_write_characters(char * toWrite, uint8_t size);
 uint8_t LCD_turn_off_cursor(void);
 uint8_t LCD_turn_on_cursor(void);
+
+
+void LCD_write_uint32_number(uint32_t num);
 # 11 "src/mssp_spi_driver.c" 2
 
 

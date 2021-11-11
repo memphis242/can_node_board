@@ -4550,7 +4550,7 @@ void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size);
 # 69 "spi_test.c" 2
 
 # 1 "./inc/lcd_driver.h" 1
-# 206 "./inc/lcd_driver.h"
+# 207 "./inc/lcd_driver.h"
 enum lcd_display_t {
     QAPASS_EBAY,
     QAPASS_AMAZON,
@@ -4586,19 +4586,30 @@ uint8_t LCD_set_cursor_position(uint8_t line, uint8_t pos_on_line);
 uint8_t LCD_write_characters(char * toWrite, uint8_t size);
 uint8_t LCD_turn_off_cursor(void);
 uint8_t LCD_turn_on_cursor(void);
+
+
+void LCD_write_uint32_number(uint32_t num);
 # 70 "spi_test.c" 2
 
 # 1 "./inc/timer.h" 1
 # 63 "./inc/timer.h"
-void Timer1_Init_Default(uint16_t period_val);
+void Timer1_Init_Default(void);
 void Timer1_Enable(void);
 void Timer1_Disable(void);
 # 71 "spi_test.c" 2
 
 # 1 "./inc/ccp.h" 1
-# 64 "./inc/ccp.h"
-void CCP1_Init_Default(uint16_t comp_val);
-void CCP2_Init_Default(uint16_t comp_val);
+# 154 "./inc/ccp.h"
+typedef enum { TMR1_CCP1, TMR1_CCPx, TM3_CCP2, TM3_CCPx} tmr_ccp_pair_t;
+
+
+
+
+
+void CCP1_Compare_Init_Default(uint16_t comp_val);
+void CCP2_Compare_Init_Default(uint16_t comp_val);
+void CCP1_Capture_Init_Default(void);
+void CCP2_Capture_Init_Default(void);
 # 72 "spi_test.c" 2
 
 # 1 "./spi_test.h" 1

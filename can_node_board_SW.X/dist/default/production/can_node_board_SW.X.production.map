@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files\Microchip\xc8\v2.31\pic\dat\en_msgs.txt -cn \
   -h+dist/default/production\can_node_board_SW.X.production.sym \
   --cmf=dist/default/production\can_node_board_SW.X.production.cmf -z \
-  -Q18F4620 -oC:\Users\almos\AppData\Local\Temp\skkk.2 \
+  -Q18F4620 -oC:\Users\almos\AppData\Local\Temp\sjhk.2 \
   --defsym=__MPLAB_BUILD=1 \
   -Mdist/default/production/can_node_board_SW.X.production.map -E1 \
   -ver=XC8 Compiler --acfsm=1493 -ASTACK=080h-0F7Fh -pstack=STACK \
@@ -26,7 +26,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\almos\AppData\Local\Temp\skkk.o \
+  C:\Users\almos\AppData\Local\Temp\sjhk.o \
   dist/default/production\can_node_board_SW.X.production.o 
 
 Object code version is 3.11
@@ -36,7 +36,7 @@ Machine type is 18F4620
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\almos\AppData\Local\Temp\skkk.o
+C:\Users\almos\AppData\Local\Temp\sjhk.o
                 idloc                            200000   200000        8        0       5
                 config                           300000   300000        E        0       4
                 init                                  E        E        4        4       0
@@ -45,23 +45,23 @@ dist/default/production\can_node_board_SW.X.production.o
                 intcode                               8        8        6        4       0
                 idloc                            200000   200000        8        0       5
                 config                           300000   300000        E        0       4
-                temp                                 6C       6C        1        1       1
+                temp                                 76       76        1        1       1
                 smallconst                         1000     1000       10      800       0
-                intcode_body                       141A     141A       56      808       0
-                text8                              1352     1352       C8      808       0
-                text7                              14BC     14BC       4C      808       0
-                text6                              11A4     11A4       E4      808       0
-                text5                              15AE     15AE       26      808       0
-                text4                              157E     157E       30      808       0
-                text3                              1288     1288       CA      808       0
-                text2                              1470     1470       4C      808       0
-                text1                              15D4     15D4       20      808       0
-                text0                              1010     1010      194      808       0
+                intcode_body                       1442     1442       34      808       0
+                text8                              1220     1220       AC      808       0
+                text7                              137E     137E       4E      808       0
+                text6                              113A     113A       E6      808       0
+                text5                              1476     1476       28      808       0
+                text4                              149E     149E       24      808       0
+                text3                              12CC     12CC       64      808       0
+                text2                              1330     1330       4E      808       0
+                text1                              14C2     14C2       20      808       0
+                text0                              1010     1010      12A      808       0
                 cstackCOMRAM                         3D       3D       20        1       1
                 dataCOMRAM                            1        1       3C        1       1
-                bssCOMRAM                            5D       5D        F        1       1
-                cinit                              1544     1544       3A      808       0
-                idataCOMRAM                        1508     1508       3C      808       0
+                bssCOMRAM                            5D       5D       19        1       1
+                cinit                              1408     1408       3A      808       0
+                idataCOMRAM                        13CC     13CC       3C      808       0
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   STACK          
@@ -70,18 +70,18 @@ TOTAL           Name                               Link     Load   Length     Sp
                 intcode                               8        8        6         0
                 init                                  E        E        4         0
                 reset_vec                             0        0        4         0
-                intcode_body                       141A     141A       56         0
-                text8                              1352     1352       C8         0
-                text7                              14BC     14BC       4C         0
-                text6                              11A4     11A4       E4         0
-                text5                              15AE     15AE       26         0
-                text4                              157E     157E       30         0
-                text3                              1288     1288       CA         0
-                text2                              1470     1470       4C         0
-                text1                              15D4     15D4       20         0
-                text0                              1010     1010      194         0
-                cinit                              1544     1544       3A         0
-                idataCOMRAM                        1508     1508       3C         0
+                intcode_body                       1442     1442       34         0
+                text8                              1220     1220       AC         0
+                text7                              137E     137E       4E         0
+                text6                              113A     113A       E6         0
+                text5                              1476     1476       28         0
+                text4                              149E     149E       24         0
+                text3                              12CC     12CC       64         0
+                text2                              1330     1330       4E         0
+                text1                              14C2     14C2       20         0
+                text0                              1010     1010      12A         0
+                cinit                              1408     1408       3A         0
+                idataCOMRAM                        13CC     13CC       3C         0
 
         CLASS   CONST          
 
@@ -91,10 +91,10 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   MEDIUMCONST    
 
         CLASS   COMRAM         
-                temp                                 6C       6C        1         1
+                temp                                 76       76        1         1
                 cstackCOMRAM                         3D       3D       20         1
                 dataCOMRAM                            1        1       3C         1
-                bssCOMRAM                            5D       5D        F         1
+                bssCOMRAM                            5D       5D       19         1
 
         CLASS   ABS1           
 
@@ -151,10 +151,10 @@ TOTAL           Name                               Link     Load   Length     Sp
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class
 
                 reset_vec                      000000  000004  000004         0       0  CODE    
-                dataCOMRAM                     000001  00006C  00006D         1       1  COMRAM  
+                dataCOMRAM                     000001  000076  000077         1       1  COMRAM  
                 intcode                        000008  00000A  000012         4       0  CODE    
                 smallconst                     001000  000010  001010       800       0  SMALLCON
-                text0                          001010  0005E4  0015F4       808       0  CODE    
+                text0                          001010  0004D2  0014E2       808       0  CODE    
 
 
 UNUSED ADDRESS RANGES
@@ -176,19 +176,19 @@ UNUSED ADDRESS RANGES
         BANK7            000700-0007FF              100
         BANK8            000800-0008FF              100
         BANK9            000900-0009FF              100
-        BIGRAM           00006D-000F7F              F13
+        BIGRAM           000077-000F7F              F09
         CODE             000004-000007                4
                          000012-000FFF              FEE
-                         0015F4-00FFFF             EA0C
-        COMRAM           00006D-00007F               13
+                         0014E2-00FFFF             EB1E
+        COMRAM           000077-00007F                9
         CONST            000004-000007                4
                          000012-000FFF              FEE
-                         0015F4-00FFFF             EA0C
+                         0014E2-00FFFF             EB1E
         EEDATA           F00000-F003FF              400
-        MEDIUMCONST      0015F4-00FFFF             EA0C
+        MEDIUMCONST      0014E2-00FFFF             EB1E
         RAM              000080-000F7F              100
         SFR              000F80-000FFF               80
-        SMALLCONST       0015F4-00FFFF              100
+        SMALLCONST       0014E2-00FFFF              100
         STACK            000080-000F7F              F00
 
                                   Symbol Table
@@ -199,39 +199,30 @@ LCD_set_cursor_position@pos_on_line cstackCOMRAM 000042
 LCD_write_data_byte_4bit@data       cstackCOMRAM 000041
 LCD_write_instr_byte_4bit@instr     cstackCOMRAM 000041
 LCD_write_instr_byte_8bit@instr     cstackCOMRAM 000041
-_CCP1CON                            (abs)        000FBD
-_CCP2CON                            (abs)        000FBA
-_CCPR1                              (abs)        000FBE
-_CCPR2                              (abs)        000FBB
-_CURRENT_DISP                       bssCOMRAM    00006B
-_DISP_BIT_MODE                      bssCOMRAM    00006A
+_CURRENT_DISP                       bssCOMRAM    000075
+_DISP_BIT_MODE                      bssCOMRAM    000074
 _INTCONbits                         (abs)        000FF2
 _LATCbits                           (abs)        000F8B
 _LATDbits                           (abs)        000F8C
-_LCD_Init_ECE376                    text6        0011A4
-_LCD_clear_display                  text4        00157E
-_LCD_enable_toggle                  text8        001352
-_LCD_set_cursor_position            text3        001288
-_LCD_write_data_byte_4bit           text2        001470
-_LCD_write_instr_byte_4bit          text7        0014BC
-_LCD_write_instr_byte_8bit          text5        0015AE
+_LCD_Init_ECE376                    text6        00113A
+_LCD_clear_display                  text4        00149E
+_LCD_enable_toggle                  text8        001220
+_LCD_set_cursor_position            text3        0012CC
+_LCD_write_data_byte_4bit           text2        001330
+_LCD_write_instr_byte_4bit          text7        00137E
+_LCD_write_instr_byte_8bit          text5        001476
 _PIE1bits                           (abs)        000F9D
-_PIE2bits                           (abs)        000FA0
 _PIR1bits                           (abs)        000F9E
 _PORTC                              (abs)        000F82
 _PORTD                              (abs)        000F83
-_PORTDbits                          (abs)        000F83
-_SPI_Init_Slave_Default             text1        0015D4
+_SPI_Init_Slave_Default             text1        0014C2
 _SSPBUF                             (abs)        000FC9
 _SSPCON1                            (abs)        000FC6
 _SSPCON1bits                        (abs)        000FC6
 _SSPSTAT                            (abs)        000FC7
-_T1CON                              (abs)        000FCD
-_T3CON                              (abs)        000FB1
 _TRISA                              (abs)        000F92
 _TRISC                              (abs)        000F94
 _TRISD                              (abs)        000F95
-_TRISDbits                          (abs)        000F95
 __HRAM                              (abs)        000000
 __Habs1                             abs1         000000
 __Hbank0                            bank0        000000
@@ -294,13 +285,13 @@ __Hreset_vec                        reset_vec    000004
 __Hrparam                           rparam       000000
 __Hsfr                              sfr          000000
 __Hsmallconst                       smallconst   001010
-__Hspace_0                          (abs)        0015F4
-__Hspace_1                          (abs)        00006D
+__Hspace_0                          (abs)        0014E2
+__Hspace_1                          (abs)        000077
 __Hspace_2                          (abs)        000000
 __Hspace_4                          (abs)        60000E
 __Hstack                            stack        000000
 __Hstruct                           struct       000000
-__Htemp                             temp         00006D
+__Htemp                             temp         000077
 __Htext                             text         000000
 __Htext0                            text0        000000
 __Htext1                            text1        000000
@@ -379,7 +370,7 @@ __Lspace_2                          (abs)        000000
 __Lspace_4                          (abs)        000000
 __Lstack                            stack        000000
 __Lstruct                           struct       000000
-__Ltemp                             temp         00006C
+__Ltemp                             temp         000076
 __Ltext                             text         000000
 __Ltext0                            text0        000000
 __Ltext1                            text1        000000
@@ -390,8 +381,8 @@ __Ltext5                            text5        000000
 __Ltext6                            text6        000000
 __Ltext7                            text7        000000
 __Ltext8                            text8        000000
-__S0                                (abs)        0015F4
-__S1                                (abs)        00006D
+__S0                                (abs)        0014E2
+__S1                                (abs)        000077
 __S2                                (abs)        000000
 __S4                                (abs)        000000
 __S5                                (abs)        000000
@@ -402,37 +393,37 @@ ___rparam_used                      (abs)        000001
 ___sp                               stack        000000
 __accesstop                         (abs)        000080
 __activetblptr                      (abs)        000002
-__end_of_LCD_Init_ECE376            text6        001288
-__end_of_LCD_clear_display          text4        0015AE
-__end_of_LCD_enable_toggle          text8        00141A
-__end_of_LCD_set_cursor_position    text3        001352
-__end_of_LCD_write_data_byte_4bit   text2        0014BC
-__end_of_LCD_write_instr_byte_4bit  text7        001508
-__end_of_LCD_write_instr_byte_8bit  text5        0015D4
-__end_of_SPI_Init_Slave_Default     text1        0015F4
-__end_of__initialization            cinit        001570
-__end_of_isr                        intcode_body 001470
-__end_of_main                       text0        0011A4
+__end_of_LCD_Init_ECE376            text6        001220
+__end_of_LCD_clear_display          text4        0014C2
+__end_of_LCD_enable_toggle          text8        0012CC
+__end_of_LCD_set_cursor_position    text3        001330
+__end_of_LCD_write_data_byte_4bit   text2        00137E
+__end_of_LCD_write_instr_byte_4bit  text7        0013CC
+__end_of_LCD_write_instr_byte_8bit  text5        00149E
+__end_of_SPI_Init_Slave_Default     text1        0014E2
+__end_of__initialization            cinit        001434
+__end_of_isr                        intcode_body 001476
+__end_of_main                       text0        00113A
 __end_of_spi_rx_invalid_msg         smallconst   00100E
-__initialization                    cinit        001544
+__initialization                    cinit        001408
 __mediumconst                       mediumconst  000000
 __pbssCOMRAM                        bssCOMRAM    00005D
-__pcinit                            cinit        001544
+__pcinit                            cinit        001408
 __pcstackCOMRAM                     cstackCOMRAM 00003D
 __pdataCOMRAM                       dataCOMRAM   000001
-__pidataCOMRAM                      idataCOMRAM  001508
+__pidataCOMRAM                      idataCOMRAM  0013CC
 __pintcode                          intcode      000008
-__pintcode_body                     intcode_body 00141A
+__pintcode_body                     intcode_body 001442
 __psmallconst                       smallconst   001000
 __ptext0                            text0        001010
-__ptext1                            text1        0015D4
-__ptext2                            text2        001470
-__ptext3                            text3        001288
-__ptext4                            text4        00157E
-__ptext5                            text5        0015AE
-__ptext6                            text6        0011A4
-__ptext7                            text7        0014BC
-__ptext8                            text8        001352
+__ptext1                            text1        0014C2
+__ptext2                            text2        001330
+__ptext3                            text3        0012CC
+__ptext4                            text4        00149E
+__ptext5                            text5        001476
+__ptext6                            text6        00113A
+__ptext7                            text7        00137E
+__ptext8                            text8        001220
 __ramtop                            ramtop       001000
 __size_of_LCD_Init_ECE376           (abs)        000000
 __size_of_LCD_clear_display         (abs)        000000
@@ -445,49 +436,49 @@ __size_of_SPI_Init_Slave_Default    (abs)        000000
 __size_of_isr                       (abs)        000000
 __size_of_main                      (abs)        000000
 __smallconst                        smallconst   001000
-_address_counter                    bssCOMRAM    000067
+_address_counter                    bssCOMRAM    000071
 _button1_msg                        dataCOMRAM   000034
-_button1_state                      bssCOMRAM    00005E
+_button1_state                      bssCOMRAM    000068
 _button2_msg                        dataCOMRAM   00002F
-_button2_state                      bssCOMRAM    00005D
+_button2_state                      bssCOMRAM    000067
 _current_disp_ctrl                  dataCOMRAM   00003C
 _current_entry_mode                 dataCOMRAM   00003A
 _current_func_set                   dataCOMRAM   000039
-_init_complete                      bssCOMRAM    000069
+_init_complete                      bssCOMRAM    000073
 _isr                                intcode      000008
 _main                               text0        001010
-_main$651                           cstackCOMRAM 000055
-_main$652                           cstackCOMRAM 000057
-_manual_transfer                    bssCOMRAM    000062
-_receive_byte                       bssCOMRAM    000066
-_spi_actor                          bssCOMRAM    000065
-_spi_rx_flag                        bssCOMRAM    00005F
-_spi_rx_invalid_flag                bssCOMRAM    000060
+_main$696                           cstackCOMRAM 000055
+_main$697                           cstackCOMRAM 000057
+_manual_transfer                    bssCOMRAM    00006C
+_receive_byte                       bssCOMRAM    000070
+_spi_actor                          bssCOMRAM    00006F
+_spi_rx_flag                        bssCOMRAM    000069
+_spi_rx_invalid_flag                bssCOMRAM    00006A
 _spi_rx_invalid_msg                 smallconst   001001
-_spi_rx_msg_buf                     bssCOMRAM    000061
-_transfer_complete_flag             bssCOMRAM    000063
-btemp                               temp         00006C
-end_of_initialization               cinit        001570
-int$flags                           temp         00006C
-int_func                            intcode_body 00141A
+_spi_rx_msg_buf                     bssCOMRAM    00006B
+_transfer_complete_flag             bssCOMRAM    00006D
+btemp                               temp         000076
+end_of_initialization               cinit        001434
+int$flags                           temp         000076
+int_func                            intcode_body 001442
 intlevel0                           text         000000
 intlevel1                           text         000000
 intlevel2                           text         000000
 intlevel3                           text         000000
-main@F2562                          dataCOMRAM   000021
+main@F2571                          dataCOMRAM   000021
 main@i                              cstackCOMRAM 000059
-main@i_650                          cstackCOMRAM 00005A
-main@i_653                          cstackCOMRAM 00005B
-main@i_654                          cstackCOMRAM 00005C
+main@i_695                          cstackCOMRAM 00005A
+main@i_698                          cstackCOMRAM 00005B
+main@i_699                          cstackCOMRAM 00005C
 main@init_success_msg               cstackCOMRAM 000047
 stackhi                             (abs)        000F7F
 stacklo                             (abs)        000080
 start                               init         00000E
-start_initialization                cinit        001544
-ttemp5                              temp         00006D
-ttemp6                              temp         000070
-ttemp7                              temp         000074
-wtemp8                              temp         00006D
+start_initialization                cinit        001408
+ttemp5                              temp         000077
+ttemp6                              temp         00007A
+ttemp7                              temp         00007E
+wtemp8                              temp         000077
 
 
 FUNCTION INFORMATION:
@@ -586,7 +577,6 @@ Total ram usage:        2 bytes
 		_LCD_enable_toggle
  This function is called by:
 		_main
-		_LCD_write_characters
  This function uses a non-reentrant model
 
 
@@ -651,7 +641,6 @@ Total ram usage:        1 bytes
 		_LCD_write_instr_byte_8bit
  This function is called by:
 		_main
-		_LCD_Init_amazonLCD
  This function uses a non-reentrant model
 
 
@@ -683,11 +672,6 @@ Total ram usage:        2 bytes
  This function is called by:
 		_LCD_clear_display
 		_LCD_set_cursor_position
-		_LCD_Init_amazonLCD
-		_LCD_return_home
-		_LCD_write_characters
-		_LCD_turn_off_cursor
-		_LCD_turn_on_cursor
  This function uses a non-reentrant model
 
 
@@ -750,11 +734,6 @@ Total ram usage:        2 bytes
 		_LCD_Init_ECE376
 		_LCD_clear_display
 		_LCD_set_cursor_position
-		_LCD_Init_amazonLCD
-		_LCD_return_home
-		_LCD_write_characters
-		_LCD_turn_off_cursor
-		_LCD_turn_on_cursor
  This function uses a non-reentrant model
 
 
@@ -787,10 +766,6 @@ Total ram usage:        2 bytes
 		_LCD_write_data_byte_4bit
 		_LCD_write_instr_byte_4bit
 		_LCD_write_instr_byte_8bit
-		_LCD_wait_for_BF
-		_LCD_write_data_byte_8bit
-		_LCD_Init
-		_LCD_read_current_address_counter
  This function uses a non-reentrant model
 
 
@@ -828,30 +803,30 @@ MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
 src/mssp_spi_driver.c
-		_SPI_Init_Slave_Default		CODE           	15D4	0000	32
+		_SPI_Init_Slave_Default		CODE           	14C2	0000	32
 
 src/mssp_spi_driver.c estimated size: 32
 
 src/lcd_driver.c
-		_LCD_Init_ECE376		CODE           	11A4	0000	228
-		_LCD_write_instr_byte_4bit		CODE           	14BC	0000	76
-		_LCD_clear_display		CODE           	157E	0000	48
-		_LCD_enable_toggle		CODE           	1352	0000	200
-		_LCD_write_data_byte_4bit		CODE           	1470	0000	76
-		_LCD_write_instr_byte_8bit		CODE           	15AE	0000	38
-		_LCD_set_cursor_position		CODE           	1288	0000	202
+		_LCD_Init_ECE376		CODE           	113A	0000	230
+		_LCD_write_instr_byte_4bit		CODE           	137E	0000	78
+		_LCD_clear_display		CODE           	149E	0000	36
+		_LCD_enable_toggle		CODE           	1220	0000	172
+		_LCD_write_data_byte_4bit		CODE           	1330	0000	78
+		_LCD_write_instr_byte_8bit		CODE           	1476	0000	40
+		_LCD_set_cursor_position		CODE           	12CC	0000	100
 
-src/lcd_driver.c estimated size: 868
+src/lcd_driver.c estimated size: 734
 
 shared
 		_spi_rx_invalid_msg		SMALLCONST     	1001	0000	13
-		__initialization		CODE           	1544	0000	44
+		__initialization		CODE           	1408	0000	44
 
 shared estimated size: 57
 
 spi_test.c
-		_main          		CODE           	1010	0000	404
-		_isr           		CODE           	0008	0000	92
+		_main          		CODE           	1010	0000	298
+		_isr           		CODE           	0008	0000	58
 
-spi_test.c estimated size: 496
+spi_test.c estimated size: 356
 

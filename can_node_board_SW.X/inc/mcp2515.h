@@ -798,7 +798,7 @@
  * |...MERRE....|....WAKIE...|...ERRIE...|...TX2IE...|...TX1IE...|...TX0IE...|...RX1IE...|...RX0IE...|
  * +-------------------------------------------------------------------------------------------------+
  * 
- * CANINTf CAN Interrupt Flag Register - Register 7-2 in Datasheet
+ * CANINTF CAN Interrupt Flag Register - Register 7-2 in Datasheet
  * Address 0x2C
  * Default/POR: 0 0 0 0 0 0 0 0
  * +-------------------------------------------------------------------------------------------------+
@@ -955,6 +955,9 @@ typedef struct {
 
 
 // Functions
+void can_init_defaut(void);
+void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump);
+
 void can_spi_command(uint8_t cmd);
 uint8_t can_spi_query(uint8_t query);
 void can_read_reg(uint8_t reg, uint8_t * rxbuf);
@@ -965,8 +968,6 @@ void can_write_bit(uint8_t reg, uint8_t mask, uint8_t val);
 void can_write_txbuf(txbuf_t txb,  uint8_t * mcp2515_tx_buf, uint8_t len);
 void can_read_rxbuf(rxbuf_t rxb,  uint8_t * mcp2515_rx_buf, uint8_t len);
 
-void can_init(void);
-void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump);
 /* Use the below functions at border between PIC and MCP2515. As in to say...
  *      - For a transmit, you may construct the message first using the structs
  *        defined above, which are more intuitive to work with, and then translate

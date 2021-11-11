@@ -2,12 +2,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 "5224 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 5224: extern volatile unsigned char T1CON __attribute__((address(0xFCD)));
 [v _T1CON `Vuc ~T0 @X0 0 e@4045 ]
-"3529
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 3529: extern volatile unsigned char T3CON __attribute__((address(0xFB1)));
-[v _T3CON `Vuc ~T0 @X0 0 e@4017 ]
-"64 inc\ccp.h
-[; ;inc\ccp.h: 64: void CCP1_Init_Default(uint16_t comp_val);
-[v _CCP1_Init_Default `(v ~T0 @X0 0 ef1`us ]
+"2503
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2503:     struct {
+[s S91 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S91 . TMR1IE TMR2IE CCP1IE SSPIE TXIE RCIE ADIE PSPIE ]
+"2513
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2513:     struct {
+[s S92 :4 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S92 . . TX1IE RC1IE ]
+"2502
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2502: typedef union {
+[u S90 `S91 1 `S92 1 ]
+[n S90 . . . ]
+"2519
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2519: extern volatile PIE1bits_t PIE1bits __attribute__((address(0xF9D)));
+[v _PIE1bits `VS90 ~T0 @X0 0 e@3997 ]
 "54 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 54: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -420,48 +429,44 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6715: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
 "31 src/timer.c
-[; ;src/timer.c: 31: void Timer1_Init_Default(uint16_t period_val){
-[v _Timer1_Init_Default `(v ~T0 @X0 1 ef1`us ]
+[; ;src/timer.c: 31: void Timer1_Init_Default(void){
+[v _Timer1_Init_Default `(v ~T0 @X0 1 ef ]
 {
 [e :U _Timer1_Init_Default ]
-[v _period_val `us ~T0 @X0 1 r1 ]
 [f ]
+"32
+[; ;src/timer.c: 32:     T1CON = 0x80;
+[e = _T1CON -> -> 128 `i `uc ]
+"33
+[; ;src/timer.c: 33:     (PIE1bits.TMR1IE = 1u);
+[e = . . _PIE1bits 0 0 -> -> 1 `ui `uc ]
 "34
-[; ;src/timer.c: 34:     T1CON = 0xB0;
-[e = _T1CON -> -> 176 `i `uc ]
-"35
-[; ;src/timer.c: 35:     (T3CON = 0x00);
-[e = _T3CON -> -> 0 `i `uc ]
-"42
-[; ;src/timer.c: 42:     CCP1_Init_Default(period_val);
-[e ( _CCP1_Init_Default (1 _period_val ]
-"44
-[; ;src/timer.c: 44: }
+[; ;src/timer.c: 34: }
 [e :UE 270 ]
 }
-"54
-[; ;src/timer.c: 54: void Timer1_Enable(void){
+"44
+[; ;src/timer.c: 44: void Timer1_Enable(void){
 [v _Timer1_Enable `(v ~T0 @X0 1 ef ]
 {
 [e :U _Timer1_Enable ]
 [f ]
-"55
-[; ;src/timer.c: 55:     T1CON |= 0x01;
+"45
+[; ;src/timer.c: 45:     T1CON |= 0x01;
 [e =| _T1CON -> -> 1 `i `Vuc ]
-"56
-[; ;src/timer.c: 56: }
+"46
+[; ;src/timer.c: 46: }
 [e :UE 271 ]
 }
-"66
-[; ;src/timer.c: 66: void Timer1_Disable(void){
+"56
+[; ;src/timer.c: 56: void Timer1_Disable(void){
 [v _Timer1_Disable `(v ~T0 @X0 1 ef ]
 {
 [e :U _Timer1_Disable ]
 [f ]
-"67
-[; ;src/timer.c: 67:     T1CON &= ~0x01;
+"57
+[; ;src/timer.c: 57:     T1CON &= ~0x01;
 [e =& _T1CON -> ~ -> 1 `i `Vuc ]
-"68
-[; ;src/timer.c: 68: }
+"58
+[; ;src/timer.c: 58: }
 [e :UE 272 ]
 }

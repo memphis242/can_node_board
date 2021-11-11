@@ -7,7 +7,29 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/lcd_driver.c: 17: static enum lcd_bit_mode_t DISP_BIT_MODE = MODE_4BIT;
 [c E2469 0 1 .. ]
 [n E2469 lcd_bit_mode_t MODE_4BIT MODE_8BIT  ]
-"1110 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
+"1222 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 1222:     struct {
+[s S52 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S52 . LATD0 LATD1 LATD2 LATD3 LATD4 LATD5 LATD6 LATD7 ]
+"1232
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 1232:     struct {
+[s S53 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S53 . LD0 LD1 LD2 LD3 LD4 LD5 LD6 LD7 ]
+"1221
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 1221: typedef union {
+[u S51 `S52 1 `S53 1 ]
+[n S51 . . . ]
+"1243
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 1243: extern volatile LATDbits_t LATDbits __attribute__((address(0xF8C)));
+[v _LATDbits `VS51 ~T0 @X0 0 e@3980 ]
+[v F2424 `(v ~T0 @X0 1 tf1`ul ]
+"203 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\pic18.h
+[v __delay `JF2424 ~T0 @X0 0 e ]
+[p i __delay ]
+"2046 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2046: extern volatile unsigned char TRISD __attribute__((address(0xF95)));
+[v _TRISD `Vuc ~T0 @X0 0 e@3989 ]
+"1110
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 1110:     struct {
 [s S49 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S49 . LATC0 LATC1 LATC2 LATC3 LATC4 LATC5 LATC6 LATC7 ]
@@ -22,13 +44,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1131
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 1131: extern volatile LATCbits_t LATCbits __attribute__((address(0xF8B)));
 [v _LATCbits `VS48 ~T0 @X0 0 e@3979 ]
-[v F2424 `(v ~T0 @X0 1 tf1`ul ]
-"203 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\pic18.h
-[v __delay `JF2424 ~T0 @X0 0 e ]
-[p i __delay ]
-"2046 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2046: extern volatile unsigned char TRISD __attribute__((address(0xF95)));
-[v _TRISD `Vuc ~T0 @X0 0 e@3989 ]
 "541
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 541:     struct {
 [s S27 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -61,8 +76,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "360
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 360: extern volatile unsigned char PORTC __attribute__((address(0xF82)));
 [v _PORTC `Vuc ~T0 @X0 0 e@3970 ]
-"234 inc\lcd_driver.h
-[; ;inc\lcd_driver.h: 234: uint8_t LCD_clear_display(void);
+"235 inc\lcd_driver.h
+[; ;inc\lcd_driver.h: 235: uint8_t LCD_clear_display(void);
 [v _LCD_clear_display `(uc ~T0 @X0 0 ef ]
 "54 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 54: __asm("PORTA equ 0F80h");
@@ -543,20 +558,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/lcd_driver.c: 48:         case QAPASS_EBAY:
 [e :U 273 ]
 "49
-[; ;src/lcd_driver.c: 49:             (LATCbits.LATC2 = 0u);
-[e = . . _LATCbits 0 2 -> -> 0 `ui `uc ]
+[; ;src/lcd_driver.c: 49:             (LATDbits.LATD1 = 0u);
+[e = . . _LATDbits 0 1 -> -> 0 `ui `uc ]
 "50
 [; ;src/lcd_driver.c: 50:             _delay((unsigned long)((2u)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 2 `ui `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
 "51
-[; ;src/lcd_driver.c: 51:             (LATCbits.LATC2 = 1u);
-[e = . . _LATCbits 0 2 -> -> 1 `ui `uc ]
+[; ;src/lcd_driver.c: 51:             (LATDbits.LATD1 = 1u);
+[e = . . _LATDbits 0 1 -> -> 1 `ui `uc ]
 "52
 [; ;src/lcd_driver.c: 52:             _delay((unsigned long)((2u)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 2 `ui `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
 "53
-[; ;src/lcd_driver.c: 53:             (LATCbits.LATC2 = 0u);
-[e = . . _LATCbits 0 2 -> -> 0 `ui `uc ]
+[; ;src/lcd_driver.c: 53:             (LATDbits.LATD1 = 0u);
+[e = . . _LATDbits 0 1 -> -> 0 `ui `uc ]
 "54
 [; ;src/lcd_driver.c: 54:             _delay((unsigned long)((2u)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 2 `ui `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
@@ -567,20 +582,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/lcd_driver.c: 57:         case QAPASS_AMAZON:
 [e :U 274 ]
 "58
-[; ;src/lcd_driver.c: 58:             (LATCbits.LATC2 = 0u);
-[e = . . _LATCbits 0 2 -> -> 0 `ui `uc ]
+[; ;src/lcd_driver.c: 58:             (LATDbits.LATD1 = 0u);
+[e = . . _LATDbits 0 1 -> -> 0 `ui `uc ]
 "59
 [; ;src/lcd_driver.c: 59:             _delay((unsigned long)((1u)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 1 `ui `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
 "60
-[; ;src/lcd_driver.c: 60:             (LATCbits.LATC2 = 1u);
-[e = . . _LATCbits 0 2 -> -> 1 `ui `uc ]
+[; ;src/lcd_driver.c: 60:             (LATDbits.LATD1 = 1u);
+[e = . . _LATDbits 0 1 -> -> 1 `ui `uc ]
 "61
 [; ;src/lcd_driver.c: 61:             _delay((unsigned long)((1u)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 1 `ui `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
 "62
-[; ;src/lcd_driver.c: 62:             (LATCbits.LATC2 = 0u);
-[e = . . _LATCbits 0 2 -> -> 0 `ui `uc ]
+[; ;src/lcd_driver.c: 62:             (LATDbits.LATD1 = 0u);
+[e = . . _LATDbits 0 1 -> -> 0 `ui `uc ]
 "63
 [; ;src/lcd_driver.c: 63:             _delay((unsigned long)((100u)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 100 `ui `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
@@ -591,20 +606,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/lcd_driver.c: 66:         case ADAFRUIT_STANDARD_16x2:
 [e :U 275 ]
 "67
-[; ;src/lcd_driver.c: 67:             (LATCbits.LATC2 = 0u);
-[e = . . _LATCbits 0 2 -> -> 0 `ui `uc ]
+[; ;src/lcd_driver.c: 67:             (LATDbits.LATD1 = 0u);
+[e = . . _LATDbits 0 1 -> -> 0 `ui `uc ]
 "68
 [; ;src/lcd_driver.c: 68:             _delay((unsigned long)((2u)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 2 `ui `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
 "69
-[; ;src/lcd_driver.c: 69:             (LATCbits.LATC2 = 1u);
-[e = . . _LATCbits 0 2 -> -> 1 `ui `uc ]
+[; ;src/lcd_driver.c: 69:             (LATDbits.LATD1 = 1u);
+[e = . . _LATDbits 0 1 -> -> 1 `ui `uc ]
 "70
 [; ;src/lcd_driver.c: 70:             _delay((unsigned long)((2u)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 2 `ui `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
 "71
-[; ;src/lcd_driver.c: 71:             (LATCbits.LATC2 = 0u);
-[e = . . _LATCbits 0 2 -> -> 0 `ui `uc ]
+[; ;src/lcd_driver.c: 71:             (LATDbits.LATD1 = 0u);
+[e = . . _LATDbits 0 1 -> -> 0 `ui `uc ]
 "72
 [; ;src/lcd_driver.c: 72:             _delay((unsigned long)((2u)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 2 `ui `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
@@ -615,20 +630,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/lcd_driver.c: 75:         case ADAFRUIT_STANDARD_20x4:
 [e :U 276 ]
 "76
-[; ;src/lcd_driver.c: 76:             (LATCbits.LATC2 = 0u);
-[e = . . _LATCbits 0 2 -> -> 0 `ui `uc ]
+[; ;src/lcd_driver.c: 76:             (LATDbits.LATD1 = 0u);
+[e = . . _LATDbits 0 1 -> -> 0 `ui `uc ]
 "77
 [; ;src/lcd_driver.c: 77:             _delay((unsigned long)((2u)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 2 `ui `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
 "78
-[; ;src/lcd_driver.c: 78:             (LATCbits.LATC2 = 1u);
-[e = . . _LATCbits 0 2 -> -> 1 `ui `uc ]
+[; ;src/lcd_driver.c: 78:             (LATDbits.LATD1 = 1u);
+[e = . . _LATDbits 0 1 -> -> 1 `ui `uc ]
 "79
 [; ;src/lcd_driver.c: 79:             _delay((unsigned long)((2u)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 2 `ui `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
 "80
-[; ;src/lcd_driver.c: 80:             (LATCbits.LATC2 = 0u);
-[e = . . _LATCbits 0 2 -> -> 0 `ui `uc ]
+[; ;src/lcd_driver.c: 80:             (LATDbits.LATD1 = 0u);
+[e = . . _LATDbits 0 1 -> -> 0 `ui `uc ]
 "81
 [; ;src/lcd_driver.c: 81:             _delay((unsigned long)((2u)*(40000000u/4000000.0)));
 [e ( __delay (1 -> * -> -> 2 `ui `d / -> -> 40000000 `ul `d .4000000.0 `ul ]
@@ -687,8 +702,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
 "128
-[; ;src/lcd_driver.c: 128:     (TRISC &= 0xF8);
-[e =& _TRISC -> -> 248 `i `Vuc ]
+[; ;src/lcd_driver.c: 128:     TRISC &= 0xFC; TRISD &= ~(1u << 1);
+[e =& _TRISC -> -> 252 `i `Vuc ]
+[e =& _TRISD -> ~ << -> 1 `ui -> 1 `i `Vuc ]
 "129
 [; ;src/lcd_driver.c: 129:     (TRISD &= 0x0Fu);
 [e =& _TRISD -> -> 15 `ui `Vuc ]
@@ -725,8 +741,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
 "154
-[; ;src/lcd_driver.c: 154:     (TRISC &= 0xF8);
-[e =& _TRISC -> -> 248 `i `Vuc ]
+[; ;src/lcd_driver.c: 154:     TRISC &= 0xFC; TRISD &= ~(1u << 1);
+[e =& _TRISC -> -> 252 `i `Vuc ]
+[e =& _TRISD -> ~ << -> 1 `ui -> 1 `i `Vuc ]
 "155
 [; ;src/lcd_driver.c: 155:     (TRISD = 0x00u);
 [e = _TRISD -> -> 0 `ui `uc ]
@@ -757,8 +774,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _instr `uc ~T0 @X0 1 r1 ]
 [f ]
 "177
-[; ;src/lcd_driver.c: 177:     (TRISC &= 0xF8);
-[e =& _TRISC -> -> 248 `i `Vuc ]
+[; ;src/lcd_driver.c: 177:     TRISC &= 0xFC; TRISD &= ~(1u << 1);
+[e =& _TRISC -> -> 252 `i `Vuc ]
+[e =& _TRISD -> ~ << -> 1 `ui -> 1 `i `Vuc ]
 "178
 [; ;src/lcd_driver.c: 178:     (TRISD &= 0x0Fu);
 [e =& _TRISD -> -> 15 `ui `Vuc ]
@@ -795,8 +813,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _instr `uc ~T0 @X0 1 r1 ]
 [f ]
 "202
-[; ;src/lcd_driver.c: 202:     (TRISC &= 0xF8);
-[e =& _TRISC -> -> 248 `i `Vuc ]
+[; ;src/lcd_driver.c: 202:     TRISC &= 0xFC; TRISD &= ~(1u << 1);
+[e =& _TRISC -> -> 252 `i `Vuc ]
+[e =& _TRISD -> ~ << -> 1 `ui -> 1 `i `Vuc ]
 "203
 [; ;src/lcd_driver.c: 203:     (TRISD = 0x00u);
 [e = _TRISD -> -> 0 `ui `uc ]
@@ -830,8 +849,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _PORTC -> -> 0 `i `uc ]
 [e = _PORTD -> -> 0 `i `uc ]
 "229
-[; ;src/lcd_driver.c: 229:     (TRISC &= 0xF8);
-[e =& _TRISC -> -> 248 `i `Vuc ]
+[; ;src/lcd_driver.c: 229:     TRISC &= 0xFC; TRISD &= ~(1u << 1);
+[e =& _TRISC -> -> 252 `i `Vuc ]
+[e =& _TRISD -> ~ << -> 1 `ui -> 1 `i `Vuc ]
 "230
 [; ;src/lcd_driver.c: 230:     (TRISD |= 0xF0u);
 [e =| _TRISD -> -> 240 `ui `Vuc ]
@@ -1037,8 +1057,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/lcd_driver.c: 338:     _delay((unsigned long)((60)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 60 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "341
-[; ;src/lcd_driver.c: 341:     (TRISC &= 0xF8);
-[e =& _TRISC -> -> 248 `i `Vuc ]
+[; ;src/lcd_driver.c: 341:     TRISC &= 0xFC; TRISD &= ~(1u << 1);
+[e =& _TRISC -> -> 252 `i `Vuc ]
+[e =& _TRISD -> ~ << -> 1 `ui -> 1 `i `Vuc ]
 "342
 [; ;src/lcd_driver.c: 342:     (TRISD &= 0x0Fu);
 [e =& _TRISD -> -> 15 `ui `Vuc ]
@@ -1052,14 +1073,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/lcd_driver.c: 347:     PORTD = 0x30;
 [e = _PORTD -> -> 48 `i `uc ]
 "348
-[; ;src/lcd_driver.c: 348:     (LATCbits.LATC2 = 1u);
-[e = . . _LATCbits 0 2 -> -> 1 `ui `uc ]
+[; ;src/lcd_driver.c: 348:     (LATDbits.LATD1 = 1u);
+[e = . . _LATDbits 0 1 -> -> 1 `ui `uc ]
 "349
 [; ;src/lcd_driver.c: 349:     _delay((unsigned long)((10)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "350
-[; ;src/lcd_driver.c: 350:     (LATCbits.LATC2 = 0u);
-[e = . . _LATCbits 0 2 -> -> 0 `ui `uc ]
+[; ;src/lcd_driver.c: 350:     (LATDbits.LATD1 = 0u);
+[e = . . _LATDbits 0 1 -> -> 0 `ui `uc ]
 "351
 [; ;src/lcd_driver.c: 351:     _delay((unsigned long)((10)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
@@ -1067,14 +1088,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/lcd_driver.c: 354:     PORTD = 0x30;
 [e = _PORTD -> -> 48 `i `uc ]
 "355
-[; ;src/lcd_driver.c: 355:     (LATCbits.LATC2 = 1u);
-[e = . . _LATCbits 0 2 -> -> 1 `ui `uc ]
+[; ;src/lcd_driver.c: 355:     (LATDbits.LATD1 = 1u);
+[e = . . _LATDbits 0 1 -> -> 1 `ui `uc ]
 "356
 [; ;src/lcd_driver.c: 356:     _delay((unsigned long)((1)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "357
-[; ;src/lcd_driver.c: 357:     (LATCbits.LATC2 = 0u);
-[e = . . _LATCbits 0 2 -> -> 0 `ui `uc ]
+[; ;src/lcd_driver.c: 357:     (LATDbits.LATD1 = 0u);
+[e = . . _LATDbits 0 1 -> -> 0 `ui `uc ]
 "358
 [; ;src/lcd_driver.c: 358:     _delay((unsigned long)((1)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
@@ -1082,14 +1103,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/lcd_driver.c: 361:     PORTD = 0x30;
 [e = _PORTD -> -> 48 `i `uc ]
 "362
-[; ;src/lcd_driver.c: 362:     (LATCbits.LATC2 = 1u);
-[e = . . _LATCbits 0 2 -> -> 1 `ui `uc ]
+[; ;src/lcd_driver.c: 362:     (LATDbits.LATD1 = 1u);
+[e = . . _LATDbits 0 1 -> -> 1 `ui `uc ]
 "363
 [; ;src/lcd_driver.c: 363:     _delay((unsigned long)((1)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
 "364
-[; ;src/lcd_driver.c: 364:     (LATCbits.LATC2 = 0u);
-[e = . . _LATCbits 0 2 -> -> 0 `ui `uc ]
+[; ;src/lcd_driver.c: 364:     (LATDbits.LATD1 = 0u);
+[e = . . _LATDbits 0 1 -> -> 0 `ui `uc ]
 "365
 [; ;src/lcd_driver.c: 365:     _delay((unsigned long)((1)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `ul `d .4000.0 `ul ]
@@ -1576,4 +1597,136 @@ Version 4.0 HI-TECH Software Intermediate Code
 "623
 [; ;src/lcd_driver.c: 623: }
 [e :UE 327 ]
+}
+"627
+[; ;src/lcd_driver.c: 627: void LCD_write_uint32_number(uint32_t num){
+[v _LCD_write_uint32_number `(v ~T0 @X0 1 ef1`ul ]
+{
+[e :U _LCD_write_uint32_number ]
+[v _num `ul ~T0 @X0 1 r1 ]
+[f ]
+"630
+[; ;src/lcd_driver.c: 630:     uint8_t num_of_digits = 0u;
+[v _num_of_digits `uc ~T0 @X0 1 a ]
+[e = _num_of_digits -> -> 0 `ui `uc ]
+"631
+[; ;src/lcd_driver.c: 631:     if(num < 10u) num_of_digits = 1u;
+[e $ ! < _num -> -> 10 `ui `ul 332  ]
+[e = _num_of_digits -> -> 1 `ui `uc ]
+[e $U 333  ]
+"632
+[; ;src/lcd_driver.c: 632:     else if(num < 100u) num_of_digits = 2u;
+[e :U 332 ]
+[e $ ! < _num -> -> 100 `ui `ul 334  ]
+[e = _num_of_digits -> -> 2 `ui `uc ]
+[e $U 335  ]
+"633
+[; ;src/lcd_driver.c: 633:     else if(num < 1000u) num_of_digits = 3u;
+[e :U 334 ]
+[e $ ! < _num -> -> 1000 `ui `ul 336  ]
+[e = _num_of_digits -> -> 3 `ui `uc ]
+[e $U 337  ]
+"634
+[; ;src/lcd_driver.c: 634:     else if(num < 10000u) num_of_digits = 4u;
+[e :U 336 ]
+[e $ ! < _num -> -> 10000 `ui `ul 338  ]
+[e = _num_of_digits -> -> 4 `ui `uc ]
+[e $U 339  ]
+"635
+[; ;src/lcd_driver.c: 635:     else if(num < 100000u) num_of_digits = 5u;
+[e :U 338 ]
+[e $ ! < _num -> 100000 `ul 340  ]
+[e = _num_of_digits -> -> 5 `ui `uc ]
+[e $U 341  ]
+"636
+[; ;src/lcd_driver.c: 636:     else if(num < 1000000u) num_of_digits = 6u;
+[e :U 340 ]
+[e $ ! < _num -> 1000000 `ul 342  ]
+[e = _num_of_digits -> -> 6 `ui `uc ]
+[e $U 343  ]
+"637
+[; ;src/lcd_driver.c: 637:     else if(num < 10000000u) num_of_digits = 7u;
+[e :U 342 ]
+[e $ ! < _num -> 10000000 `ul 344  ]
+[e = _num_of_digits -> -> 7 `ui `uc ]
+[e $U 345  ]
+"638
+[; ;src/lcd_driver.c: 638:     else if(num < 100000000u) num_of_digits = 8u;
+[e :U 344 ]
+[e $ ! < _num -> 100000000 `ul 346  ]
+[e = _num_of_digits -> -> 8 `ui `uc ]
+[e $U 347  ]
+"639
+[; ;src/lcd_driver.c: 639:     else if(num < 1000000000u) num_of_digits = 9u;
+[e :U 346 ]
+[e $ ! < _num -> 1000000000 `ul 348  ]
+[e = _num_of_digits -> -> 9 `ui `uc ]
+[e $U 349  ]
+"640
+[; ;src/lcd_driver.c: 640:     else num_of_digits = 10u;
+[e :U 348 ]
+[e = _num_of_digits -> -> 10 `ui `uc ]
+[e :U 349 ]
+[e :U 347 ]
+[e :U 345 ]
+[e :U 343 ]
+[e :U 341 ]
+[e :U 339 ]
+[e :U 337 ]
+[e :U 335 ]
+[e :U 333 ]
+[v F2549 `uc ~T0 @X0 -> 10 `i s ]
+[i F2549
+:U ..
+"643
+[; ;src/lcd_driver.c: 643:     uint8_t digits[10] = {0u};
+-> -> 0 `ui `uc
+..
+]
+[v _digits `uc ~T0 @X0 -> 10 `i a ]
+[e = _digits F2549 ]
+"644
+[; ;src/lcd_driver.c: 644:     for(uint8_t i=0; i<num_of_digits; i++){
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $U 353  ]
+[e :U 350 ]
+{
+"645
+[; ;src/lcd_driver.c: 645:         digits[i] = num % 10;
+[e = *U + &U _digits * -> _i `ux -> -> # *U &U _digits `ui `ux -> % _num -> -> -> 10 `i `l `ul `uc ]
+"646
+[; ;src/lcd_driver.c: 646:         num /= 10;
+[e =/ _num -> -> -> 10 `i `l `ul ]
+"647
+[; ;src/lcd_driver.c: 647:     }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 353 ]
+[e $ < -> _i `i -> _num_of_digits `i 350  ]
+[e :U 351 ]
+}
+"650
+[; ;src/lcd_driver.c: 650:     for(int8_t i=((int8_t)num_of_digits-1); i>=0; i--){
+{
+[v _i `c ~T0 @X0 1 a ]
+[e = _i -> - -> -> _num_of_digits `c `i -> 1 `i `c ]
+[e $ >= -> _i `i -> 0 `i 354  ]
+[e $U 355  ]
+[e :U 354 ]
+{
+"651
+[; ;src/lcd_driver.c: 651:         LCD_write_data_byte_4bit( (char) digits[i] + '0');
+[e ( _LCD_write_data_byte_4bit (1 -> + -> -> *U + &U _digits * -> -> _i `uc `ux -> -> # *U &U _digits `ui `ux `uc `ui -> 48 `ui `uc ]
+"652
+[; ;src/lcd_driver.c: 652:     }
+}
+[e -- _i -> -> 1 `i `c ]
+[e $ >= -> _i `i -> 0 `i 354  ]
+[e :U 355 ]
+}
+"654
+[; ;src/lcd_driver.c: 654: }
+[e :UE 331 ]
 }

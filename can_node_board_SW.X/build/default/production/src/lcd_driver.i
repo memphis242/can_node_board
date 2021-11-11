@@ -4472,7 +4472,7 @@ typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
 # 99 "inc\\lcd_driver.h" 2
-# 206 "inc\\lcd_driver.h"
+# 207 "inc\\lcd_driver.h"
 enum lcd_display_t {
     QAPASS_EBAY,
     QAPASS_AMAZON,
@@ -4508,6 +4508,9 @@ uint8_t LCD_set_cursor_position(uint8_t line, uint8_t pos_on_line);
 uint8_t LCD_write_characters(char * toWrite, uint8_t size);
 uint8_t LCD_turn_off_cursor(void);
 uint8_t LCD_turn_on_cursor(void);
+
+
+void LCD_write_uint32_number(uint32_t num);
 # 11 "src/lcd_driver.c" 2
 
 
@@ -4530,38 +4533,38 @@ void static LCD_enable_toggle(void){
     switch(CURRENT_DISP){
 
         case QAPASS_EBAY:
-            (LATCbits.LATC2 = 0u);
+            (LATDbits.LATD1 = 0u);
             _delay((unsigned long)((2u)*(40000000u/4000000.0)));
-            (LATCbits.LATC2 = 1u);
+            (LATDbits.LATD1 = 1u);
             _delay((unsigned long)((2u)*(40000000u/4000000.0)));
-            (LATCbits.LATC2 = 0u);
+            (LATDbits.LATD1 = 0u);
             _delay((unsigned long)((2u)*(40000000u/4000000.0)));
             break;
 
         case QAPASS_AMAZON:
-            (LATCbits.LATC2 = 0u);
+            (LATDbits.LATD1 = 0u);
             _delay((unsigned long)((1u)*(40000000u/4000000.0)));
-            (LATCbits.LATC2 = 1u);
+            (LATDbits.LATD1 = 1u);
             _delay((unsigned long)((1u)*(40000000u/4000000.0)));
-            (LATCbits.LATC2 = 0u);
+            (LATDbits.LATD1 = 0u);
             _delay((unsigned long)((100u)*(40000000u/4000000.0)));
             break;
 
         case ADAFRUIT_STANDARD_16x2:
-            (LATCbits.LATC2 = 0u);
+            (LATDbits.LATD1 = 0u);
             _delay((unsigned long)((2u)*(40000000u/4000000.0)));
-            (LATCbits.LATC2 = 1u);
+            (LATDbits.LATD1 = 1u);
             _delay((unsigned long)((2u)*(40000000u/4000000.0)));
-            (LATCbits.LATC2 = 0u);
+            (LATDbits.LATD1 = 0u);
             _delay((unsigned long)((2u)*(40000000u/4000000.0)));
             break;
 
         case ADAFRUIT_STANDARD_20x4:
-            (LATCbits.LATC2 = 0u);
+            (LATDbits.LATD1 = 0u);
             _delay((unsigned long)((2u)*(40000000u/4000000.0)));
-            (LATCbits.LATC2 = 1u);
+            (LATDbits.LATD1 = 1u);
             _delay((unsigned long)((2u)*(40000000u/4000000.0)));
-            (LATCbits.LATC2 = 0u);
+            (LATDbits.LATD1 = 0u);
             _delay((unsigned long)((2u)*(40000000u/4000000.0)));
             break;
 
@@ -4580,7 +4583,7 @@ void static LCD_wait_for_BF(void){
 # 126 "src/lcd_driver.c"
 void LCD_write_data_byte_4bit(uint8_t data){
 
-    (TRISC &= 0xF8);
+    TRISC &= 0xFC; TRISD &= ~(1u << 1);
     (TRISD &= 0x0Fu);
     (LATCbits.LATC0 = 1u);
     (LATCbits.LATC1 = 0u);
@@ -4596,7 +4599,7 @@ void LCD_write_data_byte_4bit(uint8_t data){
 # 152 "src/lcd_driver.c"
 void LCD_write_data_byte_8bit(uint8_t data){
 
-    (TRISC &= 0xF8);
+    TRISC &= 0xFC; TRISD &= ~(1u << 1);
     (TRISD = 0x00u);
     (LATCbits.LATC0 = 1u);
     (LATCbits.LATC1 = 0u);
@@ -4610,7 +4613,7 @@ void LCD_write_data_byte_8bit(uint8_t data){
 # 175 "src/lcd_driver.c"
 void LCD_write_instr_byte_4bit(uint8_t instr){
 
-    (TRISC &= 0xF8);
+    TRISC &= 0xFC; TRISD &= ~(1u << 1);
     (TRISD &= 0x0Fu);
     (LATCbits.LATC0 = 0u);
     (LATCbits.LATC1 = 0u);
@@ -4626,7 +4629,7 @@ void LCD_write_instr_byte_4bit(uint8_t instr){
 # 200 "src/lcd_driver.c"
 void LCD_write_instr_byte_8bit(uint8_t instr){
 
-    (TRISC &= 0xF8);
+    TRISC &= 0xFC; TRISD &= ~(1u << 1);
     (TRISD = 0x00u);
     (LATCbits.LATC0 = 0u);
     (LATCbits.LATC1 = 0u);
@@ -4643,7 +4646,7 @@ void LCD_Init_ECE376(void){
 
     PORTC = 0x00; PORTD = 0x00;
 
-    (TRISC &= 0xF8);
+    TRISC &= 0xFC; TRISD &= ~(1u << 1);
     (TRISD |= 0xF0u);
 
 
@@ -4732,30 +4735,30 @@ void LCD_Init(uint8_t entry_mode, uint8_t disp_ctrl, uint8_t func_set, enum lcd_
     _delay((unsigned long)((60)*(40000000u/4000.0)));
 
 
-    (TRISC &= 0xF8);
+    TRISC &= 0xFC; TRISD &= ~(1u << 1);
     (TRISD &= 0x0Fu);
     (LATCbits.LATC0 = 0u);
     (LATCbits.LATC1 = 0u);
 
 
     PORTD = 0x30;
-    (LATCbits.LATC2 = 1u);
+    (LATDbits.LATD1 = 1u);
     _delay((unsigned long)((10)*(40000000u/4000.0)));
-    (LATCbits.LATC2 = 0u);
+    (LATDbits.LATD1 = 0u);
     _delay((unsigned long)((10)*(40000000u/4000.0)));
 
 
     PORTD = 0x30;
-    (LATCbits.LATC2 = 1u);
+    (LATDbits.LATD1 = 1u);
     _delay((unsigned long)((1)*(40000000u/4000.0)));
-    (LATCbits.LATC2 = 0u);
+    (LATDbits.LATD1 = 0u);
     _delay((unsigned long)((1)*(40000000u/4000.0)));
 
 
     PORTD = 0x30;
-    (LATCbits.LATC2 = 1u);
+    (LATDbits.LATD1 = 1u);
     _delay((unsigned long)((1)*(40000000u/4000.0)));
-    (LATCbits.LATC2 = 0u);
+    (LATDbits.LATD1 = 0u);
     _delay((unsigned long)((1)*(40000000u/4000.0)));
 
 
@@ -4930,4 +4933,35 @@ uint8_t LCD_turn_on_cursor(void){
     current_disp_ctrl |= 0x02u;
 
     return 1;
+}
+
+
+
+void LCD_write_uint32_number(uint32_t num){
+
+
+    uint8_t num_of_digits = 0u;
+    if(num < 10u) num_of_digits = 1u;
+    else if(num < 100u) num_of_digits = 2u;
+    else if(num < 1000u) num_of_digits = 3u;
+    else if(num < 10000u) num_of_digits = 4u;
+    else if(num < 100000u) num_of_digits = 5u;
+    else if(num < 1000000u) num_of_digits = 6u;
+    else if(num < 10000000u) num_of_digits = 7u;
+    else if(num < 100000000u) num_of_digits = 8u;
+    else if(num < 1000000000u) num_of_digits = 9u;
+    else num_of_digits = 10u;
+
+
+    uint8_t digits[10] = {0u};
+    for(uint8_t i=0; i<num_of_digits; i++){
+        digits[i] = num % 10;
+        num /= 10;
+    }
+
+
+    for(int8_t i=((int8_t)num_of_digits-1); i>=0; i--){
+        LCD_write_data_byte_4bit( (char) digits[i] + '0');
+    }
+
 }

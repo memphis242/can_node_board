@@ -38,8 +38,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 5029: extern volatile unsigned char SSPBUF __attribute__((address(0xFC9)));
 [v _SSPBUF `Vuc ~T0 @X0 0 e@4041 ]
 [p mainexit ]
-"228 ./inc/lcd_driver.h
-[; ;./inc/lcd_driver.h: 228: void LCD_Init_ECE376(void);
+"229 ./inc/lcd_driver.h
+[; ;./inc/lcd_driver.h: 229: void LCD_Init_ECE376(void);
 [v _LCD_Init_ECE376 `(v ~T0 @X0 0 ef ]
 "110 ./inc/mssp_spi.h
 [; ;./inc/mssp_spi.h: 110: void SPI_Init_Slave_Default(void);
@@ -63,18 +63,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6406
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6406: extern volatile INTCONbits_t INTCONbits __attribute__((address(0xFF2)));
 [v _INTCONbits `VS262 ~T0 @X0 0 e@4082 ]
-"237 ./inc/lcd_driver.h
-[; ;./inc/lcd_driver.h: 237: uint8_t LCD_set_cursor_position(uint8_t line, uint8_t pos_on_line);
+"238 ./inc/lcd_driver.h
+[; ;./inc/lcd_driver.h: 238: uint8_t LCD_set_cursor_position(uint8_t line, uint8_t pos_on_line);
 [v _LCD_set_cursor_position `(uc ~T0 @X0 0 ef2`uc`uc ]
-"224
-[; ;./inc/lcd_driver.h: 224: void LCD_write_data_byte_4bit(uint8_t data);
+"225
+[; ;./inc/lcd_driver.h: 225: void LCD_write_data_byte_4bit(uint8_t data);
 [v _LCD_write_data_byte_4bit `(v ~T0 @X0 0 ef1`uc ]
 [v F2424 `(v ~T0 @X0 1 tf1`ul ]
 "203 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\pic18.h
 [v __delay `JF2424 ~T0 @X0 0 e ]
 [p i __delay ]
-"234 ./inc/lcd_driver.h
-[; ;./inc/lcd_driver.h: 234: uint8_t LCD_clear_display(void);
+"235 ./inc/lcd_driver.h
+[; ;./inc/lcd_driver.h: 235: uint8_t LCD_clear_display(void);
 [v _LCD_clear_display `(uc ~T0 @X0 0 ef ]
 "11 spi_test.c
 [p x OSC  =  HSPLL       ]
@@ -728,8 +728,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "295
 [; ;spi_test.c: 295:     LCD_set_cursor_position(1,1);
 [e ( _LCD_set_cursor_position (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
-[v F2562 `uc ~T0 @X0 -> 14 `i s ]
-[i F2562
+[v F2571 `uc ~T0 @X0 -> 14 `i s ]
+[i F2571
 :U ..
 "296
 [; ;spi_test.c: 296:     char init_success_msg[] = "Init success!";
@@ -750,7 +750,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 [v _init_success_msg `uc ~T0 @X0 -> 14 `i a ]
-[e = _init_success_msg F2562 ]
+[e = _init_success_msg F2571 ]
 "297
 [; ;spi_test.c: 297:     for(uint8_t i=0; i<13; i++) LCD_write_data_byte_4bit(init_success_msg[i]);
 {

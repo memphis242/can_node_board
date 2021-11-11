@@ -20,6 +20,8 @@ MODE_8BIT 1
 SPI_MASTER 0
 SPI_SLAVE 1
 ]
+"7 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c99\common\__lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
 "4 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c99\common\fleq.c
 [v ___fleq __fleq `(b  1 e 0 0 ]
 "62 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c99\common\float.c
@@ -32,6 +34,8 @@ SPI_SLAVE 1
 [v ___ftmul __ftmul `(f  1 e 4 0 ]
 "19 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c99\common\ftsub.c
 [v ___ftsub __ftsub `(f  1 e 4 0 ]
+"7 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c99\common\llmod.c
+[v ___llmod __llmod `(ul  1 e 4 0 ]
 "10 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c99\common\sprcadd.c
 [v ___fladd __fladd `(d  1 e 4 0 ]
 "245
@@ -48,8 +52,6 @@ SPI_SLAVE 1
 [v _isr isr `IIH(v  1 e 1 0 ]
 "199
 [v _main main `(v  1 e 1 0 ]
-"41 C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
-[v _CCP1_Init_Default CCP1_Init_Default `(v  1 e 1 0 ]
 "45 C:\git\can_node_board\can_node_board_SW.X\src/lcd_driver.c
 [v _LCD_enable_toggle LCD_enable_toggle `(v  1 s 1 LCD_enable_toggle ]
 "126
@@ -78,36 +80,7 @@ SPI_SLAVE 1
 [v _PORTC PORTC `VEuc  1 e 1 @3970 ]
 "535
 [v _PORTD PORTD `VEuc  1 e 1 @3971 ]
-[s S161 . 1 `uc 1 RD0 1 0 :1:0 
-`uc 1 RD1 1 0 :1:1 
-`uc 1 RD2 1 0 :1:2 
-`uc 1 RD3 1 0 :1:3 
-`uc 1 RD4 1 0 :1:4 
-`uc 1 RD5 1 0 :1:5 
-`uc 1 RD6 1 0 :1:6 
-`uc 1 RD7 1 0 :1:7 
-]
-"572
-[s S170 . 1 `uc 1 PSP0 1 0 :1:0 
-`uc 1 PSP1 1 0 :1:1 
-`uc 1 PSP2 1 0 :1:2 
-`uc 1 PSP3 1 0 :1:3 
-`uc 1 PSP4 1 0 :1:4 
-`uc 1 PSP5 1 0 :1:5 
-`uc 1 PSP6 1 0 :1:6 
-`uc 1 PSP7 1 0 :1:7 
-]
-[s S179 . 1 `uc 1 . 1 0 :5:0 
-`uc 1 P1B 1 0 :1:5 
-`uc 1 P1C 1 0 :1:6 
-`uc 1 P1D 1 0 :1:7 
-]
-[s S184 . 1 `uc 1 . 1 0 :7:0 
-`uc 1 SS2 1 0 :1:7 
-]
-[u S187 . 1 `S161 1 . 1 0 `S170 1 . 1 0 `S179 1 . 1 0 `S184 1 . 1 0 ]
-[v _PORTDbits PORTDbits `VES187  1 e 1 @3971 ]
-[s S114 . 1 `uc 1 LATC0 1 0 :1:0 
+[s S164 . 1 `uc 1 LATC0 1 0 :1:0 
 `uc 1 LATC1 1 0 :1:1 
 `uc 1 LATC2 1 0 :1:2 
 `uc 1 LATC3 1 0 :1:3 
@@ -117,7 +90,7 @@ SPI_SLAVE 1
 `uc 1 LATC7 1 0 :1:7 
 ]
 "1131
-[s S123 . 1 `uc 1 LC0 1 0 :1:0 
+[s S173 . 1 `uc 1 LC0 1 0 :1:0 
 `uc 1 LC1 1 0 :1:1 
 `uc 1 LC2 1 0 :1:2 
 `uc 1 LC3 1 0 :1:3 
@@ -126,9 +99,9 @@ SPI_SLAVE 1
 `uc 1 LC6 1 0 :1:6 
 `uc 1 LC7 1 0 :1:7 
 ]
-[u S132 . 1 `S114 1 . 1 0 `S123 1 . 1 0 ]
-[v _LATCbits LATCbits `VES132  1 e 1 @3979 ]
-[s S392 . 1 `uc 1 LATD0 1 0 :1:0 
+[u S182 . 1 `S164 1 . 1 0 `S173 1 . 1 0 ]
+[v _LATCbits LATCbits `VES182  1 e 1 @3979 ]
+[s S117 . 1 `uc 1 LATD0 1 0 :1:0 
 `uc 1 LATD1 1 0 :1:1 
 `uc 1 LATD2 1 0 :1:2 
 `uc 1 LATD3 1 0 :1:3 
@@ -138,7 +111,7 @@ SPI_SLAVE 1
 `uc 1 LATD7 1 0 :1:7 
 ]
 "1243
-[s S401 . 1 `uc 1 LD0 1 0 :1:0 
+[s S126 . 1 `uc 1 LD0 1 0 :1:0 
 `uc 1 LD1 1 0 :1:1 
 `uc 1 LD2 1 0 :1:2 
 `uc 1 LD3 1 0 :1:3 
@@ -147,27 +120,15 @@ SPI_SLAVE 1
 `uc 1 LD6 1 0 :1:6 
 `uc 1 LD7 1 0 :1:7 
 ]
-[u S410 . 1 `S392 1 . 1 0 `S401 1 . 1 0 ]
-[v _LATDbits LATDbits `VES410  1 e 1 @3980 ]
+[u S135 . 1 `S117 1 . 1 0 `S126 1 . 1 0 ]
+[v _LATDbits LATDbits `VES135  1 e 1 @3980 ]
 "1380
 [v _TRISA TRISA `VEuc  1 e 1 @3986 ]
 "1824
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
 "2046
 [v _TRISD TRISD `VEuc  1 e 1 @3989 ]
-[s S321 . 1 `uc 1 TRISD0 1 0 :1:0 
-`uc 1 TRISD1 1 0 :1:1 
-`uc 1 TRISD2 1 0 :1:2 
-`uc 1 TRISD3 1 0 :1:3 
-`uc 1 TRISD4 1 0 :1:4 
-`uc 1 TRISD5 1 0 :1:5 
-`uc 1 TRISD6 1 0 :1:6 
-`uc 1 TRISD7 1 0 :1:7 
-]
-"2078
-[u S339 . 1 `S321 1 . 1 0 `S161 1 . 1 0 ]
-[v _TRISDbits TRISDbits `VES339  1 e 1 @3989 ]
-[s S26 . 1 `uc 1 TMR1IE 1 0 :1:0 
+[s S27 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
 `uc 1 SSPIE 1 0 :1:3 
@@ -177,13 +138,13 @@ SPI_SLAVE 1
 `uc 1 PSPIE 1 0 :1:7 
 ]
 "2519
-[s S35 . 1 `uc 1 . 1 0 :4:0 
+[s S36 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TX1IE 1 0 :1:4 
 `uc 1 RC1IE 1 0 :1:5 
 ]
-[u S39 . 1 `S26 1 . 1 0 `S35 1 . 1 0 ]
-[v _PIE1bits PIE1bits `VES39  1 e 1 @3997 ]
-[s S362 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[u S40 . 1 `S27 1 . 1 0 `S36 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES40  1 e 1 @3997 ]
+[s S420 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
 `uc 1 SSPIF 1 0 :1:3 
@@ -193,60 +154,33 @@ SPI_SLAVE 1
 `uc 1 PSPIF 1 0 :1:7 
 ]
 "2596
-[s S371 . 1 `uc 1 . 1 0 :4:0 
+[s S429 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TX1IF 1 0 :1:4 
 `uc 1 RC1IF 1 0 :1:5 
 ]
-[u S375 . 1 `S362 1 . 1 0 `S371 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES375  1 e 1 @3998 ]
-[s S58 . 1 `uc 1 CCP2IE 1 0 :1:0 
-`uc 1 TMR3IE 1 0 :1:1 
-`uc 1 HLVDIE 1 0 :1:2 
-`uc 1 BCLIE 1 0 :1:3 
-`uc 1 EEIE 1 0 :1:4 
-`uc 1 . 1 0 :1:5 
-`uc 1 CMIE 1 0 :1:6 
-`uc 1 OSCFIE 1 0 :1:7 
-]
-"2749
-[s S67 . 1 `uc 1 . 1 0 :2:0 
-`uc 1 LVDIE 1 0 :1:2 
-]
-[u S70 . 1 `S58 1 . 1 0 `S67 1 . 1 0 ]
-[v _PIE2bits PIE2bits `VES70  1 e 1 @4000 ]
-"3529
-[v _T3CON T3CON `VEuc  1 e 1 @4017 ]
-"4155
-[v _CCP2CON CCP2CON `VEuc  1 e 1 @4026 ]
-"4234
-[v _CCPR2 CCPR2 `VEus  1 e 2 @4027 ]
-"4255
-[v _CCP1CON CCP1CON `VEuc  1 e 1 @4029 ]
-"4352
-[v _CCPR1 CCPR1 `VEus  1 e 2 @4030 ]
+[u S433 . 1 `S420 1 . 1 0 `S429 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES433  1 e 1 @3998 ]
 "4731
 [v _SSPCON1 SSPCON1 `VEuc  1 e 1 @4038 ]
-[s S292 . 1 `uc 1 SSPM 1 0 :4:0 
+[s S350 . 1 `uc 1 SSPM 1 0 :4:0 
 `uc 1 CKP 1 0 :1:4 
 `uc 1 SSPEN 1 0 :1:5 
 `uc 1 SSPOV 1 0 :1:6 
 `uc 1 WCOL 1 0 :1:7 
 ]
 "4751
-[s S298 . 1 `uc 1 SSPM0 1 0 :1:0 
+[s S356 . 1 `uc 1 SSPM0 1 0 :1:0 
 `uc 1 SSPM1 1 0 :1:1 
 `uc 1 SSPM2 1 0 :1:2 
 `uc 1 SSPM3 1 0 :1:3 
 ]
-[u S303 . 1 `S292 1 . 1 0 `S298 1 . 1 0 ]
-[v _SSPCON1bits SSPCON1bits `VES303  1 e 1 @4038 ]
+[u S361 . 1 `S350 1 . 1 0 `S356 1 . 1 0 ]
+[v _SSPCON1bits SSPCON1bits `VES361  1 e 1 @4038 ]
 "4801
 [v _SSPSTAT SSPSTAT `VEuc  1 e 1 @4039 ]
 "5029
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @4041 ]
-"5224
-[v _T1CON T1CON `VEuc  1 e 1 @4045 ]
-[s S562 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S607 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -256,7 +190,7 @@ SPI_SLAVE 1
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
 "6406
-[s S571 . 1 `uc 1 . 1 0 :1:0 
+[s S616 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 INT0F 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -265,12 +199,12 @@ SPI_SLAVE 1
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S580 . 1 `uc 1 . 1 0 :6:0 
+[s S625 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S584 . 1 `S562 1 . 1 0 `S571 1 . 1 0 `S580 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES584  1 e 1 @4082 ]
+[u S629 . 1 `S607 1 . 1 0 `S616 1 . 1 0 `S625 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES629  1 e 1 @4082 ]
 "108 C:\git\can_node_board\can_node_board_SW.X\spi_test.c
 [v _spi_rx_msg_buf spi_rx_msg_buf `uc  1 s 1 spi_rx_msg_buf ]
 "109
@@ -305,23 +239,21 @@ SPI_SLAVE 1
 [v _spi_actor spi_actor `E2464  1 s 1 spi_actor ]
 "18
 [v _transfer_complete_flag transfer_complete_flag `uc  1 e 1 0 ]
-"19
-[v _manual_transfer manual_transfer `uc  1 e 1 0 ]
 "199 C:\git\can_node_board\can_node_board_SW.X\spi_test.c
 [v _main main `(v  1 e 1 0 ]
 {
 "367
-[v main@i_654 i `uc  1 a 1 31 ]
+[v main@i_699 i `uc  1 a 1 31 ]
 "362
-[v main@i_653 i `uc  1 a 1 30 ]
+[v main@i_698 i `uc  1 a 1 30 ]
 "344
-[v main@i_650 i `uc  1 a 1 29 ]
+[v main@i_695 i `uc  1 a 1 29 ]
 "297
 [v main@i i `uc  1 a 1 28 ]
 "296
 [v main@init_success_msg init_success_msg `[14]uc  1 a 14 10 ]
 "295
-[v main@F2562 F2562 `[14]uc  1 s 14 F2562 ]
+[v main@F2571 F2571 `[14]uc  1 s 14 F2571 ]
 "383
 } 0
 "70 C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi_driver.c
