@@ -14,6 +14,11 @@
 #include <xc.h> // include processor files - each processor file is guarded.  
 #include <stdint.h>
 
+#ifndef ENABLE_PERIPHERAL_INTERRUPTS
+#define ENABLE_PERIPHERAL_INTERRUPTS    (INTCONbits.PEIE = 1u)
+#define DISABLE_PERIPHERAL_INTERRUPTS   (INTCONbits.PEIE = 0u)
+#endif
+
 
 // Definitions
 // TIMER1 MODULE

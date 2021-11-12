@@ -1,4 +1,4 @@
-# 1 "inc/mcp2515_test.c"
+# 1 "mcp2515_test.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,8 +6,8 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "inc/mcp2515_test.c" 2
-# 11 "inc/mcp2515_test.c"
+# 1 "mcp2515_test.c" 2
+# 11 "mcp2515_test.c"
 #pragma config OSC = HSPLL
 #pragma config FCMEN = OFF
 #pragma config IESO = OFF
@@ -4439,10 +4439,10 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 33 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 2 3
-# 67 "inc/mcp2515_test.c" 2
+# 67 "mcp2515_test.c" 2
 
-# 1 "inc/mcp2515.h" 1
-# 67 "inc/mcp2515.h"
+# 1 "inc\\mcp2515.h" 1
+# 67 "inc\\mcp2515.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 1 3
 # 22 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 3
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\bits/alltypes.h" 1 3
@@ -4528,19 +4528,27 @@ typedef int32_t int_fast32_t;
 typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
-# 67 "inc/mcp2515.h" 2
-# 880 "inc/mcp2515.h"
+# 67 "inc\\mcp2515.h" 2
+# 163 "inc\\mcp2515.h"
+typedef enum {
+    MCP2515_OPMODE_NORMAL = 0u,
+    MCP2515_OPMODE_SLEEP = 1u,
+    MCP2515_OPMODE_LOOPBACK = 2u,
+    MCP2515_OPMODE_LISTEN = 3u,
+    MCP2515_OPMODE_CONFIG = 4u,
+} opmode_t;
+# 925 "inc\\mcp2515.h"
 typedef enum { SPI_READ_RXB0_ID, SPI_READ_RXB0_D, SPI_READ_RXB1_ID, SPI_READ_RXB1_D } spi_read_rxb_inst_t;
 
 
 typedef enum { SPI_LOAD_TXB0_ID, SPI_LOAD_TXB0_D, SPI_LOAD_TXB1_ID, SPI_LOAD_TXB1_D, SPI_LOAD_TXB2_ID, SPI_LOAD_TXB2_D } spi_load_txb_inst_t;
-# 909 "inc/mcp2515.h"
-typedef enum { TXB0, TXB1, TXB2 } txbuf_t;
+# 954 "inc\\mcp2515.h"
+typedef enum { TXB0 = 1u, TXB1 = 2u, TXB2 = 4u } txbuf_t;
 typedef enum { RXB0, RXB1 } rxbuf_t;
 typedef enum { RX_MASK0, RX_MASK1 } rx_mask_t;
 typedef enum { RX_FILT0, RX_FILT1, RX_FILT2, RX_FILT3, RX_FILT4, RX_FILT5 } rx_filt_t;
 typedef enum { MCP2515_OPTION_ROLLOVER } mcp_2515_options_t;
-# 938 "inc/mcp2515.h"
+# 984 "inc\\mcp2515.h"
 typedef struct {
     uint16_t sid;
     uint8_t ide;
@@ -4574,16 +4582,21 @@ typedef struct {
 void can_init_default(void);
 void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump);
 
-void can_spi_command(uint8_t cmd);
-uint8_t can_spi_query(uint8_t query);
-void can_read_reg(uint8_t reg, uint8_t * rxbuf);
-void can_read_successive_reg(uint8_t start_reg, uint8_t * rxbuf, uint8_t len);
-void can_write_reg(uint8_t reg, uint8_t value);
-void can_write_successive_reg(uint8_t start_reg, uint8_t * txbuf, uint8_t len);
-void can_write_bit(uint8_t reg, uint8_t mask, uint8_t val);
-void can_write_txbuf(txbuf_t txb, uint8_t * mcp2515_tx_buf, uint8_t len);
-void can_read_rxbuf(rxbuf_t rxb, uint8_t * mcp2515_rx_buf, uint8_t len);
-# 991 "inc/mcp2515.h"
+opmode_t mcp2515_current_opmode(void);
+void mcp2515_config_mode(void);
+void mcp2515_normal_mode(void);
+void mcp2515_cmd_reset(void);
+uint8_t mcp2515_cmd_read_status(void);
+uint8_t mcp2515_cmd_rx_status(void);
+void mcp2515_cmd_read(uint8_t reg_address, uint8_t * buf);
+void mcp2515_cmd_read_sequential(uint8_t start_reg_addr, uint8_t * rxbuf, uint8_t len);
+void mcp2515_cmd_write(uint8_t reg_address, uint8_t val);
+void mcp2515_cmd_write_sequential(uint8_t start_reg_addr, uint8_t * txbuf, uint8_t len);
+void mcp2515_cmd_write_bit(uint8_t reg_address, uint8_t mask, uint8_t val);
+void mcp2515_cmd_read_rx_buf(rxbuf_t rxb, uint8_t * rx_buf);
+void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t * tx_buf);
+void mcp2515_cmd_rts(txbuf_t txb);
+# 1042 "inc\\mcp2515.h"
 void can_compose_msg_std(can_msg * msg, uint8_t * mcp2515_tx_buf);
 void can_parse_msg_std(can_msg * msg, uint8_t * mcp2515_rx_buf);
 void can_compose_msg_ext(can_msg * msg, uint8_t * mcp2515_tx_buf);
@@ -4601,10 +4614,10 @@ uint8_t can_rx_mode(void);
 uint8_t can_mcp2515_config_options(mcp_2515_options_t option, uint8_t val);
 uint8_t can_read_error(uint8_t reg);
 uint8_t can_clear_bus_error(void);
-# 68 "inc/mcp2515_test.c" 2
+# 68 "mcp2515_test.c" 2
 
-# 1 "inc/lcd_driver.h" 1
-# 207 "inc/lcd_driver.h"
+# 1 "inc\\lcd_driver.h" 1
+# 207 "inc\\lcd_driver.h"
 enum lcd_display_t {
     QAPASS_EBAY,
     QAPASS_AMAZON,
@@ -4643,10 +4656,10 @@ uint8_t LCD_turn_on_cursor(void);
 
 
 void LCD_write_uint32_number(uint32_t num);
-# 69 "inc/mcp2515_test.c" 2
+# 69 "mcp2515_test.c" 2
 
-# 1 "inc/ccp.h" 1
-# 154 "inc/ccp.h"
+# 1 "inc\\ccp.h" 1
+# 159 "inc\\ccp.h"
 typedef enum { TMR1_CCP1, TMR1_CCPx, TM3_CCP2, TM3_CCPx} tmr_ccp_pair_t;
 
 
@@ -4657,17 +4670,17 @@ void CCP1_Compare_Init_Default(uint16_t comp_val);
 void CCP2_Compare_Init_Default(uint16_t comp_val);
 void CCP1_Capture_Init_Default(void);
 void CCP2_Capture_Init_Default(void);
-# 70 "inc/mcp2515_test.c" 2
+# 70 "mcp2515_test.c" 2
 
-# 1 "inc/timer.h" 1
-# 63 "inc/timer.h"
+# 1 "inc\\timer.h" 1
+# 68 "inc\\timer.h"
 void Timer1_Init_Default(void);
 void Timer1_Enable(void);
 void Timer1_Disable(void);
-# 71 "inc/mcp2515_test.c" 2
+# 71 "mcp2515_test.c" 2
 
-# 1 "inc/mssp_spi.h" 1
-# 104 "inc/mssp_spi.h"
+# 1 "inc\\mssp_spi.h" 1
+# 114 "inc\\mssp_spi.h"
 enum spi_actor_t { SPI_MASTER, SPI_SLAVE };
 enum spi_mode_t { SPI_MODE_00, SPI_MODE_01, SPI_MODE_10, SPI_MODE_11 };
 
@@ -4685,10 +4698,17 @@ void SPI_Send_Byte(uint8_t tx);
 void SPI_Send_Packet(uint8_t * tx_pack, uint16_t tx_size);
 void SPI_Receive_Byte(uint8_t * rx);
 void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size);
-# 72 "inc/mcp2515_test.c" 2
 
-# 1 "inc/external_interrupts.h" 1
-# 120 "inc/external_interrupts.h"
+
+
+
+
+void SPI_Transfer_Byte_without_CS(uint8_t tx, uint8_t * rx);
+void SPI_Transfer_Packet_without_CS(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_size);
+# 72 "mcp2515_test.c" 2
+
+# 1 "inc\\external_interrupts.h" 1
+# 120 "inc\\external_interrupts.h"
 typedef enum { EXT_INT_INT0 = 1u, EXT_INT_INT1 = 2u, EXT_INT_INT2 = 4u } external_interrupts_t;
 typedef enum { FALLING_EDGE, RISING_EDGE } external_interrupt_edge_t;
 
@@ -4696,19 +4716,19 @@ typedef enum { FALLING_EDGE, RISING_EDGE } external_interrupt_edge_t;
 
 void external_interrupts_init_default(void);
 void external_interrupts_init(uint8_t which_pins, external_interrupt_edge_t trigger_edge);
-# 73 "inc/mcp2515_test.c" 2
+# 73 "mcp2515_test.c" 2
 
-# 1 "inc/mcp2515_test.h" 1
-# 74 "inc/mcp2515_test.c" 2
-# 98 "inc/mcp2515_test.c"
+# 1 "inc\\mcp2515_test.h" 1
+# 74 "mcp2515_test.c" 2
+# 98 "mcp2515_test.c"
 extern uint8_t transfer_complete_flag;
 
 
 static volatile uint8_t tmr_100ms_next = 0x00;
-static uint8_t spi_tx_test_msg = 0x00;
-static uint8_t spi_rx_msg_buf = 0x00u;
-static volatile uint8_t spi_ready_to_tx = 0x00;
-# 126 "inc/mcp2515_test.c"
+static uint8_t tx_node_test_msg = 0x00;
+static uint8_t tx_node_rx_buf = 0x00u;
+static volatile uint8_t tx_node_ready_to_tx = 0x00;
+# 126 "mcp2515_test.c"
 static char hex_to_char(uint8_t hex_num);
 
 
@@ -4726,7 +4746,7 @@ void __attribute__((picinterrupt(("")))) isr(void){
     if(PIR1bits.SSPIF && PIE1bits.SSPIE) {
 
         transfer_complete_flag = 0x01;
-# 158 "inc/mcp2515_test.c"
+# 158 "mcp2515_test.c"
         PIR1bits.SSPIF = 0;
     }
 
@@ -4743,14 +4763,14 @@ void __attribute__((picinterrupt(("")))) isr(void){
             tmr_100ms_next = 0x00;
 
 
-            spi_ready_to_tx = 0x01;
+            tx_node_ready_to_tx = 0x01;
 
             (PIR1bits.CCP1IF = 0u);
 
         } else{
 
             tmr_100ms_next = 0x01;
-            spi_ready_to_tx = 0x00;
+            tx_node_ready_to_tx = 0x00;
 
             (PIR1bits.CCP1IF = 0u);
         }
@@ -4768,7 +4788,7 @@ void main(void) {
 
 
     can_init_default();
-# 211 "inc/mcp2515_test.c"
+# 211 "mcp2515_test.c"
     Timer1_Init_Default();
     CCP1_Compare_Init_Default(62500u);
 
@@ -4781,20 +4801,20 @@ void main(void) {
 
     while(1){
 
-        if(spi_ready_to_tx){
+        if(tx_node_ready_to_tx){
 
-            spi_tx_test_msg = 0x00;
+            tx_node_test_msg = 0x00;
 
 
 
-            spi_ready_to_tx = 0x00;
+            tx_node_ready_to_tx = 0x00;
         }
 
     }
-# 340 "inc/mcp2515_test.c"
+# 340 "mcp2515_test.c"
     return;
 }
-# 359 "inc/mcp2515_test.c"
+# 359 "mcp2515_test.c"
 static char hex_to_char(uint8_t hex_num){
     switch(hex_num){
 

@@ -27,6 +27,7 @@ void external_interrupts_init_default(void){
     
     INTx_FALLING_EDGE;  // All on falling edge
     TRIS_INTx;  // Set RB0 to RB2 as inputs
+    
     // Unmask the external interrupts
     INT0_ENABLE;
     INT1_ENABLE;

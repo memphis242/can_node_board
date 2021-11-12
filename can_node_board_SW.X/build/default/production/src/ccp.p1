@@ -23,6 +23,25 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2519
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2519: extern volatile PIE1bits_t PIE1bits __attribute__((address(0xF9D)));
 [v _PIE1bits `VS90 ~T0 @X0 0 e@3997 ]
+"6380
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6380:     struct {
+[s S263 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S263 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
+"6390
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6390:     struct {
+[s S264 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S264 . . INT0F T0IF . INT0E T0IE PEIE GIE ]
+"6400
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6400:     struct {
+[s S265 :6 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S265 . . GIEL GIEH ]
+"6379
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6379: typedef union {
+[u S262 `S263 1 `S264 1 `S265 1 ]
+[n S262 . . . . ]
+"6406
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6406: extern volatile INTCONbits_t INTCONbits __attribute__((address(0xFF2)));
+[v _INTCONbits `VS262 ~T0 @X0 0 e@4082 ]
 "4155
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 4155: extern volatile unsigned char CCP2CON __attribute__((address(0xFBA)));
 [v _CCP2CON `Vuc ~T0 @X0 0 e@4026 ]
@@ -475,67 +494,79 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/ccp.c: 46:     (PIE1bits.CCP1IE = 1u);
 [e = . . _PIE1bits 0 2 -> -> 1 `ui `uc ]
 "47
-[; ;src/ccp.c: 47: }
+[; ;src/ccp.c: 47:     (INTCONbits.PEIE = 1u);
+[e = . . _INTCONbits 1 6 -> -> 1 `ui `uc ]
+"48
+[; ;src/ccp.c: 48: }
 [e :UE 270 ]
 }
-"48
-[; ;src/ccp.c: 48: void CCP2_Compare_Init_Default(uint16_t comp_val){
+"49
+[; ;src/ccp.c: 49: void CCP2_Compare_Init_Default(uint16_t comp_val){
 [v _CCP2_Compare_Init_Default `(v ~T0 @X0 1 ef1`us ]
 {
 [e :U _CCP2_Compare_Init_Default ]
 [v _comp_val `us ~T0 @X0 1 r1 ]
 [f ]
-"49
-[; ;src/ccp.c: 49:     (CCP2CON = 0xB);
-[e = _CCP2CON -> -> 11 `i `uc ]
 "50
-[; ;src/ccp.c: 50:     (T3CON &= ~0x48);
-[e =& _T3CON -> ~ -> 72 `i `Vuc ]
+[; ;src/ccp.c: 50:     (CCP2CON = 0xB);
+[e = _CCP2CON -> -> 11 `i `uc ]
 "51
-[; ;src/ccp.c: 51:     (CCPR2 = comp_val);
-[e = _CCPR2 _comp_val ]
+[; ;src/ccp.c: 51:     (T3CON &= ~0x48);
+[e =& _T3CON -> ~ -> 72 `i `Vuc ]
 "52
-[; ;src/ccp.c: 52:     (PIE2bits.CCP2IE = 1u);
-[e = . . _PIE2bits 0 0 -> -> 1 `ui `uc ]
+[; ;src/ccp.c: 52:     (CCPR2 = comp_val);
+[e = _CCPR2 _comp_val ]
 "53
-[; ;src/ccp.c: 53: }
+[; ;src/ccp.c: 53:     (PIE2bits.CCP2IE = 1u);
+[e = . . _PIE2bits 0 0 -> -> 1 `ui `uc ]
+"54
+[; ;src/ccp.c: 54:     (INTCONbits.PEIE = 1u);
+[e = . . _INTCONbits 1 6 -> -> 1 `ui `uc ]
+"55
+[; ;src/ccp.c: 55: }
 [e :UE 271 ]
 }
-"66
-[; ;src/ccp.c: 66: void CCP1_Capture_Init_Default(void){
+"68
+[; ;src/ccp.c: 68: void CCP1_Capture_Init_Default(void){
 [v _CCP1_Capture_Init_Default `(v ~T0 @X0 1 ef ]
 {
 [e :U _CCP1_Capture_Init_Default ]
 [f ]
-"67
-[; ;src/ccp.c: 67:     (CCP1CON = 0x5);
-[e = _CCP1CON -> -> 5 `i `uc ]
-"68
-[; ;src/ccp.c: 68:     (T3CON &= ~0x48);
-[e =& _T3CON -> ~ -> 72 `i `Vuc ]
 "69
-[; ;src/ccp.c: 69:     (PIE1bits.CCP1IE = 1u);
-[e = . . _PIE1bits 0 2 -> -> 1 `ui `uc ]
+[; ;src/ccp.c: 69:     (CCP1CON = 0x5);
+[e = _CCP1CON -> -> 5 `i `uc ]
 "70
-[; ;src/ccp.c: 70: }
+[; ;src/ccp.c: 70:     (T3CON &= ~0x48);
+[e =& _T3CON -> ~ -> 72 `i `Vuc ]
+"71
+[; ;src/ccp.c: 71:     (PIE1bits.CCP1IE = 1u);
+[e = . . _PIE1bits 0 2 -> -> 1 `ui `uc ]
+"72
+[; ;src/ccp.c: 72:     (INTCONbits.PEIE = 1u);
+[e = . . _INTCONbits 1 6 -> -> 1 `ui `uc ]
+"73
+[; ;src/ccp.c: 73: }
 [e :UE 272 ]
 }
-"71
-[; ;src/ccp.c: 71: void CCP2_Capture_Init_Default(void){
+"74
+[; ;src/ccp.c: 74: void CCP2_Capture_Init_Default(void){
 [v _CCP2_Capture_Init_Default `(v ~T0 @X0 1 ef ]
 {
 [e :U _CCP2_Capture_Init_Default ]
 [f ]
-"72
-[; ;src/ccp.c: 72:     (CCP2CON = 0x5);
-[e = _CCP2CON -> -> 5 `i `uc ]
-"73
-[; ;src/ccp.c: 73:     (T3CON &= ~0x48);
-[e =& _T3CON -> ~ -> 72 `i `Vuc ]
-"74
-[; ;src/ccp.c: 74:     (PIE2bits.CCP2IE = 1u);
-[e = . . _PIE2bits 0 0 -> -> 1 `ui `uc ]
 "75
-[; ;src/ccp.c: 75: }
+[; ;src/ccp.c: 75:     (CCP2CON = 0x5);
+[e = _CCP2CON -> -> 5 `i `uc ]
+"76
+[; ;src/ccp.c: 76:     (T3CON &= ~0x48);
+[e =& _T3CON -> ~ -> 72 `i `Vuc ]
+"77
+[; ;src/ccp.c: 77:     (PIE2bits.CCP2IE = 1u);
+[e = . . _PIE2bits 0 0 -> -> 1 `ui `uc ]
+"78
+[; ;src/ccp.c: 78:     (INTCONbits.PEIE = 1u);
+[e = . . _INTCONbits 1 6 -> -> 1 `ui `uc ]
+"79
+[; ;src/ccp.c: 79: }
 [e :UE 273 ]
 }

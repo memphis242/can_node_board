@@ -53,6 +53,7 @@ void SPI_Init_Master_Default(void){
             
     // Enable SSPIF interrupt
     MSSP_ENABLE_INTERRUPT;
+    ENABLE_PERIPHERAL_INTERRUPTS;
     
 }
 
@@ -88,6 +89,7 @@ void SPI_Init_Slave_Default(void){
     
     // Enable SSPIF interrupt
     MSSP_ENABLE_INTERRUPT;
+    ENABLE_PERIPHERAL_INTERRUPTS;
 }
 
 /* Function: SPI_Init
@@ -169,6 +171,7 @@ uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8
     
     // Enable SSPIF interrupt
     MSSP_ENABLE_INTERRUPT;
+    ENABLE_PERIPHERAL_INTERRUPTS;
     
     return EXEC_SUCCESS;
 }

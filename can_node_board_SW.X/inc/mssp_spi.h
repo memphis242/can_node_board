@@ -50,6 +50,11 @@
 #define EXEC_FAIL       0u
 #endif
 
+#ifndef ENABLE_PERIPHERAL_INTERRUPTS
+#define ENABLE_PERIPHERAL_INTERRUPTS    (INTCONbits.PEIE = 1u)
+#define DISABLE_PERIPHERAL_INTERRUPTS   (INTCONbits.PEIE = 0u)
+#endif
+
 // <editor-fold defaultstate="collapsed" desc="DEFINITIONS">
 // Definitions
 // NOTE: The xx_xx_BIT macros are for holding a constant with a 1 at the location of the bit

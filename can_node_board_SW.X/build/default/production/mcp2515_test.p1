@@ -31,18 +31,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2519
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2519: extern volatile PIE1bits_t PIE1bits __attribute__((address(0xF9D)));
 [v _PIE1bits `VS90 ~T0 @X0 0 e@3997 ]
-"98 inc/mcp2515_test.c
-[; ;inc/mcp2515_test.c: 98: extern uint8_t transfer_complete_flag;
+"98 mcp2515_test.c
+[; ;mcp2515_test.c: 98: extern uint8_t transfer_complete_flag;
 [v _transfer_complete_flag `uc ~T0 @X0 0 e ]
 [p mainexit ]
-"968 inc/mcp2515.h
-[; ;inc/mcp2515.h: 968: void can_init_default(void);
+"1014 inc\mcp2515.h
+[; ;inc\mcp2515.h: 1014: void can_init_default(void);
 [v _can_init_default `(v ~T0 @X0 0 ef ]
-"63 inc/timer.h
-[; ;inc/timer.h: 63: void Timer1_Init_Default(void);
+"68 inc\timer.h
+[; ;inc\timer.h: 68: void Timer1_Init_Default(void);
 [v _Timer1_Init_Default `(v ~T0 @X0 0 ef ]
-"160 inc/ccp.h
-[; ;inc/ccp.h: 160: void CCP1_Compare_Init_Default(uint16_t comp_val);
+"165 inc\ccp.h
+[; ;inc\ccp.h: 165: void CCP1_Compare_Init_Default(uint16_t comp_val);
 [v _CCP1_Compare_Init_Default `(v ~T0 @X0 0 ef1`us ]
 "5224 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 5224: extern volatile unsigned char T1CON __attribute__((address(0xFCD)));
@@ -66,7 +66,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6406
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6406: extern volatile INTCONbits_t INTCONbits __attribute__((address(0xFF2)));
 [v _INTCONbits `VS262 ~T0 @X0 0 e@4082 ]
-"11 inc/mcp2515_test.c
+"11 mcp2515_test.c
 [p x OSC  =  HSPLL       ]
 "12
 [p x FCMEN  =  OFF       ]
@@ -543,286 +543,286 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6715
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6715: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"101 inc/mcp2515_test.c
-[; ;inc/mcp2515_test.c: 101: static volatile uint8_t tmr_100ms_next = 0x00;
+"101 mcp2515_test.c
+[; ;mcp2515_test.c: 101: static volatile uint8_t tmr_100ms_next = 0x00;
 [v _tmr_100ms_next `Vuc ~T0 @X0 1 s ]
 [i _tmr_100ms_next
 -> -> 0 `i `uc
 ]
 "102
-[; ;inc/mcp2515_test.c: 102: static uint8_t spi_tx_test_msg = 0x00;
-[v _spi_tx_test_msg `uc ~T0 @X0 1 s ]
-[i _spi_tx_test_msg
+[; ;mcp2515_test.c: 102: static uint8_t tx_node_test_msg = 0x00;
+[v _tx_node_test_msg `uc ~T0 @X0 1 s ]
+[i _tx_node_test_msg
 -> -> 0 `i `uc
 ]
 "103
-[; ;inc/mcp2515_test.c: 103: static uint8_t spi_rx_msg_buf = 0x00u;
-[v _spi_rx_msg_buf `uc ~T0 @X0 1 s ]
-[i _spi_rx_msg_buf
+[; ;mcp2515_test.c: 103: static uint8_t tx_node_rx_buf = 0x00u;
+[v _tx_node_rx_buf `uc ~T0 @X0 1 s ]
+[i _tx_node_rx_buf
 -> -> 0 `ui `uc
 ]
 "104
-[; ;inc/mcp2515_test.c: 104: static volatile uint8_t spi_ready_to_tx = 0x00;
-[v _spi_ready_to_tx `Vuc ~T0 @X0 1 s ]
-[i _spi_ready_to_tx
+[; ;mcp2515_test.c: 104: static volatile uint8_t tx_node_ready_to_tx = 0x00;
+[v _tx_node_ready_to_tx `Vuc ~T0 @X0 1 s ]
+[i _tx_node_ready_to_tx
 -> -> 0 `i `uc
 ]
 [v $root$_isr `(v ~T0 @X0 0 e ]
 "134
-[; ;inc/mcp2515_test.c: 134: void __attribute__((picinterrupt(("")))) isr(void){
+[; ;mcp2515_test.c: 134: void __attribute__((picinterrupt(("")))) isr(void){
 [v _isr `(v ~T39 @X0 1 ef ]
 {
 [e :U _isr ]
 [f ]
 "140
-[; ;inc/mcp2515_test.c: 140:     if(PIR1bits.SSPIF && PIE1bits.SSPIE) {
+[; ;mcp2515_test.c: 140:     if(PIR1bits.SSPIF && PIE1bits.SSPIE) {
 [e $ ! && != -> . . _PIR1bits 0 3 `i -> 0 `i != -> . . _PIE1bits 0 3 `i -> 0 `i 275  ]
 {
 "142
-[; ;inc/mcp2515_test.c: 142:         transfer_complete_flag = 0x01;
+[; ;mcp2515_test.c: 142:         transfer_complete_flag = 0x01;
 [e = _transfer_complete_flag -> -> 1 `i `uc ]
 "158
-[; ;inc/mcp2515_test.c: 158:         PIR1bits.SSPIF = 0;
+[; ;mcp2515_test.c: 158:         PIR1bits.SSPIF = 0;
 [e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
 "159
-[; ;inc/mcp2515_test.c: 159:     }
+[; ;mcp2515_test.c: 159:     }
 }
 [e :U 275 ]
 "166
-[; ;inc/mcp2515_test.c: 166:     if(PIR1bits.CCP1IF && PIE1bits.CCP1IE){
+[; ;mcp2515_test.c: 166:     if(PIR1bits.CCP1IF && PIE1bits.CCP1IE){
 [e $ ! && != -> . . _PIR1bits 0 2 `i -> 0 `i != -> . . _PIE1bits 0 2 `i -> 0 `i 276  ]
 {
 "169
-[; ;inc/mcp2515_test.c: 169:         if(tmr_100ms_next){
+[; ;mcp2515_test.c: 169:         if(tmr_100ms_next){
 [e $ ! != -> _tmr_100ms_next `i -> 0 `i 277  ]
 {
 "171
-[; ;inc/mcp2515_test.c: 171:             tmr_100ms_next = 0x00;
+[; ;mcp2515_test.c: 171:             tmr_100ms_next = 0x00;
 [e = _tmr_100ms_next -> -> 0 `i `uc ]
 "174
-[; ;inc/mcp2515_test.c: 174:             spi_ready_to_tx = 0x01;
-[e = _spi_ready_to_tx -> -> 1 `i `uc ]
+[; ;mcp2515_test.c: 174:             tx_node_ready_to_tx = 0x01;
+[e = _tx_node_ready_to_tx -> -> 1 `i `uc ]
 "176
-[; ;inc/mcp2515_test.c: 176:             (PIR1bits.CCP1IF = 0u);
+[; ;mcp2515_test.c: 176:             (PIR1bits.CCP1IF = 0u);
 [e = . . _PIR1bits 0 2 -> -> 0 `ui `uc ]
 "178
-[; ;inc/mcp2515_test.c: 178:         } else{
+[; ;mcp2515_test.c: 178:         } else{
 }
 [e $U 278  ]
 [e :U 277 ]
 {
 "180
-[; ;inc/mcp2515_test.c: 180:             tmr_100ms_next = 0x01;
+[; ;mcp2515_test.c: 180:             tmr_100ms_next = 0x01;
 [e = _tmr_100ms_next -> -> 1 `i `uc ]
 "181
-[; ;inc/mcp2515_test.c: 181:             spi_ready_to_tx = 0x00;
-[e = _spi_ready_to_tx -> -> 0 `i `uc ]
+[; ;mcp2515_test.c: 181:             tx_node_ready_to_tx = 0x00;
+[e = _tx_node_ready_to_tx -> -> 0 `i `uc ]
 "183
-[; ;inc/mcp2515_test.c: 183:             (PIR1bits.CCP1IF = 0u);
+[; ;mcp2515_test.c: 183:             (PIR1bits.CCP1IF = 0u);
 [e = . . _PIR1bits 0 2 -> -> 0 `ui `uc ]
 "184
-[; ;inc/mcp2515_test.c: 184:         }
+[; ;mcp2515_test.c: 184:         }
 }
 [e :U 278 ]
 "185
-[; ;inc/mcp2515_test.c: 185:     }
+[; ;mcp2515_test.c: 185:     }
 }
 [e :U 276 ]
 "188
-[; ;inc/mcp2515_test.c: 188:     return;
+[; ;mcp2515_test.c: 188:     return;
 [e $UE 274  ]
 "189
-[; ;inc/mcp2515_test.c: 189: }
+[; ;mcp2515_test.c: 189: }
 [e :UE 274 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
 "195
-[; ;inc/mcp2515_test.c: 195: void main(void) {
+[; ;mcp2515_test.c: 195: void main(void) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
 "198
-[; ;inc/mcp2515_test.c: 198:     can_init_default();
+[; ;mcp2515_test.c: 198:     can_init_default();
 [e ( _can_init_default ..  ]
 "211
-[; ;inc/mcp2515_test.c: 211:     Timer1_Init_Default();
+[; ;mcp2515_test.c: 211:     Timer1_Init_Default();
 [e ( _Timer1_Init_Default ..  ]
 "212
-[; ;inc/mcp2515_test.c: 212:     CCP1_Compare_Init_Default(62500u);
+[; ;mcp2515_test.c: 212:     CCP1_Compare_Init_Default(62500u);
 [e ( _CCP1_Compare_Init_Default (1 -> -> 62500 `ui `us ]
 "216
-[; ;inc/mcp2515_test.c: 216:     T1CON |= 0x01;
+[; ;mcp2515_test.c: 216:     T1CON |= 0x01;
 [e =| _T1CON -> -> 1 `i `Vuc ]
 "217
-[; ;inc/mcp2515_test.c: 217:     (INTCONbits.PEIE = 1u);
+[; ;mcp2515_test.c: 217:     (INTCONbits.PEIE = 1u);
 [e = . . _INTCONbits 1 6 -> -> 1 `ui `uc ]
 "218
-[; ;inc/mcp2515_test.c: 218:     (INTCONbits.GIE = 1);
+[; ;mcp2515_test.c: 218:     (INTCONbits.GIE = 1);
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
 "221
-[; ;inc/mcp2515_test.c: 221:     while(1){
+[; ;mcp2515_test.c: 221:     while(1){
 [e :U 281 ]
 {
 "223
-[; ;inc/mcp2515_test.c: 223:         if(spi_ready_to_tx){
-[e $ ! != -> _spi_ready_to_tx `i -> 0 `i 283  ]
+[; ;mcp2515_test.c: 223:         if(tx_node_ready_to_tx){
+[e $ ! != -> _tx_node_ready_to_tx `i -> 0 `i 283  ]
 {
 "225
-[; ;inc/mcp2515_test.c: 225:             spi_tx_test_msg = 0x00;
-[e = _spi_tx_test_msg -> -> 0 `i `uc ]
+[; ;mcp2515_test.c: 225:             tx_node_test_msg = 0x00;
+[e = _tx_node_test_msg -> -> 0 `i `uc ]
 "229
-[; ;inc/mcp2515_test.c: 229:             spi_ready_to_tx = 0x00;
-[e = _spi_ready_to_tx -> -> 0 `i `uc ]
+[; ;mcp2515_test.c: 229:             tx_node_ready_to_tx = 0x00;
+[e = _tx_node_ready_to_tx -> -> 0 `i `uc ]
 "230
-[; ;inc/mcp2515_test.c: 230:         }
+[; ;mcp2515_test.c: 230:         }
 }
 [e :U 283 ]
 "232
-[; ;inc/mcp2515_test.c: 232:     }
+[; ;mcp2515_test.c: 232:     }
 }
 [e :U 280 ]
 [e $U 281  ]
 [e :U 282 ]
 "340
-[; ;inc/mcp2515_test.c: 340:     return;
+[; ;mcp2515_test.c: 340:     return;
 [e $UE 279  ]
 "341
-[; ;inc/mcp2515_test.c: 341: }
+[; ;mcp2515_test.c: 341: }
 [e :UE 279 ]
 }
 "359
-[; ;inc/mcp2515_test.c: 359: static char hex_to_char(uint8_t hex_num){
+[; ;mcp2515_test.c: 359: static char hex_to_char(uint8_t hex_num){
 [v _hex_to_char `(uc ~T0 @X0 1 sf1`uc ]
 {
 [e :U _hex_to_char ]
 [v _hex_num `uc ~T0 @X0 1 r1 ]
 [f ]
 "360
-[; ;inc/mcp2515_test.c: 360:     switch(hex_num){
+[; ;mcp2515_test.c: 360:     switch(hex_num){
 [e $U 286  ]
 {
 "362
-[; ;inc/mcp2515_test.c: 362:         case 0x0:
+[; ;mcp2515_test.c: 362:         case 0x0:
 [e :U 287 ]
 "363
-[; ;inc/mcp2515_test.c: 363:             return '0';
+[; ;mcp2515_test.c: 363:             return '0';
 [e ) -> -> 48 `ui `uc ]
 [e $UE 284  ]
 "365
-[; ;inc/mcp2515_test.c: 365:         case 0x1:
+[; ;mcp2515_test.c: 365:         case 0x1:
 [e :U 288 ]
 "366
-[; ;inc/mcp2515_test.c: 366:             return '1';
+[; ;mcp2515_test.c: 366:             return '1';
 [e ) -> -> 49 `ui `uc ]
 [e $UE 284  ]
 "368
-[; ;inc/mcp2515_test.c: 368:         case 0x2:
+[; ;mcp2515_test.c: 368:         case 0x2:
 [e :U 289 ]
 "369
-[; ;inc/mcp2515_test.c: 369:             return '2';
+[; ;mcp2515_test.c: 369:             return '2';
 [e ) -> -> 50 `ui `uc ]
 [e $UE 284  ]
 "371
-[; ;inc/mcp2515_test.c: 371:         case 0x3:
+[; ;mcp2515_test.c: 371:         case 0x3:
 [e :U 290 ]
 "372
-[; ;inc/mcp2515_test.c: 372:             return '3';
+[; ;mcp2515_test.c: 372:             return '3';
 [e ) -> -> 51 `ui `uc ]
 [e $UE 284  ]
 "374
-[; ;inc/mcp2515_test.c: 374:         case 0x4:
+[; ;mcp2515_test.c: 374:         case 0x4:
 [e :U 291 ]
 "375
-[; ;inc/mcp2515_test.c: 375:             return '4';
+[; ;mcp2515_test.c: 375:             return '4';
 [e ) -> -> 52 `ui `uc ]
 [e $UE 284  ]
 "377
-[; ;inc/mcp2515_test.c: 377:         case 0x5:
+[; ;mcp2515_test.c: 377:         case 0x5:
 [e :U 292 ]
 "378
-[; ;inc/mcp2515_test.c: 378:             return '5';
+[; ;mcp2515_test.c: 378:             return '5';
 [e ) -> -> 53 `ui `uc ]
 [e $UE 284  ]
 "380
-[; ;inc/mcp2515_test.c: 380:         case 0x6:
+[; ;mcp2515_test.c: 380:         case 0x6:
 [e :U 293 ]
 "381
-[; ;inc/mcp2515_test.c: 381:             return '6';
+[; ;mcp2515_test.c: 381:             return '6';
 [e ) -> -> 54 `ui `uc ]
 [e $UE 284  ]
 "383
-[; ;inc/mcp2515_test.c: 383:         case 0x7:
+[; ;mcp2515_test.c: 383:         case 0x7:
 [e :U 294 ]
 "384
-[; ;inc/mcp2515_test.c: 384:             return '7';
+[; ;mcp2515_test.c: 384:             return '7';
 [e ) -> -> 55 `ui `uc ]
 [e $UE 284  ]
 "386
-[; ;inc/mcp2515_test.c: 386:         case 0x8:
+[; ;mcp2515_test.c: 386:         case 0x8:
 [e :U 295 ]
 "387
-[; ;inc/mcp2515_test.c: 387:             return '8';
+[; ;mcp2515_test.c: 387:             return '8';
 [e ) -> -> 56 `ui `uc ]
 [e $UE 284  ]
 "389
-[; ;inc/mcp2515_test.c: 389:         case 0x9:
+[; ;mcp2515_test.c: 389:         case 0x9:
 [e :U 296 ]
 "390
-[; ;inc/mcp2515_test.c: 390:             return '9';
+[; ;mcp2515_test.c: 390:             return '9';
 [e ) -> -> 57 `ui `uc ]
 [e $UE 284  ]
 "392
-[; ;inc/mcp2515_test.c: 392:         case 0xA:
+[; ;mcp2515_test.c: 392:         case 0xA:
 [e :U 297 ]
 "393
-[; ;inc/mcp2515_test.c: 393:             return 'A';
+[; ;mcp2515_test.c: 393:             return 'A';
 [e ) -> -> 65 `ui `uc ]
 [e $UE 284  ]
 "395
-[; ;inc/mcp2515_test.c: 395:         case 0xB:
+[; ;mcp2515_test.c: 395:         case 0xB:
 [e :U 298 ]
 "396
-[; ;inc/mcp2515_test.c: 396:             return 'B';
+[; ;mcp2515_test.c: 396:             return 'B';
 [e ) -> -> 66 `ui `uc ]
 [e $UE 284  ]
 "398
-[; ;inc/mcp2515_test.c: 398:         case 0xC:
+[; ;mcp2515_test.c: 398:         case 0xC:
 [e :U 299 ]
 "399
-[; ;inc/mcp2515_test.c: 399:             return 'C';
+[; ;mcp2515_test.c: 399:             return 'C';
 [e ) -> -> 67 `ui `uc ]
 [e $UE 284  ]
 "401
-[; ;inc/mcp2515_test.c: 401:         case 0xD:
+[; ;mcp2515_test.c: 401:         case 0xD:
 [e :U 300 ]
 "402
-[; ;inc/mcp2515_test.c: 402:             return 'D';
+[; ;mcp2515_test.c: 402:             return 'D';
 [e ) -> -> 68 `ui `uc ]
 [e $UE 284  ]
 "404
-[; ;inc/mcp2515_test.c: 404:         case 0xE:
+[; ;mcp2515_test.c: 404:         case 0xE:
 [e :U 301 ]
 "405
-[; ;inc/mcp2515_test.c: 405:             return 'E';
+[; ;mcp2515_test.c: 405:             return 'E';
 [e ) -> -> 69 `ui `uc ]
 [e $UE 284  ]
 "407
-[; ;inc/mcp2515_test.c: 407:         case 0xF:
+[; ;mcp2515_test.c: 407:         case 0xF:
 [e :U 302 ]
 "408
-[; ;inc/mcp2515_test.c: 408:             return 'F';
+[; ;mcp2515_test.c: 408:             return 'F';
 [e ) -> -> 70 `ui `uc ]
 [e $UE 284  ]
 "410
-[; ;inc/mcp2515_test.c: 410:         default:
+[; ;mcp2515_test.c: 410:         default:
 [e :U 303 ]
 "411
-[; ;inc/mcp2515_test.c: 411:             return ' ';
+[; ;mcp2515_test.c: 411:             return ' ';
 [e ) -> -> 32 `ui `uc ]
 [e $UE 284  ]
 "413
-[; ;inc/mcp2515_test.c: 413:     }
+[; ;mcp2515_test.c: 413:     }
 }
 [e $U 285  ]
 [e :U 286 ]
@@ -845,6 +845,6 @@ Version 4.0 HI-TECH Software Intermediate Code
  303 ]
 [e :U 285 ]
 "414
-[; ;inc/mcp2515_test.c: 414: }
+[; ;mcp2515_test.c: 414: }
 [e :UE 284 ]
 }

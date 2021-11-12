@@ -17,6 +17,25 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2519
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2519: extern volatile PIE1bits_t PIE1bits __attribute__((address(0xF9D)));
 [v _PIE1bits `VS90 ~T0 @X0 0 e@3997 ]
+"6380
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6380:     struct {
+[s S263 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S263 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
+"6390
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6390:     struct {
+[s S264 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S264 . . INT0F T0IF . INT0E T0IE PEIE GIE ]
+"6400
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6400:     struct {
+[s S265 :6 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S265 . . GIEL GIEH ]
+"6379
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6379: typedef union {
+[u S262 `S263 1 `S264 1 `S265 1 ]
+[n S262 . . . . ]
+"6406
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6406: extern volatile INTCONbits_t INTCONbits __attribute__((address(0xFF2)));
+[v _INTCONbits `VS262 ~T0 @X0 0 e@4082 ]
 "54 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 54: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -444,32 +463,35 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/timer.c: 34:     (PIE1bits.TMR1IE = 1u);
 [e = . . _PIE1bits 0 0 -> -> 1 `ui `uc ]
 "35
-[; ;src/timer.c: 35: }
+[; ;src/timer.c: 35:     (INTCONbits.PEIE = 1u);
+[e = . . _INTCONbits 1 6 -> -> 1 `ui `uc ]
+"36
+[; ;src/timer.c: 36: }
 [e :UE 270 ]
 }
-"45
-[; ;src/timer.c: 45: void Timer1_Enable(void){
+"46
+[; ;src/timer.c: 46: void Timer1_Enable(void){
 [v _Timer1_Enable `(v ~T0 @X0 1 ef ]
 {
 [e :U _Timer1_Enable ]
 [f ]
-"46
-[; ;src/timer.c: 46:     T1CON |= 0x01;
-[e =| _T1CON -> -> 1 `i `Vuc ]
 "47
-[; ;src/timer.c: 47: }
+[; ;src/timer.c: 47:     T1CON |= 0x01;
+[e =| _T1CON -> -> 1 `i `Vuc ]
+"48
+[; ;src/timer.c: 48: }
 [e :UE 271 ]
 }
-"57
-[; ;src/timer.c: 57: void Timer1_Disable(void){
+"58
+[; ;src/timer.c: 58: void Timer1_Disable(void){
 [v _Timer1_Disable `(v ~T0 @X0 1 ef ]
 {
 [e :U _Timer1_Disable ]
 [f ]
-"58
-[; ;src/timer.c: 58:     T1CON &= ~0x01;
-[e =& _T1CON -> ~ -> 1 `i `Vuc ]
 "59
-[; ;src/timer.c: 59: }
+[; ;src/timer.c: 59:     T1CON &= ~0x01;
+[e =& _T1CON -> ~ -> 1 `i `Vuc ]
+"60
+[; ;src/timer.c: 60: }
 [e :UE 272 ]
 }

@@ -57,6 +57,11 @@
 #include <xc.h>
 #include <stdint.h>
 
+#ifndef ENABLE_PERIPHERAL_INTERRUPTS
+#define ENABLE_PERIPHERAL_INTERRUPTS    (INTCONbits.PEIE = 1u)
+#define DISABLE_PERIPHERAL_INTERRUPTS   (INTCONbits.PEIE = 0u)
+#endif
+
 
 // <editor-fold defaultstate="collapsed" desc="DEFINITIONS: REGISTERS & MACROS">
 

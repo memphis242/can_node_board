@@ -1,4 +1,4 @@
-# 1 "src/mssp_spi_driver.c"
+# 1 "src/mssp_spi.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "src/mssp_spi_driver.c" 2
+# 1 "src/mssp_spi.c" 2
 
 
 
@@ -4389,10 +4389,10 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 33 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 2 3
-# 9 "src/mssp_spi_driver.c" 2
+# 9 "src/mssp_spi.c" 2
 
 # 1 "inc\\mssp_spi.h" 1
-# 35 "inc\\mssp_spi.h"
+# 40 "inc\\mssp_spi.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 1 3
 # 22 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 3
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\bits/alltypes.h" 1 3
@@ -4478,8 +4478,8 @@ typedef int32_t int_fast32_t;
 typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
-# 35 "inc\\mssp_spi.h" 2
-# 104 "inc\\mssp_spi.h"
+# 40 "inc\\mssp_spi.h" 2
+# 114 "inc\\mssp_spi.h"
 enum spi_actor_t { SPI_MASTER, SPI_SLAVE };
 enum spi_mode_t { SPI_MODE_00, SPI_MODE_01, SPI_MODE_10, SPI_MODE_11 };
 
@@ -4497,7 +4497,14 @@ void SPI_Send_Byte(uint8_t tx);
 void SPI_Send_Packet(uint8_t * tx_pack, uint16_t tx_size);
 void SPI_Receive_Byte(uint8_t * rx);
 void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size);
-# 10 "src/mssp_spi_driver.c" 2
+
+
+
+
+
+void SPI_Transfer_Byte_without_CS(uint8_t tx, uint8_t * rx);
+void SPI_Transfer_Packet_without_CS(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_size);
+# 10 "src/mssp_spi.c" 2
 
 # 1 "inc\\lcd_driver.h" 1
 # 207 "inc\\lcd_driver.h"
@@ -4539,17 +4546,16 @@ uint8_t LCD_turn_on_cursor(void);
 
 
 void LCD_write_uint32_number(uint32_t num);
-# 11 "src/mssp_spi_driver.c" 2
+# 11 "src/mssp_spi.c" 2
 
 
 
 
 uint8_t receive_byte = 0x00;
 static enum spi_actor_t spi_actor = SPI_MASTER;
-static uint8_t slave_mode = 0x00;
 uint8_t transfer_complete_flag = 0x00;
 uint8_t manual_transfer = 0x00;
-# 32 "src/mssp_spi_driver.c"
+# 31 "src/mssp_spi.c"
 void SPI_Init_Master_Default(void){
 
     SSPCON1bits.SSPEN = 0;
@@ -4575,9 +4581,10 @@ void SPI_Init_Master_Default(void){
 
 
     PIE1bits.SSPIE = 1;
+    (INTCONbits.PEIE = 1u);
 
 }
-# 70 "src/mssp_spi_driver.c"
+# 70 "src/mssp_spi.c"
 void SPI_Init_Slave_Default(void){
 
     SSPCON1bits.SSPEN = 0;
@@ -4600,8 +4607,9 @@ void SPI_Init_Slave_Default(void){
 
 
     PIE1bits.SSPIE = 1;
+    (INTCONbits.PEIE = 1u);
 }
-# 110 "src/mssp_spi_driver.c"
+# 111 "src/mssp_spi.c"
 uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8_t fosc_div, enum spi_actor_t spi_actor_type){
 
     SSPCON1bits.SSPEN = 0;
@@ -4665,14 +4673,15 @@ uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8
 
 
     PIE1bits.SSPIE = 1;
+    (INTCONbits.PEIE = 1u);
 
     return 1u;
 }
-# 185 "src/mssp_spi_driver.c"
+# 187 "src/mssp_spi.c"
 void SPI_Disable(void){
     SSPCON1bits.SSPEN = 0;
 }
-# 205 "src/mssp_spi_driver.c"
+# 207 "src/mssp_spi.c"
 void SPI_Transfer_Byte(uint8_t tx, uint8_t * rx){
     manual_transfer = 0x01;
     transfer_complete_flag = 0x00;
@@ -4681,7 +4690,7 @@ void SPI_Transfer_Byte(uint8_t tx, uint8_t * rx){
     SSPBUF = tx;
     while(!transfer_complete_flag);
 
-    if(!slave_mode) LATDbits.LATD2 = 1;
+    if(spi_actor == SPI_MASTER) LATDbits.LATD2 = 1;
     *rx = SSPBUF;
 
     manual_transfer = 0x00;
@@ -4689,14 +4698,14 @@ void SPI_Transfer_Byte(uint8_t tx, uint8_t * rx){
 
     return;
 }
-# 234 "src/mssp_spi_driver.c"
+# 236 "src/mssp_spi.c"
 void SPI_Transfer_Packet(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_size){
-    uint16_t i = 0;
-    for(i=0; i<pack_size; i++){
+
+    for(uint16_t i=0; i<pack_size; i++){
         SPI_Transfer_Byte(tx_pack[i], &rx_pack[i]);
     }
 }
-# 250 "src/mssp_spi_driver.c"
+# 252 "src/mssp_spi.c"
 void SPI_Send_Byte(uint8_t tx){
     manual_transfer = 0x01;
     transfer_complete_flag = 0x00;
@@ -4704,29 +4713,51 @@ void SPI_Send_Byte(uint8_t tx){
     if(spi_actor == SPI_MASTER) LATDbits.LATD2 = 0;
     SSPBUF = tx;
     while(!transfer_complete_flag);
-    if(!slave_mode) LATDbits.LATD2 = 1;
+    if(spi_actor == SPI_MASTER) LATDbits.LATD2 = 1;
     transfer_complete_flag = 0x00;
 
     manual_transfer = 0x00;
     transfer_complete_flag = 0x00;
 }
-# 274 "src/mssp_spi_driver.c"
+# 276 "src/mssp_spi.c"
 void SPI_Send_Packet(uint8_t * tx_pack, uint16_t tx_size){
     uint16_t i = 0;
     for(i=0; i<tx_size; i++){
         SPI_Send_Byte(tx_pack[i]);
     }
 }
-# 290 "src/mssp_spi_driver.c"
+# 292 "src/mssp_spi.c"
 void SPI_Receive_Byte(uint8_t * rx){
 
     SPI_Transfer_Byte(0x00, rx);
 
 }
-# 306 "src/mssp_spi_driver.c"
+# 308 "src/mssp_spi.c"
 void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size){
     uint16_t i = 0;
     for(i=0; i<rx_size; i++){
         SPI_Receive_Byte(&rx_pack[i]);
     }
+}
+# 335 "src/mssp_spi.c"
+void SPI_Transfer_Byte_without_CS(uint8_t tx, uint8_t * rx){
+
+    manual_transfer = 0x01;
+    transfer_complete_flag = 0x00;
+
+    SSPBUF = tx;
+    while(!transfer_complete_flag);
+    *rx = SSPBUF;
+
+    manual_transfer = 0x00;
+    transfer_complete_flag = 0x00;
+
+}
+# 362 "src/mssp_spi.c"
+void SPI_Transfer_Packet_without_CS(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_size){
+
+    for(uint16_t i=0; i<pack_size; i++){
+        SPI_Transfer_Byte(tx_pack[i], &rx_pack[i]);
+    }
+
 }

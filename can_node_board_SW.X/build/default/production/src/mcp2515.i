@@ -4472,18 +4472,26 @@ typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
 # 67 "inc\\mcp2515.h" 2
-# 880 "inc\\mcp2515.h"
+# 163 "inc\\mcp2515.h"
+typedef enum {
+    MCP2515_OPMODE_NORMAL = 0u,
+    MCP2515_OPMODE_SLEEP = 1u,
+    MCP2515_OPMODE_LOOPBACK = 2u,
+    MCP2515_OPMODE_LISTEN = 3u,
+    MCP2515_OPMODE_CONFIG = 4u,
+} opmode_t;
+# 925 "inc\\mcp2515.h"
 typedef enum { SPI_READ_RXB0_ID, SPI_READ_RXB0_D, SPI_READ_RXB1_ID, SPI_READ_RXB1_D } spi_read_rxb_inst_t;
 
 
 typedef enum { SPI_LOAD_TXB0_ID, SPI_LOAD_TXB0_D, SPI_LOAD_TXB1_ID, SPI_LOAD_TXB1_D, SPI_LOAD_TXB2_ID, SPI_LOAD_TXB2_D } spi_load_txb_inst_t;
-# 909 "inc\\mcp2515.h"
-typedef enum { TXB0, TXB1, TXB2 } txbuf_t;
+# 954 "inc\\mcp2515.h"
+typedef enum { TXB0 = 1u, TXB1 = 2u, TXB2 = 4u } txbuf_t;
 typedef enum { RXB0, RXB1 } rxbuf_t;
 typedef enum { RX_MASK0, RX_MASK1 } rx_mask_t;
 typedef enum { RX_FILT0, RX_FILT1, RX_FILT2, RX_FILT3, RX_FILT4, RX_FILT5 } rx_filt_t;
 typedef enum { MCP2515_OPTION_ROLLOVER } mcp_2515_options_t;
-# 938 "inc\\mcp2515.h"
+# 984 "inc\\mcp2515.h"
 typedef struct {
     uint16_t sid;
     uint8_t ide;
@@ -4517,16 +4525,21 @@ typedef struct {
 void can_init_default(void);
 void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump);
 
-void can_spi_command(uint8_t cmd);
-uint8_t can_spi_query(uint8_t query);
-void can_read_reg(uint8_t reg, uint8_t * rxbuf);
-void can_read_successive_reg(uint8_t start_reg, uint8_t * rxbuf, uint8_t len);
-void can_write_reg(uint8_t reg, uint8_t value);
-void can_write_successive_reg(uint8_t start_reg, uint8_t * txbuf, uint8_t len);
-void can_write_bit(uint8_t reg, uint8_t mask, uint8_t val);
-void can_write_txbuf(txbuf_t txb, uint8_t * mcp2515_tx_buf, uint8_t len);
-void can_read_rxbuf(rxbuf_t rxb, uint8_t * mcp2515_rx_buf, uint8_t len);
-# 991 "inc\\mcp2515.h"
+opmode_t mcp2515_current_opmode(void);
+void mcp2515_config_mode(void);
+void mcp2515_normal_mode(void);
+void mcp2515_cmd_reset(void);
+uint8_t mcp2515_cmd_read_status(void);
+uint8_t mcp2515_cmd_rx_status(void);
+void mcp2515_cmd_read(uint8_t reg_address, uint8_t * buf);
+void mcp2515_cmd_read_sequential(uint8_t start_reg_addr, uint8_t * rxbuf, uint8_t len);
+void mcp2515_cmd_write(uint8_t reg_address, uint8_t val);
+void mcp2515_cmd_write_sequential(uint8_t start_reg_addr, uint8_t * txbuf, uint8_t len);
+void mcp2515_cmd_write_bit(uint8_t reg_address, uint8_t mask, uint8_t val);
+void mcp2515_cmd_read_rx_buf(rxbuf_t rxb, uint8_t * rx_buf);
+void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t * tx_buf);
+void mcp2515_cmd_rts(txbuf_t txb);
+# 1042 "inc\\mcp2515.h"
 void can_compose_msg_std(can_msg * msg, uint8_t * mcp2515_tx_buf);
 void can_parse_msg_std(can_msg * msg, uint8_t * mcp2515_rx_buf);
 void can_compose_msg_ext(can_msg * msg, uint8_t * mcp2515_tx_buf);
@@ -4589,7 +4602,7 @@ void LCD_write_uint32_number(uint32_t num);
 # 12 "src/mcp2515.c" 2
 
 # 1 "inc\\ccp.h" 1
-# 154 "inc\\ccp.h"
+# 159 "inc\\ccp.h"
 typedef enum { TMR1_CCP1, TMR1_CCPx, TM3_CCP2, TM3_CCPx} tmr_ccp_pair_t;
 
 
@@ -4603,14 +4616,14 @@ void CCP2_Capture_Init_Default(void);
 # 13 "src/mcp2515.c" 2
 
 # 1 "inc\\timer.h" 1
-# 63 "inc\\timer.h"
+# 68 "inc\\timer.h"
 void Timer1_Init_Default(void);
 void Timer1_Enable(void);
 void Timer1_Disable(void);
 # 14 "src/mcp2515.c" 2
 
 # 1 "inc\\mssp_spi.h" 1
-# 104 "inc\\mssp_spi.h"
+# 114 "inc\\mssp_spi.h"
 enum spi_actor_t { SPI_MASTER, SPI_SLAVE };
 enum spi_mode_t { SPI_MODE_00, SPI_MODE_01, SPI_MODE_10, SPI_MODE_11 };
 
@@ -4628,6 +4641,13 @@ void SPI_Send_Byte(uint8_t tx);
 void SPI_Send_Packet(uint8_t * tx_pack, uint16_t tx_size);
 void SPI_Receive_Byte(uint8_t * rx);
 void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size);
+
+
+
+
+
+void SPI_Transfer_Byte_without_CS(uint8_t tx, uint8_t * rx);
+void SPI_Transfer_Packet_without_CS(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_size);
 # 15 "src/mcp2515.c" 2
 
 # 1 "inc\\external_interrupts.h" 1
@@ -4640,26 +4660,213 @@ typedef enum { FALLING_EDGE, RISING_EDGE } external_interrupt_edge_t;
 void external_interrupts_init_default(void);
 void external_interrupts_init(uint8_t which_pins, external_interrupt_edge_t trigger_edge);
 # 16 "src/mcp2515.c" 2
-# 45 "src/mcp2515.c"
+
+
+
+
+extern uint8_t receive_byte;
+# 50 "src/mcp2515.c"
 void can_init_default(void){
+
+
+    SPI_Init_Master_Default();
+    (INTCONbits.GIE = 1);
+
+
+
+    do {
+        mcp2515_cmd_reset();
+        _delay((unsigned long)((100u)*(40000000u/4000.0)));
+    } while( mcp2515_current_opmode() != MCP2515_OPMODE_CONFIG);
 
 
     external_interrupts_init_default();
 
 
-    SPI_Init_Master_Default();
+
+    mcp2515_cmd_write_bit(0x0F, 0x04, 0x00u);
 
 
+
+
+
+
+    mcp2515_cmd_write_bit(0x2A, 0xC0, 0xC0);
+    mcp2515_cmd_write_bit(0x2A, 0x3F, 0x03u);
+    mcp2515_cmd_write_bit(0x29, 0x80, 0x80u);
+    mcp2515_cmd_write_bit(0x29, 0x40, 0x00u);
+    mcp2515_cmd_write_bit(0x29, 0x38, (7u << 3u));
+    mcp2515_cmd_write_bit(0x29, 0x07, (4u));
+    mcp2515_cmd_write_bit(0x28, 0x07, (5u));
+# 105 "src/mcp2515.c"
+    mcp2515_cmd_write_bit(0x60, 0x60, 0x00);
+    mcp2515_cmd_write_bit(0x70, 0x60, 0x00);
+
+    mcp2515_cmd_write_bit(0x60, 0x04, 0x04);
+
+    mcp2515_cmd_write_bit(0x0D, 0x03, 0x0F);
+    mcp2515_cmd_write_bit(0x0D, 0x0C, 0x0F);
+# 123 "src/mcp2515.c"
+    mcp2515_normal_mode();
+
+
+    _delay((unsigned long)((100u)*(40000000u/4000.0)));
 
 }
 
-void can_spi_command(uint8_t cmd){
-
-
+void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump){
 
 }
+# 146 "src/mcp2515.c"
+opmode_t mcp2515_current_opmode(void){
+    uint8_t opmode = 0x00;
+    mcp2515_cmd_read(0x0E, &opmode);
+    opmode_t current_opmode = (opmode_t) (opmode & 0xE0);
 
-uint8_t can_spi_query(uint8_t query){
+    return current_opmode;
+}
+# 163 "src/mcp2515.c"
+void mcp2515_config_mode(void){
+    mcp2515_cmd_write_bit(0x0F, 0xE0, MCP2515_OPMODE_CONFIG);
+}
+# 176 "src/mcp2515.c"
+void mcp2515_normal_mode(void){
+    mcp2515_cmd_write_bit(0x0F, 0xE0, MCP2515_OPMODE_NORMAL);
+}
+# 189 "src/mcp2515.c"
+void mcp2515_cmd_reset(void){
+    SPI_Transfer_Byte(0xC0, &receive_byte);
+}
+# 203 "src/mcp2515.c"
+uint8_t mcp2515_cmd_read_status(void){
+    SPI_Transfer_Byte(0xA0, &receive_byte);
+    return receive_byte;
+}
+# 217 "src/mcp2515.c"
+uint8_t mcp2515_cmd_rx_status(void){
+    SPI_Transfer_Byte(0xB0, &receive_byte);
+    return receive_byte;
+}
+# 232 "src/mcp2515.c"
+void mcp2515_cmd_read(uint8_t reg_address, uint8_t * buf){
 
-    return 1;
+    LATDbits.LATD2 = 0;
+
+
+    SPI_Transfer_Byte_without_CS(0x03, &receive_byte);
+
+    SPI_Transfer_Byte_without_CS(reg_address, &receive_byte);
+
+    SPI_Transfer_Byte_without_CS(0x00u, buf);
+
+    LATDbits.LATD2 = 1;
+
+}
+# 259 "src/mcp2515.c"
+void mcp2515_cmd_read_sequential(uint8_t start_reg_addr, uint8_t * rxbuf, uint8_t len){
+
+    LATDbits.LATD2 = 0;
+
+
+    SPI_Transfer_Byte_without_CS(0x03, &receive_byte);
+
+    SPI_Transfer_Byte_without_CS(start_reg_addr, &receive_byte);
+
+    for(uint8_t i=0; i<len; i++) SPI_Transfer_Byte_without_CS(0x00u, &rxbuf[i]);
+
+    LATDbits.LATD2 = 1;
+
+}
+# 285 "src/mcp2515.c"
+void mcp2515_cmd_write(uint8_t reg_address, uint8_t val){
+
+    LATDbits.LATD2 = 0;
+
+
+    SPI_Transfer_Byte_without_CS(0x02, &receive_byte);
+
+    SPI_Transfer_Byte_without_CS(reg_address, &receive_byte);
+
+    SPI_Transfer_Byte_without_CS(val, &receive_byte);
+
+    LATDbits.LATD2 = 1;
+
+}
+# 312 "src/mcp2515.c"
+void mcp2515_cmd_write_sequential(uint8_t start_reg_addr, uint8_t * txbuf, uint8_t len){
+
+    LATDbits.LATD2 = 0;
+
+
+    SPI_Transfer_Byte_without_CS(0x02, &receive_byte);
+
+    SPI_Transfer_Byte_without_CS(start_reg_addr, &receive_byte);
+
+    for(uint8_t i=0; i<len; i++) SPI_Transfer_Byte_without_CS(txbuf[i], &receive_byte);
+
+    LATDbits.LATD2 = 1;
+
+}
+# 345 "src/mcp2515.c"
+void mcp2515_cmd_write_bit(uint8_t reg_address, uint8_t mask, uint8_t val){
+
+    LATDbits.LATD2 = 0;
+
+
+    SPI_Transfer_Byte_without_CS(0x05, &receive_byte);
+
+    SPI_Transfer_Byte_without_CS(reg_address, &receive_byte);
+
+    SPI_Transfer_Byte_without_CS(mask, &receive_byte);
+
+    SPI_Transfer_Byte_without_CS(val, &receive_byte);
+
+    LATDbits.LATD2 = 1;
+
+}
+# 378 "src/mcp2515.c"
+void mcp2515_cmd_read_rx_buf(rxbuf_t rxb, uint8_t * rx_buf){
+
+    LATDbits.LATD2 = 0;
+
+
+
+    SPI_Transfer_Byte_without_CS((0x90 | ((rxb ? SPI_READ_RXB1_ID : SPI_READ_RXB0_ID) << 1)), &receive_byte);
+
+    for(uint8_t i=0; i<13u; i++) SPI_Transfer_Byte_without_CS(0x00u, &rx_buf[i]);
+
+    LATDbits.LATD2 = 1;
+
+}
+# 408 "src/mcp2515.c"
+void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t * tx_buf){
+    spi_load_txb_inst_t selected_txb;
+
+
+    switch(txb){
+        case TXB0:
+            selected_txb = SPI_LOAD_TXB0_ID;
+            break;
+        case TXB1:
+            selected_txb = SPI_LOAD_TXB1_ID;
+            break;
+        case TXB2:
+            selected_txb = SPI_LOAD_TXB2_ID;
+            break;
+    }
+
+    LATDbits.LATD2 = 0;
+
+
+
+    SPI_Transfer_Byte_without_CS((0x40 | (selected_txb)), &receive_byte);
+
+    for(uint8_t i=0; i<13u; i++) SPI_Transfer_Byte_without_CS(tx_buf[i], &receive_byte);
+
+    LATDbits.LATD2 = 1;
+
+}
+# 445 "src/mcp2515.c"
+void mcp2515_cmd_rts(txbuf_t txb){
+    SPI_Transfer_Byte((0x8 | (txb)), &receive_byte);
 }

@@ -44,12 +44,14 @@ void CCP1_Compare_Init_Default(uint16_t comp_val){
     TMR1_FOR_CCPx;
     CCP1_SET_COMP_VAL(comp_val);
     ENABLE_CCP1_INTERRUPT;
+    ENABLE_PERIPHERAL_INTERRUPTS;
 }
 void CCP2_Compare_Init_Default(uint16_t comp_val){
     CCP2M_COMPARE_DEFAULT;
     TMR1_FOR_CCPx;
     CCP2_SET_COMP_VAL(comp_val);
     ENABLE_CCP2_INTERRUPT;
+    ENABLE_PERIPHERAL_INTERRUPTS;
 }
 
 // CAPTURE FUNCTIONS
@@ -67,9 +69,11 @@ void CCP1_Capture_Init_Default(void){
     CCP1M_CAPTURE_DEFAULT;
     TMR1_FOR_CCPx;
     ENABLE_CCP1_INTERRUPT;
+    ENABLE_PERIPHERAL_INTERRUPTS;
 }
 void CCP2_Capture_Init_Default(void){
     CCP2M_CAPTURE_DEFAULT;
     TMR1_FOR_CCPx;
     ENABLE_CCP2_INTERRUPT;
+    ENABLE_PERIPHERAL_INTERRUPTS;
 }

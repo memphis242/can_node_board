@@ -32,6 +32,7 @@ void Timer1_Init_Default(void){
     TMR1_DEFAULT;
     TMR1_PRESCAL_8;
     TMR1_ENABLE_INTERRUPT;
+    ENABLE_PERIPHERAL_INTERRUPTS;
 }
 
 /* Function: Timer1_Enable

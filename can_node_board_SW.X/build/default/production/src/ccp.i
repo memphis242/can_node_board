@@ -4479,7 +4479,7 @@ typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
 # 58 "inc\\ccp.h" 2
-# 154 "inc\\ccp.h"
+# 159 "inc\\ccp.h"
 typedef enum { TMR1_CCP1, TMR1_CCPx, TM3_CCP2, TM3_CCPx} tmr_ccp_pair_t;
 
 
@@ -4493,7 +4493,7 @@ void CCP2_Capture_Init_Default(void);
 # 10 "src/ccp.c" 2
 
 # 1 "inc\\timer.h" 1
-# 63 "inc\\timer.h"
+# 68 "inc\\timer.h"
 void Timer1_Init_Default(void);
 void Timer1_Enable(void);
 void Timer1_Disable(void);
@@ -4504,21 +4504,25 @@ void CCP1_Compare_Init_Default(uint16_t comp_val){
     (T3CON &= ~0x48);
     (CCPR1 = comp_val);
     (PIE1bits.CCP1IE = 1u);
+    (INTCONbits.PEIE = 1u);
 }
 void CCP2_Compare_Init_Default(uint16_t comp_val){
     (CCP2CON = 0xB);
     (T3CON &= ~0x48);
     (CCPR2 = comp_val);
     (PIE2bits.CCP2IE = 1u);
+    (INTCONbits.PEIE = 1u);
 }
-# 66 "src/ccp.c"
+# 68 "src/ccp.c"
 void CCP1_Capture_Init_Default(void){
     (CCP1CON = 0x5);
     (T3CON &= ~0x48);
     (PIE1bits.CCP1IE = 1u);
+    (INTCONbits.PEIE = 1u);
 }
 void CCP2_Capture_Init_Default(void){
     (CCP2CON = 0x5);
     (T3CON &= ~0x48);
     (PIE2bits.CCP2IE = 1u);
+    (INTCONbits.PEIE = 1u);
 }

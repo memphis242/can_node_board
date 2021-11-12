@@ -29,16 +29,16 @@ extern uint8_t receive_byte;    // Used as part of SPI comms when I don't care a
  * <p>
  * Here I, assuming the MCP2515 is in configuration mode (should check first)
  * <ol>
- *      <li>set up interrupt pins on MCP2515 (~RXxBF pins)</li>
  *      <li>ensure SPI has been initialized,</li>
+ *      <li>check the MCP2515 is in configuration mode</li>
+ *      <li>set up interrupt pins on MCP2515 (~RXxBF pins)</li>
  *      <li>set up CLKEN, CLKPRE in CANCTRL so that the CLKOUT pin is disabled,</li>
  *         (otherwise, leave other bits at their reset values)
  *      <li>set up the bit-timing to be 250kbps (CNFGx),</li>
  *      <li>set up TX-related control (TXBnCTRL, TXRTSCTRL)</li>
  *      <li>set up RX-related control (RXBnCTRL, BFPCTRL, filters, masks)</li>
  *      <li>configure the MCP2515's interrupts CANINTE</li>
- *      <li>Save all this in internally-linked global variables to remember</li>
- *         current config
+ *      <li>Save all this in internally-linked global variables to remember current config</li>
  *      <li>Request the op mode to be Normal</li>
  * </ol>
  * </p>
@@ -49,21 +49,28 @@ extern uint8_t receive_byte;    // Used as part of SPI comms when I don't care a
  */
 void can_init_default(void){
     
-    // Check if MCP2515 is in config mode...
+    // 1. Initialize SPI as a master
+    SPI_Init_Master_Default();
+    ei();   // Need to enable global interrupts for SPI to work!
     
-    // 1. I use external interrupt pins on the PIC for ~RX0BF, ~RX1BF, and ~RESET
+    // 2. Make sure MCP2515 is in config mode by sending a RESET command and waiting...
+    // If not in config mode, request to be in config mode and wait until this is confirmed
+    do {
+        mcp2515_cmd_reset();
+        __delay_ms(100u); // Wait a little just to let the MCP2515 do its thing
+    } while( mcp2515_current_opmode() != MCP2515_OPMODE_CONFIG);
+    
+    // 3. I use external interrupt pins on the PIC for ~RX0BF, ~RX1BF, and ~RESET
     external_interrupts_init_default();
     
-    // 2. Now initialize SPI as a master
-    SPI_Init_Master_Default();
-    
-    // 3. Disable CLKOUT pin as it is enabled by default on POR --> i.e., CLKEN in
+    // 4. Disable CLKOUT pin as it is enabled by default on POR --> i.e., CLKEN in
     //    CANCTRL = 0
     mcp2515_cmd_write_bit(MCP2515_CANCTRL, MCP2515_CLKOUT_ENABLE, 0x00u);
     
-    /* 4. Set up bit-timing to 250kbps, assuming 40MHz MCP2515 oscillator
+    /* 5. Set up bit-timing to 250kbps, assuming 40MHz MCP2515 oscillator
      * This amounts to BRP: 3, NPROPSEG = 5TQ, NPS1 = 8TQ, NPS2 = 6TQ --> SJW = 4TQ
-     * BRP and SJW are set in CNF1, PROPSEG and PS1 in CNF2, and PS2 in both CNF2 and CNF3
+     * BRP and SJW are set in CNF1, PROPSEG and PS1 in CNF2, and PS2 in both CNF2 and CNF3.
+     * Note that CNF1, CNF2, and CNF3 can only be modified in configuration mode!
      */
     mcp2515_cmd_write_bit(MCP2515_CNF1, CNF1_SJW_BITS, CNF1_SET_SJW_4TQ);   // Set SJW to 4TQ
     mcp2515_cmd_write_bit(MCP2515_CNF1, CNF1_BRP_BITS, 0x03u);              // Set BRP to 3 --> 4
@@ -73,7 +80,50 @@ void can_init_default(void){
     mcp2515_cmd_write_bit(MCP2515_CNF2, CNF2_PRSEG_BITS, CNF2_SET_PROPSEG(4u)); // Set PROPSEG to 4 --> 5TQ
     mcp2515_cmd_write_bit(MCP2515_CNF3, CNF3_PHSEG2_BITS, CNF3_SET_PS2(5u));    // Set PS2 to 5 --> 6TQ
     
+    /* 6. Set up TX-related control (TXBnCTRL, TXRTSCTRL)
+     * For now, I will the TXBnCTRL registers at their default values. The only configuration
+     * to do is the TXP bit-field, which sets the priority of the transmit buffers.
+     * I don't have a priority in-mind at the moment so I will leave them all at 00
+     * (the POR value), which sets all buffers at the same priority level (lowest priority).
+     * 
+     * For the TXRTSCTRL, I want the ~TXxRTS pins to be inputs, since I plan to use the
+     * RTS command over SPI to initiate a transmission. This happens to also be the POR
+     * state of the register so nothing needed to be done here either! Note if this needs
+     * to be changed later, the TXRTSCTRL register can only be changed in configuration mode!
+     */
     
+    /* 7. Set up RX-related control (RXBnCTRL, BFPCTRL, filters, masks)
+     * By default, I will just allow all messages through without filtering. The user can
+     * reconfigure in filters and masks depending on the situation. Note that the filters
+     * and masks can only be changed in configuration mode!
+     * 
+     * I will also enable rollover from RXB0 to RXB1.
+     * 
+     * I will also set the ~RXnBF pins to be interrupts.
+     */
+    // Allow everything through
+    mcp2515_cmd_write_bit(MCP2515_RXB0CTRL, MCP2515_RXBnCTRL_RXM, 0x00);
+    mcp2515_cmd_write_bit(MCP2515_RXB1CTRL, MCP2515_RXBnCTRL_RXM, 0x00);
+    // Enable rollover
+    mcp2515_cmd_write_bit(MCP2515_RXB0CTRL, MCP2515_RXB0CTRL_BUKT, MCP2515_RX_ROLLOVER);
+    // Set ~RXnBF pins to be interrupts
+    mcp2515_cmd_write_bit(MCP2515_BFPCTRL, MCP2515_BFPCTRL_RXnBF_MODE_BITS, SET_RXnBF_DEFAULT); // Set as interrupts
+    mcp2515_cmd_write_bit(MCP2515_BFPCTRL, MCP2515_BFPCTRL_RXnBF_ENABLE_BITS, SET_RXnBF_DEFAULT);   // Enable the pins
+    
+    /* 8. Configure the MCP2515's interrupts CANINTE
+     * I don't plan on using the ~INT pin for now, so I want all the interrupts disabled.
+     * This is the case by default, so nothing to do here!
+     */
+    
+    /* 9. Save all this in internally-linked global variables to remember current config
+     * I'll do this later...
+     */
+    
+    // 10. Request the op mode to be Normal
+    mcp2515_normal_mode();
+    
+    // Wait just a little...
+    __delay_ms(100u);
     
 }
 
@@ -83,6 +133,50 @@ void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump){
 
 // ****************************************************************************
 // <editor-fold defaultstate="collapsed" desc="MCP2515 COMMAND FUNCTIONS">
+
+/**
+ * <h3>Function: mcp2515_current_opmode</h3>
+ * ------------------------------------------------
+ * <p>Returns the current operation mode of the MCP2515.</p>
+ * 
+ * @param none
+ * 
+ * @return opmode_t current_opmode -- The current operation mode
+ */
+opmode_t mcp2515_current_opmode(void){
+    uint8_t opmode = 0x00;
+    mcp2515_cmd_read(MCP2515_CANSTAT, &opmode);
+    opmode_t current_opmode = (opmode_t) (opmode & MCP2515_CANSTAT_OPMODE_BITS);
+    
+    return current_opmode;
+}
+
+/**
+ * <h3>Function: mcp2515_config_mode</h3>
+ * ------------------------------------------------
+ * <p>Requests to place the MCP2515 in configuration mode.</p>
+ * 
+ * @param none
+ * 
+ * @return none
+ */
+void mcp2515_config_mode(void){
+    mcp2515_cmd_write_bit(MCP2515_CANCTRL, MCP2515_CANCTRL_REQOP_BITS, MCP2515_OPMODE_CONFIG);
+}
+
+/**
+ * <h3>Function: mcp2515_normal_mode</h3>
+ * ------------------------------------------------
+ * <p>Requests to place the MCP2515 in normal mode.</p>
+ * 
+ * @param none
+ * 
+ * @return none
+ */
+void mcp2515_normal_mode(void){
+    mcp2515_cmd_write_bit(MCP2515_CANCTRL, MCP2515_CANCTRL_REQOP_BITS, MCP2515_OPMODE_NORMAL);
+}
+
 /**
  * <h3>Function: mcp2515_cmd_reset</h3>
  * ------------------------------------------------
@@ -144,7 +238,7 @@ void mcp2515_cmd_read(uint8_t reg_address, uint8_t * buf){
     // Then send address
     SPI_Transfer_Byte_without_CS(reg_address, &receive_byte);
     // Then finally read in data at address
-    SPI_Transfer_Byte_without_CS(0x00u, &buf);
+    SPI_Transfer_Byte_without_CS(0x00u, buf);
     
     SPI_MASTER_CS_HIGH;
     
@@ -338,5 +432,17 @@ void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t * tx_buf){      // Programmer 
     SPI_MASTER_CS_HIGH;
     
 }
-    
+
+/**
+ * <h3>Function: mcp2515_cmd_rts</h3>
+ * ------------------------------------------------
+ * <p>Sends a Request-to-Send command which initiates a transmission.</p>
+ * 
+ * @param txbuf_t txb -- This specifies which TX buffer to send --> TXB0, TXB1, or TXB2
+ * 
+ * @return none
+ */
+void mcp2515_cmd_rts(txbuf_t txb){
+    SPI_Transfer_Byte(MCP2515_SPI_RTS(txb), &receive_byte);
+}
 // </editor-fold>

@@ -73,6 +73,12 @@
 #define EXEC_SUCCESS    1
 #endif
 
+#ifndef _XTAL_FREQ
+// 40MHz --> Defining this will allow use of __delay_ms()
+#define _XTAL_FREQ  40000000u
+#endif
+
+
 
 // <editor-fold defaultstate="collapsed" desc="CANCTRL & CANSTAT">
 /* Control Register - CANCTRL - Register 10-1 in Datasheet
@@ -107,6 +113,7 @@
  * 
  */
 #define MCP2515_CANCTRL                     0x0F    // could also do 0x1F, 0x2F, ..., 0xEF
+#define MCP2515_CANCTRL_REQOP_BITS          0xE0
 #define MCP2515_CANCTRl_REQOP_NORMAL        0x00
 #define MCP2515_CANCTRl_REQOP_SLEEP         0x20
 #define MCP2515_CANCTRl_REQOP_LOOPBACK      0x40
@@ -153,6 +160,13 @@
  */
 #define MCP2515_CANSTAT                 0x0E    // could also do 0x1E, 0x2E, ..., 0xEE
 #define MCP2515_CANSTAT_OPMODE_BITS     0xE0
+typedef enum {
+    MCP2515_OPMODE_NORMAL = 0u,
+    MCP2515_OPMODE_SLEEP = 1u,
+    MCP2515_OPMODE_LOOPBACK = 2u,
+    MCP2515_OPMODE_LISTEN = 3u,
+    MCP2515_OPMODE_CONFIG = 4u,
+} opmode_t;
 #define MCP2515_CANSTAT_ICOD_BITS       0x0E    // ICOD = "Interrupt CODe"
 // </editor-fold>
 
@@ -475,16 +489,20 @@
  *      (R/W) - B0BFM : ""
  * 
  */
-#define MCP2515_BFPCTRL             0x0D
+#define MCP2515_BFPCTRL                     0x0D
 // not yet planning on using ~RXnBF pins as outputs, so I'll leave def's and macros out for that for now...
-#define MCP2515_BFPCTRL_B1BFE       0x08
-#define MCP2515_BFPCTRL_B0BFE       0x04
-#define ENABLE_RX1BF_PIN            0x08
-#define ENABLE_RX0BF_PIN            0x04
-#define MCP2515_BFPCTRL_B1BFM       0x02
-#define MCP2515_BFPCTRL_B0BFM       0X01
-#define SET_RX1BF_AS_INTERRUPT      0x02
-#define SET_RX0BF_AS_INTERRUPT      0x01
+#define MCP2515_BFPCTRL_RXnBF_ENABLE_BITS   0x0C
+#define MCP2515_BFPCTRL_RXnBF_MODE_BITS     0x03
+#define MCP2515_BFPCTRL_B1BFE               0x08
+#define MCP2515_BFPCTRL_B0BFE               0x04
+#define ENABLE_RX1BF_PIN                    0x08
+#define ENABLE_RX0BF_PIN                    0x04
+#define MCP2515_BFPCTRL_B1BFM               0x02
+#define MCP2515_BFPCTRL_B0BFM               0X01
+#define SET_RX1BF_AS_INTERRUPT              0x02
+#define SET_RX0BF_AS_INTERRUPT              0x01
+#define SET_RXnBF_DEFAULT                   0x0F
+
 
 /* As stated earlier, RXB0 content goes from 0x61 to 0x6D, and RXB1 content goes from 0x71 to 0x7D
  * Refer to the comments I made earlier laying out the registers for TXBnSIDH, ..., TXBnD7; RXBn's
@@ -901,14 +919,14 @@
  * 
  */
 
-#define MCP2515_SPI_RESET           0xC0
-#define MCP2515_SPI_READ            0x03
-#define MCP2515_SPI_READ_RXBUF(X)   (0x90 | ((X) << 1))   // Use with below enum spi_read_rxb_inst_t
+#define MCP2515_SPI_RESET               0xC0
+#define MCP2515_SPI_READ                0x03
+#define MCP2515_SPI_READ_RXBUF(X)       (0x90 | ((X) << 1))   // Use with below enum spi_read_rxb_inst_t
 typedef enum { SPI_READ_RXB0_ID, SPI_READ_RXB0_D, SPI_READ_RXB1_ID, SPI_READ_RXB1_D } spi_read_rxb_inst_t;
-#define MCP2515_SPI_WRITE           0x02
-#define MCP2515_SPI_LOAD_TXBUF(X)   (0x40 | X)  // Use with below enum spi_load_txb_inst_t
+#define MCP2515_SPI_WRITE               0x02
+#define MCP2515_SPI_LOAD_TXBUF(X)       (0x40 | (X))  // Use with below enum spi_load_txb_inst_t
 typedef enum { SPI_LOAD_TXB0_ID, SPI_LOAD_TXB0_D, SPI_LOAD_TXB1_ID, SPI_LOAD_TXB1_D, SPI_LOAD_TXB2_ID, SPI_LOAD_TXB2_D } spi_load_txb_inst_t;
-//ignoring RTS for now
+#define MCP2515_SPI_RTS(X)              (0x8 | (X)) // Use with txbuf_t enum
 #define MCP2515_SPI_READ_STATUS         0xA0
 #define MCP2515_SPI_READ_STATUS_RX0IF   (1u << 0u)
 #define MCP2515_SPI_READ_STATUS_RX1IF   (1u << 1u)
@@ -933,7 +951,7 @@ typedef enum { SPI_LOAD_TXB0_ID, SPI_LOAD_TXB0_D, SPI_LOAD_TXB1_ID, SPI_LOAD_TXB
 
 
 // Enumerations
-typedef enum { TXB0, TXB1, TXB2 } txbuf_t;
+typedef enum { TXB0 = 1u, TXB1 = 2u, TXB2 = 4u } txbuf_t;
 typedef enum { RXB0, RXB1 } rxbuf_t;
 typedef enum { RX_MASK0, RX_MASK1 } rx_mask_t;
 typedef enum { RX_FILT0, RX_FILT1, RX_FILT2, RX_FILT3, RX_FILT4, RX_FILT5 } rx_filt_t;
@@ -996,6 +1014,9 @@ typedef struct {
 void can_init_default(void);
 void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump);
 
+opmode_t mcp2515_current_opmode(void);
+void mcp2515_config_mode(void);
+void mcp2515_normal_mode(void);
 void mcp2515_cmd_reset(void);
 uint8_t mcp2515_cmd_read_status(void);
 uint8_t mcp2515_cmd_rx_status(void);
@@ -1006,6 +1027,7 @@ void mcp2515_cmd_write_sequential(uint8_t start_reg_addr, uint8_t * txbuf, uint8
 void mcp2515_cmd_write_bit(uint8_t reg_address, uint8_t mask, uint8_t val);
 void mcp2515_cmd_read_rx_buf(rxbuf_t rxb, uint8_t * rx_buf);    // Programmer needs to have the write size buffer ready!! MCP2515_MSG_BUFF_SIZE_BYTES
 void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t * tx_buf);      // Programmer needs to have the write size buffer ready!! MCP2515_MSG_BUFF_SIZE_BYTES
+void mcp2515_cmd_rts(txbuf_t txb);
 
 /* Use the below functions at border between PIC and MCP2515. As in to say...
  *      - For a transmit, you may construct the message first using the structs

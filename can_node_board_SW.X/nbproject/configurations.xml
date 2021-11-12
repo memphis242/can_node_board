@@ -32,6 +32,7 @@
       </logicalFolder>
       <itemPath>main.c</itemPath>
       <itemPath>spi_test.c</itemPath>
+      <itemPath>mcp2515_test.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -40,8 +41,7 @@
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
-    <Elem>inc</Elem>
-    <Elem>src</Elem>
+    <Elem>.</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

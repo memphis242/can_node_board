@@ -4494,6 +4494,7 @@ void external_interrupts_init_default(void){
     (INTCON2 &= ~(0x70));
     ADCON1bits.PCFG = 0xF; (TRISB |= 0x07);
 
+
     (INTCONbits.INT0IE = 1u);
     (INTCON3bits.INT1IE = 1u);
     (INTCON3bits.INT2IE = 1u);
@@ -4504,7 +4505,7 @@ void external_interrupts_init_default(void){
     (INTCON3bits.INT2IF = 0u);
 
 }
-# 57 "src/external_interrupts.c"
+# 58 "src/external_interrupts.c"
 void external_interrupts_init(uint8_t which_pins, external_interrupt_edge_t trigger_edge){
     if((which_pins & (1u << 0))) {
         INTCON2bits.INTEDG0 = trigger_edge;
