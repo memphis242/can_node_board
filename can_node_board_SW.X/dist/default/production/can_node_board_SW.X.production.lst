@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.31 build 20201012212115 
-                                                                                               Thu Nov 11 03:20:56 2021
+                                                                                               Thu Nov 11 17:04:34 2021
 
 Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9 
      1                           	processor	18F4620
@@ -361,12 +361,12 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
    347                           
    348                           ; 14 bytes @ 0xA
    349  000047                     	ds	14
-   350  000055                     _main$696:
+   350  000055                     _main$701:
    351                           	callstack 0
    352                           
    353                           ; 2 bytes @ 0x18
    354  000055                     	ds	2
-   355  000057                     _main$697:
+   355  000057                     _main$702:
    356                           	callstack 0
    357                           
    358                           ; 2 bytes @ 0x1A
@@ -376,17 +376,17 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
    362                           
    363                           ; 1 bytes @ 0x1C
    364  000059                     	ds	1
-   365  00005A                     main@i_695:
+   365  00005A                     main@i_700:
    366                           	callstack 0
    367                           
    368                           ; 1 bytes @ 0x1D
    369  00005A                     	ds	1
-   370  00005B                     main@i_698:
+   370  00005B                     main@i_703:
    371                           	callstack 0
    372                           
    373                           ; 1 bytes @ 0x1E
    374  00005B                     	ds	1
-   375  00005C                     main@i_699:
+   375  00005C                     main@i_704:
    376                           	callstack 0
    377                           
    378                           ; 1 bytes @ 0x1F
@@ -476,7 +476,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
       +                          msg[i]);
    457  001038  0E00               	movlw	0
    458  00103A  6E59               	movwf	main@i^0,c
-   459  00103C                     l1595:
+   459  00103C                     l1604:
    460  00103C  5059               	movf	main@i^0,w,c
    461  00103E  0F47               	addlw	low main@init_success_msg
    462  001040  6ED9               	movwf	fsr2l,c
@@ -486,7 +486,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
    466  00104A  2A59               	incf	main@i^0,f,c
    467  00104C  0E0C               	movlw	12
    468  00104E  6459               	cpfsgt	main@i^0,c
-   469  001050  D7F5               	goto	l1595
+   469  001050  D7F5               	goto	l1604
    470                           
    471                           ;spi_test.c: 300:     _delay((unsigned long)((2000)*(40000000U/4000.0)));
    472  001052  0E66               	movlw	102
@@ -505,17 +505,17 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
    485                           
    486                           ;spi_test.c: 301:     LCD_clear_display();
    487  00106A  EC4F  F00A         	call	_LCD_clear_display	;wreg free
-   488  00106E                     l1605:
+   488  00106E                     l1614:
    489                           
    490                           ;spi_test.c: 306:         if(spi_rx_flag) {
    491  00106E  5069               	movf	_spi_rx_flag^0,w,c
    492  001070  B4D8               	btfsc	status,2,c
-   493  001072  D7FD               	goto	l1605
+   493  001072  D7FD               	goto	l1614
    494                           
    495                           ;spi_test.c: 338:             if(spi_rx_invalid_flag) {
    496  001074  506A               	movf	_spi_rx_invalid_flag^0,w,c
    497  001076  B4D8               	btfsc	status,2,c
-   498  001078  D01D               	goto	l347
+   498  001078  D01D               	goto	l356
    499                           
    500                           ;spi_test.c: 340:                 LCD_clear_display();
    501  00107A  EC4F  F00A         	call	_LCD_clear_display	;wreg free
@@ -528,11 +528,11 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
    508                           
    509                           ;spi_test.c: 344:                 for(uint8_t i=0; i<12; i++){
    510  001088  0E00               	movlw	0
-   511  00108A  6E5A               	movwf	main@i_695^0,c
-   512  00108C                     l1617:
+   511  00108A  6E5A               	movwf	main@i_700^0,c
+   512  00108C                     l1626:
    513                           
    514                           ;spi_test.c: 345:                     LCD_write_data_byte_4bit(spi_rx_invalid_msg[i]);
-   515  00108C  505A               	movf	main@i_695^0,w,c
+   515  00108C  505A               	movf	main@i_700^0,w,c
    516  00108E  0F01               	addlw	low _spi_rx_invalid_msg
    517  001090  6E45               	movwf	??_main^0,c
    518  001092  C045  FFF6         	movff	??_main,tblptrl
@@ -549,10 +549,10 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
    529  00109E  EC98  F009         	call	_LCD_write_data_byte_4bit
    530                           
    531                           ;spi_test.c: 346:                 }
-   532  0010A2  2A5A               	incf	main@i_695^0,f,c
+   532  0010A2  2A5A               	incf	main@i_700^0,f,c
    533  0010A4  0E0B               	movlw	11
-   534  0010A6  645A               	cpfsgt	main@i_695^0,c
-   535  0010A8  D7F1               	goto	l1617
+   534  0010A6  645A               	cpfsgt	main@i_700^0,c
+   535  0010A8  D7F1               	goto	l1626
    536                           
    537                           ;spi_test.c: 348:                 spi_rx_flag = 0x00;
    538  0010AA  0E00               	movlw	0
@@ -563,40 +563,40 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
    543  0010B0  6E6A               	movwf	_spi_rx_invalid_flag^0,c
    544                           
    545                           ;spi_test.c: 351:             } else {
-   546  0010B2  D7DD               	goto	l1605
-   547  0010B4                     l347:
+   546  0010B2  D7DD               	goto	l1614
+   547  0010B4                     l356:
    548                           
    549                           ;spi_test.c: 354:                 button1_state = (spi_rx_msg_buf & (1u << 0u)) ? '1' : 
       +                          '0';
    550  0010B4  B06B               	btfsc	_spi_rx_msg_buf^0,0,c
-   551  0010B6  D004               	goto	l1627
+   551  0010B6  D004               	goto	l1636
    552  0010B8  0E00               	movlw	0
-   553  0010BA  6E56               	movwf	(_main$696+1)^0,c
+   553  0010BA  6E56               	movwf	(_main$701+1)^0,c
    554  0010BC  0E30               	movlw	48
    555  0010BE  D003               	goto	L1
-   556  0010C0                     l1627:
+   556  0010C0                     l1636:
    557  0010C0  0E00               	movlw	0
-   558  0010C2  6E56               	movwf	(_main$696+1)^0,c
+   558  0010C2  6E56               	movwf	(_main$701+1)^0,c
    559  0010C4  0E31               	movlw	49
    560  0010C6                     L1:
-   561  0010C6  6E55               	movwf	_main$696^0,c
-   562  0010C8  C055  F068         	movff	_main$696,_button1_state
+   561  0010C6  6E55               	movwf	_main$701^0,c
+   562  0010C8  C055  F068         	movff	_main$701,_button1_state
    563                           
    564                           ;spi_test.c: 355:                 button2_state = (spi_rx_msg_buf & (1u << 1u)) ? '1' : 
       +                          '0';
    565  0010CC  B26B               	btfsc	_spi_rx_msg_buf^0,1,c
-   566  0010CE  D004               	goto	l1635
+   566  0010CE  D004               	goto	l1644
    567  0010D0  0E00               	movlw	0
-   568  0010D2  6E58               	movwf	(_main$697+1)^0,c
+   568  0010D2  6E58               	movwf	(_main$702+1)^0,c
    569  0010D4  0E30               	movlw	48
    570  0010D6  D003               	goto	L2
-   571  0010D8                     l1635:
+   571  0010D8                     l1644:
    572  0010D8  0E00               	movlw	0
-   573  0010DA  6E58               	movwf	(_main$697+1)^0,c
+   573  0010DA  6E58               	movwf	(_main$702+1)^0,c
    574  0010DC  0E31               	movlw	49
    575  0010DE                     L2:
-   576  0010DE  6E57               	movwf	_main$697^0,c
-   577  0010E0  C057  F067         	movff	_main$697,_button2_state
+   576  0010DE  6E57               	movwf	_main$702^0,c
+   577  0010E0  C057  F067         	movff	_main$702,_button2_state
    578                           
    579                           ;spi_test.c: 356:                 button1_msg[4] = button1_state;
    580  0010E4  C068  F038         	movff	_button1_state,_button1_msg+4
@@ -612,11 +612,11 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
    590                           
    591                           ;spi_test.c: 362:                 for(uint8_t i=0; i<5; i++){
    592  0010F6  0E00               	movlw	0
-   593  0010F8  6E5B               	movwf	main@i_698^0,c
-   594  0010FA                     l1651:
+   593  0010F8  6E5B               	movwf	main@i_703^0,c
+   594  0010FA                     l1660:
    595                           
    596                           ;spi_test.c: 363:                     LCD_write_data_byte_4bit(button1_msg[i]);
-   597  0010FA  505B               	movf	main@i_698^0,w,c
+   597  0010FA  505B               	movf	main@i_703^0,w,c
    598  0010FC  0F34               	addlw	low _button1_msg
    599  0010FE  6ED9               	movwf	fsr2l,c
    600  001100  6ADA               	clrf	fsr2h,c
@@ -624,10 +624,10 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
    602  001104  EC98  F009         	call	_LCD_write_data_byte_4bit
    603                           
    604                           ;spi_test.c: 364:                 }
-   605  001108  2A5B               	incf	main@i_698^0,f,c
+   605  001108  2A5B               	incf	main@i_703^0,f,c
    606  00110A  0E04               	movlw	4
-   607  00110C  645B               	cpfsgt	main@i_698^0,c
-   608  00110E  D7F5               	goto	l1651
+   607  00110C  645B               	cpfsgt	main@i_703^0,c
+   608  00110E  D7F5               	goto	l1660
    609                           
    610                           ;spi_test.c: 366:                 LCD_set_cursor_position(2,1);
    611  001110  0E01               	movlw	1
@@ -637,11 +637,11 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
    615                           
    616                           ;spi_test.c: 367:                 for(uint8_t i=0; i<5; i++){
    617  00111A  0E00               	movlw	0
-   618  00111C  6E5C               	movwf	main@i_699^0,c
-   619  00111E                     l1665:
+   618  00111C  6E5C               	movwf	main@i_704^0,c
+   619  00111E                     l1674:
    620                           
    621                           ;spi_test.c: 368:                     LCD_write_data_byte_4bit(button2_msg[i]);
-   622  00111E  505C               	movf	main@i_699^0,w,c
+   622  00111E  505C               	movf	main@i_704^0,w,c
    623  001120  0F2F               	addlw	low _button2_msg
    624  001122  6ED9               	movwf	fsr2l,c
    625  001124  6ADA               	clrf	fsr2h,c
@@ -649,15 +649,15 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
    627  001128  EC98  F009         	call	_LCD_write_data_byte_4bit
    628                           
    629                           ;spi_test.c: 369:                 }
-   630  00112C  2A5C               	incf	main@i_699^0,f,c
+   630  00112C  2A5C               	incf	main@i_704^0,f,c
    631  00112E  0E04               	movlw	4
-   632  001130  645C               	cpfsgt	main@i_699^0,c
-   633  001132  D7F5               	goto	l1665
+   632  001130  645C               	cpfsgt	main@i_704^0,c
+   633  001132  D7F5               	goto	l1674
    634                           
    635                           ;spi_test.c: 371:                 spi_rx_flag = 0x00;
    636  001134  0E00               	movlw	0
    637  001136  6E69               	movwf	_spi_rx_flag^0,c
-   638  001138  D79A               	goto	l1605
+   638  001138  D79A               	goto	l1614
    639  00113A                     __end_of_main:
    640                           	callstack 0
    641                           
@@ -898,35 +898,35 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
    861  0012D2  0012               	return	
    862  0012D4  0E20               	movlw	32
    863  0012D6  6442               	cpfsgt	LCD_set_cursor_position@pos_on_line^0,c
-   864  0012D8  D001               	goto	l1531
+   864  0012D8  D001               	goto	l1540
    865  0012DA  0012               	return	
-   866  0012DC                     l1531:
+   866  0012DC                     l1540:
    867                           
    868                           ;src/lcd_driver.c: 511:         if(line == 1u && pos_on_line < 16u){
    869  0012DC  0444               	decf	LCD_set_cursor_position@line^0,w,c
    870  0012DE  A4D8               	btfss	status,2,c
-   871  0012E0  D005               	goto	l1537
+   871  0012E0  D005               	goto	l1546
    872  0012E2  0E10               	movlw	16
    873  0012E4  6042               	cpfslt	LCD_set_cursor_position@pos_on_line^0,c
-   874  0012E6  D002               	goto	l1537
+   874  0012E6  D002               	goto	l1546
    875                           
    876                           ;src/lcd_driver.c: 512:             ddram_addr = 0x00u + pos_on_line - 1;
    877  0012E8  0442               	decf	LCD_set_cursor_position@pos_on_line^0,w,c
    878  0012EA  D012               	goto	L3
-   879  0012EC                     l1537:
+   879  0012EC                     l1546:
    880  0012EC  0E02               	movlw	2
    881  0012EE  1844               	xorwf	LCD_set_cursor_position@line^0,w,c
    882  0012F0  A4D8               	btfss	status,2,c
-   883  0012F2  D006               	goto	l1543
+   883  0012F2  D006               	goto	l1552
    884  0012F4  0E10               	movlw	16
    885  0012F6  6042               	cpfslt	LCD_set_cursor_position@pos_on_line^0,c
-   886  0012F8  D003               	goto	l1543
+   886  0012F8  D003               	goto	l1552
    887                           
    888                           ;src/lcd_driver.c: 515:             ddram_addr = 0x40u + pos_on_line - 1;
    889  0012FA  5042               	movf	LCD_set_cursor_position@pos_on_line^0,w,c
    890  0012FC  0F3F               	addlw	63
    891  0012FE  D008               	goto	L3
-   892  001300                     l1543:
+   892  001300                     l1552:
    893  001300  0444               	decf	LCD_set_cursor_position@line^0,w,c
    894  001302  A4D8               	btfss	status,2,c
    895  001304  0012               	return	
@@ -945,7 +945,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
    908                           ;src/lcd_driver.c: 520:         } else{
    909  001312  5074               	movf	_DISP_BIT_MODE^0,w,c
    910  001314  A4D8               	btfss	status,2,c
-   911  001316  D005               	goto	l1553
+   911  001316  D005               	goto	l1562
    912                           
    913                           ;src/lcd_driver.c: 526:         LCD_write_instr_byte_4bit(0x80u | ddram_addr);
    914  001318  5043               	movf	LCD_set_cursor_position@ddram_addr^0,w,c
@@ -953,14 +953,14 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
    916  00131C  ECBF  F009         	call	_LCD_write_instr_byte_4bit
    917                           
    918                           ;src/lcd_driver.c: 527:     } else{
-   919  001320  D004               	goto	l1555
-   920  001322                     l1553:
+   919  001320  D004               	goto	l1564
+   920  001322                     l1562:
    921                           
    922                           ;src/lcd_driver.c: 528:         LCD_write_instr_byte_8bit(0x80u | ddram_addr);
    923  001322  5043               	movf	LCD_set_cursor_position@ddram_addr^0,w,c
    924  001324  0980               	iorlw	128
    925  001326  EC3B  F00A         	call	_LCD_write_instr_byte_8bit
-   926  00132A                     l1555:
+   926  00132A                     l1564:
    927                           
    928                           ;src/lcd_driver.c: 531:     address_counter = ddram_addr;
    929  00132A  C043  F071         	movff	LCD_set_cursor_position@ddram_addr,_address_counter
@@ -1015,20 +1015,20 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
    973                           ;incstack = 0
    974  00149E  5074               	movf	_DISP_BIT_MODE^0,w,c
    975  0014A0  A4D8               	btfss	status,2,c
-   976  0014A2  D004               	goto	l1521
+   976  0014A2  D004               	goto	l1530
    977                           
    978                           ;src/lcd_driver.c: 429:         LCD_write_instr_byte_4bit(0x01u);
    979  0014A4  0E01               	movlw	1
    980  0014A6  ECBF  F009         	call	_LCD_write_instr_byte_4bit
    981                           
    982                           ;src/lcd_driver.c: 430:     } else{
-   983  0014AA  D003               	goto	l1523
-   984  0014AC                     l1521:
+   983  0014AA  D003               	goto	l1532
+   984  0014AC                     l1530:
    985                           
    986                           ;src/lcd_driver.c: 431:         LCD_write_instr_byte_8bit(0x01u);
    987  0014AC  0E01               	movlw	1
    988  0014AE  EC3B  F00A         	call	_LCD_write_instr_byte_8bit
-   989  0014B2                     l1523:
+   989  0014B2                     l1532:
    990                           
    991                           ;src/lcd_driver.c: 434:     _delay((unsigned long)((10)*(40000000u/4000.0)));
    992  0014B2  0E82               	movlw	130
@@ -1477,7 +1477,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
   1415                           ;src/lcd_driver.c: 46:     switch(CURRENT_DISP){
   1416                           
   1417                           ;incstack = 0
-  1418  001220  D040               	goto	l1407
+  1418  001220  D040               	goto	l1416
   1419  001222                     l66:
   1420                           
   1421                           ;src/lcd_driver.c: 49:             (LATDbits.LATD1 = 0u);
@@ -1615,7 +1615,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
   1552                           
   1553                           ;src/lcd_driver.c: 82:             break;
   1554  0012A0  0012               	return	
-  1555  0012A2                     l1407:
+  1555  0012A2                     l1416:
   1556  0012A2  5075               	movf	_CURRENT_DISP^0,w,c
   1557  0012A4  6E3E               	movwf	??_LCD_enable_toggle^0,c
   1558  0012A6  6A3F               	clrf	(??_LCD_enable_toggle+1)^0,c
@@ -1710,7 +1710,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
   1641                           ;spi_test.c: 142:     if(PIR1bits.SSPIF && PIE1bits.SSPIE) {
   1642  001444  B69E               	btfsc	158,3,c	;volatile
   1643  001446  A69D               	btfss	157,3,c	;volatile
-  1644  001448  D014               	goto	i2l336
+  1644  001448  D014               	goto	i2l345
   1645                           
   1646                           ;spi_test.c: 144:         transfer_complete_flag = 0x01;
   1647  00144A  0E01               	movlw	1
@@ -1728,7 +1728,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
   1659  00145A  0EC0               	movlw	192
   1660  00145C  163D               	andwf	??_isr^0,f,c
   1661  00145E  B4D8               	btfsc	status,2,c
-  1662  001460  D005               	goto	i2l1277
+  1662  001460  D005               	goto	i2l1286
   1663                           
   1664                           ;spi_test.c: 152:             SSPBUF = (0x40u | 0x2Au);
   1665  001462  0E6A               	movlw	106
@@ -1739,17 +1739,17 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og9
   1670  001468  6E6A               	movwf	_spi_rx_invalid_flag^0,c
   1671                           
   1672                           ;spi_test.c: 154:         } else {
-  1673  00146A  D002               	goto	i2l1279
-  1674  00146C                     i2l1277:
+  1673  00146A  D002               	goto	i2l1288
+  1674  00146C                     i2l1286:
   1675                           
   1676                           ;spi_test.c: 155:             SSPBUF = 0x3Bu;
   1677  00146C  0E3B               	movlw	59
   1678  00146E  6EC9               	movwf	201,c	;volatile
-  1679  001470                     i2l1279:
+  1679  001470                     i2l1288:
   1680                           
   1681                           ;spi_test.c: 160:         PIR1bits.SSPIF = 0;
   1682  001470  969E               	bcf	158,3,c	;volatile
-  1683  001472                     i2l336:
+  1683  001472                     i2l345:
   1684  001472  9276               	bcf	btemp,1,c	;clear compiler interrupt flag (level 2)
   1685  001474  0011               	retfie		f
   1686  001476                     __end_of_isr:
@@ -2278,11 +2278,11 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V2.31 build 20201012212115 
-Symbol Table                                                                                   Thu Nov 11 03:20:56 2021
+Symbol Table                                                                                   Thu Nov 11 17:04:34 2021
 
                                 l70 1282                                  l66 1222  
                                 l68 1242                                  l69 1262  
-            _transfer_complete_flag 006D                                 l347 10B4  
+            _transfer_complete_flag 006D                                 l356 10B4  
                                u331 1030                                 u507 11B6  
                                u427 105C                                 u517 11C8  
                                u437 1374                                 u607 1266  
@@ -2297,21 +2297,21 @@ Symbol Table                                                                    
                                u497 119E                                 u587 1250  
                                u597 125A                                 _isr 0008  
                                wreg 000FE8                  _current_entry_mode 003A  
-                              l1407 12A2                                l1521 14AC  
-                              l1523 14B2                                l1531 12DC  
-                              l1605 106E                                l1543 1300  
-                              l1553 1322                                l1537 12EC  
-                              l1617 108C                                l1555 132A  
-                              l1651 10FA                                l1635 10D8  
-                              l1627 10C0                                l1665 111E  
-                              l1595 103C                                ?_isr 003D  
+                              l1416 12A2                                l1530 14AC  
+                              l1532 14B2                                l1540 12DC  
+                              l1604 103C                                l1614 106E  
+                              l1552 1300                                l1562 1322  
+                              l1546 12EC                                l1626 108C  
+                              l1564 132A                                l1660 10FA  
+                              l1644 10D8                                l1636 10C0  
+                              l1674 111E                                ?_isr 003D  
                               _main 1010                                fsr2h 000FDA  
                               indf2 000FDF                                fsr1l 000FE1  
                               fsr2l 000FD9                                btemp 0076  
                               start 000E                        ___param_bank 000000  
                              ??_isr 003D             __end_of_LCD_Init_ECE376 1220  
                              ?_main 003D        LCD_write_uint32_number@F2549 005D  
-                             i2l336 1472                               _PORTC 000F82  
+                             i2l345 1472                               _PORTC 000F82  
                              _PORTD 000F83                               _TRISA 000F92  
                              _TRISC 000F94                               _TRISD 000F95  
  LCD_set_cursor_position@ddram_addr 0043                               main@i 0059  
@@ -2323,8 +2323,8 @@ Symbol Table                                                                    
        LCD_set_cursor_position@line 0044                     __initialization 1408  
                       __end_of_main 113A                              ??_main 0045  
        ??_LCD_write_instr_byte_4bit 0040         ??_LCD_write_instr_byte_8bit 0040  
-                     __activetblptr 000002                              i2l1277 146C  
-                            i2l1279 1470                              _SSPBUF 000FC9  
+                     __activetblptr 000002                              i2l1286 146C  
+                            i2l1288 1470                              _SSPBUF 000FC9  
                 _spi_rx_invalid_msg 1001                              clear_0 142E  
                   ?_LCD_Init_ECE376 003D    __end_of_LCD_write_data_byte_4bit 137E  
                       __pdataCOMRAM 0001                        __mediumconst 0000  
@@ -2367,13 +2367,13 @@ Symbol Table                                                                    
                      _DISP_BIT_MODE 0074           __end_of_LCD_enable_toggle 12CC  
                           _PIR1bits 000F9E          __size_of_LCD_clear_display 0024  
                          main@F2571 0021                           _spi_actor 006F  
-                         main@i_695 005A                           main@i_698 005B  
-                         main@i_699 005C      LCD_write_instr_byte_4bit@instr 0041  
+                         main@i_700 005A                           main@i_703 005B  
+                         main@i_704 005C      LCD_write_instr_byte_4bit@instr 0041  
                          copy_data0 141C      LCD_write_instr_byte_8bit@instr 0041  
                           __Hrparam 0000                            __Lrparam 0000  
           ?_LCD_set_cursor_position 0042                         _button1_msg 0034  
                        _button2_msg 002F             ?_SPI_Init_Slave_Default 003D  
-                          _main$696 0055                            _main$697 0057  
+                          _main$701 0055                            _main$702 0057  
                      __size_of_main 012A          __size_of_LCD_enable_toggle 00AC  
                           int$flags 0076  __size_of_LCD_write_instr_byte_4bit 004E  
 __size_of_LCD_write_instr_byte_8bit 0028          ?_LCD_write_instr_byte_4bit 003D  

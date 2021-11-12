@@ -180,7 +180,7 @@ SPI_SLAVE 1
 [v _SSPSTAT SSPSTAT `VEuc  1 e 1 @4039 ]
 "5029
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @4041 ]
-[s S607 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S612 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -190,7 +190,7 @@ SPI_SLAVE 1
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
 "6406
-[s S616 . 1 `uc 1 . 1 0 :1:0 
+[s S621 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 INT0F 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -199,12 +199,12 @@ SPI_SLAVE 1
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S625 . 1 `uc 1 . 1 0 :6:0 
+[s S630 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S629 . 1 `S607 1 . 1 0 `S616 1 . 1 0 `S625 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES629  1 e 1 @4082 ]
+[u S634 . 1 `S612 1 . 1 0 `S621 1 . 1 0 `S630 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES634  1 e 1 @4082 ]
 "108 C:\git\can_node_board\can_node_board_SW.X\spi_test.c
 [v _spi_rx_msg_buf spi_rx_msg_buf `uc  1 s 1 spi_rx_msg_buf ]
 "109
@@ -243,11 +243,11 @@ SPI_SLAVE 1
 [v _main main `(v  1 e 1 0 ]
 {
 "367
-[v main@i_699 i `uc  1 a 1 31 ]
+[v main@i_704 i `uc  1 a 1 31 ]
 "362
-[v main@i_698 i `uc  1 a 1 30 ]
+[v main@i_703 i `uc  1 a 1 30 ]
 "344
-[v main@i_695 i `uc  1 a 1 29 ]
+[v main@i_700 i `uc  1 a 1 29 ]
 "297
 [v main@i i `uc  1 a 1 28 ]
 "296

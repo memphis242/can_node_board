@@ -68,6 +68,11 @@
 
 
 // <editor-fold defaultstate="collapsed" desc="DEFINITIONS - Registers and Macros">
+#ifndef EXEC_FAIL
+#define EXEC_FAIL       0
+#define EXEC_SUCCESS    1
+#endif
+
 
 // <editor-fold defaultstate="collapsed" desc="CANCTRL & CANSTAT">
 /* Control Register - CANCTRL - Register 10-1 in Datasheet

@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files\Microchip\xc8\v2.31\pic\dat\en_msgs.txt -cn \
   -h+dist/default/production\can_node_board_SW.X.production.sym \
   --cmf=dist/default/production\can_node_board_SW.X.production.cmf -z \
-  -Q18F4620 -oC:\Users\almos\AppData\Local\Temp\sjhk.2 \
+  -Q18F4620 -oC:\Users\almos\AppData\Local\Temp\s7fs.2 \
   --defsym=__MPLAB_BUILD=1 \
   -Mdist/default/production/can_node_board_SW.X.production.map -E1 \
   -ver=XC8 Compiler --acfsm=1493 -ASTACK=080h-0F7Fh -pstack=STACK \
@@ -26,7 +26,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\almos\AppData\Local\Temp\sjhk.o \
+  C:\Users\almos\AppData\Local\Temp\s7fs.o \
   dist/default/production\can_node_board_SW.X.production.o 
 
 Object code version is 3.11
@@ -36,7 +36,7 @@ Machine type is 18F4620
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\almos\AppData\Local\Temp\sjhk.o
+C:\Users\almos\AppData\Local\Temp\s7fs.o
                 idloc                            200000   200000        8        0       5
                 config                           300000   300000        E        0       4
                 init                                  E        E        4        4       0
@@ -447,8 +447,8 @@ _current_func_set                   dataCOMRAM   000039
 _init_complete                      bssCOMRAM    000073
 _isr                                intcode      000008
 _main                               text0        001010
-_main$696                           cstackCOMRAM 000055
-_main$697                           cstackCOMRAM 000057
+_main$701                           cstackCOMRAM 000055
+_main$702                           cstackCOMRAM 000057
 _manual_transfer                    bssCOMRAM    00006C
 _receive_byte                       bssCOMRAM    000070
 _spi_actor                          bssCOMRAM    00006F
@@ -467,9 +467,9 @@ intlevel2                           text         000000
 intlevel3                           text         000000
 main@F2571                          dataCOMRAM   000021
 main@i                              cstackCOMRAM 000059
-main@i_695                          cstackCOMRAM 00005A
-main@i_698                          cstackCOMRAM 00005B
-main@i_699                          cstackCOMRAM 00005C
+main@i_700                          cstackCOMRAM 00005A
+main@i_703                          cstackCOMRAM 00005B
+main@i_704                          cstackCOMRAM 00005C
 main@init_success_msg               cstackCOMRAM 000047
 stackhi                             (abs)        000F7F
 stacklo                             (abs)        000080

@@ -50,4 +50,5 @@ void can_spi_command(uint8_t cmd){
 
 uint8_t can_spi_query(uint8_t query){
     
+    return EXEC_SUCCESS;
 }

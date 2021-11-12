@@ -50,6 +50,7 @@ __Hnvrram 0 0 COMRAM 1
 __Lnvrram 0 0 COMRAM 1
 _spi_rx_invalid_flag 6A 0 COMRAM 1
 int$flags 76 0 COMRAM 1
+main@i_700 5A 0 COMRAM 1
 main@init_success_msg 47 0 COMRAM 1
 _PIE1bits F9D 0 ABS 0
 __Heeprom_data 0 0 EEDATA 0
@@ -86,6 +87,8 @@ __pintcode 8 0 CODE 0
 __end_of_spi_rx_invalid_msg 100E 0 SMALLCONST 0
 __Habs1 0 0 ABS 0
 __Labs1 0 0 ABS 0
+main@i_703 5B 0 COMRAM 1
+main@i_704 5C 0 COMRAM 1
 __HnvFARRAM 0 0 FARRAM 0
 __LnvFARRAM 0 0 FARRAM 0
 _current_disp_ctrl 3C 0 COMRAM 1
@@ -94,7 +97,6 @@ __size_of_LCD_write_data_byte_4bit 0 0 ABS 0
 __Hdata 0 0 ABS 0
 __Ldata 0 0 ABS 0
 _LCD_clear_display 149E 0 CODE 0
-main@i_695 5A 0 COMRAM 1
 stackhi F7F 0 ABS 0
 __Htemp 77 0 COMRAM 1
 __Ltemp 76 0 COMRAM 1
@@ -110,9 +112,7 @@ __end_of_main 113A 0 CODE 0
 __Lrbss 0 0 COMRAM 1
 __Htext 0 0 ABS 0
 __Ltext 0 0 ABS 0
-main@i_698 5B 0 COMRAM 1
 end_of_initialization 1434 0 CODE 0
-main@i_699 5C 0 COMRAM 1
 _LCD_Init_ECE376 113A 0 CODE 0
 _spi_rx_msg_buf 6B 0 COMRAM 1
 __size_of_LCD_write_instr_byte_8bit 0 0 ABS 0
@@ -200,8 +200,10 @@ __Lidloc 0 0 IDLOC 5
 __Hstack 0 0 STACK 2
 __Lstack 0 0 STACK 2
 int_func 1442 0 CODE 0
+_main$701 55 0 COMRAM 1
 __Hparam 0 0 COMRAM 1
 __Lparam 0 0 COMRAM 1
+_main$702 57 0 COMRAM 1
 __Hspace_0 14E2 0 ABS 0
 __HcstackCOMRAM 0 0 ABS 0
 __Lspace_0 0 0 ABS 0
@@ -230,8 +232,6 @@ __Hconst 0 0 CONST 0
 __Lconst 0 0 CONST 0
 __Hspace_4 60000E 0 ABS 0
 __Lspace_4 0 0 ABS 0
-_main$696 55 0 COMRAM 1
-_main$697 57 0 COMRAM 1
 _transfer_complete_flag 6D 0 COMRAM 1
 _DISP_BIT_MODE 74 0 COMRAM 1
 LCD_write_data_byte_4bit@data 41 0 COMRAM 1
@@ -293,37 +293,37 @@ text0 1010 14E1 CODE 1010 0
 %locals
 dist/default/production\can_node_board_SW.X.production.o
 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
-C:\Users\almos\AppData\Local\Temp\sjhk.s
-1973 1408 0 CODE 0
-1975 1408 0 CODE 0
-1978 1408 0 CODE 0
-2071 1408 0 CODE 0
-2072 140A 0 CODE 0
-2073 140C 0 CODE 0
-2074 140E 0 CODE 0
-2075 1410 0 CODE 0
-2076 1412 0 CODE 0
-2077 1414 0 CODE 0
-2078 1418 0 CODE 0
-2079 141C 0 CODE 0
-2080 141C 0 CODE 0
-2081 141E 0 CODE 0
-2082 1422 0 CODE 0
-2083 1424 0 CODE 0
-2084 1426 0 CODE 0
-2088 1428 0 CODE 0
-2089 142C 0 CODE 0
-2090 142E 0 CODE 0
-2091 142E 0 CODE 0
-2092 1430 0 CODE 0
-2093 1432 0 CODE 0
-2099 1434 0 CODE 0
-2101 1434 0 CODE 0
-2102 1436 0 CODE 0
-2104 1438 0 CODE 0
-2105 143A 0 CODE 0
-2106 143C 0 CODE 0
-2107 143E 0 CODE 0
+C:\Users\almos\AppData\Local\Temp\s7fs.s
+2247 1408 0 CODE 0
+2249 1408 0 CODE 0
+2252 1408 0 CODE 0
+2345 1408 0 CODE 0
+2346 140A 0 CODE 0
+2347 140C 0 CODE 0
+2348 140E 0 CODE 0
+2349 1410 0 CODE 0
+2350 1412 0 CODE 0
+2351 1414 0 CODE 0
+2352 1418 0 CODE 0
+2353 141C 0 CODE 0
+2354 141C 0 CODE 0
+2355 141E 0 CODE 0
+2356 1422 0 CODE 0
+2357 1424 0 CODE 0
+2358 1426 0 CODE 0
+2362 1428 0 CODE 0
+2363 142C 0 CODE 0
+2364 142E 0 CODE 0
+2365 142E 0 CODE 0
+2366 1430 0 CODE 0
+2367 1432 0 CODE 0
+2373 1434 0 CODE 0
+2375 1434 0 CODE 0
+2376 1436 0 CODE 0
+2378 1438 0 CODE 0
+2379 143A 0 CODE 0
+2380 143C 0 CODE 0
+2381 143E 0 CODE 0
 spi_test.c
 199 1010 0 CODE 0
 288 1010 0 CODE 0
@@ -491,8 +491,8 @@ src/lcd_driver.c
 81 1298 0 CODE 0
 82 12A0 0 CODE 0
 84 12A2 0 CODE 0
-C:\Users\almos\AppData\Local\Temp\sjhk.s
-4312 8 0 CODE 0
+C:\Users\almos\AppData\Local\Temp\s7fs.s
+4586 8 0 CODE 0
 spi_test.c
 134 8 0 CODE 0
 spi_test.c
