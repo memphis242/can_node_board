@@ -386,7 +386,7 @@ void mcp2515_cmd_read_rx_buf(rxbuf_t rxb, uint8_t * rx_buf){
     
     // First send READ_RXBUF command with SPI_READ_RXBx_ID to indicate we are reading
     // the full buffer
-    SPI_Transfer_Byte_without_CS(MCP2515_SPI_READ_RXBUF(rxb ? SPI_READ_RXB1_ID : SPI_READ_RXB0_ID), &receive_byte);
+    SPI_Transfer_Byte_without_CS((uint8_t) MCP2515_SPI_READ_RXBUF(rxb ? SPI_READ_RXB1_ID : SPI_READ_RXB0_ID), &receive_byte);
     // Then read in bytes!
     for(uint8_t i=0; i<MCP2515_MSG_BUFF_SIZE_BYTES; i++) SPI_Transfer_Byte_without_CS(0x00u, &rx_buf[i]);
     
@@ -452,6 +452,7 @@ void mcp2515_cmd_rts(txbuf_t txb){
 }
 // </editor-fold>
 
+// ****************************************************************************
 // <editor-fold defaultstate="collapsed" desc="INTERMEDIATE LAYER">
 
 /* These functions serves as the intermediary between the final MCP2515 command, which
@@ -495,14 +496,14 @@ void can_parse_msg_std(can_msg * msg, uint8_t * mcp2515_rx_buf){
 void can_compose_msg_ext(can_msg * msg, uint8_t * mcp2515_tx_buf){
     
     // Warning: Some yellow-belt bit Kung-Fu up ahead
-    mcp2515_tx_buf[0] = (msg->arb_field.sid & 0x07F8u) >> 3u;      // SID10:SID3
-    mcp2515_tx_buf[1] = ((msg->arb_field.sid & 0x0007u) << 5u) |   // SID2:SID0
-                        ((msg->arb_field.exide) << 3u)         |   // EXIDE
-                        ((msg->arb_field.eid & 0x30000) >> 16u);   // EID17:EID16
-    mcp2515_tx_buf[2] = (msg->arb_field.eid & 0x0FF00) >> 8u;      // EID15:EID8
-    mcp2515_tx_buf[3] = msg->arb_field.eid & 0x000FF;              // EID7:EID0
-    mcp2515_tx_buf[4] = (msg->arb_field.rtr << 6u)    |           // RTR
-                        (msg->ctrl_field.dlc);                     // DLC
+    mcp2515_tx_buf[0] = (uint8_t) ( (msg->arb_field.sid & 0x07F8u) >> 3u );      // SID10:SID3
+    mcp2515_tx_buf[1] = (uint8_t) ( ((uint32_t)(msg->arb_field.sid & 0x0007u) << 5u) |   // SID2:SID0
+                        ((uint32_t)(msg->arb_field.exide) << 3u)         |   // EXIDE
+                        ((msg->arb_field.eid & 0x30000) >> 16u) );   // EID17:EID16
+    mcp2515_tx_buf[2] = (uint8_t) ( (msg->arb_field.eid & 0x0FF00) >> 8u );      // EID15:EID8
+    mcp2515_tx_buf[3] = (uint8_t) (msg->arb_field.eid & 0x000FF);              // EID7:EID0
+    mcp2515_tx_buf[4] = (uint8_t) ( (msg->arb_field.rtr << 6u)    |           // RTR
+                        (msg->ctrl_field.dlc) );                     // DLC
     mcp2515_tx_buf[5] = msg->data_field.data0;
     mcp2515_tx_buf[6] = msg->data_field.data1;
     mcp2515_tx_buf[7] = msg->data_field.data2;
@@ -539,9 +540,9 @@ void can_parse_msg_ext(can_msg * msg, uint8_t * mcp2515_rx_buf){
     // Warning: More bit Kung-Fu up ahead...
     msg->arb_field.sid = (((uint16_t) mcp2515_rx_buf[0]) << 3u) | (((uint16_t) mcp2515_rx_buf[1] & 0x00E0) >> 5u);
     msg->arb_field.exide = (mcp2515_rx_buf[1] & 0x08) >> 3u;
-    msg->arb_field.eid = (((uint16_t) mcp2515_rx_buf[1] & 0x0003) << 16u)    |
-                         (((uint16_t) mcp2515_rx_buf[2]) << 8u)     |
-                         ((uint16_t) mcp2515_rx_buf[3]);
+    msg->arb_field.eid = (((uint32_t) mcp2515_rx_buf[1] & 0x0003) << 16u)    |
+                         (((uint32_t) mcp2515_rx_buf[2]) << 8u)     |
+                         ((uint32_t) mcp2515_rx_buf[3]);
     msg->arb_field.rtr = (mcp2515_rx_buf[4] & 0x40) >> 6u;
     msg->ctrl_field.dlc = mcp2515_rx_buf[4] & 0x0F;
     msg->data_field.data0 = mcp2515_rx_buf[5];
@@ -559,18 +560,43 @@ void can_parse_msg_ext(can_msg * msg, uint8_t * mcp2515_rx_buf){
 
 // <editor-fold defaultstate="collapsed" desc="API LAYER">
 
-uint8_t can_send(can_msg * msg);    // TODO: Include priority at some point...
-uint8_t can_receive(can_msg * msg);
-uint8_t can_remote_frame(can_msg_arb_field arb_field);
-uint8_t can_tx_cancel(void);
-uint8_t can_tx_available(void);
-uint8_t can_rx_pending(void);
-uint8_t can_rx_setmask(rx_mask_t mask_id, uint32_t mask, uint8_t is_extended);
-uint8_t can_rx_setfilter(rx_filt_t filt_id, uint32_t filter);
-uint8_t can_rx_mode(void);
-uint8_t can_mcp2515_config_options(mcp_2515_options_t option, uint8_t val);
-uint8_t can_read_error(uint8_t reg);
-uint8_t can_clear_bus_error(void);
+uint8_t can_send(can_msg * msg){    // TODO: Include priority at some point...
+    // Translate msg into a buffer
+    uint8_t tx_buf[MCP2515_MSG_BUFF_SIZE_BYTES] = {0u};
+    can_compose_msg_ext(msg, tx_buf);
+    
+    // Check for non-empty buffers
+    
+    
+    // Load into an empty buffer
+    
+    
+    // Request to send
+    
+    
+    // Await confirmation from TXnIF getting set
+    // Account for errors or arbitration loss
+    // If successful, reset flag
+    
+    return EXEC_SUCCESS;
+}
+
+uint8_t can_receive(can_msg * msg){
+    
+    
+    return EXEC_SUCCESS;
+}
+
+//uint8_t can_remote_frame(can_msg_arb_field arb_field);
+//uint8_t can_tx_cancel(void);
+//uint8_t can_tx_available(void);
+//uint8_t can_rx_pending(void);
+//uint8_t can_rx_setmask(rx_mask_t mask_id, uint32_t mask, uint8_t is_extended);
+//uint8_t can_rx_setfilter(rx_filt_t filt_id, uint32_t filter);
+//uint8_t can_rx_mode(void);
+//uint8_t can_mcp2515_config_options(mcp_2515_options_t option, uint8_t val);
+//uint8_t can_read_error(uint8_t reg);
+//uint8_t can_clear_bus_error(void);
 
 // </editor-fold>
 

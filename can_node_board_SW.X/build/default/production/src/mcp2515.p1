@@ -28,8 +28,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "203 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\pic18.h
 [v __delay `JF2424 ~T0 @X0 0 e ]
 [p i __delay ]
-"61 src/mcp2515.c
-[; ;src/mcp2515.c: 61:     } while( mcp2515_current_opmode() != MCP2515_OPMODE_CONFIG);
+"64 src/mcp2515.c
+[; ;src/mcp2515.c: 64:     } while( mcp2515_current_opmode() != MCP2515_OPMODE_CONFIG);
 [c E2464 0 1 2 3 4 .. ]
 [n E2464 . MCP2515_OPMODE_NORMAL MCP2515_OPMODE_SLEEP MCP2515_OPMODE_LOOPBACK MCP2515_OPMODE_LISTEN MCP2515_OPMODE_CONFIG  ]
 "1017 inc\mcp2515.h
@@ -71,22 +71,38 @@ Version 4.0 HI-TECH Software Intermediate Code
 "136 inc\mssp_spi.h
 [; ;inc\mssp_spi.h: 136: void SPI_Transfer_Byte_without_CS(uint8_t tx, uint8_t * rx);
 [v _SPI_Transfer_Byte_without_CS `(v ~T0 @X0 0 ef2`uc`*uc ]
-"378 src/mcp2515.c
-[; ;src/mcp2515.c: 378: void mcp2515_cmd_read_rx_buf(rxbuf_t rxb, uint8_t * rx_buf){
+"383 src/mcp2515.c
+[; ;src/mcp2515.c: 383: void mcp2515_cmd_read_rx_buf(rxbuf_t rxb, uint8_t * rx_buf){
 [c E2490 0 1 .. ]
 [n E2490 . RXB0 RXB1  ]
-"384
-[; ;src/mcp2515.c: 384:     SPI_Transfer_Byte_without_CS((0x90 | ((rxb ? SPI_READ_RXB1_ID : SPI_READ_RXB0_ID) << 1)), &receive_byte);
+"389
+[; ;src/mcp2515.c: 389:     SPI_Transfer_Byte_without_CS((uint8_t) (0x90 | ((rxb ? SPI_READ_RXB1_ID : SPI_READ_RXB0_ID) << 1)), &receive_byte);
 [c E2471 0 1 2 3 .. ]
 [n E2471 . SPI_READ_RXB0_ID SPI_READ_RXB0_D SPI_READ_RXB1_ID SPI_READ_RXB1_D  ]
-"408
-[; ;src/mcp2515.c: 408: void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t * tx_buf){
+"413
+[; ;src/mcp2515.c: 413: void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t * tx_buf){
 [c E2485 1 2 4 .. ]
 [n E2485 . TXB0 TXB1 TXB2  ]
-"409
-[; ;src/mcp2515.c: 409:     spi_load_txb_inst_t selected_txb;
+"414
+[; ;src/mcp2515.c: 414:     spi_load_txb_inst_t selected_txb;
 [c E2477 0 1 2 3 4 5 .. ]
 [n E2477 . SPI_LOAD_TXB0_ID SPI_LOAD_TXB0_D SPI_LOAD_TXB1_ID SPI_LOAD_TXB1_D SPI_LOAD_TXB2_ID SPI_LOAD_TXB2_D  ]
+"984 inc\mcp2515.h
+[; ;inc\mcp2515.h: 984: typedef struct {
+[s S270 `us 1 `uc 1 `ul 1 `uc 1 ]
+[n S270 . sid exide eid rtr ]
+"991
+[; ;inc\mcp2515.h: 991: typedef struct {
+[s S271 `uc 1 ]
+[n S271 . dlc ]
+"995
+[; ;inc\mcp2515.h: 995: typedef struct {
+[s S272 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
+[n S272 . data0 data1 data2 data3 data4 data5 data6 data7 ]
+"1006
+[; ;inc\mcp2515.h: 1006: typedef struct {
+[s S273 `S270 1 `S271 1 `S272 1 ]
+[n S273 . arb_field ctrl_field data_field ]
 "54 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 54: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -498,87 +514,87 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6715
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6715: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"50 src/mcp2515.c
-[; ;src/mcp2515.c: 50: void can_init_default(void){
+"53 src/mcp2515.c
+[; ;src/mcp2515.c: 53: void can_init_default(void){
 [v _can_init_default `(v ~T0 @X0 1 ef ]
 {
 [e :U _can_init_default ]
 [f ]
-"53
-[; ;src/mcp2515.c: 53:     SPI_Init_Master_Default();
+"56
+[; ;src/mcp2515.c: 56:     SPI_Init_Master_Default();
 [e ( _SPI_Init_Master_Default ..  ]
-"54
-[; ;src/mcp2515.c: 54:     (INTCONbits.GIE = 1);
+"57
+[; ;src/mcp2515.c: 57:     (INTCONbits.GIE = 1);
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-"58
-[; ;src/mcp2515.c: 58:     do {
+"61
+[; ;src/mcp2515.c: 61:     do {
 [e :U 277 ]
 {
-"59
-[; ;src/mcp2515.c: 59:         mcp2515_cmd_reset();
+"62
+[; ;src/mcp2515.c: 62:         mcp2515_cmd_reset();
 [e ( _mcp2515_cmd_reset ..  ]
-"60
-[; ;src/mcp2515.c: 60:         _delay((unsigned long)((100u)*(40000000u/4000.0)));
+"63
+[; ;src/mcp2515.c: 63:         _delay((unsigned long)((100u)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 100 `ui `d / -> -> 40000000 `ul `d .4000.0 `ul ]
-"61
-[; ;src/mcp2515.c: 61:     } while( mcp2515_current_opmode() != MCP2515_OPMODE_CONFIG);
+"64
+[; ;src/mcp2515.c: 64:     } while( mcp2515_current_opmode() != MCP2515_OPMODE_CONFIG);
 }
 [e $ != -> ( _mcp2515_current_opmode ..  `ui -> . `E2464 4 `ui 277  ]
 [e :U 276 ]
-"64
-[; ;src/mcp2515.c: 64:     external_interrupts_init_default();
+"67
+[; ;src/mcp2515.c: 67:     external_interrupts_init_default();
 [e ( _external_interrupts_init_default ..  ]
-"68
-[; ;src/mcp2515.c: 68:     mcp2515_cmd_write_bit(0x0F, 0x04, 0x00u);
+"71
+[; ;src/mcp2515.c: 71:     mcp2515_cmd_write_bit(0x0F, 0x04, 0x00u);
 [e ( _mcp2515_cmd_write_bit (3 , , -> -> 15 `i `uc -> -> 4 `i `uc -> -> 0 `ui `uc ]
-"75
-[; ;src/mcp2515.c: 75:     mcp2515_cmd_write_bit(0x2A, 0xC0, 0xC0);
-[e ( _mcp2515_cmd_write_bit (3 , , -> -> 42 `i `uc -> -> 192 `i `uc -> -> 192 `i `uc ]
-"76
-[; ;src/mcp2515.c: 76:     mcp2515_cmd_write_bit(0x2A, 0x3F, 0x03u);
-[e ( _mcp2515_cmd_write_bit (3 , , -> -> 42 `i `uc -> -> 63 `i `uc -> -> 3 `ui `uc ]
-"77
-[; ;src/mcp2515.c: 77:     mcp2515_cmd_write_bit(0x29, 0x80, 0x80u);
-[e ( _mcp2515_cmd_write_bit (3 , , -> -> 41 `i `uc -> -> 128 `i `uc -> -> 128 `ui `uc ]
 "78
-[; ;src/mcp2515.c: 78:     mcp2515_cmd_write_bit(0x29, 0x40, 0x00u);
-[e ( _mcp2515_cmd_write_bit (3 , , -> -> 41 `i `uc -> -> 64 `i `uc -> -> 0 `ui `uc ]
+[; ;src/mcp2515.c: 78:     mcp2515_cmd_write_bit(0x2A, 0xC0, 0xC0);
+[e ( _mcp2515_cmd_write_bit (3 , , -> -> 42 `i `uc -> -> 192 `i `uc -> -> 192 `i `uc ]
 "79
-[; ;src/mcp2515.c: 79:     mcp2515_cmd_write_bit(0x29, 0x38, (7u << 3u));
-[e ( _mcp2515_cmd_write_bit (3 , , -> -> 41 `i `uc -> -> 56 `i `uc -> << -> 7 `ui -> 3 `ui `uc ]
+[; ;src/mcp2515.c: 79:     mcp2515_cmd_write_bit(0x2A, 0x3F, 0x03u);
+[e ( _mcp2515_cmd_write_bit (3 , , -> -> 42 `i `uc -> -> 63 `i `uc -> -> 3 `ui `uc ]
 "80
-[; ;src/mcp2515.c: 80:     mcp2515_cmd_write_bit(0x29, 0x07, (4u));
-[e ( _mcp2515_cmd_write_bit (3 , , -> -> 41 `i `uc -> -> 7 `i `uc -> -> 4 `ui `uc ]
+[; ;src/mcp2515.c: 80:     mcp2515_cmd_write_bit(0x29, 0x80, 0x80u);
+[e ( _mcp2515_cmd_write_bit (3 , , -> -> 41 `i `uc -> -> 128 `i `uc -> -> 128 `ui `uc ]
 "81
-[; ;src/mcp2515.c: 81:     mcp2515_cmd_write_bit(0x28, 0x07, (5u));
+[; ;src/mcp2515.c: 81:     mcp2515_cmd_write_bit(0x29, 0x40, 0x00u);
+[e ( _mcp2515_cmd_write_bit (3 , , -> -> 41 `i `uc -> -> 64 `i `uc -> -> 0 `ui `uc ]
+"82
+[; ;src/mcp2515.c: 82:     mcp2515_cmd_write_bit(0x29, 0x38, (7u << 3u));
+[e ( _mcp2515_cmd_write_bit (3 , , -> -> 41 `i `uc -> -> 56 `i `uc -> << -> 7 `ui -> 3 `ui `uc ]
+"83
+[; ;src/mcp2515.c: 83:     mcp2515_cmd_write_bit(0x29, 0x07, (4u));
+[e ( _mcp2515_cmd_write_bit (3 , , -> -> 41 `i `uc -> -> 7 `i `uc -> -> 4 `ui `uc ]
+"84
+[; ;src/mcp2515.c: 84:     mcp2515_cmd_write_bit(0x28, 0x07, (5u));
 [e ( _mcp2515_cmd_write_bit (3 , , -> -> 40 `i `uc -> -> 7 `i `uc -> -> 5 `ui `uc ]
-"105
-[; ;src/mcp2515.c: 105:     mcp2515_cmd_write_bit(0x60, 0x60, 0x00);
-[e ( _mcp2515_cmd_write_bit (3 , , -> -> 96 `i `uc -> -> 96 `i `uc -> -> 0 `i `uc ]
-"106
-[; ;src/mcp2515.c: 106:     mcp2515_cmd_write_bit(0x70, 0x60, 0x00);
-[e ( _mcp2515_cmd_write_bit (3 , , -> -> 112 `i `uc -> -> 96 `i `uc -> -> 0 `i `uc ]
 "108
-[; ;src/mcp2515.c: 108:     mcp2515_cmd_write_bit(0x60, 0x04, 0x04);
-[e ( _mcp2515_cmd_write_bit (3 , , -> -> 96 `i `uc -> -> 4 `i `uc -> -> 4 `i `uc ]
-"110
-[; ;src/mcp2515.c: 110:     mcp2515_cmd_write_bit(0x0D, 0x03, 0x0F);
-[e ( _mcp2515_cmd_write_bit (3 , , -> -> 13 `i `uc -> -> 3 `i `uc -> -> 15 `i `uc ]
+[; ;src/mcp2515.c: 108:     mcp2515_cmd_write_bit(0x60, 0x60, 0x00);
+[e ( _mcp2515_cmd_write_bit (3 , , -> -> 96 `i `uc -> -> 96 `i `uc -> -> 0 `i `uc ]
+"109
+[; ;src/mcp2515.c: 109:     mcp2515_cmd_write_bit(0x70, 0x60, 0x00);
+[e ( _mcp2515_cmd_write_bit (3 , , -> -> 112 `i `uc -> -> 96 `i `uc -> -> 0 `i `uc ]
 "111
-[; ;src/mcp2515.c: 111:     mcp2515_cmd_write_bit(0x0D, 0x0C, 0x0F);
+[; ;src/mcp2515.c: 111:     mcp2515_cmd_write_bit(0x60, 0x04, 0x04);
+[e ( _mcp2515_cmd_write_bit (3 , , -> -> 96 `i `uc -> -> 4 `i `uc -> -> 4 `i `uc ]
+"113
+[; ;src/mcp2515.c: 113:     mcp2515_cmd_write_bit(0x0D, 0x03, 0x0F);
+[e ( _mcp2515_cmd_write_bit (3 , , -> -> 13 `i `uc -> -> 3 `i `uc -> -> 15 `i `uc ]
+"114
+[; ;src/mcp2515.c: 114:     mcp2515_cmd_write_bit(0x0D, 0x0C, 0x0F);
 [e ( _mcp2515_cmd_write_bit (3 , , -> -> 13 `i `uc -> -> 12 `i `uc -> -> 15 `i `uc ]
-"123
-[; ;src/mcp2515.c: 123:     mcp2515_normal_mode();
-[e ( _mcp2515_normal_mode ..  ]
 "126
-[; ;src/mcp2515.c: 126:     _delay((unsigned long)((100u)*(40000000u/4000.0)));
+[; ;src/mcp2515.c: 126:     mcp2515_normal_mode();
+[e ( _mcp2515_normal_mode ..  ]
+"129
+[; ;src/mcp2515.c: 129:     _delay((unsigned long)((100u)*(40000000u/4000.0)));
 [e ( __delay (1 -> * -> -> 100 `ui `d / -> -> 40000000 `ul `d .4000.0 `ul ]
-"128
-[; ;src/mcp2515.c: 128: }
+"131
+[; ;src/mcp2515.c: 131: }
 [e :UE 274 ]
 }
-"130
-[; ;src/mcp2515.c: 130: void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump){
+"133
+[; ;src/mcp2515.c: 133: void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump){
 [v _can_set_baud_rate `(v ~T0 @X0 1 ef3`ul`uc`uc ]
 {
 [e :U _can_set_baud_rate ]
@@ -586,137 +602,137 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _propsec `uc ~T0 @X0 1 r2 ]
 [v _syncjump `uc ~T0 @X0 1 r3 ]
 [f ]
-"132
-[; ;src/mcp2515.c: 132: }
+"135
+[; ;src/mcp2515.c: 135: }
 [e :UE 278 ]
 }
-"146
-[; ;src/mcp2515.c: 146: opmode_t mcp2515_current_opmode(void){
+"151
+[; ;src/mcp2515.c: 151: opmode_t mcp2515_current_opmode(void){
 [v _mcp2515_current_opmode `(E2464 ~T0 @X0 1 ef ]
 {
 [e :U _mcp2515_current_opmode ]
 [f ]
-"147
-[; ;src/mcp2515.c: 147:     uint8_t opmode = 0x00;
+"152
+[; ;src/mcp2515.c: 152:     uint8_t opmode = 0x00;
 [v _opmode `uc ~T0 @X0 1 a ]
 [e = _opmode -> -> 0 `i `uc ]
-"148
-[; ;src/mcp2515.c: 148:     mcp2515_cmd_read(0x0E, &opmode);
+"153
+[; ;src/mcp2515.c: 153:     mcp2515_cmd_read(0x0E, &opmode);
 [e ( _mcp2515_cmd_read (2 , -> -> 14 `i `uc &U _opmode ]
-"149
-[; ;src/mcp2515.c: 149:     opmode_t current_opmode = (opmode_t) (opmode & 0xE0);
+"154
+[; ;src/mcp2515.c: 154:     opmode_t current_opmode = (opmode_t) (opmode & 0xE0);
 [v _current_opmode `E2464 ~T0 @X0 1 a ]
 [e = _current_opmode -> & -> _opmode `i -> 224 `i `E2464 ]
-"151
-[; ;src/mcp2515.c: 151:     return current_opmode;
+"156
+[; ;src/mcp2515.c: 156:     return current_opmode;
 [e ) _current_opmode ]
 [e $UE 279  ]
-"152
-[; ;src/mcp2515.c: 152: }
+"157
+[; ;src/mcp2515.c: 157: }
 [e :UE 279 ]
 }
-"163
-[; ;src/mcp2515.c: 163: void mcp2515_config_mode(void){
+"168
+[; ;src/mcp2515.c: 168: void mcp2515_config_mode(void){
 [v _mcp2515_config_mode `(v ~T0 @X0 1 ef ]
 {
 [e :U _mcp2515_config_mode ]
 [f ]
-"164
-[; ;src/mcp2515.c: 164:     mcp2515_cmd_write_bit(0x0F, 0xE0, MCP2515_OPMODE_CONFIG);
+"169
+[; ;src/mcp2515.c: 169:     mcp2515_cmd_write_bit(0x0F, 0xE0, MCP2515_OPMODE_CONFIG);
 [e ( _mcp2515_cmd_write_bit (3 , , -> -> 15 `i `uc -> -> 224 `i `uc -> . `E2464 4 `uc ]
-"165
-[; ;src/mcp2515.c: 165: }
+"170
+[; ;src/mcp2515.c: 170: }
 [e :UE 280 ]
 }
-"176
-[; ;src/mcp2515.c: 176: void mcp2515_normal_mode(void){
+"181
+[; ;src/mcp2515.c: 181: void mcp2515_normal_mode(void){
 [v _mcp2515_normal_mode `(v ~T0 @X0 1 ef ]
 {
 [e :U _mcp2515_normal_mode ]
 [f ]
-"177
-[; ;src/mcp2515.c: 177:     mcp2515_cmd_write_bit(0x0F, 0xE0, MCP2515_OPMODE_NORMAL);
+"182
+[; ;src/mcp2515.c: 182:     mcp2515_cmd_write_bit(0x0F, 0xE0, MCP2515_OPMODE_NORMAL);
 [e ( _mcp2515_cmd_write_bit (3 , , -> -> 15 `i `uc -> -> 224 `i `uc -> . `E2464 0 `uc ]
-"178
-[; ;src/mcp2515.c: 178: }
+"183
+[; ;src/mcp2515.c: 183: }
 [e :UE 281 ]
 }
-"189
-[; ;src/mcp2515.c: 189: void mcp2515_cmd_reset(void){
+"194
+[; ;src/mcp2515.c: 194: void mcp2515_cmd_reset(void){
 [v _mcp2515_cmd_reset `(v ~T0 @X0 1 ef ]
 {
 [e :U _mcp2515_cmd_reset ]
 [f ]
-"190
-[; ;src/mcp2515.c: 190:     SPI_Transfer_Byte(0xC0, &receive_byte);
+"195
+[; ;src/mcp2515.c: 195:     SPI_Transfer_Byte(0xC0, &receive_byte);
 [e ( _SPI_Transfer_Byte (2 , -> -> 192 `i `uc &U _receive_byte ]
-"191
-[; ;src/mcp2515.c: 191: }
+"196
+[; ;src/mcp2515.c: 196: }
 [e :UE 282 ]
 }
-"203
-[; ;src/mcp2515.c: 203: uint8_t mcp2515_cmd_read_status(void){
+"208
+[; ;src/mcp2515.c: 208: uint8_t mcp2515_cmd_read_status(void){
 [v _mcp2515_cmd_read_status `(uc ~T0 @X0 1 ef ]
 {
 [e :U _mcp2515_cmd_read_status ]
 [f ]
-"204
-[; ;src/mcp2515.c: 204:     SPI_Transfer_Byte(0xA0, &receive_byte);
+"209
+[; ;src/mcp2515.c: 209:     SPI_Transfer_Byte(0xA0, &receive_byte);
 [e ( _SPI_Transfer_Byte (2 , -> -> 160 `i `uc &U _receive_byte ]
-"205
-[; ;src/mcp2515.c: 205:     return receive_byte;
+"210
+[; ;src/mcp2515.c: 210:     return receive_byte;
 [e ) _receive_byte ]
 [e $UE 283  ]
-"206
-[; ;src/mcp2515.c: 206: }
+"211
+[; ;src/mcp2515.c: 211: }
 [e :UE 283 ]
 }
-"217
-[; ;src/mcp2515.c: 217: uint8_t mcp2515_cmd_rx_status(void){
+"222
+[; ;src/mcp2515.c: 222: uint8_t mcp2515_cmd_rx_status(void){
 [v _mcp2515_cmd_rx_status `(uc ~T0 @X0 1 ef ]
 {
 [e :U _mcp2515_cmd_rx_status ]
 [f ]
-"218
-[; ;src/mcp2515.c: 218:     SPI_Transfer_Byte(0xB0, &receive_byte);
+"223
+[; ;src/mcp2515.c: 223:     SPI_Transfer_Byte(0xB0, &receive_byte);
 [e ( _SPI_Transfer_Byte (2 , -> -> 176 `i `uc &U _receive_byte ]
-"219
-[; ;src/mcp2515.c: 219:     return receive_byte;
+"224
+[; ;src/mcp2515.c: 224:     return receive_byte;
 [e ) _receive_byte ]
 [e $UE 284  ]
-"220
-[; ;src/mcp2515.c: 220: }
+"225
+[; ;src/mcp2515.c: 225: }
 [e :UE 284 ]
 }
-"232
-[; ;src/mcp2515.c: 232: void mcp2515_cmd_read(uint8_t reg_address, uint8_t * buf){
+"237
+[; ;src/mcp2515.c: 237: void mcp2515_cmd_read(uint8_t reg_address, uint8_t * buf){
 [v _mcp2515_cmd_read `(v ~T0 @X0 1 ef2`uc`*uc ]
 {
 [e :U _mcp2515_cmd_read ]
 [v _reg_address `uc ~T0 @X0 1 r1 ]
 [v _buf `*uc ~T0 @X0 1 r2 ]
 [f ]
-"234
-[; ;src/mcp2515.c: 234:     LATDbits.LATD2 = 0;
-[e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
-"237
-[; ;src/mcp2515.c: 237:     SPI_Transfer_Byte_without_CS(0x03, &receive_byte);
-[e ( _SPI_Transfer_Byte_without_CS (2 , -> -> 3 `i `uc &U _receive_byte ]
 "239
-[; ;src/mcp2515.c: 239:     SPI_Transfer_Byte_without_CS(reg_address, &receive_byte);
+[; ;src/mcp2515.c: 239:     LATDbits.LATD2 = 0;
+[e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
+"242
+[; ;src/mcp2515.c: 242:     SPI_Transfer_Byte_without_CS(0x03, &receive_byte);
+[e ( _SPI_Transfer_Byte_without_CS (2 , -> -> 3 `i `uc &U _receive_byte ]
+"244
+[; ;src/mcp2515.c: 244:     SPI_Transfer_Byte_without_CS(reg_address, &receive_byte);
 [e ( _SPI_Transfer_Byte_without_CS (2 , _reg_address &U _receive_byte ]
-"241
-[; ;src/mcp2515.c: 241:     SPI_Transfer_Byte_without_CS(0x00u, buf);
+"246
+[; ;src/mcp2515.c: 246:     SPI_Transfer_Byte_without_CS(0x00u, buf);
 [e ( _SPI_Transfer_Byte_without_CS (2 , -> -> 0 `ui `uc _buf ]
-"243
-[; ;src/mcp2515.c: 243:     LATDbits.LATD2 = 1;
+"248
+[; ;src/mcp2515.c: 248:     LATDbits.LATD2 = 1;
 [e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
-"245
-[; ;src/mcp2515.c: 245: }
+"250
+[; ;src/mcp2515.c: 250: }
 [e :UE 285 ]
 }
-"259
-[; ;src/mcp2515.c: 259: void mcp2515_cmd_read_sequential(uint8_t start_reg_addr, uint8_t * rxbuf, uint8_t len){
+"264
+[; ;src/mcp2515.c: 264: void mcp2515_cmd_read_sequential(uint8_t start_reg_addr, uint8_t * rxbuf, uint8_t len){
 [v _mcp2515_cmd_read_sequential `(v ~T0 @X0 1 ef3`uc`*uc`uc ]
 {
 [e :U _mcp2515_cmd_read_sequential ]
@@ -724,17 +740,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _rxbuf `*uc ~T0 @X0 1 r2 ]
 [v _len `uc ~T0 @X0 1 r3 ]
 [f ]
-"261
-[; ;src/mcp2515.c: 261:     LATDbits.LATD2 = 0;
-[e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
-"264
-[; ;src/mcp2515.c: 264:     SPI_Transfer_Byte_without_CS(0x03, &receive_byte);
-[e ( _SPI_Transfer_Byte_without_CS (2 , -> -> 3 `i `uc &U _receive_byte ]
 "266
-[; ;src/mcp2515.c: 266:     SPI_Transfer_Byte_without_CS(start_reg_addr, &receive_byte);
+[; ;src/mcp2515.c: 266:     LATDbits.LATD2 = 0;
+[e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
+"269
+[; ;src/mcp2515.c: 269:     SPI_Transfer_Byte_without_CS(0x03, &receive_byte);
+[e ( _SPI_Transfer_Byte_without_CS (2 , -> -> 3 `i `uc &U _receive_byte ]
+"271
+[; ;src/mcp2515.c: 271:     SPI_Transfer_Byte_without_CS(start_reg_addr, &receive_byte);
 [e ( _SPI_Transfer_Byte_without_CS (2 , _start_reg_addr &U _receive_byte ]
-"268
-[; ;src/mcp2515.c: 268:     for(uint8_t i=0; i<len; i++) SPI_Transfer_Byte_without_CS(0x00u, &rxbuf[i]);
+"273
+[; ;src/mcp2515.c: 273:     for(uint8_t i=0; i<len; i++) SPI_Transfer_Byte_without_CS(0x00u, &rxbuf[i]);
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
@@ -746,42 +762,42 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ < -> _i `i -> _len `i 287  ]
 [e :U 288 ]
 }
-"270
-[; ;src/mcp2515.c: 270:     LATDbits.LATD2 = 1;
+"275
+[; ;src/mcp2515.c: 275:     LATDbits.LATD2 = 1;
 [e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
-"272
-[; ;src/mcp2515.c: 272: }
+"277
+[; ;src/mcp2515.c: 277: }
 [e :UE 286 ]
 }
-"285
-[; ;src/mcp2515.c: 285: void mcp2515_cmd_write(uint8_t reg_address, uint8_t val){
+"290
+[; ;src/mcp2515.c: 290: void mcp2515_cmd_write(uint8_t reg_address, uint8_t val){
 [v _mcp2515_cmd_write `(v ~T0 @X0 1 ef2`uc`uc ]
 {
 [e :U _mcp2515_cmd_write ]
 [v _reg_address `uc ~T0 @X0 1 r1 ]
 [v _val `uc ~T0 @X0 1 r2 ]
 [f ]
-"287
-[; ;src/mcp2515.c: 287:     LATDbits.LATD2 = 0;
-[e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
-"290
-[; ;src/mcp2515.c: 290:     SPI_Transfer_Byte_without_CS(0x02, &receive_byte);
-[e ( _SPI_Transfer_Byte_without_CS (2 , -> -> 2 `i `uc &U _receive_byte ]
 "292
-[; ;src/mcp2515.c: 292:     SPI_Transfer_Byte_without_CS(reg_address, &receive_byte);
+[; ;src/mcp2515.c: 292:     LATDbits.LATD2 = 0;
+[e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
+"295
+[; ;src/mcp2515.c: 295:     SPI_Transfer_Byte_without_CS(0x02, &receive_byte);
+[e ( _SPI_Transfer_Byte_without_CS (2 , -> -> 2 `i `uc &U _receive_byte ]
+"297
+[; ;src/mcp2515.c: 297:     SPI_Transfer_Byte_without_CS(reg_address, &receive_byte);
 [e ( _SPI_Transfer_Byte_without_CS (2 , _reg_address &U _receive_byte ]
-"294
-[; ;src/mcp2515.c: 294:     SPI_Transfer_Byte_without_CS(val, &receive_byte);
+"299
+[; ;src/mcp2515.c: 299:     SPI_Transfer_Byte_without_CS(val, &receive_byte);
 [e ( _SPI_Transfer_Byte_without_CS (2 , _val &U _receive_byte ]
-"296
-[; ;src/mcp2515.c: 296:     LATDbits.LATD2 = 1;
+"301
+[; ;src/mcp2515.c: 301:     LATDbits.LATD2 = 1;
 [e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
-"298
-[; ;src/mcp2515.c: 298: }
+"303
+[; ;src/mcp2515.c: 303: }
 [e :UE 291 ]
 }
-"312
-[; ;src/mcp2515.c: 312: void mcp2515_cmd_write_sequential(uint8_t start_reg_addr, uint8_t * txbuf, uint8_t len){
+"317
+[; ;src/mcp2515.c: 317: void mcp2515_cmd_write_sequential(uint8_t start_reg_addr, uint8_t * txbuf, uint8_t len){
 [v _mcp2515_cmd_write_sequential `(v ~T0 @X0 1 ef3`uc`*uc`uc ]
 {
 [e :U _mcp2515_cmd_write_sequential ]
@@ -789,17 +805,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _txbuf `*uc ~T0 @X0 1 r2 ]
 [v _len `uc ~T0 @X0 1 r3 ]
 [f ]
-"314
-[; ;src/mcp2515.c: 314:     LATDbits.LATD2 = 0;
-[e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
-"317
-[; ;src/mcp2515.c: 317:     SPI_Transfer_Byte_without_CS(0x02, &receive_byte);
-[e ( _SPI_Transfer_Byte_without_CS (2 , -> -> 2 `i `uc &U _receive_byte ]
 "319
-[; ;src/mcp2515.c: 319:     SPI_Transfer_Byte_without_CS(start_reg_addr, &receive_byte);
+[; ;src/mcp2515.c: 319:     LATDbits.LATD2 = 0;
+[e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
+"322
+[; ;src/mcp2515.c: 322:     SPI_Transfer_Byte_without_CS(0x02, &receive_byte);
+[e ( _SPI_Transfer_Byte_without_CS (2 , -> -> 2 `i `uc &U _receive_byte ]
+"324
+[; ;src/mcp2515.c: 324:     SPI_Transfer_Byte_without_CS(start_reg_addr, &receive_byte);
 [e ( _SPI_Transfer_Byte_without_CS (2 , _start_reg_addr &U _receive_byte ]
-"321
-[; ;src/mcp2515.c: 321:     for(uint8_t i=0; i<len; i++) SPI_Transfer_Byte_without_CS(txbuf[i], &receive_byte);
+"326
+[; ;src/mcp2515.c: 326:     for(uint8_t i=0; i<len; i++) SPI_Transfer_Byte_without_CS(txbuf[i], &receive_byte);
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
@@ -811,15 +827,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ < -> _i `i -> _len `i 293  ]
 [e :U 294 ]
 }
-"323
-[; ;src/mcp2515.c: 323:     LATDbits.LATD2 = 1;
+"328
+[; ;src/mcp2515.c: 328:     LATDbits.LATD2 = 1;
 [e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
-"325
-[; ;src/mcp2515.c: 325: }
+"330
+[; ;src/mcp2515.c: 330: }
 [e :UE 292 ]
 }
-"345
-[; ;src/mcp2515.c: 345: void mcp2515_cmd_write_bit(uint8_t reg_address, uint8_t mask, uint8_t val){
+"350
+[; ;src/mcp2515.c: 350: void mcp2515_cmd_write_bit(uint8_t reg_address, uint8_t mask, uint8_t val){
 [v _mcp2515_cmd_write_bit `(v ~T0 @X0 1 ef3`uc`uc`uc ]
 {
 [e :U _mcp2515_cmd_write_bit ]
@@ -827,44 +843,44 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _mask `uc ~T0 @X0 1 r2 ]
 [v _val `uc ~T0 @X0 1 r3 ]
 [f ]
-"347
-[; ;src/mcp2515.c: 347:     LATDbits.LATD2 = 0;
-[e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
-"350
-[; ;src/mcp2515.c: 350:     SPI_Transfer_Byte_without_CS(0x05, &receive_byte);
-[e ( _SPI_Transfer_Byte_without_CS (2 , -> -> 5 `i `uc &U _receive_byte ]
 "352
-[; ;src/mcp2515.c: 352:     SPI_Transfer_Byte_without_CS(reg_address, &receive_byte);
+[; ;src/mcp2515.c: 352:     LATDbits.LATD2 = 0;
+[e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
+"355
+[; ;src/mcp2515.c: 355:     SPI_Transfer_Byte_without_CS(0x05, &receive_byte);
+[e ( _SPI_Transfer_Byte_without_CS (2 , -> -> 5 `i `uc &U _receive_byte ]
+"357
+[; ;src/mcp2515.c: 357:     SPI_Transfer_Byte_without_CS(reg_address, &receive_byte);
 [e ( _SPI_Transfer_Byte_without_CS (2 , _reg_address &U _receive_byte ]
-"354
-[; ;src/mcp2515.c: 354:     SPI_Transfer_Byte_without_CS(mask, &receive_byte);
+"359
+[; ;src/mcp2515.c: 359:     SPI_Transfer_Byte_without_CS(mask, &receive_byte);
 [e ( _SPI_Transfer_Byte_without_CS (2 , _mask &U _receive_byte ]
-"356
-[; ;src/mcp2515.c: 356:     SPI_Transfer_Byte_without_CS(val, &receive_byte);
+"361
+[; ;src/mcp2515.c: 361:     SPI_Transfer_Byte_without_CS(val, &receive_byte);
 [e ( _SPI_Transfer_Byte_without_CS (2 , _val &U _receive_byte ]
-"358
-[; ;src/mcp2515.c: 358:     LATDbits.LATD2 = 1;
+"363
+[; ;src/mcp2515.c: 363:     LATDbits.LATD2 = 1;
 [e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
-"360
-[; ;src/mcp2515.c: 360: }
+"365
+[; ;src/mcp2515.c: 365: }
 [e :UE 297 ]
 }
-"378
-[; ;src/mcp2515.c: 378: void mcp2515_cmd_read_rx_buf(rxbuf_t rxb, uint8_t * rx_buf){
+"383
+[; ;src/mcp2515.c: 383: void mcp2515_cmd_read_rx_buf(rxbuf_t rxb, uint8_t * rx_buf){
 [v _mcp2515_cmd_read_rx_buf `(v ~T0 @X0 1 ef2`E2490`*uc ]
 {
 [e :U _mcp2515_cmd_read_rx_buf ]
 [v _rxb `E2490 ~T0 @X0 1 r1 ]
 [v _rx_buf `*uc ~T0 @X0 1 r2 ]
 [f ]
-"380
-[; ;src/mcp2515.c: 380:     LATDbits.LATD2 = 0;
+"385
+[; ;src/mcp2515.c: 385:     LATDbits.LATD2 = 0;
 [e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
-"384
-[; ;src/mcp2515.c: 384:     SPI_Transfer_Byte_without_CS((0x90 | ((rxb ? SPI_READ_RXB1_ID : SPI_READ_RXB0_ID) << 1)), &receive_byte);
+"389
+[; ;src/mcp2515.c: 389:     SPI_Transfer_Byte_without_CS((uint8_t) (0x90 | ((rxb ? SPI_READ_RXB1_ID : SPI_READ_RXB0_ID) << 1)), &receive_byte);
 [e ( _SPI_Transfer_Byte_without_CS (2 , -> | -> 144 `i << ? != -> _rxb `ui -> -> 0 `i `ui : . `E2471 2 . `E2471 0 -> 1 `i `uc &U _receive_byte ]
-"386
-[; ;src/mcp2515.c: 386:     for(uint8_t i=0; i<13u; i++) SPI_Transfer_Byte_without_CS(0x00u, &rx_buf[i]);
+"391
+[; ;src/mcp2515.c: 391:     for(uint8_t i=0; i<13u; i++) SPI_Transfer_Byte_without_CS(0x00u, &rx_buf[i]);
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
@@ -876,57 +892,57 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ < -> _i `ui -> 13 `ui 299  ]
 [e :U 300 ]
 }
-"388
-[; ;src/mcp2515.c: 388:     LATDbits.LATD2 = 1;
+"393
+[; ;src/mcp2515.c: 393:     LATDbits.LATD2 = 1;
 [e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
-"390
-[; ;src/mcp2515.c: 390: }
+"395
+[; ;src/mcp2515.c: 395: }
 [e :UE 298 ]
 }
-"408
-[; ;src/mcp2515.c: 408: void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t * tx_buf){
+"413
+[; ;src/mcp2515.c: 413: void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t * tx_buf){
 [v _mcp2515_cmd_load_tx_buf `(v ~T0 @X0 1 ef2`E2485`*uc ]
 {
 [e :U _mcp2515_cmd_load_tx_buf ]
 [v _txb `E2485 ~T0 @X0 1 r1 ]
 [v _tx_buf `*uc ~T0 @X0 1 r2 ]
 [f ]
-"409
-[; ;src/mcp2515.c: 409:     spi_load_txb_inst_t selected_txb;
+"414
+[; ;src/mcp2515.c: 414:     spi_load_txb_inst_t selected_txb;
 [v _selected_txb `E2477 ~T0 @X0 1 a ]
-"412
-[; ;src/mcp2515.c: 412:     switch(txb){
+"417
+[; ;src/mcp2515.c: 417:     switch(txb){
 [e $U 304  ]
 {
-"413
-[; ;src/mcp2515.c: 413:         case TXB0:
-[e :U 305 ]
-"414
-[; ;src/mcp2515.c: 414:             selected_txb = SPI_LOAD_TXB0_ID;
-[e = _selected_txb . `E2477 0 ]
-"415
-[; ;src/mcp2515.c: 415:             break;
-[e $U 303  ]
-"416
-[; ;src/mcp2515.c: 416:         case TXB1:
-[e :U 306 ]
-"417
-[; ;src/mcp2515.c: 417:             selected_txb = SPI_LOAD_TXB1_ID;
-[e = _selected_txb . `E2477 2 ]
 "418
-[; ;src/mcp2515.c: 418:             break;
-[e $U 303  ]
+[; ;src/mcp2515.c: 418:         case TXB0:
+[e :U 305 ]
 "419
-[; ;src/mcp2515.c: 419:         case TXB2:
-[e :U 307 ]
+[; ;src/mcp2515.c: 419:             selected_txb = SPI_LOAD_TXB0_ID;
+[e = _selected_txb . `E2477 0 ]
 "420
-[; ;src/mcp2515.c: 420:             selected_txb = SPI_LOAD_TXB2_ID;
-[e = _selected_txb . `E2477 4 ]
-"421
-[; ;src/mcp2515.c: 421:             break;
+[; ;src/mcp2515.c: 420:             break;
 [e $U 303  ]
+"421
+[; ;src/mcp2515.c: 421:         case TXB1:
+[e :U 306 ]
 "422
-[; ;src/mcp2515.c: 422:     }
+[; ;src/mcp2515.c: 422:             selected_txb = SPI_LOAD_TXB1_ID;
+[e = _selected_txb . `E2477 2 ]
+"423
+[; ;src/mcp2515.c: 423:             break;
+[e $U 303  ]
+"424
+[; ;src/mcp2515.c: 424:         case TXB2:
+[e :U 307 ]
+"425
+[; ;src/mcp2515.c: 425:             selected_txb = SPI_LOAD_TXB2_ID;
+[e = _selected_txb . `E2477 4 ]
+"426
+[; ;src/mcp2515.c: 426:             break;
+[e $U 303  ]
+"427
+[; ;src/mcp2515.c: 427:     }
 }
 [e $U 303  ]
 [e :U 304 ]
@@ -935,14 +951,14 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> . `E2485 2 `ui 307
  303 ]
 [e :U 303 ]
-"424
-[; ;src/mcp2515.c: 424:     LATDbits.LATD2 = 0;
+"429
+[; ;src/mcp2515.c: 429:     LATDbits.LATD2 = 0;
 [e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
-"428
-[; ;src/mcp2515.c: 428:     SPI_Transfer_Byte_without_CS((0x40 | (selected_txb)), &receive_byte);
+"433
+[; ;src/mcp2515.c: 433:     SPI_Transfer_Byte_without_CS((0x40 | (selected_txb)), &receive_byte);
 [e ( _SPI_Transfer_Byte_without_CS (2 , -> | -> -> 64 `i `ui -> _selected_txb `ui `uc &U _receive_byte ]
-"430
-[; ;src/mcp2515.c: 430:     for(uint8_t i=0; i<13u; i++) SPI_Transfer_Byte_without_CS(tx_buf[i], &receive_byte);
+"435
+[; ;src/mcp2515.c: 435:     for(uint8_t i=0; i<13u; i++) SPI_Transfer_Byte_without_CS(tx_buf[i], &receive_byte);
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
@@ -954,24 +970,193 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ < -> _i `ui -> 13 `ui 308  ]
 [e :U 309 ]
 }
-"432
-[; ;src/mcp2515.c: 432:     LATDbits.LATD2 = 1;
+"437
+[; ;src/mcp2515.c: 437:     LATDbits.LATD2 = 1;
 [e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
-"434
-[; ;src/mcp2515.c: 434: }
+"439
+[; ;src/mcp2515.c: 439: }
 [e :UE 302 ]
 }
-"445
-[; ;src/mcp2515.c: 445: void mcp2515_cmd_rts(txbuf_t txb){
+"450
+[; ;src/mcp2515.c: 450: void mcp2515_cmd_rts(txbuf_t txb){
 [v _mcp2515_cmd_rts `(v ~T0 @X0 1 ef1`E2485 ]
 {
 [e :U _mcp2515_cmd_rts ]
 [v _txb `E2485 ~T0 @X0 1 r1 ]
 [f ]
-"446
-[; ;src/mcp2515.c: 446:     SPI_Transfer_Byte((0x8 | (txb)), &receive_byte);
+"451
+[; ;src/mcp2515.c: 451:     SPI_Transfer_Byte((0x8 | (txb)), &receive_byte);
 [e ( _SPI_Transfer_Byte (2 , -> | -> -> 8 `i `ui -> _txb `ui `uc &U _receive_byte ]
-"447
-[; ;src/mcp2515.c: 447: }
+"452
+[; ;src/mcp2515.c: 452: }
 [e :UE 311 ]
+}
+"465
+[; ;src/mcp2515.c: 465: void can_compose_msg_std(can_msg * msg, uint8_t * mcp2515_tx_buf){
+[v _can_compose_msg_std `(v ~T0 @X0 1 ef2`*S273`*uc ]
+{
+[e :U _can_compose_msg_std ]
+[v _msg `*S273 ~T0 @X0 1 r1 ]
+[v _mcp2515_tx_buf `*uc ~T0 @X0 1 r2 ]
+[f ]
+"467
+[; ;src/mcp2515.c: 467: }
+[e :UE 312 ]
+}
+"470
+[; ;src/mcp2515.c: 470: void can_parse_msg_std(can_msg * msg, uint8_t * mcp2515_rx_buf){
+[v _can_parse_msg_std `(v ~T0 @X0 1 ef2`*S273`*uc ]
+{
+[e :U _can_parse_msg_std ]
+[v _msg `*S273 ~T0 @X0 1 r1 ]
+[v _mcp2515_rx_buf `*uc ~T0 @X0 1 r2 ]
+[f ]
+"472
+[; ;src/mcp2515.c: 472: }
+[e :UE 313 ]
+}
+"496
+[; ;src/mcp2515.c: 496: void can_compose_msg_ext(can_msg * msg, uint8_t * mcp2515_tx_buf){
+[v _can_compose_msg_ext `(v ~T0 @X0 1 ef2`*S273`*uc ]
+{
+[e :U _can_compose_msg_ext ]
+[v _msg `*S273 ~T0 @X0 1 r1 ]
+[v _mcp2515_tx_buf `*uc ~T0 @X0 1 r2 ]
+[f ]
+"499
+[; ;src/mcp2515.c: 499:     mcp2515_tx_buf[0] = (uint8_t) ( (msg->arb_field.sid & 0x07F8u) >> 3u );
+[e = *U + _mcp2515_tx_buf * -> -> 0 `i `x -> -> # *U _mcp2515_tx_buf `i `x -> >> & -> . . *U _msg 0 0 `ui -> 2040 `ui -> 3 `ui `uc ]
+"500
+[; ;src/mcp2515.c: 500:     mcp2515_tx_buf[1] = (uint8_t) ( ((uint32_t)(msg->arb_field.sid & 0x0007u) << 5u) |
+[e = *U + _mcp2515_tx_buf * -> -> 1 `i `x -> -> # *U _mcp2515_tx_buf `i `x -> | | << -> & -> . . *U _msg 0 0 `ui -> 7 `ui `ul -> 5 `ui << -> . . *U _msg 0 1 `ul -> 3 `ui >> & . . *U _msg 0 2 -> -> 196608 `l `ul -> 16 `ui `uc ]
+"503
+[; ;src/mcp2515.c: 503:     mcp2515_tx_buf[2] = (uint8_t) ( (msg->arb_field.eid & 0x0FF00) >> 8u );
+[e = *U + _mcp2515_tx_buf * -> -> 2 `i `x -> -> # *U _mcp2515_tx_buf `i `x -> >> & . . *U _msg 0 2 -> -> 65280 `ui `ul -> 8 `ui `uc ]
+"504
+[; ;src/mcp2515.c: 504:     mcp2515_tx_buf[3] = (uint8_t) (msg->arb_field.eid & 0x000FF);
+[e = *U + _mcp2515_tx_buf * -> -> 3 `i `x -> -> # *U _mcp2515_tx_buf `i `x -> & . . *U _msg 0 2 -> -> -> 255 `i `l `ul `uc ]
+"505
+[; ;src/mcp2515.c: 505:     mcp2515_tx_buf[4] = (uint8_t) ( (msg->arb_field.rtr << 6u) |
+[e = *U + _mcp2515_tx_buf * -> -> 4 `i `x -> -> # *U _mcp2515_tx_buf `i `x -> | << -> . . *U _msg 0 3 `i -> 6 `ui -> . . *U _msg 1 0 `i `uc ]
+"507
+[; ;src/mcp2515.c: 507:     mcp2515_tx_buf[5] = msg->data_field.data0;
+[e = *U + _mcp2515_tx_buf * -> -> 5 `i `x -> -> # *U _mcp2515_tx_buf `i `x . . *U _msg 2 0 ]
+"508
+[; ;src/mcp2515.c: 508:     mcp2515_tx_buf[6] = msg->data_field.data1;
+[e = *U + _mcp2515_tx_buf * -> -> 6 `i `x -> -> # *U _mcp2515_tx_buf `i `x . . *U _msg 2 1 ]
+"509
+[; ;src/mcp2515.c: 509:     mcp2515_tx_buf[7] = msg->data_field.data2;
+[e = *U + _mcp2515_tx_buf * -> -> 7 `i `x -> -> # *U _mcp2515_tx_buf `i `x . . *U _msg 2 2 ]
+"510
+[; ;src/mcp2515.c: 510:     mcp2515_tx_buf[8] = msg->data_field.data3;
+[e = *U + _mcp2515_tx_buf * -> -> 8 `i `x -> -> # *U _mcp2515_tx_buf `i `x . . *U _msg 2 3 ]
+"511
+[; ;src/mcp2515.c: 511:     mcp2515_tx_buf[9] = msg->data_field.data4;
+[e = *U + _mcp2515_tx_buf * -> -> 9 `i `x -> -> # *U _mcp2515_tx_buf `i `x . . *U _msg 2 4 ]
+"512
+[; ;src/mcp2515.c: 512:     mcp2515_tx_buf[10] = msg->data_field.data5;
+[e = *U + _mcp2515_tx_buf * -> -> 10 `i `x -> -> # *U _mcp2515_tx_buf `i `x . . *U _msg 2 5 ]
+"513
+[; ;src/mcp2515.c: 513:     mcp2515_tx_buf[11] = msg->data_field.data6;
+[e = *U + _mcp2515_tx_buf * -> -> 11 `i `x -> -> # *U _mcp2515_tx_buf `i `x . . *U _msg 2 6 ]
+"514
+[; ;src/mcp2515.c: 514:     mcp2515_tx_buf[12] = msg->data_field.data7;
+[e = *U + _mcp2515_tx_buf * -> -> 12 `i `x -> -> # *U _mcp2515_tx_buf `i `x . . *U _msg 2 7 ]
+"516
+[; ;src/mcp2515.c: 516: }
+[e :UE 314 ]
+}
+"539
+[; ;src/mcp2515.c: 539: void can_parse_msg_ext(can_msg * msg, uint8_t * mcp2515_rx_buf){
+[v _can_parse_msg_ext `(v ~T0 @X0 1 ef2`*S273`*uc ]
+{
+[e :U _can_parse_msg_ext ]
+[v _msg `*S273 ~T0 @X0 1 r1 ]
+[v _mcp2515_rx_buf `*uc ~T0 @X0 1 r2 ]
+[f ]
+"541
+[; ;src/mcp2515.c: 541:     msg->arb_field.sid = (((uint16_t) mcp2515_rx_buf[0]) << 3u) | (((uint16_t) mcp2515_rx_buf[1] & 0x00E0) >> 5u);
+[e = . . *U _msg 0 0 -> | << -> -> *U + _mcp2515_rx_buf * -> -> 0 `i `x -> -> # *U _mcp2515_rx_buf `i `x `us `ui -> 3 `ui >> & -> -> *U + _mcp2515_rx_buf * -> -> 1 `i `x -> -> # *U _mcp2515_rx_buf `i `x `us `ui -> -> 224 `i `ui -> 5 `ui `us ]
+"542
+[; ;src/mcp2515.c: 542:     msg->arb_field.exide = (mcp2515_rx_buf[1] & 0x08) >> 3u;
+[e = . . *U _msg 0 1 -> >> & -> *U + _mcp2515_rx_buf * -> -> 1 `i `x -> -> # *U _mcp2515_rx_buf `i `x `i -> 8 `i -> 3 `ui `uc ]
+"543
+[; ;src/mcp2515.c: 543:     msg->arb_field.eid = (((uint32_t) mcp2515_rx_buf[1] & 0x0003) << 16u) |
+[e = . . *U _msg 0 2 | | << & -> *U + _mcp2515_rx_buf * -> -> 1 `i `x -> -> # *U _mcp2515_rx_buf `i `x `ul -> -> -> 3 `i `l `ul -> 16 `ui << -> *U + _mcp2515_rx_buf * -> -> 2 `i `x -> -> # *U _mcp2515_rx_buf `i `x `ul -> 8 `ui -> *U + _mcp2515_rx_buf * -> -> 3 `i `x -> -> # *U _mcp2515_rx_buf `i `x `ul ]
+"546
+[; ;src/mcp2515.c: 546:     msg->arb_field.rtr = (mcp2515_rx_buf[4] & 0x40) >> 6u;
+[e = . . *U _msg 0 3 -> >> & -> *U + _mcp2515_rx_buf * -> -> 4 `i `x -> -> # *U _mcp2515_rx_buf `i `x `i -> 64 `i -> 6 `ui `uc ]
+"547
+[; ;src/mcp2515.c: 547:     msg->ctrl_field.dlc = mcp2515_rx_buf[4] & 0x0F;
+[e = . . *U _msg 1 0 -> & -> *U + _mcp2515_rx_buf * -> -> 4 `i `x -> -> # *U _mcp2515_rx_buf `i `x `i -> 15 `i `uc ]
+"548
+[; ;src/mcp2515.c: 548:     msg->data_field.data0 = mcp2515_rx_buf[5];
+[e = . . *U _msg 2 0 *U + _mcp2515_rx_buf * -> -> 5 `i `x -> -> # *U _mcp2515_rx_buf `i `x ]
+"549
+[; ;src/mcp2515.c: 549:     msg->data_field.data1 = mcp2515_rx_buf[6];
+[e = . . *U _msg 2 1 *U + _mcp2515_rx_buf * -> -> 6 `i `x -> -> # *U _mcp2515_rx_buf `i `x ]
+"550
+[; ;src/mcp2515.c: 550:     msg->data_field.data2 = mcp2515_rx_buf[7];
+[e = . . *U _msg 2 2 *U + _mcp2515_rx_buf * -> -> 7 `i `x -> -> # *U _mcp2515_rx_buf `i `x ]
+"551
+[; ;src/mcp2515.c: 551:     msg->data_field.data3 = mcp2515_rx_buf[8];
+[e = . . *U _msg 2 3 *U + _mcp2515_rx_buf * -> -> 8 `i `x -> -> # *U _mcp2515_rx_buf `i `x ]
+"552
+[; ;src/mcp2515.c: 552:     msg->data_field.data4 = mcp2515_rx_buf[9];
+[e = . . *U _msg 2 4 *U + _mcp2515_rx_buf * -> -> 9 `i `x -> -> # *U _mcp2515_rx_buf `i `x ]
+"553
+[; ;src/mcp2515.c: 553:     msg->data_field.data5 = mcp2515_rx_buf[10];
+[e = . . *U _msg 2 5 *U + _mcp2515_rx_buf * -> -> 10 `i `x -> -> # *U _mcp2515_rx_buf `i `x ]
+"554
+[; ;src/mcp2515.c: 554:     msg->data_field.data6 = mcp2515_rx_buf[11];
+[e = . . *U _msg 2 6 *U + _mcp2515_rx_buf * -> -> 11 `i `x -> -> # *U _mcp2515_rx_buf `i `x ]
+"555
+[; ;src/mcp2515.c: 555:     msg->data_field.data7 = mcp2515_rx_buf[12];
+[e = . . *U _msg 2 7 *U + _mcp2515_rx_buf * -> -> 12 `i `x -> -> # *U _mcp2515_rx_buf `i `x ]
+"557
+[; ;src/mcp2515.c: 557: }
+[e :UE 315 ]
+}
+"563
+[; ;src/mcp2515.c: 563: uint8_t can_send(can_msg * msg){
+[v _can_send `(uc ~T0 @X0 1 ef1`*S273 ]
+{
+[e :U _can_send ]
+[v _msg `*S273 ~T0 @X0 1 r1 ]
+[f ]
+[v F2773 `uc ~T0 @X0 -> 13 `i s ]
+[i F2773
+:U ..
+"565
+[; ;src/mcp2515.c: 565:     uint8_t tx_buf[13u] = {0u};
+-> -> 0 `ui `uc
+..
+]
+[v _tx_buf `uc ~T0 @X0 -> 13 `i a ]
+[e = _tx_buf F2773 ]
+"566
+[; ;src/mcp2515.c: 566:     can_compose_msg_ext(msg, tx_buf);
+[e ( _can_compose_msg_ext (2 , _msg &U _tx_buf ]
+"581
+[; ;src/mcp2515.c: 581:     return 1;
+[e ) -> -> 1 `i `uc ]
+[e $UE 316  ]
+"582
+[; ;src/mcp2515.c: 582: }
+[e :UE 316 ]
+}
+"584
+[; ;src/mcp2515.c: 584: uint8_t can_receive(can_msg * msg){
+[v _can_receive `(uc ~T0 @X0 1 ef1`*S273 ]
+{
+[e :U _can_receive ]
+[v _msg `*S273 ~T0 @X0 1 r1 ]
+[f ]
+"587
+[; ;src/mcp2515.c: 587:     return 1;
+[e ) -> -> 1 `i `uc ]
+[e $UE 317  ]
+"588
+[; ;src/mcp2515.c: 588: }
+[e :UE 317 ]
 }

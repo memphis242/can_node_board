@@ -4441,8 +4441,6 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 33 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 2 3
 # 67 "mcp2515_test.c" 2
 
-# 1 "inc\\mcp2515.h" 1
-# 67 "inc\\mcp2515.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 1 3
 # 22 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 3
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\bits/alltypes.h" 1 3
@@ -4528,7 +4526,9 @@ typedef int32_t int_fast32_t;
 typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
-# 67 "inc\\mcp2515.h" 2
+# 68 "mcp2515_test.c" 2
+
+# 1 "inc\\mcp2515.h" 1
 # 163 "inc\\mcp2515.h"
 typedef enum {
     MCP2515_OPMODE_NORMAL = 0u,
@@ -4551,7 +4551,7 @@ typedef enum { MCP2515_OPTION_ROLLOVER } mcp_2515_options_t;
 # 984 "inc\\mcp2515.h"
 typedef struct {
     uint16_t sid;
-    uint8_t ide;
+    uint8_t exide;
     uint32_t eid;
     uint8_t rtr;
 } can_msg_arb_field;
@@ -4602,11 +4602,12 @@ void can_parse_msg_std(can_msg * msg, uint8_t * mcp2515_rx_buf);
 void can_compose_msg_ext(can_msg * msg, uint8_t * mcp2515_tx_buf);
 void can_parse_msg_ext(can_msg * msg, uint8_t * mcp2515_rx_buf);
 
+
 uint8_t can_send(can_msg * msg);
-uint8_t can_remot_frame(can_msg_arb_field arb_field);
+uint8_t can_receive(can_msg * msg);
+uint8_t can_remote_frame(can_msg_arb_field arb_field);
 uint8_t can_tx_cancel(void);
 uint8_t can_tx_available(void);
-uint8_t can_receive(can_msg * msg);
 uint8_t can_rx_pending(void);
 uint8_t can_rx_setmask(rx_mask_t mask_id, uint32_t mask, uint8_t is_extended);
 uint8_t can_rx_setfilter(rx_filt_t filt_id, uint32_t filter);
@@ -4614,7 +4615,7 @@ uint8_t can_rx_mode(void);
 uint8_t can_mcp2515_config_options(mcp_2515_options_t option, uint8_t val);
 uint8_t can_read_error(uint8_t reg);
 uint8_t can_clear_bus_error(void);
-# 68 "mcp2515_test.c" 2
+# 69 "mcp2515_test.c" 2
 
 # 1 "inc\\lcd_driver.h" 1
 # 207 "inc\\lcd_driver.h"
@@ -4656,7 +4657,7 @@ uint8_t LCD_turn_on_cursor(void);
 
 
 void LCD_write_uint32_number(uint32_t num);
-# 69 "mcp2515_test.c" 2
+# 70 "mcp2515_test.c" 2
 
 # 1 "inc\\ccp.h" 1
 # 159 "inc\\ccp.h"
@@ -4670,14 +4671,14 @@ void CCP1_Compare_Init_Default(uint16_t comp_val);
 void CCP2_Compare_Init_Default(uint16_t comp_val);
 void CCP1_Capture_Init_Default(void);
 void CCP2_Capture_Init_Default(void);
-# 70 "mcp2515_test.c" 2
+# 71 "mcp2515_test.c" 2
 
 # 1 "inc\\timer.h" 1
 # 68 "inc\\timer.h"
 void Timer1_Init_Default(void);
 void Timer1_Enable(void);
 void Timer1_Disable(void);
-# 71 "mcp2515_test.c" 2
+# 72 "mcp2515_test.c" 2
 
 # 1 "inc\\mssp_spi.h" 1
 # 114 "inc\\mssp_spi.h"
@@ -4705,7 +4706,7 @@ void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size);
 
 void SPI_Transfer_Byte_without_CS(uint8_t tx, uint8_t * rx);
 void SPI_Transfer_Packet_without_CS(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_size);
-# 72 "mcp2515_test.c" 2
+# 73 "mcp2515_test.c" 2
 
 # 1 "inc\\external_interrupts.h" 1
 # 120 "inc\\external_interrupts.h"
@@ -4716,11 +4717,11 @@ typedef enum { FALLING_EDGE, RISING_EDGE } external_interrupt_edge_t;
 
 void external_interrupts_init_default(void);
 void external_interrupts_init(uint8_t which_pins, external_interrupt_edge_t trigger_edge);
-# 73 "mcp2515_test.c" 2
+# 74 "mcp2515_test.c" 2
 
 # 1 "inc\\mcp2515_test.h" 1
-# 74 "mcp2515_test.c" 2
-# 98 "mcp2515_test.c"
+# 75 "mcp2515_test.c" 2
+# 99 "mcp2515_test.c"
 extern uint8_t transfer_complete_flag;
 
 
@@ -4728,7 +4729,7 @@ static volatile uint8_t tmr_100ms_next = 0x00;
 static uint8_t tx_node_test_msg = 0x00;
 static uint8_t tx_node_rx_buf = 0x00u;
 static volatile uint8_t tx_node_ready_to_tx = 0x00;
-# 126 "mcp2515_test.c"
+# 127 "mcp2515_test.c"
 static char hex_to_char(uint8_t hex_num);
 
 
@@ -4746,7 +4747,7 @@ void __attribute__((picinterrupt(("")))) isr(void){
     if(PIR1bits.SSPIF && PIE1bits.SSPIE) {
 
         transfer_complete_flag = 0x01;
-# 158 "mcp2515_test.c"
+# 159 "mcp2515_test.c"
         PIR1bits.SSPIF = 0;
     }
 
@@ -4788,7 +4789,7 @@ void main(void) {
 
 
     can_init_default();
-# 211 "mcp2515_test.c"
+# 212 "mcp2515_test.c"
     Timer1_Init_Default();
     CCP1_Compare_Init_Default(62500u);
 
@@ -4811,10 +4812,10 @@ void main(void) {
         }
 
     }
-# 340 "mcp2515_test.c"
+# 341 "mcp2515_test.c"
     return;
 }
-# 359 "mcp2515_test.c"
+# 360 "mcp2515_test.c"
 static char hex_to_char(uint8_t hex_num){
     switch(hex_num){
 
