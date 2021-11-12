@@ -25,6 +25,11 @@
  *      - SPI Mode (1,1) -- clock idle HIGH, data sampled on rising edge -- CKP = 1, CKE = 0
  * NOTE that (x,y) don't match (CKP,CKE)! CKP does = x but CKE is opposite of y. This is because y typically denotes the edge that
  * data is sampled on (0 = idle --> active, 1 = active --> idle) whereas CKE denotes the edge that data is TRANSMITTED on.
+ * 
+ * NOTE! In master mode, as stated in section "17.3.5 MASTER MODE", "... data is transmitted/received as
+ * soon as the SSPBUF register is written to." So to start any transfer, just write to SSPBUF. Even if
+ * you just intend to receive, just write to it nonetheless.
+ * 
  */
 
  

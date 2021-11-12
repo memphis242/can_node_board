@@ -156,6 +156,8 @@
 #define MCP2515_CANSTAT_ICOD_BITS       0x0E    // ICOD = "Interrupt CODe"
 // </editor-fold>
 
+#define MCP2515_MSG_BUFF_SIZE_BYTES     13u     // 13 bytes that actually go into a message
+
 // <editor-fold defaultstate="collapsed" desc="TX-RELATED">
 /* ****************************************************************************
  * Transmit-Related
@@ -635,12 +637,22 @@
  * are using the MCP2562 transceiver, which has a t_tx_rx of 235ns.
  * 
  * 250kbps means a bit time of 4us. I'll chose NT to be 20 (i.e., 20 TQ per bit-time).
- * That means TQ = 200ns. With Fosc = 40MHz, BRP = 3. Ok, this has set the bit-rate.
+ * That means TQ = 200ns. With Fosc = 40MHz, BRP = 3 (see calc below for TQ in CNF1).
+ * Ok, this sets the bit-rate.
  * To get NSMP to be 70%, NPROPSEG + NPH1 needs to be 13. With 2m of bus length,
  * t_bus ~ 10ns. t_tx_rx is given as 235ns. This makes 2 * (t_tx_rx + t_bus) to
  * be around 490ns. This is the worst-case propagation delay. So, NPROPSEG needs
  * to be at least 3TQ. I'll choose it to be 5TQ, which sets NPH1 = 8TQ. This leaves
- * over NPH2 = 6TQ to complete the 20TQ for this bit-time split.
+ * over NPH2 = 6TQ to complete the 20TQ for this bit-time split. So overall,
+ * 
+ * BRP: 3       NPROPSEG = 5TQ      NPS1 = 8TQ      NPS2 = 6TQ
+ * 
+ * RECALL that for PRSEG, PHSEG1, and PHSEG2, subtract 1 from the values you
+ * calculate, because the MCP2515 takes the register value and adds 1 (see
+ * the calculations within the registers below). This is so that if you enter 0
+ * for any of those times, the lowest the actual value goes is 1TQ. So:
+ * 
+ * BRP: 3       PRSEG: 4        PHSEG1 = 7      PHSEG2 = 5
  * ----------------------------------------------------------------------------
  * So, with that, it becomes straightforward to configure CNF1, CNF2, and CNF3.
  * 
@@ -700,17 +712,24 @@
 #define MCP2515_CNF2            0x29
 #define MCP2515_CNF3            0x28
 
+#define CNF1_SJW_BITS                0xC0
 #define CNF1_SET_SJW_4TQ             0xC0
 #define CNF1_SET_SJW_3TQ             0x80
 #define CNF1_SET_SJW_2TQ             0x40
 #define CNF1_SET_SJW_1TQ             0x00
+#define CNF1_BRP_BITS                0x3F
+#define CNF1_SET_BRP(x)              (0x3F & (x-1))
 
-#define CNF2_SET_BRP(x)              (0x3F & x)
+#define CNF2_BTLMODE_BITS            0x80
 #define CNF2_SET_BTLMODE_CNF3        0x80
+#define CNF2_SAM_BITS                0x40
 #define CNF2_SET_SAM(x)              (x << 6u)
-#define CNF2_SET_PS1(x)              (x << 3u)
+#define CNF2_PHSEG1_BITS             0x38
+#define CNF2_SET_PHSEG1(x)           (x << 3u)
+#define CNF2_PRSEG_BITS              0x07
 #define CNF2_SET_PROPSEG(x)          (x)
 
+#define CNF3_PHSEG2_BITS             0x07
 #define CNF3_SET_PS2(x)              (x)
 // don't care about SoF or Wake-up filter for now
 
@@ -869,8 +888,16 @@
  * 8- RX STATUS -- 1011 0000 : 0xB0 -- Polls for filter match and message type of received message
  *                                     (see datasheet for details)
  * 
- * 9- BIT MODIFY -- 0000 0101 : 0x05 -- Similar to WRITE, however not sure how this works exactly...
- *                                      Datasheet shows: START --> BIT MODIFY --> Address --> Mask --> Data
+ * 9- BIT MODIFY -- 0000 0101 : 0x05 -- Similar to WRITE, however there is an additional mask sent to state which
+ *                                      bits will be allowed to change and which won't. For example,
+ *                                          MASK: 00110101
+ *                                          DATA: xx10x0x1
+ *                                          REG:  uu10u0u1  (u = unchanged)
+ *                                      Also note that multiple bits can be modified, not just one.
+ *                                      Also note that not all registers are bit-modifiable in this way. It is
+ *                                      mainly the control registers (except for CANSTAT).
+ *                            
+ *                              START --> BIT MODIFY --> Address --> Mask --> Data
  * 
  */
 
@@ -911,6 +938,7 @@ typedef enum { RXB0, RXB1 } rxbuf_t;
 typedef enum { RX_MASK0, RX_MASK1 } rx_mask_t;
 typedef enum { RX_FILT0, RX_FILT1, RX_FILT2, RX_FILT3, RX_FILT4, RX_FILT5 } rx_filt_t;
 typedef enum { MCP2515_OPTION_ROLLOVER } mcp_2515_options_t;
+//typedef enum { RESET, READ, READ_RX_BUFFER, WRITE, LOAD_TX_BUFFER, RTS, READ_STATUS, RX_STATUS, BIT_MODIFY } mcp2515_commands_t;
 
 
 // Structures
@@ -968,15 +996,16 @@ typedef struct {
 void can_init_default(void);
 void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump);
 
-void can_spi_command(uint8_t cmd);
-uint8_t can_spi_query(uint8_t query);
-void can_read_reg(uint8_t reg, uint8_t * rxbuf);
-void can_read_successive_reg(uint8_t start_reg, uint8_t * rxbuf, uint8_t len);
-void can_write_reg(uint8_t reg, uint8_t value);
-void can_write_successive_reg(uint8_t start_reg, uint8_t * txbuf, uint8_t len);
-void can_write_bit(uint8_t reg, uint8_t mask, uint8_t val);
-void can_write_txbuf(txbuf_t txb,  uint8_t * mcp2515_tx_buf, uint8_t len);
-void can_read_rxbuf(rxbuf_t rxb,  uint8_t * mcp2515_rx_buf, uint8_t len);
+void mcp2515_cmd_reset(void);
+uint8_t mcp2515_cmd_read_status(void);
+uint8_t mcp2515_cmd_rx_status(void);
+void mcp2515_cmd_read(uint8_t reg_address, uint8_t * buf);
+void mcp2515_cmd_read_sequential(uint8_t start_reg_addr, uint8_t * rxbuf, uint8_t len);
+void mcp2515_cmd_write(uint8_t reg_address, uint8_t val);
+void mcp2515_cmd_write_sequential(uint8_t start_reg_addr, uint8_t * txbuf, uint8_t len);
+void mcp2515_cmd_write_bit(uint8_t reg_address, uint8_t mask, uint8_t val);
+uint8_t * mcp2515_cmd_read_rx_buf(rxbuf_t rxb);    // Programmer needs to have the write size buffer ready!! MCP2515_MSG_BUFF_SIZE_BYTES
+void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t tx_buf);      // Programmer needs to have the write size buffer ready!! MCP2515_MSG_BUFF_SIZE_BYTES
 
 /* Use the below functions at border between PIC and MCP2515. As in to say...
  *      - For a transmit, you may construct the message first using the structs

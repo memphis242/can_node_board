@@ -231,8 +231,8 @@ void SPI_Transfer_Byte(uint8_t tx, uint8_t * rx){
  * Returns: none
  */
 void SPI_Transfer_Packet(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_size){
-    uint16_t i = 0;
-    for(i=0; i<pack_size; i++){
+
+    for(uint16_t i=0; i<pack_size; i++){
         SPI_Transfer_Byte(tx_pack[i], &rx_pack[i]);
     }
 }
@@ -314,6 +314,55 @@ void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size){
  */
 
 
+// Functions that do not automatically enable/disable CS, as described in header
+
+/* Function: SPI_Transfer_Byte_without_CS
+ * ---------------------------------
+ * Same as SPI_Transfer_Byte except without enabling/disabling the CS line.
+ * That needs to be done before and after this function gets called. This
+ * should allow the application to more easily make use of sequential reading
+ * from SPI devices.
+ * 
+ * Parameters:
+ *      . tx - The byte to be sent.
+ *      . rx - The buffer to hold the received byte.
+ * 
+ * Returns: none
+ */
+void SPI_Transfer_Byte_without_CS(uint8_t tx, uint8_t * rx){
+    
+    manual_transfer = 0x01; // Indicate the manual transfer is beginning.
+    transfer_complete_flag = 0x00;
+    
+    SSPBUF = tx;
+    while(!transfer_complete_flag);     // Wait until data ready variable flag is set  
+    *rx = SSPBUF;
+    
+    manual_transfer = 0x00; // Indicate the manual transfer is ending.
+    transfer_complete_flag = 0x00;  // Reset transfer complete flag
+    
+}
+
+/* Function: SPI_Transfer_Packet_without_CS
+ * ---------------------------------
+ * Same as SPI_Transfer_Packet except without enabling/disabling the CS line.
+ * That needs to be done before and after this function gets called. This
+ * should allow the application to more easily make use of sequential reading
+ * from SPI devices.
+ * 
+ * Parameters:
+ *      . tx - The byte to be sent.
+ *      . rx - The buffer to hold the received byte.
+ * 
+ * Returns: none
+ */
+void SPI_Transfer_Packet_without_CS(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_size){
+    
+    for(uint16_t i=0; i<pack_size; i++){
+        SPI_Transfer_Byte(tx_pack[i], &rx_pack[i]);
+    }
+    
+}
 
 
 
