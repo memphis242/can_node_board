@@ -65,6 +65,7 @@
 
 
 #include <xc.h>
+#include <stdint.h>
 #include "mcp2515.h"
 #include "lcd_driver.h"
 #include "ccp.h"

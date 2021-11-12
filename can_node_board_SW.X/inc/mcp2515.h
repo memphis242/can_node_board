@@ -982,9 +982,9 @@ typedef enum { MCP2515_OPTION_ROLLOVER } mcp_2515_options_t;
  *
  */
 typedef struct {
-    uint16_t sid;   // bits 10:0 --> 0x000 to 0x3FF
-    uint8_t ide;    // 0 = standard, 1 = extended
-    uint32_t eid;   // bits 17:0 --> 0x00000 to 0x1FFFF
+    uint16_t sid;   // bits 10:0 --> 0x000 to 0x7FF
+    uint8_t exide;    // 0 = standard, 1 = extended
+    uint32_t eid;   // bits 17:0 --> 0x00000 to 0x3FFFF
     uint8_t rtr;    // 0 = data frame, 1 = remote frame (for J1939, rtr always = 0)
 } can_msg_arb_field;
 
@@ -1011,23 +1011,23 @@ typedef struct {
 
 
 // Functions
-void can_init_default(void);
+void can_init_default(void); //
 void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump);
 
-opmode_t mcp2515_current_opmode(void);
-void mcp2515_config_mode(void);
-void mcp2515_normal_mode(void);
-void mcp2515_cmd_reset(void);
-uint8_t mcp2515_cmd_read_status(void);
-uint8_t mcp2515_cmd_rx_status(void);
-void mcp2515_cmd_read(uint8_t reg_address, uint8_t * buf);
-void mcp2515_cmd_read_sequential(uint8_t start_reg_addr, uint8_t * rxbuf, uint8_t len);
-void mcp2515_cmd_write(uint8_t reg_address, uint8_t val);
-void mcp2515_cmd_write_sequential(uint8_t start_reg_addr, uint8_t * txbuf, uint8_t len);
-void mcp2515_cmd_write_bit(uint8_t reg_address, uint8_t mask, uint8_t val);
-void mcp2515_cmd_read_rx_buf(rxbuf_t rxb, uint8_t * rx_buf);    // Programmer needs to have the write size buffer ready!! MCP2515_MSG_BUFF_SIZE_BYTES
-void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t * tx_buf);      // Programmer needs to have the write size buffer ready!! MCP2515_MSG_BUFF_SIZE_BYTES
-void mcp2515_cmd_rts(txbuf_t txb);
+opmode_t mcp2515_current_opmode(void); //
+void mcp2515_config_mode(void); //
+void mcp2515_normal_mode(void); // 
+void mcp2515_cmd_reset(void); //
+uint8_t mcp2515_cmd_read_status(void); //
+uint8_t mcp2515_cmd_rx_status(void); //
+void mcp2515_cmd_read(uint8_t reg_address, uint8_t * buf); //
+void mcp2515_cmd_read_sequential(uint8_t start_reg_addr, uint8_t * rxbuf, uint8_t len); //
+void mcp2515_cmd_write(uint8_t reg_address, uint8_t val); //
+void mcp2515_cmd_write_sequential(uint8_t start_reg_addr, uint8_t * txbuf, uint8_t len); //
+void mcp2515_cmd_write_bit(uint8_t reg_address, uint8_t mask, uint8_t val); //
+void mcp2515_cmd_read_rx_buf(rxbuf_t rxb, uint8_t * rx_buf); //
+void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t * tx_buf); //
+void mcp2515_cmd_rts(txbuf_t txb); //
 
 /* Use the below functions at border between PIC and MCP2515. As in to say...
  *      - For a transmit, you may construct the message first using the structs
@@ -1044,11 +1044,12 @@ void can_parse_msg_std(can_msg * msg, uint8_t * mcp2515_rx_buf);
 void can_compose_msg_ext(can_msg * msg, uint8_t * mcp2515_tx_buf);
 void can_parse_msg_ext(can_msg * msg, uint8_t * mcp2515_rx_buf);
 
+// This will be the highest level API layer
 uint8_t can_send(can_msg * msg);    // TODO: Include priority at some point...
-uint8_t can_remot_frame(can_msg_arb_field arb_field);
+uint8_t can_receive(can_msg * msg);
+uint8_t can_remote_frame(can_msg_arb_field arb_field);
 uint8_t can_tx_cancel(void);
 uint8_t can_tx_available(void);
-uint8_t can_receive(can_msg * msg);
 uint8_t can_rx_pending(void);
 uint8_t can_rx_setmask(rx_mask_t mask_id, uint32_t mask, uint8_t is_extended);
 uint8_t can_rx_setfilter(rx_filt_t filt_id, uint32_t filter);

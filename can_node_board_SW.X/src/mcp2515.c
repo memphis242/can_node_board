@@ -23,6 +23,9 @@ extern uint8_t receive_byte;    // Used as part of SPI comms when I don't care a
 
 
 // Functions
+
+// ****************************************************************************
+// <editor-fold defaultstate="collapsed" desc="Configuration Functions">
 /**
  * <h3>Function: can_init_default</h3>
  * ----------------------------------------------------------------------------
@@ -130,6 +133,8 @@ void can_init_default(void){
 void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump){
     
 }
+
+// </editor-fold>
 
 // ****************************************************************************
 // <editor-fold defaultstate="collapsed" desc="MCP2515 COMMAND FUNCTIONS">
@@ -446,3 +451,126 @@ void mcp2515_cmd_rts(txbuf_t txb){
     SPI_Transfer_Byte(MCP2515_SPI_RTS(txb), &receive_byte);
 }
 // </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="INTERMEDIATE LAYER">
+
+/* These functions serves as the intermediary between the final MCP2515 command, which
+ * will utilize an array buffer to send the individual bytes, and the application
+ * layer, which makes use of can_msg structs since it's a little more intuitive to
+ * work with.
+ */
+
+
+void can_compose_msg_std(can_msg * msg, uint8_t * mcp2515_tx_buf){
+    // I'll leave this for now...
+}
+
+
+void can_parse_msg_std(can_msg * msg, uint8_t * mcp2515_rx_buf){
+    // I'll leave this for now...
+}
+
+/**
+ * <h3>Function: can_compose_msg_ext</h3>
+ * <p>Convert a can_msg struct into the 13 bytes needed to go into a tx_buf before
+ * sending the msg off. User needs to take care that mcp2515_tx_buf is large
+ * enough! MCP2515_MSG_BUFF_SIZE_BYTES!</p>
+ * 
+ * <p>Recall that a buffer in the MCP2515 goes (in byte order) (refer to MCP2515
+ * data sheet or my mcp2515.h header file for more detailed register layout):
+ * <ol>
+ *      <li>SIDH: SID10:SID3</li>
+ *      <li>SIDL: SID2:SID0--undef--EXIDE--EID17:EID16</li>
+ *      <li>EID8: EID15:EID8</li>
+ *      <li>EID0: EID7:EID0 </li>
+ *      <li>DLC: undef--RTR--undef-undef--DLC3:DLC0</li>
+ *      <li>Data Bytes 0 to 7 (8 bytes)</li>
+ * 
+ * @param can_msg * msg -- The struct holding the CAN message
+ * @param uint8_t * mcp2515_tx_buf -- The TX buffer that will be used with the
+ *                                    LOAD_TX_BUFFER command.
+ * 
+ * @return none
+ */
+void can_compose_msg_ext(can_msg * msg, uint8_t * mcp2515_tx_buf){
+    
+    // Warning: Some yellow-belt bit Kung-Fu up ahead
+    mcp2515_tx_buf[0] = (msg->arb_field.sid & 0x07F8u) >> 3u;      // SID10:SID3
+    mcp2515_tx_buf[1] = ((msg->arb_field.sid & 0x0007u) << 5u) |   // SID2:SID0
+                        ((msg->arb_field.exide) << 3u)         |   // EXIDE
+                        ((msg->arb_field.eid & 0x30000) >> 16u);   // EID17:EID16
+    mcp2515_tx_buf[2] = (msg->arb_field.eid & 0x0FF00) >> 8u;      // EID15:EID8
+    mcp2515_tx_buf[3] = msg->arb_field.eid & 0x000FF;              // EID7:EID0
+    mcp2515_tx_buf[4] = (msg->arb_field.rtr << 6u)    |           // RTR
+                        (msg->ctrl_field.dlc);                     // DLC
+    mcp2515_tx_buf[5] = msg->data_field.data0;
+    mcp2515_tx_buf[6] = msg->data_field.data1;
+    mcp2515_tx_buf[7] = msg->data_field.data2;
+    mcp2515_tx_buf[8] = msg->data_field.data3;
+    mcp2515_tx_buf[9] = msg->data_field.data4;
+    mcp2515_tx_buf[10] = msg->data_field.data5;
+    mcp2515_tx_buf[11] = msg->data_field.data6;
+    mcp2515_tx_buf[12] = msg->data_field.data7;
+    
+}
+
+/**
+ * <h3>Function: can_parse_msg_ext</h3>
+ * <p>Convert a mcp2515_rx_buf into a can_msg struct. User needs to take care
+ * that mcp2515_tx_buf is large enough! MCP2515_MSG_BUFF_SIZE_BYTES!</p>
+ * 
+ * <p>Recall that a buffer in the MCP2515 goes (in byte order) (refer to MCP2515
+ * data sheet or my mcp2515.h header file for more detailed register layout):
+ * <ol>
+ *      <li>SIDH: SID10:SID3</li>
+ *      <li>SIDL: SID2:SID0--undef--EXIDE--EID17:EID16</li>
+ *      <li>EID8: EID15:EID8</li>
+ *      <li>EID0: EID7:EID0 </li>
+ *      <li>DLC: undef--RTR--undef-undef--DLC3:DLC0</li>
+ *      <li>Data Bytes 0 to 7 (8 bytes)</li>
+ * 
+ * @param can_msg * msg -- The struct holding the CAN message
+ * @param uint8_t * mcp2515_rx_buf -- The RX buffer that was obtained with an
+ *                                    READ_RX_BUFFER command.
+ * 
+ * @return none
+ */
+void can_parse_msg_ext(can_msg * msg, uint8_t * mcp2515_rx_buf){
+    // Warning: More bit Kung-Fu up ahead...
+    msg->arb_field.sid = (((uint16_t) mcp2515_rx_buf[0]) << 3u) | (((uint16_t) mcp2515_rx_buf[1] & 0x00E0) >> 5u);
+    msg->arb_field.exide = (mcp2515_rx_buf[1] & 0x08) >> 3u;
+    msg->arb_field.eid = (((uint16_t) mcp2515_rx_buf[1] & 0x0003) << 16u)    |
+                         (((uint16_t) mcp2515_rx_buf[2]) << 8u)     |
+                         ((uint16_t) mcp2515_rx_buf[3]);
+    msg->arb_field.rtr = (mcp2515_rx_buf[4] & 0x40) >> 6u;
+    msg->ctrl_field.dlc = mcp2515_rx_buf[4] & 0x0F;
+    msg->data_field.data0 = mcp2515_rx_buf[5];
+    msg->data_field.data1 = mcp2515_rx_buf[6];
+    msg->data_field.data2 = mcp2515_rx_buf[7];
+    msg->data_field.data3 = mcp2515_rx_buf[8];
+    msg->data_field.data4 = mcp2515_rx_buf[9];
+    msg->data_field.data5 = mcp2515_rx_buf[10];
+    msg->data_field.data6 = mcp2515_rx_buf[11];
+    msg->data_field.data7 = mcp2515_rx_buf[12];
+    
+}
+
+// </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="API LAYER">
+
+uint8_t can_send(can_msg * msg);    // TODO: Include priority at some point...
+uint8_t can_receive(can_msg * msg);
+uint8_t can_remote_frame(can_msg_arb_field arb_field);
+uint8_t can_tx_cancel(void);
+uint8_t can_tx_available(void);
+uint8_t can_rx_pending(void);
+uint8_t can_rx_setmask(rx_mask_t mask_id, uint32_t mask, uint8_t is_extended);
+uint8_t can_rx_setfilter(rx_filt_t filt_id, uint32_t filter);
+uint8_t can_rx_mode(void);
+uint8_t can_mcp2515_config_options(mcp_2515_options_t option, uint8_t val);
+uint8_t can_read_error(uint8_t reg);
+uint8_t can_clear_bus_error(void);
+
+// </editor-fold>
+
