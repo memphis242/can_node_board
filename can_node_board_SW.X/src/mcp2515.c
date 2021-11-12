@@ -17,30 +17,34 @@
 
 
 // <editor-fold defaultstate="collapsed" desc="GLOBAL & STATIC VARIABLES">
-
+extern uint8_t receive_byte;
 // </editor-fold>
 
 
 // Functions
-/* Function: can_init_default
- * ---------------------------------
+/**
+ * Function: can_init_default
+ * ----------------------------------------------------------------------------
+ * <p>
  * Here I, assuming the MCP2515 is in configuration mode (should check first)
- *      1- set up interrupt pins on MCP2515 (~RXxBF pins)
- *      2- ensure SPI has been initialized,
- *      3- set up CLKEN, CLKPRE in CANCTRL so that the CLKOUT pin is disabled,
+ * <ol>
+ *      <li>set up interrupt pins on MCP2515 (~RXxBF pins)</li>
+ *      <li>ensure SPI has been initialized,</li>
+ *      <li>set up CLKEN, CLKPRE in CANCTRL so that the CLKOUT pin is disabled,</li>
  *         (otherwise, leave other bits at their reset values)
- *      4- set up the bit-timing to be 250kbps (CNFGx),
- *      5- set up TX-related control (TXBnCTRL, TXRTSCTRL)
- *      6- set up RX-related control (RXBnCTRL, BFPCTRL, filters, masks)
- *      7- configure the MCP2515's interrupts CANINTE
- *      8- Save all this in internally-linked global variables to remember
+ *      <li>set up the bit-timing to be 250kbps (CNFGx),</li>
+ *      <li>set up TX-related control (TXBnCTRL, TXRTSCTRL)</li>
+ *      <li>set up RX-related control (RXBnCTRL, BFPCTRL, filters, masks)</li>
+ *      <li>configure the MCP2515's interrupts CANINTE</li>
+ *      <li>Save all this in internally-linked global variables to remember</li>
  *         current config
- *      9- Request the op mode to be Normal
+ *      <li>Request the op mode to be Normal</li>
+ * </ol>
+ * </p>
  * 
+ * @param none
  * 
- * Parameters: none
- * 
- * Returns: none
+ * @return none
  */
 void can_init_default(void){
     
@@ -72,13 +76,29 @@ void can_init_default(void){
     
 }
 
-void can_spi_command(uint8_t cmd){
-    
-    
+void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump){
     
 }
 
-uint8_t can_spi_query(uint8_t query){
+/**
+ * Function: mcp2515_cmd_reset
+ * Sends a RESET command over SPI to the MCP2515.
+ * 
+ * @param none
+ * 
+ * @return none
+ */
+void mcp2515_cmd_reset(void){
+    SPI_Transfer_Byte(MCP2515_SPI_RESET, &receive_byte);
     
-    return EXEC_SUCCESS;
 }
+
+uint8_t mcp2515_cmd_read_status(void);
+uint8_t mcp2515_cmd_rx_status(void);
+void mcp2515_cmd_read(uint8_t reg_address, uint8_t * buf);
+void mcp2515_cmd_read_sequential(uint8_t start_reg_addr, uint8_t * rxbuf, uint8_t len);
+void mcp2515_cmd_write(uint8_t reg_address, uint8_t val);
+void mcp2515_cmd_write_sequential(uint8_t start_reg_addr, uint8_t * txbuf, uint8_t len);
+void mcp2515_cmd_write_bit(uint8_t reg_address, uint8_t mask, uint8_t val);
+uint8_t * mcp2515_cmd_read_rx_buf(rxbuf_t rxb);    // Programmer needs to have the write size buffer ready!! MCP2515_MSG_BUFF_SIZE_BYTES
+void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t tx_buf);      // Programmer needs to have the write size buffer ready!! MCP2515_MSG_BUFF_SIZE_BYTES
