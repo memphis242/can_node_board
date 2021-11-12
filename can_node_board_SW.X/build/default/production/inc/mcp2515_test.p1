@@ -1,29 +1,52 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"6304 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6304: extern volatile unsigned char INTCON2 __attribute__((address(0xFF1)));
-[v _INTCON2 `Vuc ~T0 @X0 0 e@4081 ]
-"4450
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 4450:     struct {
-[s S175 :4 `uc 1 :2 `uc 1 ]
-[n S175 . PCFG VCFG ]
-"4454
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 4454:     struct {
-[s S176 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S176 . PCFG0 PCFG1 PCFG2 PCFG3 VCFG0 VCFG1 ]
-"4462
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 4462:     struct {
-[s S177 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S177 . . CHSN3 VCFG01 VCFG11 ]
-"4449
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 4449: typedef union {
-[u S174 `S175 1 `S176 1 `S177 1 ]
-[n S174 . . . . ]
-"4469
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 4469: extern volatile ADCON1bits_t ADCON1bits __attribute__((address(0xFC1)));
-[v _ADCON1bits `VS174 ~T0 @X0 0 e@4033 ]
-"1602
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 1602: extern volatile unsigned char TRISB __attribute__((address(0xF93)));
-[v _TRISB `Vuc ~T0 @X0 0 e@3987 ]
+[t ~ __interrupt . k ]
+[t T39 __interrupt ]
+"2580 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2580:     struct {
+[s S94 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S94 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF PSPIF ]
+"2590
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2590:     struct {
+[s S95 :4 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S95 . . TX1IF RC1IF ]
+"2579
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2579: typedef union {
+[u S93 `S94 1 `S95 1 ]
+[n S93 . . . ]
+"2596
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2596: extern volatile PIR1bits_t PIR1bits __attribute__((address(0xF9E)));
+[v _PIR1bits `VS93 ~T0 @X0 0 e@3998 ]
+"2503
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2503:     struct {
+[s S91 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S91 . TMR1IE TMR2IE CCP1IE SSPIE TXIE RCIE ADIE PSPIE ]
+"2513
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2513:     struct {
+[s S92 :4 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S92 . . TX1IE RC1IE ]
+"2502
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2502: typedef union {
+[u S90 `S91 1 `S92 1 ]
+[n S90 . . . ]
+"2519
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 2519: extern volatile PIE1bits_t PIE1bits __attribute__((address(0xF9D)));
+[v _PIE1bits `VS90 ~T0 @X0 0 e@3997 ]
+"98 inc/mcp2515_test.c
+[; ;inc/mcp2515_test.c: 98: extern uint8_t transfer_complete_flag;
+[v _transfer_complete_flag `uc ~T0 @X0 0 e ]
+[p mainexit ]
+"968 inc/mcp2515.h
+[; ;inc/mcp2515.h: 968: void can_init_default(void);
+[v _can_init_default `(v ~T0 @X0 0 ef ]
+"63 inc/timer.h
+[; ;inc/timer.h: 63: void Timer1_Init_Default(void);
+[v _Timer1_Init_Default `(v ~T0 @X0 0 ef ]
+"160 inc/ccp.h
+[; ;inc/ccp.h: 160: void CCP1_Compare_Init_Default(uint16_t comp_val);
+[v _CCP1_Compare_Init_Default `(v ~T0 @X0 0 ef1`us ]
+"5224 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 5224: extern volatile unsigned char T1CON __attribute__((address(0xFCD)));
+[v _T1CON `Vuc ~T0 @X0 0 e@4045 ]
 "6380
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6380:     struct {
 [s S263 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -43,44 +66,72 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6406
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6406: extern volatile INTCONbits_t INTCONbits __attribute__((address(0xFF2)));
 [v _INTCONbits `VS262 ~T0 @X0 0 e@4082 ]
-"6218
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6218:     struct {
-[s S256 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S256 . INT1IF INT2IF . INT1IE INT2IE . INT1IP INT2IP ]
-"6228
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6228:     struct {
-[s S257 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S257 . INT1F INT2F . INT1E INT2E . INT1P INT2P ]
-"6217
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6217: typedef union {
-[u S255 `S256 1 `S257 1 ]
-[n S255 . . . ]
-"6239
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6239: extern volatile INTCON3bits_t INTCON3bits __attribute__((address(0xFF0)));
-[v _INTCON3bits `VS255 ~T0 @X0 0 e@4080 ]
-"57 src/external_interrupts.c
-[; ;src/external_interrupts.c: 57: void external_interrupts_init(uint8_t which_pins, external_interrupt_edge_t trigger_edge){
-[c E2469 0 1 .. ]
-[n E2469 . FALLING_EDGE RISING_EDGE  ]
-"6310 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6310:     struct {
-[s S259 :7 `uc 1 :1 `uc 1 ]
-[n S259 . . NOT_RBPU ]
-"6314
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6314:     struct {
-[s S260 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S260 . RBIP . TMR0IP . INTEDG2 INTEDG1 INTEDG0 nRBPU ]
-"6324
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6324:     struct {
-[s S261 :7 `uc 1 :1 `uc 1 ]
-[n S261 . . RBPU ]
-"6309
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6309: typedef union {
-[u S258 `S259 1 `S260 1 `S261 1 ]
-[n S258 . . . . ]
-"6329
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6329: extern volatile INTCON2bits_t INTCON2bits __attribute__((address(0xFF1)));
-[v _INTCON2bits `VS258 ~T0 @X0 0 e@4081 ]
+"11 inc/mcp2515_test.c
+[p x OSC  =  HSPLL       ]
+"12
+[p x FCMEN  =  OFF       ]
+"13
+[p x IESO  =  OFF        ]
+"16
+[p x PWRT  =  OFF        ]
+"17
+[p x BOREN  =  SBORDIS   ]
+"18
+[p x BORV  =  3          ]
+"21
+[p x WDT  =  OFF         ]
+"22
+[p x WDTPS  =  32768     ]
+"25
+[p x CCP2MX  =  PORTBE   ]
+"26
+[p x PBADEN  =  OFF      ]
+"27
+[p x LPT1OSC  =  OFF     ]
+"28
+[p x MCLRE  =  ON        ]
+"31
+[p x STVREN  =  ON       ]
+"32
+[p x LVP  =  OFF         ]
+"33
+[p x XINST  =  OFF       ]
+"36
+[p x CP0  =  OFF         ]
+"37
+[p x CP1  =  OFF         ]
+"38
+[p x CP2  =  OFF         ]
+"39
+[p x CP3  =  OFF         ]
+"42
+[p x CPB  =  OFF         ]
+"43
+[p x CPD  =  OFF         ]
+"46
+[p x WRT0  =  OFF        ]
+"47
+[p x WRT1  =  OFF        ]
+"48
+[p x WRT2  =  OFF        ]
+"49
+[p x WRT3  =  OFF        ]
+"52
+[p x WRTC  =  OFF        ]
+"53
+[p x WRTB  =  OFF        ]
+"54
+[p x WRTD  =  OFF        ]
+"57
+[p x EBTR0  =  OFF       ]
+"58
+[p x EBTR1  =  OFF       ]
+"59
+[p x EBTR2  =  OFF       ]
+"60
+[p x EBTR3  =  OFF       ]
+"63
+[p x EBTRB  =  OFF       ]
 "54 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 54: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -492,113 +543,308 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6715
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6715: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"26 src/external_interrupts.c
-[; ;src/external_interrupts.c: 26: void external_interrupts_init_default(void){
-[v _external_interrupts_init_default `(v ~T0 @X0 1 ef ]
+"101 inc/mcp2515_test.c
+[; ;inc/mcp2515_test.c: 101: static volatile uint8_t tmr_100ms_next = 0x00;
+[v _tmr_100ms_next `Vuc ~T0 @X0 1 s ]
+[i _tmr_100ms_next
+-> -> 0 `i `uc
+]
+"102
+[; ;inc/mcp2515_test.c: 102: static uint8_t spi_tx_test_msg = 0x00;
+[v _spi_tx_test_msg `uc ~T0 @X0 1 s ]
+[i _spi_tx_test_msg
+-> -> 0 `i `uc
+]
+"103
+[; ;inc/mcp2515_test.c: 103: static uint8_t spi_rx_msg_buf = 0x00u;
+[v _spi_rx_msg_buf `uc ~T0 @X0 1 s ]
+[i _spi_rx_msg_buf
+-> -> 0 `ui `uc
+]
+"104
+[; ;inc/mcp2515_test.c: 104: static volatile uint8_t spi_ready_to_tx = 0x00;
+[v _spi_ready_to_tx `Vuc ~T0 @X0 1 s ]
+[i _spi_ready_to_tx
+-> -> 0 `i `uc
+]
+[v $root$_isr `(v ~T0 @X0 0 e ]
+"134
+[; ;inc/mcp2515_test.c: 134: void __attribute__((picinterrupt(("")))) isr(void){
+[v _isr `(v ~T39 @X0 1 ef ]
 {
-[e :U _external_interrupts_init_default ]
+[e :U _isr ]
 [f ]
-"28
-[; ;src/external_interrupts.c: 28:     (INTCON2 &= ~(0x70));
-[e =& _INTCON2 -> ~ -> 112 `i `Vuc ]
-"29
-[; ;src/external_interrupts.c: 29:     ADCON1bits.PCFG = 0xF; (TRISB |= 0x07);
-[e = . . _ADCON1bits 0 0 -> -> 15 `i `uc ]
-[e =| _TRISB -> -> 7 `i `Vuc ]
-"31
-[; ;src/external_interrupts.c: 31:     (INTCONbits.INT0IE = 1u);
-[e = . . _INTCONbits 0 4 -> -> 1 `ui `uc ]
-"32
-[; ;src/external_interrupts.c: 32:     (INTCON3bits.INT1IE = 1u);
-[e = . . _INTCON3bits 0 3 -> -> 1 `ui `uc ]
-"33
-[; ;src/external_interrupts.c: 33:     (INTCON3bits.INT2IE = 1u);
-[e = . . _INTCON3bits 0 4 -> -> 1 `ui `uc ]
-"36
-[; ;src/external_interrupts.c: 36:     (INTCONbits.INT0IF = 0u);
-[e = . . _INTCONbits 0 1 -> -> 0 `ui `uc ]
-"37
-[; ;src/external_interrupts.c: 37:     (INTCON3bits.INT1IF = 0u);
-[e = . . _INTCON3bits 0 0 -> -> 0 `ui `uc ]
-"38
-[; ;src/external_interrupts.c: 38:     (INTCON3bits.INT2IF = 0u);
-[e = . . _INTCON3bits 0 1 -> -> 0 `ui `uc ]
-"40
-[; ;src/external_interrupts.c: 40: }
-[e :UE 270 ]
-}
-"57
-[; ;src/external_interrupts.c: 57: void external_interrupts_init(uint8_t which_pins, external_interrupt_edge_t trigger_edge){
-[v _external_interrupts_init `(v ~T0 @X0 1 ef2`uc`E2469 ]
+"140
+[; ;inc/mcp2515_test.c: 140:     if(PIR1bits.SSPIF && PIE1bits.SSPIE) {
+[e $ ! && != -> . . _PIR1bits 0 3 `i -> 0 `i != -> . . _PIE1bits 0 3 `i -> 0 `i 275  ]
 {
-[e :U _external_interrupts_init ]
-[v _which_pins `uc ~T0 @X0 1 r1 ]
-[v _trigger_edge `E2469 ~T0 @X0 1 r2 ]
+"142
+[; ;inc/mcp2515_test.c: 142:         transfer_complete_flag = 0x01;
+[e = _transfer_complete_flag -> -> 1 `i `uc ]
+"158
+[; ;inc/mcp2515_test.c: 158:         PIR1bits.SSPIF = 0;
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+"159
+[; ;inc/mcp2515_test.c: 159:     }
+}
+[e :U 275 ]
+"166
+[; ;inc/mcp2515_test.c: 166:     if(PIR1bits.CCP1IF && PIE1bits.CCP1IE){
+[e $ ! && != -> . . _PIR1bits 0 2 `i -> 0 `i != -> . . _PIE1bits 0 2 `i -> 0 `i 276  ]
+{
+"169
+[; ;inc/mcp2515_test.c: 169:         if(tmr_100ms_next){
+[e $ ! != -> _tmr_100ms_next `i -> 0 `i 277  ]
+{
+"171
+[; ;inc/mcp2515_test.c: 171:             tmr_100ms_next = 0x00;
+[e = _tmr_100ms_next -> -> 0 `i `uc ]
+"174
+[; ;inc/mcp2515_test.c: 174:             spi_ready_to_tx = 0x01;
+[e = _spi_ready_to_tx -> -> 1 `i `uc ]
+"176
+[; ;inc/mcp2515_test.c: 176:             (PIR1bits.CCP1IF = 0u);
+[e = . . _PIR1bits 0 2 -> -> 0 `ui `uc ]
+"178
+[; ;inc/mcp2515_test.c: 178:         } else{
+}
+[e $U 278  ]
+[e :U 277 ]
+{
+"180
+[; ;inc/mcp2515_test.c: 180:             tmr_100ms_next = 0x01;
+[e = _tmr_100ms_next -> -> 1 `i `uc ]
+"181
+[; ;inc/mcp2515_test.c: 181:             spi_ready_to_tx = 0x00;
+[e = _spi_ready_to_tx -> -> 0 `i `uc ]
+"183
+[; ;inc/mcp2515_test.c: 183:             (PIR1bits.CCP1IF = 0u);
+[e = . . _PIR1bits 0 2 -> -> 0 `ui `uc ]
+"184
+[; ;inc/mcp2515_test.c: 184:         }
+}
+[e :U 278 ]
+"185
+[; ;inc/mcp2515_test.c: 185:     }
+}
+[e :U 276 ]
+"188
+[; ;inc/mcp2515_test.c: 188:     return;
+[e $UE 274  ]
+"189
+[; ;inc/mcp2515_test.c: 189: }
+[e :UE 274 ]
+}
+[v $root$_main `(v ~T0 @X0 0 e ]
+"195
+[; ;inc/mcp2515_test.c: 195: void main(void) {
+[v _main `(v ~T0 @X0 1 ef ]
+{
+[e :U _main ]
 [f ]
-"58
-[; ;src/external_interrupts.c: 58:     if((which_pins & (1u << 0))) {
-[e $ ! != & -> _which_pins `ui << -> 1 `ui -> 0 `i -> -> 0 `i `ui 272  ]
+"198
+[; ;inc/mcp2515_test.c: 198:     can_init_default();
+[e ( _can_init_default ..  ]
+"211
+[; ;inc/mcp2515_test.c: 211:     Timer1_Init_Default();
+[e ( _Timer1_Init_Default ..  ]
+"212
+[; ;inc/mcp2515_test.c: 212:     CCP1_Compare_Init_Default(62500u);
+[e ( _CCP1_Compare_Init_Default (1 -> -> 62500 `ui `us ]
+"216
+[; ;inc/mcp2515_test.c: 216:     T1CON |= 0x01;
+[e =| _T1CON -> -> 1 `i `Vuc ]
+"217
+[; ;inc/mcp2515_test.c: 217:     (INTCONbits.PEIE = 1u);
+[e = . . _INTCONbits 1 6 -> -> 1 `ui `uc ]
+"218
+[; ;inc/mcp2515_test.c: 218:     (INTCONbits.GIE = 1);
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+"221
+[; ;inc/mcp2515_test.c: 221:     while(1){
+[e :U 281 ]
 {
-"59
-[; ;src/external_interrupts.c: 59:         INTCON2bits.INTEDG0 = trigger_edge;
-[e = . . _INTCON2bits 1 6 -> _trigger_edge `uc ]
-"60
-[; ;src/external_interrupts.c: 60:         ADCON1bits.PCFG = 0xF; (TRISB |= 0x01);
-[e = . . _ADCON1bits 0 0 -> -> 15 `i `uc ]
-[e =| _TRISB -> -> 1 `i `Vuc ]
-"61
-[; ;src/external_interrupts.c: 61:         (INTCONbits.INT0IE = 1u);
-[e = . . _INTCONbits 0 4 -> -> 1 `ui `uc ]
-"62
-[; ;src/external_interrupts.c: 62:         (INTCONbits.INT0IF = 0u);
-[e = . . _INTCONbits 0 1 -> -> 0 `ui `uc ]
-"63
-[; ;src/external_interrupts.c: 63:     }
-}
-[e :U 272 ]
-"64
-[; ;src/external_interrupts.c: 64:     if((which_pins & (1u << 1))) {
-[e $ ! != & -> _which_pins `ui << -> 1 `ui -> 1 `i -> -> 0 `i `ui 273  ]
+"223
+[; ;inc/mcp2515_test.c: 223:         if(spi_ready_to_tx){
+[e $ ! != -> _spi_ready_to_tx `i -> 0 `i 283  ]
 {
-"65
-[; ;src/external_interrupts.c: 65:         INTCON2bits.INTEDG1 = trigger_edge;
-[e = . . _INTCON2bits 1 5 -> _trigger_edge `uc ]
-"66
-[; ;src/external_interrupts.c: 66:         ADCON1bits.PCFG = 0xF; (TRISB |= 0x02);
-[e = . . _ADCON1bits 0 0 -> -> 15 `i `uc ]
-[e =| _TRISB -> -> 2 `i `Vuc ]
-"67
-[; ;src/external_interrupts.c: 67:         (INTCON3bits.INT1IE = 1u);
-[e = . . _INTCON3bits 0 3 -> -> 1 `ui `uc ]
-"68
-[; ;src/external_interrupts.c: 68:         (INTCON3bits.INT1IF = 0u);
-[e = . . _INTCON3bits 0 0 -> -> 0 `ui `uc ]
-"69
-[; ;src/external_interrupts.c: 69:     }
+"225
+[; ;inc/mcp2515_test.c: 225:             spi_tx_test_msg = 0x00;
+[e = _spi_tx_test_msg -> -> 0 `i `uc ]
+"229
+[; ;inc/mcp2515_test.c: 229:             spi_ready_to_tx = 0x00;
+[e = _spi_ready_to_tx -> -> 0 `i `uc ]
+"230
+[; ;inc/mcp2515_test.c: 230:         }
 }
-[e :U 273 ]
-"70
-[; ;src/external_interrupts.c: 70:     if((which_pins & (1u << 2))) {
-[e $ ! != & -> _which_pins `ui << -> 1 `ui -> 2 `i -> -> 0 `i `ui 274  ]
+[e :U 283 ]
+"232
+[; ;inc/mcp2515_test.c: 232:     }
+}
+[e :U 280 ]
+[e $U 281  ]
+[e :U 282 ]
+"340
+[; ;inc/mcp2515_test.c: 340:     return;
+[e $UE 279  ]
+"341
+[; ;inc/mcp2515_test.c: 341: }
+[e :UE 279 ]
+}
+"359
+[; ;inc/mcp2515_test.c: 359: static char hex_to_char(uint8_t hex_num){
+[v _hex_to_char `(uc ~T0 @X0 1 sf1`uc ]
 {
-"71
-[; ;src/external_interrupts.c: 71:         INTCON2bits.INTEDG2 = trigger_edge;
-[e = . . _INTCON2bits 1 4 -> _trigger_edge `uc ]
-"72
-[; ;src/external_interrupts.c: 72:         ADCON1bits.PCFG = 0xF; (TRISB |= 0x04);
-[e = . . _ADCON1bits 0 0 -> -> 15 `i `uc ]
-[e =| _TRISB -> -> 4 `i `Vuc ]
-"73
-[; ;src/external_interrupts.c: 73:         (INTCON3bits.INT2IE = 1u);
-[e = . . _INTCON3bits 0 4 -> -> 1 `ui `uc ]
-"74
-[; ;src/external_interrupts.c: 74:         (INTCON3bits.INT2IF = 0u);
-[e = . . _INTCON3bits 0 1 -> -> 0 `ui `uc ]
-"75
-[; ;src/external_interrupts.c: 75:     }
+[e :U _hex_to_char ]
+[v _hex_num `uc ~T0 @X0 1 r1 ]
+[f ]
+"360
+[; ;inc/mcp2515_test.c: 360:     switch(hex_num){
+[e $U 286  ]
+{
+"362
+[; ;inc/mcp2515_test.c: 362:         case 0x0:
+[e :U 287 ]
+"363
+[; ;inc/mcp2515_test.c: 363:             return '0';
+[e ) -> -> 48 `ui `uc ]
+[e $UE 284  ]
+"365
+[; ;inc/mcp2515_test.c: 365:         case 0x1:
+[e :U 288 ]
+"366
+[; ;inc/mcp2515_test.c: 366:             return '1';
+[e ) -> -> 49 `ui `uc ]
+[e $UE 284  ]
+"368
+[; ;inc/mcp2515_test.c: 368:         case 0x2:
+[e :U 289 ]
+"369
+[; ;inc/mcp2515_test.c: 369:             return '2';
+[e ) -> -> 50 `ui `uc ]
+[e $UE 284  ]
+"371
+[; ;inc/mcp2515_test.c: 371:         case 0x3:
+[e :U 290 ]
+"372
+[; ;inc/mcp2515_test.c: 372:             return '3';
+[e ) -> -> 51 `ui `uc ]
+[e $UE 284  ]
+"374
+[; ;inc/mcp2515_test.c: 374:         case 0x4:
+[e :U 291 ]
+"375
+[; ;inc/mcp2515_test.c: 375:             return '4';
+[e ) -> -> 52 `ui `uc ]
+[e $UE 284  ]
+"377
+[; ;inc/mcp2515_test.c: 377:         case 0x5:
+[e :U 292 ]
+"378
+[; ;inc/mcp2515_test.c: 378:             return '5';
+[e ) -> -> 53 `ui `uc ]
+[e $UE 284  ]
+"380
+[; ;inc/mcp2515_test.c: 380:         case 0x6:
+[e :U 293 ]
+"381
+[; ;inc/mcp2515_test.c: 381:             return '6';
+[e ) -> -> 54 `ui `uc ]
+[e $UE 284  ]
+"383
+[; ;inc/mcp2515_test.c: 383:         case 0x7:
+[e :U 294 ]
+"384
+[; ;inc/mcp2515_test.c: 384:             return '7';
+[e ) -> -> 55 `ui `uc ]
+[e $UE 284  ]
+"386
+[; ;inc/mcp2515_test.c: 386:         case 0x8:
+[e :U 295 ]
+"387
+[; ;inc/mcp2515_test.c: 387:             return '8';
+[e ) -> -> 56 `ui `uc ]
+[e $UE 284  ]
+"389
+[; ;inc/mcp2515_test.c: 389:         case 0x9:
+[e :U 296 ]
+"390
+[; ;inc/mcp2515_test.c: 390:             return '9';
+[e ) -> -> 57 `ui `uc ]
+[e $UE 284  ]
+"392
+[; ;inc/mcp2515_test.c: 392:         case 0xA:
+[e :U 297 ]
+"393
+[; ;inc/mcp2515_test.c: 393:             return 'A';
+[e ) -> -> 65 `ui `uc ]
+[e $UE 284  ]
+"395
+[; ;inc/mcp2515_test.c: 395:         case 0xB:
+[e :U 298 ]
+"396
+[; ;inc/mcp2515_test.c: 396:             return 'B';
+[e ) -> -> 66 `ui `uc ]
+[e $UE 284  ]
+"398
+[; ;inc/mcp2515_test.c: 398:         case 0xC:
+[e :U 299 ]
+"399
+[; ;inc/mcp2515_test.c: 399:             return 'C';
+[e ) -> -> 67 `ui `uc ]
+[e $UE 284  ]
+"401
+[; ;inc/mcp2515_test.c: 401:         case 0xD:
+[e :U 300 ]
+"402
+[; ;inc/mcp2515_test.c: 402:             return 'D';
+[e ) -> -> 68 `ui `uc ]
+[e $UE 284  ]
+"404
+[; ;inc/mcp2515_test.c: 404:         case 0xE:
+[e :U 301 ]
+"405
+[; ;inc/mcp2515_test.c: 405:             return 'E';
+[e ) -> -> 69 `ui `uc ]
+[e $UE 284  ]
+"407
+[; ;inc/mcp2515_test.c: 407:         case 0xF:
+[e :U 302 ]
+"408
+[; ;inc/mcp2515_test.c: 408:             return 'F';
+[e ) -> -> 70 `ui `uc ]
+[e $UE 284  ]
+"410
+[; ;inc/mcp2515_test.c: 410:         default:
+[e :U 303 ]
+"411
+[; ;inc/mcp2515_test.c: 411:             return ' ';
+[e ) -> -> 32 `ui `uc ]
+[e $UE 284  ]
+"413
+[; ;inc/mcp2515_test.c: 413:     }
 }
-[e :U 274 ]
-"76
-[; ;src/external_interrupts.c: 76: }
-[e :UE 271 ]
+[e $U 285  ]
+[e :U 286 ]
+[e [\ -> _hex_num `i , $ -> 0 `i 287
+ , $ -> 1 `i 288
+ , $ -> 2 `i 289
+ , $ -> 3 `i 290
+ , $ -> 4 `i 291
+ , $ -> 5 `i 292
+ , $ -> 6 `i 293
+ , $ -> 7 `i 294
+ , $ -> 8 `i 295
+ , $ -> 9 `i 296
+ , $ -> 10 `i 297
+ , $ -> 11 `i 298
+ , $ -> 12 `i 299
+ , $ -> 13 `i 300
+ , $ -> 14 `i 301
+ , $ -> 15 `i 302
+ 303 ]
+[e :U 285 ]
+"414
+[; ;inc/mcp2515_test.c: 414: }
+[e :UE 284 ]
 }

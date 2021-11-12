@@ -3,8 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/git/can_node_board/can_node_board_SW.X/src/ccp.c</file>
+            <file>file:/C:/git/can_node_board/can_node_board_SW.X/src/mssp_spi_driver.c</file>
+            <file>file:/C:/git/can_node_board/can_node_board_SW.X/inc/mcp2515_test.c</file>
             <file>file:/C:/git/can_node_board/can_node_board_SW.X/src/mcp2515.c</file>
             <file>file:/C:/git/can_node_board/can_node_board_SW.X/inc/mcp2515.h</file>
+            <file>file:/C:/git/can_node_board/can_node_board_SW.X/inc/mcp2515_test.h</file>
+            <file>file:/C:/git/can_node_board/can_node_board_SW.X/inc/ccp.h</file>
+            <file>file:/C:/git/can_node_board/can_node_board_SW.X/src/timer.c</file>
+            <file>file:/C:/git/can_node_board/can_node_board_SW.X/inc/external_interrupts.h</file>
+            <file>file:/C:/git/can_node_board/can_node_board_SW.X/inc/lcd_driver.h</file>
+            <file>file:/C:/git/can_node_board/can_node_board_SW.X/spi_test.h</file>
+            <file>file:/C:/git/can_node_board/can_node_board_SW.X/inc/mssp_spi.h</file>
+            <file>file:/C:/git/can_node_board/can_node_board_SW.X/src/external_interrupts.c</file>
+            <file>file:/C:/git/can_node_board/can_node_board_SW.X/inc/timer.h</file>
         </group>
     </open-files>
 </project-private>

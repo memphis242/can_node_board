@@ -438,35 +438,38 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/timer.c: 32:     T1CON = 0x80;
 [e = _T1CON -> -> 128 `i `uc ]
 "33
-[; ;src/timer.c: 33:     (PIE1bits.TMR1IE = 1u);
-[e = . . _PIE1bits 0 0 -> -> 1 `ui `uc ]
+[; ;src/timer.c: 33:     T1CON |= 0x30;
+[e =| _T1CON -> -> 48 `i `Vuc ]
 "34
-[; ;src/timer.c: 34: }
+[; ;src/timer.c: 34:     (PIE1bits.TMR1IE = 1u);
+[e = . . _PIE1bits 0 0 -> -> 1 `ui `uc ]
+"35
+[; ;src/timer.c: 35: }
 [e :UE 270 ]
 }
-"44
-[; ;src/timer.c: 44: void Timer1_Enable(void){
+"45
+[; ;src/timer.c: 45: void Timer1_Enable(void){
 [v _Timer1_Enable `(v ~T0 @X0 1 ef ]
 {
 [e :U _Timer1_Enable ]
 [f ]
-"45
-[; ;src/timer.c: 45:     T1CON |= 0x01;
-[e =| _T1CON -> -> 1 `i `Vuc ]
 "46
-[; ;src/timer.c: 46: }
+[; ;src/timer.c: 46:     T1CON |= 0x01;
+[e =| _T1CON -> -> 1 `i `Vuc ]
+"47
+[; ;src/timer.c: 47: }
 [e :UE 271 ]
 }
-"56
-[; ;src/timer.c: 56: void Timer1_Disable(void){
+"57
+[; ;src/timer.c: 57: void Timer1_Disable(void){
 [v _Timer1_Disable `(v ~T0 @X0 1 ef ]
 {
 [e :U _Timer1_Disable ]
 [f ]
-"57
-[; ;src/timer.c: 57:     T1CON &= ~0x01;
-[e =& _T1CON -> ~ -> 1 `i `Vuc ]
 "58
-[; ;src/timer.c: 58: }
+[; ;src/timer.c: 58:     T1CON &= ~0x01;
+[e =& _T1CON -> ~ -> 1 `i `Vuc ]
+"59
+[; ;src/timer.c: 59: }
 [e :UE 272 ]
 }

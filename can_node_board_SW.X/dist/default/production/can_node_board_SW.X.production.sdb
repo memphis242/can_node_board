@@ -20,6 +20,11 @@ MODE_8BIT 1
 SPI_MASTER 0
 SPI_SLAVE 1
 ]
+"57 C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+[e E2469 . `uc
+FALLING_EDGE 0
+RISING_EDGE 1
+]
 "7 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c99\common\__lldiv.c
 [v ___lldiv __lldiv `(ul  1 e 4 0 ]
 "4 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c99\common\fleq.c
@@ -48,10 +53,14 @@ SPI_SLAVE 1
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "91 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c99\common\Umul64.c
 [v ___omul __omul `(uo  1 e 8 0 ]
-"134 C:\git\can_node_board\can_node_board_SW.X\spi_test.c
+"134 C:\git\can_node_board\can_node_board_SW.X\inc/mcp2515_test.c
 [v _isr isr `IIH(v  1 e 1 0 ]
-"199
+"195
 [v _main main `(v  1 e 1 0 ]
+"42 C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
+[v _CCP1_Compare_Init_Default CCP1_Compare_Init_Default `(v  1 e 1 0 ]
+"26 C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+[v _external_interrupts_init_default external_interrupts_init_default `(v  1 e 1 0 ]
 "45 C:\git\can_node_board\can_node_board_SW.X\src/lcd_driver.c
 [v _LCD_enable_toggle LCD_enable_toggle `(v  1 s 1 LCD_enable_toggle ]
 "126
@@ -62,45 +71,20 @@ SPI_SLAVE 1
 [v _LCD_write_instr_byte_4bit LCD_write_instr_byte_4bit `(v  1 e 1 0 ]
 "200
 [v _LCD_write_instr_byte_8bit LCD_write_instr_byte_8bit `(v  1 e 1 0 ]
-"224
-[v _LCD_Init_ECE376 LCD_Init_ECE376 `(v  1 e 1 0 ]
 "427
 [v _LCD_clear_display LCD_clear_display `(uc  1 e 1 0 ]
-"500
-[v _LCD_set_cursor_position LCD_set_cursor_position `(uc  1 e 1 0 ]
-"70 C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi_driver.c
-[v _SPI_Init_Slave_Default SPI_Init_Slave_Default `(v  1 e 1 0 ]
+"45 C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+[v _can_init_default can_init_default `(v  1 e 1 0 ]
+"32 C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi_driver.c
+[v _SPI_Init_Master_Default SPI_Init_Master_Default `(v  1 e 1 0 ]
 "205
 [v _SPI_Transfer_Byte SPI_Transfer_Byte `(v  1 e 1 0 ]
 "250
 [v _SPI_Send_Byte SPI_Send_Byte `(v  1 e 1 0 ]
 "290
 [v _SPI_Receive_Byte SPI_Receive_Byte `(v  1 e 1 0 ]
-"360 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
-[v _PORTC PORTC `VEuc  1 e 1 @3970 ]
-"535
-[v _PORTD PORTD `VEuc  1 e 1 @3971 ]
-[s S164 . 1 `uc 1 LATC0 1 0 :1:0 
-`uc 1 LATC1 1 0 :1:1 
-`uc 1 LATC2 1 0 :1:2 
-`uc 1 LATC3 1 0 :1:3 
-`uc 1 LATC4 1 0 :1:4 
-`uc 1 LATC5 1 0 :1:5 
-`uc 1 LATC6 1 0 :1:6 
-`uc 1 LATC7 1 0 :1:7 
-]
-"1131
-[s S173 . 1 `uc 1 LC0 1 0 :1:0 
-`uc 1 LC1 1 0 :1:1 
-`uc 1 LC2 1 0 :1:2 
-`uc 1 LC3 1 0 :1:3 
-`uc 1 LC4 1 0 :1:4 
-`uc 1 LC5 1 0 :1:5 
-`uc 1 LC6 1 0 :1:6 
-`uc 1 LC7 1 0 :1:7 
-]
-[u S182 . 1 `S164 1 . 1 0 `S173 1 . 1 0 ]
-[v _LATCbits LATCbits `VES182  1 e 1 @3979 ]
+"31 C:\git\can_node_board\can_node_board_SW.X\src/timer.c
+[v _Timer1_Init_Default Timer1_Init_Default `(v  1 e 1 0 ]
 [s S117 . 1 `uc 1 LATD0 1 0 :1:0 
 `uc 1 LATD1 1 0 :1:1 
 `uc 1 LATD2 1 0 :1:2 
@@ -110,7 +94,7 @@ SPI_SLAVE 1
 `uc 1 LATD6 1 0 :1:6 
 `uc 1 LATD7 1 0 :1:7 
 ]
-"1243
+"1243 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
 [s S126 . 1 `uc 1 LD0 1 0 :1:0 
 `uc 1 LD1 1 0 :1:1 
 `uc 1 LD2 1 0 :1:2 
@@ -122,12 +106,31 @@ SPI_SLAVE 1
 ]
 [u S135 . 1 `S117 1 . 1 0 `S126 1 . 1 0 ]
 [v _LATDbits LATDbits `VES135  1 e 1 @3980 ]
-"1380
-[v _TRISA TRISA `VEuc  1 e 1 @3986 ]
+"1602
+[v _TRISB TRISB `VEuc  1 e 1 @3987 ]
 "1824
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
-"2046
-[v _TRISD TRISD `VEuc  1 e 1 @3989 ]
+[s S379 . 1 `uc 1 TRISD0 1 0 :1:0 
+`uc 1 TRISD1 1 0 :1:1 
+`uc 1 TRISD2 1 0 :1:2 
+`uc 1 TRISD3 1 0 :1:3 
+`uc 1 TRISD4 1 0 :1:4 
+`uc 1 TRISD5 1 0 :1:5 
+`uc 1 TRISD6 1 0 :1:6 
+`uc 1 TRISD7 1 0 :1:7 
+]
+"2078
+[s S204 . 1 `uc 1 RD0 1 0 :1:0 
+`uc 1 RD1 1 0 :1:1 
+`uc 1 RD2 1 0 :1:2 
+`uc 1 RD3 1 0 :1:3 
+`uc 1 RD4 1 0 :1:4 
+`uc 1 RD5 1 0 :1:5 
+`uc 1 RD6 1 0 :1:6 
+`uc 1 RD7 1 0 :1:7 
+]
+[u S397 . 1 `S379 1 . 1 0 `S204 1 . 1 0 ]
+[v _TRISDbits TRISDbits `VES397  1 e 1 @3989 ]
 [s S27 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
@@ -160,6 +163,30 @@ SPI_SLAVE 1
 ]
 [u S433 . 1 `S420 1 . 1 0 `S429 1 . 1 0 ]
 [v _PIR1bits PIR1bits `VES433  1 e 1 @3998 ]
+"3529
+[v _T3CON T3CON `VEuc  1 e 1 @4017 ]
+"4255
+[v _CCP1CON CCP1CON `VEuc  1 e 1 @4029 ]
+"4352
+[v _CCPR1 CCPR1 `VEus  1 e 2 @4030 ]
+[s S581 . 1 `uc 1 PCFG 1 0 :4:0 
+`uc 1 VCFG 1 0 :2:4 
+]
+"4469
+[s S584 . 1 `uc 1 PCFG0 1 0 :1:0 
+`uc 1 PCFG1 1 0 :1:1 
+`uc 1 PCFG2 1 0 :1:2 
+`uc 1 PCFG3 1 0 :1:3 
+`uc 1 VCFG0 1 0 :1:4 
+`uc 1 VCFG1 1 0 :1:5 
+]
+[s S591 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 CHSN3 1 0 :1:3 
+`uc 1 VCFG01 1 0 :1:4 
+`uc 1 VCFG11 1 0 :1:5 
+]
+[u S596 . 1 `S581 1 . 1 0 `S584 1 . 1 0 `S591 1 . 1 0 ]
+[v _ADCON1bits ADCON1bits `VES596  1 e 1 @4033 ]
 "4731
 [v _SSPCON1 SSPCON1 `VEuc  1 e 1 @4038 ]
 [s S350 . 1 `uc 1 SSPM 1 0 :4:0 
@@ -180,7 +207,32 @@ SPI_SLAVE 1
 [v _SSPSTAT SSPSTAT `VEuc  1 e 1 @4039 ]
 "5029
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @4041 ]
-[s S612 . 1 `uc 1 RBIF 1 0 :1:0 
+"5224
+[v _T1CON T1CON `VEuc  1 e 1 @4045 ]
+[s S666 . 1 `uc 1 INT1IF 1 0 :1:0 
+`uc 1 INT2IF 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 INT1IE 1 0 :1:3 
+`uc 1 INT2IE 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 INT1IP 1 0 :1:6 
+`uc 1 INT2IP 1 0 :1:7 
+]
+"6239
+[s S675 . 1 `uc 1 INT1F 1 0 :1:0 
+`uc 1 INT2F 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 INT1E 1 0 :1:3 
+`uc 1 INT2E 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 INT1P 1 0 :1:6 
+`uc 1 INT2P 1 0 :1:7 
+]
+[u S684 . 1 `S666 1 . 1 0 `S675 1 . 1 0 ]
+[v _INTCON3bits INTCON3bits `VES684  1 e 1 @4080 ]
+"6304
+[v _INTCON2 INTCON2 `VEuc  1 e 1 @4081 ]
+[s S617 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -190,7 +242,7 @@ SPI_SLAVE 1
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
 "6406
-[s S621 . 1 `uc 1 . 1 0 :1:0 
+[s S626 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 INT0F 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -199,125 +251,55 @@ SPI_SLAVE 1
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S630 . 1 `uc 1 . 1 0 :6:0 
+[s S635 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S634 . 1 `S612 1 . 1 0 `S621 1 . 1 0 `S630 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES634  1 e 1 @4082 ]
-"108 C:\git\can_node_board\can_node_board_SW.X\spi_test.c
-[v _spi_rx_msg_buf spi_rx_msg_buf `uc  1 s 1 spi_rx_msg_buf ]
-"109
-[v _spi_rx_invalid_flag spi_rx_invalid_flag `uc  1 s 1 spi_rx_invalid_flag ]
-"110
-[v _spi_rx_flag spi_rx_flag `uc  1 s 1 spi_rx_flag ]
-"113
-[v _button1_state button1_state `uc  1 s 1 button1_state ]
-"114
-[v _button2_state button2_state `uc  1 s 1 button2_state ]
-"118
-[v _button1_msg button1_msg `[5]uc  1 s 5 button1_msg ]
-"119
-[v _button2_msg button2_msg `[5]uc  1 s 5 button2_msg ]
-"120
-[v _spi_rx_invalid_msg spi_rx_invalid_msg `C[13]uc  1 s 13 spi_rx_invalid_msg ]
-"16 C:\git\can_node_board\can_node_board_SW.X\src/lcd_driver.c
-[v _CURRENT_DISP CURRENT_DISP `E2464  1 s 1 CURRENT_DISP ]
-"17
-[v _DISP_BIT_MODE DISP_BIT_MODE `E2469  1 s 1 DISP_BIT_MODE ]
-"18
-[v _init_complete init_complete `uc  1 s 1 init_complete ]
-"22
-[v _current_entry_mode current_entry_mode `uc  1 s 1 current_entry_mode ]
-"23
-[v _current_disp_ctrl current_disp_ctrl `uc  1 s 1 current_disp_ctrl ]
-"24
-[v _current_func_set current_func_set `uc  1 s 1 current_func_set ]
-"26
-[v _address_counter address_counter `uc  1 s 1 address_counter ]
+[u S639 . 1 `S617 1 . 1 0 `S626 1 . 1 0 `S635 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES639  1 e 1 @4082 ]
+"101 C:\git\can_node_board\can_node_board_SW.X\inc/mcp2515_test.c
+[v _tmr_100ms_next tmr_100ms_next `VEuc  1 s 1 tmr_100ms_next ]
+"102
+[v _spi_tx_test_msg spi_tx_test_msg `uc  1 s 1 spi_tx_test_msg ]
+"104
+[v _spi_ready_to_tx spi_ready_to_tx `VEuc  1 s 1 spi_ready_to_tx ]
 "16 C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi_driver.c
 [v _spi_actor spi_actor `E2464  1 s 1 spi_actor ]
 "18
 [v _transfer_complete_flag transfer_complete_flag `uc  1 e 1 0 ]
-"199 C:\git\can_node_board\can_node_board_SW.X\spi_test.c
+"195 C:\git\can_node_board\can_node_board_SW.X\inc/mcp2515_test.c
 [v _main main `(v  1 e 1 0 ]
 {
-"367
-[v main@i_704 i `uc  1 a 1 31 ]
-"362
-[v main@i_703 i `uc  1 a 1 30 ]
-"344
-[v main@i_700 i `uc  1 a 1 29 ]
-"297
-[v main@i i `uc  1 a 1 28 ]
-"296
-[v main@init_success_msg init_success_msg `[14]uc  1 a 14 10 ]
-"295
-[v main@F2571 F2571 `[14]uc  1 s 14 F2571 ]
-"383
+"341
 } 0
-"70 C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi_driver.c
-[v _SPI_Init_Slave_Default SPI_Init_Slave_Default `(v  1 e 1 0 ]
+"45 C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+[v _can_init_default can_init_default `(v  1 e 1 0 ]
 {
-"92
+"55
 } 0
-"126 C:\git\can_node_board\can_node_board_SW.X\src/lcd_driver.c
-[v _LCD_write_data_byte_4bit LCD_write_data_byte_4bit `(v  1 e 1 0 ]
+"26 C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+[v _external_interrupts_init_default external_interrupts_init_default `(v  1 e 1 0 ]
 {
-[v LCD_write_data_byte_4bit@data data `uc  1 a 1 wreg ]
-[v LCD_write_data_byte_4bit@data data `uc  1 a 1 wreg ]
-"128
-[v LCD_write_data_byte_4bit@data data `uc  1 a 1 4 ]
-"140
+"40
 } 0
-"500
-[v _LCD_set_cursor_position LCD_set_cursor_position `(uc  1 e 1 0 ]
+"32 C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi_driver.c
+[v _SPI_Init_Master_Default SPI_Init_Master_Default `(v  1 e 1 0 ]
 {
-[v LCD_set_cursor_position@line line `uc  1 a 1 wreg ]
-"506
-[v LCD_set_cursor_position@ddram_addr ddram_addr `uc  1 a 1 6 ]
-"500
-[v LCD_set_cursor_position@line line `uc  1 a 1 wreg ]
-[v LCD_set_cursor_position@pos_on_line pos_on_line `uc  1 p 1 5 ]
-"502
-[v LCD_set_cursor_position@line line `uc  1 a 1 7 ]
-"534
+"58
 } 0
-"427
-[v _LCD_clear_display LCD_clear_display `(uc  1 e 1 0 ]
+"31 C:\git\can_node_board\can_node_board_SW.X\src/timer.c
+[v _Timer1_Init_Default Timer1_Init_Default `(v  1 e 1 0 ]
 {
-"437
+"35
 } 0
-"200
-[v _LCD_write_instr_byte_8bit LCD_write_instr_byte_8bit `(v  1 e 1 0 ]
+"42 C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
+[v _CCP1_Compare_Init_Default CCP1_Compare_Init_Default `(v  1 e 1 0 ]
 {
-[v LCD_write_instr_byte_8bit@instr instr `uc  1 a 1 wreg ]
-[v LCD_write_instr_byte_8bit@instr instr `uc  1 a 1 wreg ]
-"202
-[v LCD_write_instr_byte_8bit@instr instr `uc  1 a 1 4 ]
-"212
+[v CCP1_Compare_Init_Default@comp_val comp_val `us  1 p 2 0 ]
+"47
 } 0
-"224
-[v _LCD_Init_ECE376 LCD_Init_ECE376 `(v  1 e 1 0 ]
-{
-"262
-} 0
-"175
-[v _LCD_write_instr_byte_4bit LCD_write_instr_byte_4bit `(v  1 e 1 0 ]
-{
-[v LCD_write_instr_byte_4bit@instr instr `uc  1 a 1 wreg ]
-[v LCD_write_instr_byte_4bit@instr instr `uc  1 a 1 wreg ]
-"177
-[v LCD_write_instr_byte_4bit@instr instr `uc  1 a 1 4 ]
-"189
-} 0
-"45
-[v _LCD_enable_toggle LCD_enable_toggle `(v  1 s 1 LCD_enable_toggle ]
-{
-"86
-} 0
-"134 C:\git\can_node_board\can_node_board_SW.X\spi_test.c
+"134 C:\git\can_node_board\can_node_board_SW.X\inc/mcp2515_test.c
 [v _isr isr `IIH(v  1 e 1 0 ]
 {
-"193
+"189
 } 0

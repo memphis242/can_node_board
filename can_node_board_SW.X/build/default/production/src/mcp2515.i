@@ -4477,13 +4477,13 @@ typedef enum { SPI_READ_RXB0_ID, SPI_READ_RXB0_D, SPI_READ_RXB1_ID, SPI_READ_RXB
 
 
 typedef enum { SPI_LOAD_TXB0_ID, SPI_LOAD_TXB0_D, SPI_LOAD_TXB1_ID, SPI_LOAD_TXB1_D, SPI_LOAD_TXB2_ID, SPI_LOAD_TXB2_D } spi_load_txb_inst_t;
-# 904 "inc\\mcp2515.h"
+# 909 "inc\\mcp2515.h"
 typedef enum { TXB0, TXB1, TXB2 } txbuf_t;
 typedef enum { RXB0, RXB1 } rxbuf_t;
 typedef enum { RX_MASK0, RX_MASK1 } rx_mask_t;
 typedef enum { RX_FILT0, RX_FILT1, RX_FILT2, RX_FILT3, RX_FILT4, RX_FILT5 } rx_filt_t;
 typedef enum { MCP2515_OPTION_ROLLOVER } mcp_2515_options_t;
-# 933 "inc\\mcp2515.h"
+# 938 "inc\\mcp2515.h"
 typedef struct {
     uint16_t sid;
     uint8_t ide;
@@ -4514,7 +4514,7 @@ typedef struct {
 
 
 
-void can_init_defaut(void);
+void can_init_default(void);
 void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump);
 
 void can_spi_command(uint8_t cmd);
@@ -4526,7 +4526,7 @@ void can_write_successive_reg(uint8_t start_reg, uint8_t * txbuf, uint8_t len);
 void can_write_bit(uint8_t reg, uint8_t mask, uint8_t val);
 void can_write_txbuf(txbuf_t txb, uint8_t * mcp2515_tx_buf, uint8_t len);
 void can_read_rxbuf(rxbuf_t rxb, uint8_t * mcp2515_rx_buf, uint8_t len);
-# 986 "inc\\mcp2515.h"
+# 991 "inc\\mcp2515.h"
 void can_compose_msg_std(can_msg * msg, uint8_t * mcp2515_tx_buf);
 void can_parse_msg_std(can_msg * msg, uint8_t * mcp2515_rx_buf);
 void can_compose_msg_ext(can_msg * msg, uint8_t * mcp2515_tx_buf);
@@ -4545,15 +4545,117 @@ uint8_t can_mcp2515_config_options(mcp_2515_options_t option, uint8_t val);
 uint8_t can_read_error(uint8_t reg);
 uint8_t can_clear_bus_error(void);
 # 11 "src/mcp2515.c" 2
-# 40 "src/mcp2515.c"
-void can_init_defaut(void){
 
+# 1 "inc\\lcd_driver.h" 1
+# 207 "inc\\lcd_driver.h"
+enum lcd_display_t {
+    QAPASS_EBAY,
+    QAPASS_AMAZON,
+    ADAFRUIT_STANDARD_16x2,
+    ADAFRUIT_STANDARD_20x4
+};
+enum lcd_bit_mode_t {
+    MODE_4BIT,
+    MODE_8BIT
+};
+
+
+
+
+
+void static LCD_enable_toggle(void);
+void static LCD_wait_for_BF(void);
+
+void LCD_write_data_byte_4bit(uint8_t data);
+void LCD_write_data_byte_8bit(uint8_t data);
+void LCD_write_instr_byte_4bit(uint8_t instr);
+void LCD_write_instr_byte_8bit(uint8_t instr);
+void LCD_Init_ECE376(void);
+void LCD_Init_amazonLCD(uint8_t mode_4bit);
+void LCD_Init(uint8_t entry_mode, uint8_t disp_ctrl, uint8_t func_set, enum lcd_display_t disp_to_be_used);
+
+
+uint8_t LCD_isInit(void);
+uint8_t LCD_clear_display(void);
+uint8_t LCD_return_home(void);
+uint8_t LCD_read_current_address_counter(void);
+uint8_t LCD_set_cursor_position(uint8_t line, uint8_t pos_on_line);
+uint8_t LCD_write_characters(char * toWrite, uint8_t size);
+uint8_t LCD_turn_off_cursor(void);
+uint8_t LCD_turn_on_cursor(void);
+
+
+void LCD_write_uint32_number(uint32_t num);
+# 12 "src/mcp2515.c" 2
+
+# 1 "inc\\ccp.h" 1
+# 154 "inc\\ccp.h"
+typedef enum { TMR1_CCP1, TMR1_CCPx, TM3_CCP2, TM3_CCPx} tmr_ccp_pair_t;
+
+
+
+
+
+void CCP1_Compare_Init_Default(uint16_t comp_val);
+void CCP2_Compare_Init_Default(uint16_t comp_val);
+void CCP1_Capture_Init_Default(void);
+void CCP2_Capture_Init_Default(void);
+# 13 "src/mcp2515.c" 2
+
+# 1 "inc\\timer.h" 1
+# 63 "inc\\timer.h"
+void Timer1_Init_Default(void);
+void Timer1_Enable(void);
+void Timer1_Disable(void);
+# 14 "src/mcp2515.c" 2
+
+# 1 "inc\\mssp_spi.h" 1
+# 104 "inc\\mssp_spi.h"
+enum spi_actor_t { SPI_MASTER, SPI_SLAVE };
+enum spi_mode_t { SPI_MODE_00, SPI_MODE_01, SPI_MODE_10, SPI_MODE_11 };
+
+
+
+void SPI_Init_Master_Default(void);
+void SPI_Init_Slave_Default(void);
+uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8_t fosc_div, enum spi_actor_t spi_actor_type);
+
+void SPI_Disable(void);
+
+void SPI_Transfer_Byte(uint8_t tx, uint8_t * rx);
+void SPI_Transfer_Packet(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_size);
+void SPI_Send_Byte(uint8_t tx);
+void SPI_Send_Packet(uint8_t * tx_pack, uint16_t tx_size);
+void SPI_Receive_Byte(uint8_t * rx);
+void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size);
+# 15 "src/mcp2515.c" 2
+
+# 1 "inc\\external_interrupts.h" 1
+# 120 "inc\\external_interrupts.h"
+typedef enum { EXT_INT_INT0 = 1u, EXT_INT_INT1 = 2u, EXT_INT_INT2 = 4u } external_interrupts_t;
+typedef enum { FALLING_EDGE, RISING_EDGE } external_interrupt_edge_t;
+
+
+
+void external_interrupts_init_default(void);
+void external_interrupts_init(uint8_t which_pins, external_interrupt_edge_t trigger_edge);
+# 16 "src/mcp2515.c" 2
+# 45 "src/mcp2515.c"
+void can_init_default(void){
+
+
+    external_interrupts_init_default();
+
+
+    SPI_Init_Master_Default();
 
 
 
 }
 
 void can_spi_command(uint8_t cmd){
+
+
 
 }
 

@@ -4479,12 +4479,49 @@ typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
 # 26 "inc\\external_interrupts.h" 2
-# 93 "inc\\external_interrupts.h"
+# 120 "inc\\external_interrupts.h"
 typedef enum { EXT_INT_INT0 = 1u, EXT_INT_INT1 = 2u, EXT_INT_INT2 = 4u } external_interrupts_t;
-typedef enum { RISING_EDGE, FALLING_EDGE } external_interrupt_edge_t;
+typedef enum { FALLING_EDGE, RISING_EDGE } external_interrupt_edge_t;
 
 
 
-void external_interrupts_init_default(uint8_t which_pins, external_interrupt_edge_t trigger_edge);
+void external_interrupts_init_default(void);
+void external_interrupts_init(uint8_t which_pins, external_interrupt_edge_t trigger_edge);
 # 10 "src/external_interrupts.c" 2
+# 26 "src/external_interrupts.c"
+void external_interrupts_init_default(void){
 
+    (INTCON2 &= ~(0x70));
+    ADCON1bits.PCFG = 0xF; (TRISB |= 0x07);
+
+    (INTCONbits.INT0IE = 1u);
+    (INTCON3bits.INT1IE = 1u);
+    (INTCON3bits.INT2IE = 1u);
+
+
+    (INTCONbits.INT0IF = 0u);
+    (INTCON3bits.INT1IF = 0u);
+    (INTCON3bits.INT2IF = 0u);
+
+}
+# 57 "src/external_interrupts.c"
+void external_interrupts_init(uint8_t which_pins, external_interrupt_edge_t trigger_edge){
+    if((which_pins & (1u << 0))) {
+        INTCON2bits.INTEDG0 = trigger_edge;
+        ADCON1bits.PCFG = 0xF; (TRISB |= 0x01);
+        (INTCONbits.INT0IE = 1u);
+        (INTCONbits.INT0IF = 0u);
+    }
+    if((which_pins & (1u << 1))) {
+        INTCON2bits.INTEDG1 = trigger_edge;
+        ADCON1bits.PCFG = 0xF; (TRISB |= 0x02);
+        (INTCON3bits.INT1IE = 1u);
+        (INTCON3bits.INT1IF = 0u);
+    }
+    if((which_pins & (1u << 2))) {
+        INTCON2bits.INTEDG2 = trigger_edge;
+        ADCON1bits.PCFG = 0xF; (TRISB |= 0x04);
+        (INTCON3bits.INT2IE = 1u);
+        (INTCON3bits.INT2IF = 0u);
+    }
+}

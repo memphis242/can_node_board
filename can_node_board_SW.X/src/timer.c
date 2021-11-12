@@ -21,15 +21,16 @@
 /* Function: Timer1_Init_Default
  * ---------------------------------
  * Initialize Timer1 in the default manner, which for this project will be for
- * it to utilize CCP2 in the manner described in CCP2.h and to have the T1CON be
- * 16-bit, prescaler of 8, tmr1 osc off, internal clock, tmr1 off
+ * T1CON to be configured for 16-bit R/W, prescaler of 8, tmr1 osc off,
+ * internal clock, tmr1 off
  * 
- * Parameters: uint16_t period_val --> This is what will be loaded into CCP2
+ * Parameters: none
  * 
  * Returns: none
  */
 void Timer1_Init_Default(void){
     TMR1_DEFAULT;
+    TMR1_PRESCAL_8;
     TMR1_ENABLE_INTERRUPT;
 }
 

@@ -13,6 +13,7 @@
         <itemPath>inc/external_interrupts.h</itemPath>
       </logicalFolder>
       <itemPath>spi_test.h</itemPath>
+      <itemPath>inc/mcp2515_test.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -24,13 +25,14 @@
       <logicalFolder name="src" displayName="src" projectFiles="true">
         <itemPath>src/ccp.c</itemPath>
         <itemPath>src/lcd_driver.c</itemPath>
-        <itemPath>src/mssp_spi_driver.c</itemPath>
         <itemPath>src/timer.c</itemPath>
         <itemPath>src/mcp2515.c</itemPath>
         <itemPath>src/external_interrupts.c</itemPath>
+        <itemPath>src/mssp_spi.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
       <itemPath>spi_test.c</itemPath>
+      <itemPath>inc/mcp2515_test.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

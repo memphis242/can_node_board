@@ -897,6 +897,11 @@ typedef enum { SPI_LOAD_TXB0_ID, SPI_LOAD_TXB0_D, SPI_LOAD_TXB1_ID, SPI_LOAD_TXB
 
 // </editor-fold>
 
+// Related GPIO
+#define RX0BF_FLAG          INT0_FLAG
+#define RX1BF_FLAG          INT1_FLAG
+#define MCP2515_RESET_FLAG  INT2_FLAG
+
 // </editor-fold>
 
 
@@ -960,7 +965,7 @@ typedef struct {
 
 
 // Functions
-void can_init_defaut(void);
+void can_init_default(void);
 void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump);
 
 void can_spi_command(uint8_t cmd);

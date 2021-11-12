@@ -99,10 +99,10 @@
 #define CLEAR_INT1_FLAG     (INT1_FLAG = 0u)
 #define CLEAR_INT2_FLAG     (INT2_FLAG = 0u)
 
-#define TRIS_INTx       (ADCON1bits.PCFG = 0xF); (TRISB |= 0x07)
-#define TRIS_INT0       (ADCON1bits.PCFG = 0xF); (TRISB |= 0x01))
-#define TRIS_INT1       (ADCON1bits.PCFG = 0xF); (TRISB |= 0x02))
-#define TRIS_INT2       (ADCON1bits.PCFG = 0xF); (TRISB |= 0x04))
+#define TRIS_INTx       ADCON1bits.PCFG = 0xF; (TRISB |= 0x07)
+#define TRIS_INT0       ADCON1bits.PCFG = 0xF; (TRISB |= 0x01)
+#define TRIS_INT1       ADCON1bits.PCFG = 0xF; (TRISB |= 0x02)
+#define TRIS_INT2       ADCON1bits.PCFG = 0xF; (TRISB |= 0x04)
 
 
 #ifndef TEST_BIT_SET

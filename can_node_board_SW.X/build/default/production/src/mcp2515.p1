@@ -1,4 +1,10 @@
 Version 4.0 HI-TECH Software Intermediate Code
+"125 inc\external_interrupts.h
+[; ;inc\external_interrupts.h: 125: void external_interrupts_init_default(void);
+[v _external_interrupts_init_default `(v ~T0 @X0 0 ef ]
+"109 inc\mssp_spi.h
+[; ;inc\mssp_spi.h: 109: void SPI_Init_Master_Default(void);
+[v _SPI_Init_Master_Default `(v ~T0 @X0 0 ef ]
 "54 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 54: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -410,39 +416,45 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6715
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6715: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"40 src/mcp2515.c
-[; ;src/mcp2515.c: 40: void can_init_defaut(void){
-[v _can_init_defaut `(v ~T0 @X0 1 ef ]
+"45 src/mcp2515.c
+[; ;src/mcp2515.c: 45: void can_init_default(void){
+[v _can_init_default `(v ~T0 @X0 1 ef ]
 {
-[e :U _can_init_defaut ]
+[e :U _can_init_default ]
 [f ]
-"45
-[; ;src/mcp2515.c: 45: }
+"48
+[; ;src/mcp2515.c: 48:     external_interrupts_init_default();
+[e ( _external_interrupts_init_default ..  ]
+"51
+[; ;src/mcp2515.c: 51:     SPI_Init_Master_Default();
+[e ( _SPI_Init_Master_Default ..  ]
+"55
+[; ;src/mcp2515.c: 55: }
 [e :UE 274 ]
 }
-"47
-[; ;src/mcp2515.c: 47: void can_spi_command(uint8_t cmd){
+"57
+[; ;src/mcp2515.c: 57: void can_spi_command(uint8_t cmd){
 [v _can_spi_command `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _can_spi_command ]
 [v _cmd `uc ~T0 @X0 1 r1 ]
 [f ]
-"49
-[; ;src/mcp2515.c: 49: }
+"61
+[; ;src/mcp2515.c: 61: }
 [e :UE 275 ]
 }
-"51
-[; ;src/mcp2515.c: 51: uint8_t can_spi_query(uint8_t query){
+"63
+[; ;src/mcp2515.c: 63: uint8_t can_spi_query(uint8_t query){
 [v _can_spi_query `(uc ~T0 @X0 1 ef1`uc ]
 {
 [e :U _can_spi_query ]
 [v _query `uc ~T0 @X0 1 r1 ]
 [f ]
-"53
-[; ;src/mcp2515.c: 53:     return 1;
+"65
+[; ;src/mcp2515.c: 65:     return 1;
 [e ) -> -> 1 `i `uc ]
 [e $UE 276  ]
-"54
-[; ;src/mcp2515.c: 54: }
+"66
+[; ;src/mcp2515.c: 66: }
 [e :UE 276 ]
 }

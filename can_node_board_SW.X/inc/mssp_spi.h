@@ -119,6 +119,13 @@ void SPI_Send_Packet(uint8_t * tx_pack, uint16_t tx_size);
 void SPI_Receive_Byte(uint8_t * rx);
 void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size);
 
+/* The following are functions that do not automatically enable/disable the CS
+ * line, which would make it easier for an application to successively clock
+ * in cycles and control the CS line separately instead of /w each byte.
+ */
+void SPI_Transfer_Byte_without_CS(uint8_t tx, uint8_t * rx);
+void SPI_Transfer_Packet_without_CS(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_size);
+
 
 #endif	/* MSSP_DRIVER_HEADER */
 

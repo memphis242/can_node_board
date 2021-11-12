@@ -14,7 +14,6 @@
 // Global variables relevant to SPI
 uint8_t receive_byte = 0x00;    // Used by ISR when SPI mode is slave and receive has occurred
 static enum spi_actor_t spi_actor = SPI_MASTER;
-static uint8_t slave_mode = 0x00;      // Flag to indicate current mode --> 0 = master, 1 = slave
 uint8_t transfer_complete_flag = 0x00;
 uint8_t manual_transfer = 0x00; // Flag to indicate when we are manually (i.e., using the functions below) transferring data; may be used in ISR or debugging
 
@@ -210,7 +209,7 @@ void SPI_Transfer_Byte(uint8_t tx, uint8_t * rx){
     SSPBUF = tx;
     while(!transfer_complete_flag);     // Wait until data ready variable flag is set
 //    while(!PIR1bits.SSPIF)
-    if(!slave_mode) MASTER_CS_HIGH;  // If in Master Mode...MASTER_CS_HIGH;    
+    if(spi_actor == SPI_MASTER) MASTER_CS_HIGH;  // If in Master Mode...MASTER_CS_HIGH;    
     *rx = SSPBUF;
     
     manual_transfer = 0x00; // Indicate the manual transfer is ending.
@@ -254,7 +253,7 @@ void SPI_Send_Byte(uint8_t tx){
     if(spi_actor == SPI_MASTER) MASTER_CS_LOW;  // If in Master Mode...
     SSPBUF = tx;
     while(!transfer_complete_flag);     // Wait until data ready variable flag is set
-    if(!slave_mode) MASTER_CS_HIGH;  // If in Master Mode...
+    if(spi_actor == SPI_MASTER) MASTER_CS_HIGH;  // If in Master Mode...
     transfer_complete_flag = 0x00;  // Reset transfer_complete_flag
     
     manual_transfer = 0x00; // Indicate the manual transfer is ending.

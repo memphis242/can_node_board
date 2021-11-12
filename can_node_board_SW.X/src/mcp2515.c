@@ -9,6 +9,11 @@
 
 #include <xc.h>
 #include "mcp2515.h"
+#include "lcd_driver.h"
+#include "ccp.h"
+#include "timer.h"
+#include "mssp_spi.h"
+#include "external_interrupts.h"
 
 
 // <editor-fold defaultstate="collapsed" desc="GLOBAL & STATIC VARIABLES">
@@ -37,14 +42,21 @@
  * 
  * Returns: none
  */
-void can_init_defaut(void){
+void can_init_default(void){
     
-    // I use external interrupt pins on the PIC for ~RX0BF, ~RX1BF, and ~RESET
+    // 1. I use external interrupt pins on the PIC for ~RX0BF, ~RX1BF, and ~RESET
+    external_interrupts_init_default();
     
+    // 2. Now initialize SPI as a master
+    SPI_Init_Master_Default();
+    
+    // 3. 
     
 }
 
 void can_spi_command(uint8_t cmd){
+    
+    
     
 }
 
