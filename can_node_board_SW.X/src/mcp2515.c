@@ -17,13 +17,14 @@
 
 
 // <editor-fold defaultstate="collapsed" desc="GLOBAL & STATIC VARIABLES">
-extern uint8_t receive_byte;
+extern uint8_t receive_byte;    // Used as part of SPI comms when I don't care about
+                                // the received byte
 // </editor-fold>
 
 
 // Functions
 /**
- * Function: can_init_default
+ * <h3>Function: can_init_default</h3>
  * ----------------------------------------------------------------------------
  * <p>
  * Here I, assuming the MCP2515 is in configuration mode (should check first)
@@ -80,9 +81,12 @@ void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump){
     
 }
 
+// ****************************************************************************
+// <editor-fold defaultstate="collapsed" desc="MCP2515 COMMAND FUNCTIONS">
 /**
- * Function: mcp2515_cmd_reset
- * Sends a RESET command over SPI to the MCP2515.
+ * <h3>Function: mcp2515_cmd_reset</h3>
+ * ------------------------------------------------
+ * <p>Sends a RESET command over SPI to the MCP2515.</p>
  * 
  * @param none
  * 
@@ -90,15 +94,249 @@ void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump){
  */
 void mcp2515_cmd_reset(void){
     SPI_Transfer_Byte(MCP2515_SPI_RESET, &receive_byte);
+}
+
+/**
+ * <h3>Function: mcp2515_cmd_read_status</h3>
+ * ------------------------------------------------
+ * <p>Polls several status-type bits and returns a byte containing those bits.</p>
+ * 
+ * @param none
+ * 
+ * @return uint8_t receive_byte -- The format of the byte is as follows:
+ * <p>RX0IF--RX1IF--TXREQ for TXB0--TX0IF--TXREQ for TXB1--TX1IF--TXREQ for TXB2--TX2IF</p>
+ */
+uint8_t mcp2515_cmd_read_status(void){
+    SPI_Transfer_Byte(MCP2515_SPI_READ_STATUS, &receive_byte);
+    return receive_byte;
+}
+
+/**
+ * <h3>Function: mcp2515_cmd_rx_status</h3>
+ * ------------------------------------------------
+ * <p>Polls for filter match and message type of received message. See datasheet for details!</p>
+ * 
+ * @param none
+ * 
+ * @return none
+ */
+uint8_t mcp2515_cmd_rx_status(void){
+    SPI_Transfer_Byte(MCP2515_SPI_RX_STATUS, &receive_byte);
+    return receive_byte;
+}
+
+/**
+ * <h3>Function: mcp2515_cmd_read</h3>
+ * ------------------------------------------------
+ * <p>Reads the data from the register at the selected address.</p>
+ * 
+ * @param uint8_t reg_address -- This is the address of the register you wish to read from.
+ * @param uint8_t * buf -- This is where that data will be stored in.
+ * 
+ * @return none
+ */
+void mcp2515_cmd_read(uint8_t reg_address, uint8_t * buf){
+    
+    SPI_MASTER_CS_LOW;
+    
+    // First send READ command
+    SPI_Transfer_Byte_without_CS(MCP2515_SPI_READ, &receive_byte);
+    // Then send address
+    SPI_Transfer_Byte_without_CS(reg_address, &receive_byte);
+    // Then finally read in data at address
+    SPI_Transfer_Byte_without_CS(0x00u, &buf);
+    
+    SPI_MASTER_CS_HIGH;
     
 }
 
-uint8_t mcp2515_cmd_read_status(void);
-uint8_t mcp2515_cmd_rx_status(void);
-void mcp2515_cmd_read(uint8_t reg_address, uint8_t * buf);
-void mcp2515_cmd_read_sequential(uint8_t start_reg_addr, uint8_t * rxbuf, uint8_t len);
-void mcp2515_cmd_write(uint8_t reg_address, uint8_t val);
-void mcp2515_cmd_write_sequential(uint8_t start_reg_addr, uint8_t * txbuf, uint8_t len);
-void mcp2515_cmd_write_bit(uint8_t reg_address, uint8_t mask, uint8_t val);
-uint8_t * mcp2515_cmd_read_rx_buf(rxbuf_t rxb);    // Programmer needs to have the write size buffer ready!! MCP2515_MSG_BUFF_SIZE_BYTES
-void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t tx_buf);      // Programmer needs to have the write size buffer ready!! MCP2515_MSG_BUFF_SIZE_BYTES
+/**
+ * <h3>Function: mcp2515_cmd_read_sequential</h3>
+ * ------------------------------------------------
+ * <p>Reads the data from successive registers starting at the selected address.
+ * This is possible because the MCP2515 supports such behavior.</p>
+ * 
+ * @param uint8_t start_reg_addr -- This is the address of the register you will start reading from
+ * @param uint8_t * rxbuf -- This is where that data will be stored in.
+ * @param uint8_t len -- This is how many bytes to read. MAKE SURE rxbuf has such size!
+ * 
+ * @return none
+ */
+void mcp2515_cmd_read_sequential(uint8_t start_reg_addr, uint8_t * rxbuf, uint8_t len){
+    
+    SPI_MASTER_CS_LOW;
+    
+    // First send READ command
+    SPI_Transfer_Byte_without_CS(MCP2515_SPI_READ, &receive_byte);
+    // Then send address of first byte to read
+    SPI_Transfer_Byte_without_CS(start_reg_addr, &receive_byte);
+    // Then begin reading sequentially len times
+    for(uint8_t i=0; i<len; i++) SPI_Transfer_Byte_without_CS(0x00u, &rxbuf[i]);
+    
+    SPI_MASTER_CS_HIGH;
+    
+}
+
+/**
+ * <h3>Function: mcp2515_cmd_write</h3>
+ * ------------------------------------------------
+ * <p>Writes data to the register at the selected address.</p>
+ * 
+ * @param uint8_t reg_address -- This is the address of the register you wish to write to.
+ * @param uint8_t val -- This is what will be written to the register. CAREFUL when using
+ *                       this command to write to control registers!
+ * 
+ * @return none
+ */
+void mcp2515_cmd_write(uint8_t reg_address, uint8_t val){
+    
+    SPI_MASTER_CS_LOW;
+    
+    // First send WRITE command
+    SPI_Transfer_Byte_without_CS(MCP2515_SPI_WRITE, &receive_byte);
+    // Then send address
+    SPI_Transfer_Byte_without_CS(reg_address, &receive_byte);
+    // Then send data to be written
+    SPI_Transfer_Byte_without_CS(val, &receive_byte);
+    
+    SPI_MASTER_CS_HIGH;
+    
+}
+
+/**
+ * <h3>Function: mcp2515_cmd_write_sequential</h3>
+ * ------------------------------------------------
+ * <p>Writes data to successive registers starting at the selected address.
+ * This is possible because the MCP2515 supports such behavior.</p>
+ * 
+ * @param uint8_t start_reg_addr -- This is the address of the register you will start writing to
+ * @param uint8_t * txbuf -- This is the data that will be written to the registers
+ * @param uint8_t len -- This is how many registers you write. BE CAREFUL NOT TO GO BEYOND what you exactly intend!
+ * 
+ * @return none
+ */
+void mcp2515_cmd_write_sequential(uint8_t start_reg_addr, uint8_t * txbuf, uint8_t len){
+    
+    SPI_MASTER_CS_LOW;
+    
+    // First send WRITE command
+    SPI_Transfer_Byte_without_CS(MCP2515_SPI_WRITE, &receive_byte);
+    // Then send address of first byte to write to
+    SPI_Transfer_Byte_without_CS(start_reg_addr, &receive_byte);
+    // Then begin writing sequentially len times
+    for(uint8_t i=0; i<len; i++) SPI_Transfer_Byte_without_CS(txbuf[i], &receive_byte);
+    
+    SPI_MASTER_CS_HIGH;
+    
+}
+
+/**
+ * <h3>Function: mcp2515_cmd_write_bit</h3>
+ * ------------------------------------------------
+ * <p>Writes data to the register at the selected address, similar to
+ * mcp2515_cmd_write, but while utilizing the mask to ensure only certain
+ * bits are written to and not the entire register. Not all registers can work
+ * with this command - use only with control registers (e.g., CANCTRL, TXBxCTRL, ...)
+ * and interrupt-related registers (e.g., CANINTE, CANINTF). NOTE that CANSTAT does
+ * NOT work with this command!</p>
+ * 
+ * @param uint8_t reg_address -- This is the address of the register you wish to write to.
+ * @param uint8_t mask -- Whichever bits are 1 in the mask, those bits will be allowed to get
+ *                        written to in reg_address from val. For those bits that are 0, the
+ *                        corresponding bits in val will be ignored.
+ * @param uint8_t val -- This is what will be written to the register.
+ * 
+ * @return none
+ */
+void mcp2515_cmd_write_bit(uint8_t reg_address, uint8_t mask, uint8_t val){
+    
+    SPI_MASTER_CS_LOW;
+    
+    // First send BIT_MODIFY command
+    SPI_Transfer_Byte_without_CS(MCP2515_SPI_BIT_MODIFY, &receive_byte);
+    // Then send address
+    SPI_Transfer_Byte_without_CS(reg_address, &receive_byte);
+    // Then send mask
+    SPI_Transfer_Byte_without_CS(mask, &receive_byte);
+    // Then send data to be written
+    SPI_Transfer_Byte_without_CS(val, &receive_byte);
+    
+    SPI_MASTER_CS_HIGH;
+    
+}
+
+/**
+ * <h3>Function: mcp2515_cmd_read_rx_buf</h3>
+ * ------------------------------------------------
+ * <p>Reads the RX buffer specified by rxb. This is equivalent to the READ command
+ * but is a little faster since you will not need to send the address byte. Be prepared
+ * with the right sized buffer! I have defined MCP2515_MSG_BUFF_SIZE_BYTES for this
+ * purpose. Note that the MCP2515 allows you to start reading the buffer in its complete
+ * form or just the data bytes. For now, I will have this function always read the full
+ * buffer with the ID included.</p>
+ * 
+ * @param rxbuf_t rxb -- This specifies which RX buffer to read --> RXB0 or RXB1?
+ * @param uint8_t * rx_buf -- This is where the buffer data will be stored. Again,
+ *                            make sure this is the right size! MCP2515_MSG_BUFF_SIZE_BYTES
+ * 
+ * @return none
+ */
+void mcp2515_cmd_read_rx_buf(rxbuf_t rxb, uint8_t * rx_buf){
+    
+    SPI_MASTER_CS_LOW;
+    
+    // First send READ_RXBUF command with SPI_READ_RXBx_ID to indicate we are reading
+    // the full buffer
+    SPI_Transfer_Byte_without_CS(MCP2515_SPI_READ_RXBUF(rxb ? SPI_READ_RXB1_ID : SPI_READ_RXB0_ID), &receive_byte);
+    // Then read in bytes!
+    for(uint8_t i=0; i<MCP2515_MSG_BUFF_SIZE_BYTES; i++) SPI_Transfer_Byte_without_CS(0x00u, &rx_buf[i]);
+    
+    SPI_MASTER_CS_HIGH;
+    
+}
+
+/**
+ * <h3>Function: mcp2515_cmd_load_tx_buf</h3>
+ * ------------------------------------------------
+ * <p>Load the TX buffer specified by txb. This is equivalent to the WRITE command
+ * but is a little faster since you will not need to send the address byte. Be prepared
+ * with the right sized buffer! I have defined MCP2515_MSG_BUFF_SIZE_BYTES for this
+ * purpose. Note that the MCP2515 allows you to start loading the buffer in its complete
+ * form or just the data bytes. For now, I will have this function always load the full
+ * buffer with the ID included.</p>
+ * 
+ * @param txbuf_t txb -- This specifies which TX buffer to load --> TXB0, TXB1, or TXB2
+ * @param uint8_t * tx_buf -- This is what will be loaded into the buffer. Again,
+ *                            make sure this is the right size! MCP2515_MSG_BUFF_SIZE_BYTES
+ * 
+ * @return none
+ */
+void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t * tx_buf){      // Programmer needs to have the write size buffer ready!! MCP2515_MSG_BUFF_SIZE_BYTES
+    spi_load_txb_inst_t selected_txb;
+    
+    // Set which buffer will be loaded
+    switch(txb){
+        case TXB0:
+            selected_txb = SPI_LOAD_TXB0_ID;
+            break;
+        case TXB1:
+            selected_txb = SPI_LOAD_TXB1_ID;
+            break;
+        case TXB2:
+            selected_txb = SPI_LOAD_TXB2_ID;
+            break;
+    }
+    
+    SPI_MASTER_CS_LOW;
+    
+    // First send LOAD_TX_BUFFER command with SPI_LOAD_TXBx_ID to indicate we are loading
+    // the full buffer
+    SPI_Transfer_Byte_without_CS(MCP2515_SPI_LOAD_TXBUF(selected_txb), &receive_byte);
+    // Then load in bytes!
+    for(uint8_t i=0; i<MCP2515_MSG_BUFF_SIZE_BYTES; i++) SPI_Transfer_Byte_without_CS(tx_buf[i], &receive_byte);
+    
+    SPI_MASTER_CS_HIGH;
+    
+}
+    
+// </editor-fold>

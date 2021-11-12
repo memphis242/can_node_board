@@ -903,7 +903,7 @@
 
 #define MCP2515_SPI_RESET           0xC0
 #define MCP2515_SPI_READ            0x03
-#define MCP2515_SPI_READ_RXBUF(X)   (0x90 | (X << 1))   // Use with below enum spi_read_rxb_inst_t
+#define MCP2515_SPI_READ_RXBUF(X)   (0x90 | ((X) << 1))   // Use with below enum spi_read_rxb_inst_t
 typedef enum { SPI_READ_RXB0_ID, SPI_READ_RXB0_D, SPI_READ_RXB1_ID, SPI_READ_RXB1_D } spi_read_rxb_inst_t;
 #define MCP2515_SPI_WRITE           0x02
 #define MCP2515_SPI_LOAD_TXBUF(X)   (0x40 | X)  // Use with below enum spi_load_txb_inst_t
@@ -1004,8 +1004,8 @@ void mcp2515_cmd_read_sequential(uint8_t start_reg_addr, uint8_t * rxbuf, uint8_
 void mcp2515_cmd_write(uint8_t reg_address, uint8_t val);
 void mcp2515_cmd_write_sequential(uint8_t start_reg_addr, uint8_t * txbuf, uint8_t len);
 void mcp2515_cmd_write_bit(uint8_t reg_address, uint8_t mask, uint8_t val);
-uint8_t * mcp2515_cmd_read_rx_buf(rxbuf_t rxb);    // Programmer needs to have the write size buffer ready!! MCP2515_MSG_BUFF_SIZE_BYTES
-void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t tx_buf);      // Programmer needs to have the write size buffer ready!! MCP2515_MSG_BUFF_SIZE_BYTES
+void mcp2515_cmd_read_rx_buf(rxbuf_t rxb, uint8_t * rx_buf);    // Programmer needs to have the write size buffer ready!! MCP2515_MSG_BUFF_SIZE_BYTES
+void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t * tx_buf);      // Programmer needs to have the write size buffer ready!! MCP2515_MSG_BUFF_SIZE_BYTES
 
 /* Use the below functions at border between PIC and MCP2515. As in to say...
  *      - For a transmit, you may construct the message first using the structs

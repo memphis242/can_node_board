@@ -47,7 +47,7 @@ void SPI_Init_Master_Default(void){
     CLEAR_MSSP_IFLAG;
     
     // Make sure CS line is HIGH (inactive)
-    MASTER_CS_HIGH;
+    SPI_MASTER_CS_HIGH;
     
     spi_actor = SPI_MASTER;  // Set flag to master mode
             
@@ -141,7 +141,7 @@ uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8
         TRIS_SPI_MASTER;
         
         // Make sure CS line is HIGH (inactive)
-        MASTER_CS_HIGH;
+        SPI_MASTER_CS_HIGH;
         
         spi_actor = SPI_MASTER;
         
@@ -205,11 +205,11 @@ void SPI_Transfer_Byte(uint8_t tx, uint8_t * rx){
     manual_transfer = 0x01; // Indicate the manual transfer is beginning.
     transfer_complete_flag = 0x00;
     
-    if(spi_actor == SPI_MASTER) MASTER_CS_LOW;  // If in Master Mode...
+    if(spi_actor == SPI_MASTER) SPI_MASTER_CS_LOW;  // If in Master Mode...
     SSPBUF = tx;
     while(!transfer_complete_flag);     // Wait until data ready variable flag is set
 //    while(!PIR1bits.SSPIF)
-    if(spi_actor == SPI_MASTER) MASTER_CS_HIGH;  // If in Master Mode...MASTER_CS_HIGH;    
+    if(spi_actor == SPI_MASTER) SPI_MASTER_CS_HIGH;  // If in Master Mode...MASTER_CS_HIGH;    
     *rx = SSPBUF;
     
     manual_transfer = 0x00; // Indicate the manual transfer is ending.
@@ -250,10 +250,10 @@ void SPI_Send_Byte(uint8_t tx){
     manual_transfer = 0x01; // Indicate the manual transfer is beginning.
     transfer_complete_flag = 0x00;
     
-    if(spi_actor == SPI_MASTER) MASTER_CS_LOW;  // If in Master Mode...
+    if(spi_actor == SPI_MASTER) SPI_MASTER_CS_LOW;  // If in Master Mode...
     SSPBUF = tx;
     while(!transfer_complete_flag);     // Wait until data ready variable flag is set
-    if(spi_actor == SPI_MASTER) MASTER_CS_HIGH;  // If in Master Mode...
+    if(spi_actor == SPI_MASTER) SPI_MASTER_CS_HIGH;  // If in Master Mode...
     transfer_complete_flag = 0x00;  // Reset transfer_complete_flag
     
     manual_transfer = 0x00; // Indicate the manual transfer is ending.

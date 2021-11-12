@@ -93,8 +93,8 @@
 #define TRIS_SPI_MASTER             TRISC |= 0x10; TRISC &= ~(0x28); TRISDbits.RD2 = 0;  // This is what TRISC needs to be set to. RC5 = SDO and RC3 = SCK outputs, RC4 = SDI input (RC4 would be automatically config by MSSP)
 #define TRIS_SPI_SLAVE              TRISC |= 0x18; TRISC &= ~(0x20); TRISA |= 0x20       // Same as TRIS_MASTER except SCK (RC3) is input and CS line is RA5
 #define MASTER_CS                   LATDbits.LATD2     // Chip Select line is in Master Mode (can use other I/O too)
-#define MASTER_CS_LOW               MASTER_CS = 0      // Activate the CS line
-#define MASTER_CS_HIGH              MASTER_CS = 1      // De-Activate the CS line
+#define SPI_MASTER_CS_LOW               MASTER_CS = 0      // Activate the CS line
+#define SPI_MASTER_CS_HIGH              MASTER_CS = 1      // De-Activate the CS line
 
 // MSSP Interrupt-Related
 #define MSSP_IF_BIT                 PIR1bits.SSPIF
