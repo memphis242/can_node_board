@@ -862,6 +862,7 @@ typedef enum {
 #define MCP2515_TX0I            0x04
 #define MCP2515_RX1I            0x02
 #define MCP2515_RX0I            0x01
+#define MCP2515_CANINTE_DEFAULT (MCP2515_ERRI | MCP2515_TX2I | MCP2515_TX1I | MCP2515_TX0I | MCP2515_RX1I | MCP2515_RX0I)
 
 // </editor-fold>
 

@@ -26,17 +26,13 @@
 void external_interrupts_init_default(void){
     
     INTx_FALLING_EDGE;  // All on falling edge
-    TRIS_INTx;  // Set RB0 to RB2 as inputs
+    TRIS_INT0;  // Set RB0 to RB2 as inputs
     
     // Unmask the external interrupts
     INT0_ENABLE;
-    INT1_ENABLE;
-    INT2_ENABLE;
     
     // Just in case flags are not cleared
     CLEAR_INT0_FLAG;
-    CLEAR_INT1_FLAG;
-    CLEAR_INT2_FLAG;
     
 }
 
@@ -55,23 +51,27 @@ void external_interrupts_init_default(void){
  * 
  * Returns: none
  */
-void external_interrupts_init(uint8_t which_pins, external_interrupt_edge_t trigger_edge){
-    if(TEST_BIT_SET(which_pins,0)) {    // INT0
-        INTCON2bits.INTEDG0 = trigger_edge;
-        TRIS_INT0;
-        INT0_ENABLE;
-        CLEAR_INT0_FLAG;
+void external_interrupts_init(external_interrupts_t which_pin, external_interrupt_edge_t trigger_edge){
+    
+    switch(which_pin){
+        case EXT_INT_INT0:
+            INTCON2bits.INTEDG0 = trigger_edge;
+            TRIS_INT0;
+            INT0_ENABLE;
+            CLEAR_INT0_FLAG;
+            break;
+        case EXT_INT_INT1:
+            INTCON2bits.INTEDG1 = trigger_edge;
+            TRIS_INT1;
+            INT1_ENABLE;
+            CLEAR_INT1_FLAG;
+            break;
+        case EXT_INT_INT2:
+            INTCON2bits.INTEDG2 = trigger_edge;
+            TRIS_INT2;
+            INT2_ENABLE;
+            CLEAR_INT2_FLAG;
+            break;
     }
-    if(TEST_BIT_SET(which_pins,1)) {    // INT1
-        INTCON2bits.INTEDG1 = trigger_edge;
-        TRIS_INT1;
-        INT1_ENABLE;
-        CLEAR_INT1_FLAG;
-    }
-    if(TEST_BIT_SET(which_pins,2)) {
-        INTCON2bits.INTEDG2 = trigger_edge;
-        TRIS_INT2;
-        INT2_ENABLE;
-        CLEAR_INT2_FLAG;
-    }
+    
 }

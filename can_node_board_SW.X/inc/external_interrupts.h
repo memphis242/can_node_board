@@ -123,7 +123,7 @@ typedef enum { FALLING_EDGE, RISING_EDGE } external_interrupt_edge_t;
 
 // FUNCTION-PROTOTYPES
 void external_interrupts_init_default(void);
-void external_interrupts_init(uint8_t which_pins, external_interrupt_edge_t trigger_edge);
+void external_interrupts_init(external_interrupts_t which_pin, external_interrupt_edge_t trigger_edge);
 
 #endif	/* EXTERNAL_INTERRUPTS_HEADER */
 

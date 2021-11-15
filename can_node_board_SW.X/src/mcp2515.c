@@ -19,13 +19,26 @@
 // <editor-fold defaultstate="collapsed" desc="GLOBAL & STATIC VARIABLES">
 extern uint8_t receive_byte;    // Used as part of SPI comms when I don't care about
                                 // the received byte
+// To help keep track of which buffers I'm loading up and which buffers got successfully sent...
+uint8_t txbf0_full = 0x00u;
+uint8_t txbf1_full = 0x00u;
+uint8_t txbf2_full = 0x00u;
+uint8_t txbf0_sent = 0x00u;
+uint8_t txbf1_sent = 0x00u;
+uint8_t txbf2_sent = 0x00u;
+
+// To keep track of which receive buffers are waiting to be read
+uint8_t rxbf0_full = 0x00u;
+uint8_t rxbf1_full = 0x00u;
+
+static uint8_t mcp2515_status = 0x00u;
 // </editor-fold>
 
 
 // Functions
 
 // ****************************************************************************
-// <editor-fold defaultstate="collapsed" desc="Configuration Functions">
+// <editor-fold defaultstate="collapsed" desc="CONFIGURATION FUNCTIONS">
 /**
  * <h3>Function: can_init_default</h3>
  * ----------------------------------------------------------------------------
@@ -63,8 +76,11 @@ void can_init_default(void){
         __delay_ms(100u); // Wait a little just to let the MCP2515 do its thing
     } while( mcp2515_current_opmode() != MCP2515_OPMODE_CONFIG);
     
-    // 3. I use external interrupt pins on the PIC for ~RX0BF, ~RX1BF, and ~RESET
-    external_interrupts_init_default();
+    // 3. I use one external interrupt pin on the PIC for ~INT of the MCP2515
+    di();   // Since I had previously enabled unmasked interrupts, and I'm about to
+            // enable another interrupt, disable first before re-enabling...
+    external_interrupts_init(EXT_INT_INT0, FALLING_EDGE);
+    ei();
     
     // 4. Disable CLKOUT pin as it is enabled by default on POR --> i.e., CLKEN in
     //    CANCTRL = 0
@@ -89,10 +105,11 @@ void can_init_default(void){
      * I don't have a priority in-mind at the moment so I will leave them all at 00
      * (the POR value), which sets all buffers at the same priority level (lowest priority).
      * 
-     * For the TXRTSCTRL, I want the ~TXxRTS pins to be inputs, since I plan to use the
-     * RTS command over SPI to initiate a transmission. This happens to also be the POR
-     * state of the register so nothing needed to be done here either! Note if this needs
-     * to be changed later, the TXRTSCTRL register can only be changed in configuration mode!
+     * For the TXRTSCTRL, I want the ~TXxRTS pins to be inputs (i.e., not RTS pins),
+     * since I plan to use the RTS command over SPI to initiate a transmission.
+     * This happens to also be the POR state of the register so nothing needed
+     * to be done here either! Note if this needs to be changed later, the
+     * TXRTSCTRL register can only be changed in configuration mode!
      */
     
     /* 7. Set up RX-related control (RXBnCTRL, BFPCTRL, filters, masks)
@@ -102,21 +119,23 @@ void can_init_default(void){
      * 
      * I will also enable rollover from RXB0 to RXB1.
      * 
-     * I will also set the ~RXnBF pins to be interrupts.
+     * I will also set the ~RXnBF pins to be disabled (on the board, they will be
+     * left floating).
      */
     // Allow everything through
     mcp2515_cmd_write_bit(MCP2515_RXB0CTRL, MCP2515_RXBnCTRL_RXM, 0x00);
     mcp2515_cmd_write_bit(MCP2515_RXB1CTRL, MCP2515_RXBnCTRL_RXM, 0x00);
     // Enable rollover
     mcp2515_cmd_write_bit(MCP2515_RXB0CTRL, MCP2515_RXB0CTRL_BUKT, MCP2515_RX_ROLLOVER);
-    // Set ~RXnBF pins to be interrupts
-    mcp2515_cmd_write_bit(MCP2515_BFPCTRL, MCP2515_BFPCTRL_RXnBF_MODE_BITS, SET_RXnBF_DEFAULT); // Set as interrupts
-    mcp2515_cmd_write_bit(MCP2515_BFPCTRL, MCP2515_BFPCTRL_RXnBF_ENABLE_BITS, SET_RXnBF_DEFAULT);   // Enable the pins
+    // Set ~RXnBF pins to be disabled --> this is default POR state so no need to do anything
     
     /* 8. Configure the MCP2515's interrupts CANINTE
-     * I don't plan on using the ~INT pin for now, so I want all the interrupts disabled.
-     * This is the case by default, so nothing to do here!
+     * I plan to use the ~INT pin to process pretty much all the MCP2515 interrupts.
+     * When it is set, in the ISR, I read the CANINTF register and handle the flags
+     * that are set accordingly.
      */
+    mcp2515_cmd_write(MCP2515_CANINTE, MCP2515_CANINTE_DEFAULT);
+    mcp2515_cmd_write(MCP2515_CANINTF, 0x00u);  // Clear all flags in case any happen to be set
     
     /* 9. Save all this in internally-linked global variables to remember current config
      * I'll do this later...
@@ -203,7 +222,7 @@ void mcp2515_cmd_reset(void){
  * @param none
  * 
  * @return uint8_t receive_byte -- The format of the byte is as follows:
- * <p>RX0IF--RX1IF--TXREQ for TXB0--TX0IF--TXREQ for TXB1--TX1IF--TXREQ for TXB2--TX2IF</p>
+ * <p>RX0IF--RX1IF--TXREQ_TXB0--TX0IF--TXREQ_TXB1--TX1IF--TXREQ_TXB2--TX2IF</p>
  */
 uint8_t mcp2515_cmd_read_status(void){
     SPI_Transfer_Byte(MCP2515_SPI_READ_STATUS, &receive_byte);
@@ -560,29 +579,77 @@ void can_parse_msg_ext(can_msg * msg, uint8_t * mcp2515_rx_buf){
 
 // <editor-fold defaultstate="collapsed" desc="API LAYER">
 
+/**
+ * <h3>Function: can_send</h3>
+ * <p>This queues up a message to be sent. This is NOT a guarantee that the message
+ * sent right away. For that, check the CANINTF register in the MCP2515. Otherwise,
+ * I am handling this through static variable flags and the ISR.</p>
+ * 
+ * <p> NOTE! For the sake of speed, I do not check that we are in the right opmode
+ * to send. Application should check CANSTAT_OPMODE bits if unsure before calling
+ * this function!</p>
+ * 
+ * <p>Also note, if all the TX buffers are free, then you can call this function
+ * three times in a row and it will load TXB0 --> TXB1 --> TXB2. After that, it
+ * will return EXEC_FAIL, indicating it was unable to request sends because
+ * buffers are currently all loaded.</p>
+ * 
+ * @param can_msg msg --> Message to send, placed in a can_msg struct
+ * @return 
+ */
 uint8_t can_send(can_msg * msg){    // TODO: Include priority at some point...
     // Translate msg into a buffer
-    uint8_t tx_buf[MCP2515_MSG_BUFF_SIZE_BYTES] = {0u};
-    can_compose_msg_ext(msg, tx_buf);
+    uint8_t tx_msg_buf[MCP2515_MSG_BUFF_SIZE_BYTES] = {0u};
+    can_compose_msg_ext(msg, tx_msg_buf);
     
     // Check for non-empty buffers
-    
+    // TODO - Not sure how to do this quickly through the MCP2515...
+    // For now, I'll use internal static variables to keep track of which buffer
+    // I'm requesting to get filled every time
+    txbuf_t txbf_to_use = TXB0;     // By default, use TXB0
+    if(txbf0_full){     // Check if TXB0 has been loaded already
+        if(txbf1_full){ // If TXB0 full, is TXB1 full?
+            if(txbf2_full){
+                return EXEC_FAIL;   // If TXB2 is also full, then return EXEC_FAIL
+                                    // and do not proceed further
+            } else {
+                txbf_to_use = TXB2;     // If yes, use TXB2
+                txbf2_full = 0x01u;  // Set flag indicating it is now assumed to be full
+            }
+        } else {
+            txbf_to_use = TXB1;     // If not, then use TXB1
+            txbf1_full = 0x01u;  // Set flag indicating it is now assumed to be full
+        }
+    } else {
+        txbf0_full = 0x01u;  // Set flag indicating it is now assumed to be full
+    }
     
     // Load into an empty buffer
-    
+    mcp2515_cmd_load_tx_buf(txbf_to_use, tx_msg_buf);
     
     // Request to send
-    
+    mcp2515_cmd_rts(txbf_to_use);
     
     // Await confirmation from TXnIF getting set
     // Account for errors or arbitration loss
-    // If successful, reset flag
+    // If successful, reset flags, including TXnIF
+    // TODO: ---> This is MUCH better to do in the ISR...
     
     return EXEC_SUCCESS;
 }
 
+/**
+ * <h3>Function: can_receive</h3>
+ * <p>This is the routine that is called to handle the event a message is received.</p>
+ * 
+ * @param can_msg msg --> Message to send, placed in a can_msg struct
+ * @return 
+ */
 uint8_t can_receive(can_msg * msg){
     
+    if(rxbf0_full) {
+        
+    }
     
     return EXEC_SUCCESS;
 }
