@@ -105,7 +105,6 @@ F 3 "~" H 9300 3350 50  0001 C CNN
 	1    9300 3350
 	1    0    0    -1  
 $EndComp
-NoConn ~ 8850 2550
 Text GLabel 7650 1950 0    50   Input ~ 0
 PIC2_MOSI
 Text GLabel 7650 2050 0    50   Input ~ 0
@@ -284,10 +283,8 @@ F 3 "" H 9300 4050 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	9300 4050 9300 4000
-Text GLabel 9500 3550 2    30   Input ~ 0
-CAN2_~RESET
-Wire Wire Line
-	9300 3550 9500 3550
+Text GLabel 8850 2550 2    30   Input ~ 0
+CAN2_~INT
 $Comp
 L power:GND #PWR0204
 U 1 1 619BDA5A
@@ -1282,7 +1279,7 @@ F 3 "" H 9350 2300 50  0001 C CNN
 $EndComp
 Connection ~ 9300 2850
 Text GLabel 4800 2300 2    30   Input ~ 0
-CAN2_~RESET
+CAN2_~INT
 Text GLabel 4800 2600 2    30   Input ~ 0
 CAN2_~RX0BF
 Text GLabel 4800 2450 2    30   Input ~ 0
@@ -1291,6 +1288,8 @@ Wire Wire Line
 	5500 1850 5600 1850
 Wire Wire Line
 	5600 1850 5600 1950
+Text GLabel 4800 4400 2    50   Input ~ 0
+PIC2_~SS
 Wire Bus Line
 	1700 3750 1700 4850
 Wire Bus Line
@@ -1299,6 +1298,4 @@ Wire Bus Line
 	4000 4850 5350 4850
 Wire Bus Line
 	5000 3150 5000 3800
-Text GLabel 4800 4400 2    50   Input ~ 0
-PIC2_~SS
 $EndSCHEMATC

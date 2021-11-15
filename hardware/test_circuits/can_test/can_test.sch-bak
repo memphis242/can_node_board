@@ -878,7 +878,7 @@ Wire Wire Line
 Wire Wire Line
 	5150 3050 5150 3100
 Text GLabel 4600 3500 2    30   Input ~ 0
-CAN1_~RESET
+CAN1_~INT
 $Comp
 L Interface_CAN_LIN:MCP2562-E-P U102
 U 1 1 61872B82
@@ -901,7 +901,6 @@ F 3 "~" H 9400 3200 50  0001 C CNN
 	1    9400 3200
 	1    0    0    -1  
 $EndComp
-NoConn ~ 8950 2400
 Text GLabel 7750 1800 0    50   Input ~ 0
 PIC1_MOSI
 Text GLabel 7750 1900 0    50   Input ~ 0
@@ -1114,10 +1113,8 @@ F 3 "" H 9400 3900 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	9400 3900 9400 3850
-Text GLabel 9600 3400 2    30   Input ~ 0
-CAN1_~RESET
-Wire Wire Line
-	9400 3400 9600 3400
+Text GLabel 8950 2400 2    30   Input ~ 0
+CAN1_~INT
 $Comp
 L power:+5V #PWR0101
 U 1 1 619412FD
