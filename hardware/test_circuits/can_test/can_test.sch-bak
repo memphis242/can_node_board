@@ -853,10 +853,6 @@ F 3 "" H 3000 1200 50  0001 C CNN
 	1    3000 1200
 	1    0    0    -1  
 $EndComp
-Text GLabel 4600 3800 2    30   Input ~ 0
-CAN1_~RX0BF
-Text GLabel 4600 3650 2    30   Input ~ 0
-CAN1_~RX1BF
 Wire Wire Line
 	5250 3800 5250 3850
 Wire Wire Line
@@ -877,7 +873,7 @@ Wire Wire Line
 	5050 3050 5150 3050
 Wire Wire Line
 	5150 3050 5150 3100
-Text GLabel 4600 3500 2    30   Input ~ 0
+Text GLabel 4600 3800 2    30   Input ~ 0
 CAN1_~INT
 $Comp
 L Interface_CAN_LIN:MCP2562-E-P U102
@@ -1048,10 +1044,6 @@ Wire Wire Line
 	8950 1850 9550 1850
 Wire Wire Line
 	8950 1950 9550 1950
-Text GLabel 8950 2500 2    30   Input ~ 0
-CAN1_~RX0BF
-Text GLabel 8950 2600 2    30   Input ~ 0
-CAN1_~RX1BF
 $Comp
 L Switch:SW_Push SW102
 U 1 1 6190D3F8
@@ -1066,12 +1058,12 @@ $EndComp
 $Comp
 L power:+5V #PWR0118
 U 1 1 619123F1
-P 9400 2700
-F 0 "#PWR0118" H 9400 2550 50  0001 C CNN
-F 1 "+5V" H 9400 2850 50  0000 C CNN
-F 2 "" H 9400 2700 50  0001 C CNN
-F 3 "" H 9400 2700 50  0001 C CNN
-	1    9400 2700
+P 9400 2500
+F 0 "#PWR0118" H 9400 2350 50  0001 C CNN
+F 1 "+5V" H 9500 2550 50  0000 C CNN
+F 2 "" H 9400 2500 50  0001 C CNN
+F 3 "" H 9400 2500 50  0001 C CNN
+	1    9400 2500
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -1080,7 +1072,6 @@ Wire Wire Line
 	8950 2800 9400 2800
 Wire Wire Line
 	9400 2800 9400 2700
-Connection ~ 9400 2700
 Wire Wire Line
 	8950 2900 9400 2900
 Wire Wire Line
@@ -1243,4 +1234,15 @@ Text Notes 1600 -2400 0    100  ~ 20
 5V POWER
 Text Notes 2900 950  0    40   ~ 0
 External Power
+Wire Wire Line
+	8950 2500 9400 2500
+Wire Wire Line
+	9400 2700 9400 2600
+Connection ~ 9400 2700
+Connection ~ 9400 2500
+Wire Wire Line
+	8950 2600 9400 2600
+Connection ~ 9400 2600
+Wire Wire Line
+	9400 2600 9400 2500
 $EndSCHEMATC

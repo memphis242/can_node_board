@@ -230,10 +230,6 @@ Wire Wire Line
 	8850 2000 9450 2000
 Wire Wire Line
 	8850 2100 9450 2100
-Text GLabel 8850 2650 2    30   Input ~ 0
-CAN2_~RX0BF
-Text GLabel 8850 2750 2    30   Input ~ 0
-CAN2_~RX1BF
 $Comp
 L Switch:SW_Push SW201
 U 1 1 619BDA30
@@ -1181,12 +1177,12 @@ $EndComp
 $Comp
 L power:+5VL #PWR0213
 U 1 1 61B1A552
-P 9300 2850
-F 0 "#PWR0213" H 9300 2700 50  0001 C CNN
-F 1 "+5VL" H 9315 3023 50  0000 C CNN
-F 2 "" H 9300 2850 50  0001 C CNN
-F 3 "" H 9300 2850 50  0001 C CNN
-	1    9300 2850
+P 9300 2650
+F 0 "#PWR0213" H 9300 2500 50  0001 C CNN
+F 1 "+5VL" H 9450 2700 50  0000 C CNN
+F 2 "" H 9300 2650 50  0001 C CNN
+F 3 "" H 9300 2650 50  0001 C CNN
+	1    9300 2650
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1277,19 +1273,26 @@ F 3 "" H 9350 2300 50  0001 C CNN
 	1    9350 2300
 	1    0    0    -1  
 $EndComp
-Connection ~ 9300 2850
-Text GLabel 4800 2300 2    30   Input ~ 0
-CAN2_~INT
 Text GLabel 4800 2600 2    30   Input ~ 0
-CAN2_~RX0BF
-Text GLabel 4800 2450 2    30   Input ~ 0
-CAN2_~RX1BF
+CAN2_~INT
 Wire Wire Line
 	5500 1850 5600 1850
 Wire Wire Line
 	5600 1850 5600 1950
 Text GLabel 4800 4400 2    50   Input ~ 0
 PIC2_~SS
+NoConn ~ 4800 2450
+NoConn ~ 4800 2300
+Wire Wire Line
+	8850 2750 9300 2750
+Wire Wire Line
+	9300 2750 9300 2650
+Wire Wire Line
+	9300 2850 9300 2750
+Connection ~ 9300 2850
+Connection ~ 9300 2750
+Wire Wire Line
+	8850 2650 9300 2650
 Wire Bus Line
 	1700 3750 1700 4850
 Wire Bus Line
@@ -1298,4 +1301,5 @@ Wire Bus Line
 	4000 4850 5350 4850
 Wire Bus Line
 	5000 3150 5000 3800
+Connection ~ 9300 2650
 $EndSCHEMATC
