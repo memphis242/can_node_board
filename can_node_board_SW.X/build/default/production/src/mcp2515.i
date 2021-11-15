@@ -4480,18 +4480,18 @@ typedef enum {
     MCP2515_OPMODE_LISTEN = 3u,
     MCP2515_OPMODE_CONFIG = 4u,
 } opmode_t;
-# 925 "inc\\mcp2515.h"
+# 926 "inc\\mcp2515.h"
 typedef enum { SPI_READ_RXB0_ID, SPI_READ_RXB0_D, SPI_READ_RXB1_ID, SPI_READ_RXB1_D } spi_read_rxb_inst_t;
 
 
 typedef enum { SPI_LOAD_TXB0_ID, SPI_LOAD_TXB0_D, SPI_LOAD_TXB1_ID, SPI_LOAD_TXB1_D, SPI_LOAD_TXB2_ID, SPI_LOAD_TXB2_D } spi_load_txb_inst_t;
-# 954 "inc\\mcp2515.h"
+# 955 "inc\\mcp2515.h"
 typedef enum { TXB0 = 1u, TXB1 = 2u, TXB2 = 4u } txbuf_t;
 typedef enum { RXB0, RXB1 } rxbuf_t;
 typedef enum { RX_MASK0, RX_MASK1 } rx_mask_t;
 typedef enum { RX_FILT0, RX_FILT1, RX_FILT2, RX_FILT3, RX_FILT4, RX_FILT5 } rx_filt_t;
 typedef enum { MCP2515_OPTION_ROLLOVER } mcp_2515_options_t;
-# 984 "inc\\mcp2515.h"
+# 985 "inc\\mcp2515.h"
 typedef struct {
     uint16_t sid;
     uint8_t exide;
@@ -4539,7 +4539,7 @@ void mcp2515_cmd_write_bit(uint8_t reg_address, uint8_t mask, uint8_t val);
 void mcp2515_cmd_read_rx_buf(rxbuf_t rxb, uint8_t * rx_buf);
 void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t * tx_buf);
 void mcp2515_cmd_rts(txbuf_t txb);
-# 1042 "inc\\mcp2515.h"
+# 1043 "inc\\mcp2515.h"
 void can_compose_msg_std(can_msg * msg, uint8_t * mcp2515_tx_buf);
 void can_parse_msg_std(can_msg * msg, uint8_t * mcp2515_rx_buf);
 void can_compose_msg_ext(can_msg * msg, uint8_t * mcp2515_tx_buf);
@@ -4547,7 +4547,11 @@ void can_parse_msg_ext(can_msg * msg, uint8_t * mcp2515_rx_buf);
 
 
 uint8_t can_send(can_msg * msg);
-uint8_t can_receive(can_msg * msg);
+
+
+
+
+uint8_t can_receive(can_msg * msg_buf0, can_msg * msg_buf1);
 uint8_t can_remote_frame(can_msg_arb_field arb_field);
 uint8_t can_tx_cancel(void);
 uint8_t can_tx_available(void);
@@ -4659,14 +4663,28 @@ typedef enum { FALLING_EDGE, RISING_EDGE } external_interrupt_edge_t;
 
 
 void external_interrupts_init_default(void);
-void external_interrupts_init(uint8_t which_pins, external_interrupt_edge_t trigger_edge);
+void external_interrupts_init(external_interrupts_t which_pin, external_interrupt_edge_t trigger_edge);
 # 16 "src/mcp2515.c" 2
 
 
 
 
 extern uint8_t receive_byte;
-# 53 "src/mcp2515.c"
+
+
+uint8_t txbf0_full = 0x00u;
+uint8_t txbf1_full = 0x00u;
+uint8_t txbf2_full = 0x00u;
+uint8_t txbf0_sent = 0x00u;
+uint8_t txbf1_sent = 0x00u;
+uint8_t txbf2_sent = 0x00u;
+
+
+uint8_t rxbf0_full = 0x00u;
+uint8_t rxbf1_full = 0x00u;
+
+static uint8_t mcp2515_status = 0x00u;
+# 66 "src/mcp2515.c"
 void can_init_default(void){
 
 
@@ -4681,7 +4699,10 @@ void can_init_default(void){
     } while( mcp2515_current_opmode() != MCP2515_OPMODE_CONFIG);
 
 
-    external_interrupts_init_default();
+    (INTCONbits.GIE = 0);
+
+    external_interrupts_init(EXT_INT_INT0, FALLING_EDGE);
+    (INTCONbits.GIE = 1);
 
 
 
@@ -4699,15 +4720,26 @@ void can_init_default(void){
     mcp2515_cmd_write_bit(0x29, 0x38, (7u << 3u));
     mcp2515_cmd_write_bit(0x29, 0x07, (4u));
     mcp2515_cmd_write_bit(0x28, 0x07, (5u));
-# 108 "src/mcp2515.c"
+# 126 "src/mcp2515.c"
     mcp2515_cmd_write_bit(0x60, 0x60, 0x00);
     mcp2515_cmd_write_bit(0x70, 0x60, 0x00);
 
     mcp2515_cmd_write_bit(0x60, 0x04, 0x04);
 
-    mcp2515_cmd_write_bit(0x0D, 0x03, 0x0F);
-    mcp2515_cmd_write_bit(0x0D, 0x0C, 0x0F);
-# 126 "src/mcp2515.c"
+
+
+
+
+
+
+    mcp2515_cmd_write(0x2B, (0x20 | 0x10 | 0x08 | 0x04 | 0x02 | 0x01));
+    mcp2515_cmd_write(0x2C, 0x00u);
+
+
+
+
+
+
     mcp2515_normal_mode();
 
 
@@ -4718,7 +4750,7 @@ void can_init_default(void){
 void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump){
 
 }
-# 151 "src/mcp2515.c"
+# 170 "src/mcp2515.c"
 opmode_t mcp2515_current_opmode(void){
     uint8_t opmode = 0x00;
     mcp2515_cmd_read(0x0E, &opmode);
@@ -4726,29 +4758,29 @@ opmode_t mcp2515_current_opmode(void){
 
     return current_opmode;
 }
-# 168 "src/mcp2515.c"
+# 187 "src/mcp2515.c"
 void mcp2515_config_mode(void){
     mcp2515_cmd_write_bit(0x0F, 0xE0, MCP2515_OPMODE_CONFIG);
 }
-# 181 "src/mcp2515.c"
+# 200 "src/mcp2515.c"
 void mcp2515_normal_mode(void){
     mcp2515_cmd_write_bit(0x0F, 0xE0, MCP2515_OPMODE_NORMAL);
 }
-# 194 "src/mcp2515.c"
+# 213 "src/mcp2515.c"
 void mcp2515_cmd_reset(void){
     SPI_Transfer_Byte(0xC0, &receive_byte);
 }
-# 208 "src/mcp2515.c"
+# 227 "src/mcp2515.c"
 uint8_t mcp2515_cmd_read_status(void){
     SPI_Transfer_Byte(0xA0, &receive_byte);
     return receive_byte;
 }
-# 222 "src/mcp2515.c"
+# 241 "src/mcp2515.c"
 uint8_t mcp2515_cmd_rx_status(void){
     SPI_Transfer_Byte(0xB0, &receive_byte);
     return receive_byte;
 }
-# 237 "src/mcp2515.c"
+# 256 "src/mcp2515.c"
 void mcp2515_cmd_read(uint8_t reg_address, uint8_t * buf){
 
     LATDbits.LATD2 = 0;
@@ -4763,7 +4795,7 @@ void mcp2515_cmd_read(uint8_t reg_address, uint8_t * buf){
     LATDbits.LATD2 = 1;
 
 }
-# 264 "src/mcp2515.c"
+# 283 "src/mcp2515.c"
 void mcp2515_cmd_read_sequential(uint8_t start_reg_addr, uint8_t * rxbuf, uint8_t len){
 
     LATDbits.LATD2 = 0;
@@ -4778,7 +4810,7 @@ void mcp2515_cmd_read_sequential(uint8_t start_reg_addr, uint8_t * rxbuf, uint8_
     LATDbits.LATD2 = 1;
 
 }
-# 290 "src/mcp2515.c"
+# 309 "src/mcp2515.c"
 void mcp2515_cmd_write(uint8_t reg_address, uint8_t val){
 
     LATDbits.LATD2 = 0;
@@ -4793,7 +4825,7 @@ void mcp2515_cmd_write(uint8_t reg_address, uint8_t val){
     LATDbits.LATD2 = 1;
 
 }
-# 317 "src/mcp2515.c"
+# 336 "src/mcp2515.c"
 void mcp2515_cmd_write_sequential(uint8_t start_reg_addr, uint8_t * txbuf, uint8_t len){
 
     LATDbits.LATD2 = 0;
@@ -4808,7 +4840,7 @@ void mcp2515_cmd_write_sequential(uint8_t start_reg_addr, uint8_t * txbuf, uint8
     LATDbits.LATD2 = 1;
 
 }
-# 350 "src/mcp2515.c"
+# 369 "src/mcp2515.c"
 void mcp2515_cmd_write_bit(uint8_t reg_address, uint8_t mask, uint8_t val){
 
     LATDbits.LATD2 = 0;
@@ -4825,7 +4857,7 @@ void mcp2515_cmd_write_bit(uint8_t reg_address, uint8_t mask, uint8_t val){
     LATDbits.LATD2 = 1;
 
 }
-# 383 "src/mcp2515.c"
+# 402 "src/mcp2515.c"
 void mcp2515_cmd_read_rx_buf(rxbuf_t rxb, uint8_t * rx_buf){
 
     LATDbits.LATD2 = 0;
@@ -4839,7 +4871,7 @@ void mcp2515_cmd_read_rx_buf(rxbuf_t rxb, uint8_t * rx_buf){
     LATDbits.LATD2 = 1;
 
 }
-# 413 "src/mcp2515.c"
+# 432 "src/mcp2515.c"
 void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t * tx_buf){
     spi_load_txb_inst_t selected_txb;
 
@@ -4867,11 +4899,11 @@ void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t * tx_buf){
     LATDbits.LATD2 = 1;
 
 }
-# 450 "src/mcp2515.c"
+# 469 "src/mcp2515.c"
 void mcp2515_cmd_rts(txbuf_t txb){
     SPI_Transfer_Byte((0x8 | (txb)), &receive_byte);
 }
-# 465 "src/mcp2515.c"
+# 484 "src/mcp2515.c"
 void can_compose_msg_std(can_msg * msg, uint8_t * mcp2515_tx_buf){
 
 }
@@ -4880,7 +4912,7 @@ void can_compose_msg_std(can_msg * msg, uint8_t * mcp2515_tx_buf){
 void can_parse_msg_std(can_msg * msg, uint8_t * mcp2515_rx_buf){
 
 }
-# 496 "src/mcp2515.c"
+# 515 "src/mcp2515.c"
 void can_compose_msg_ext(can_msg * msg, uint8_t * mcp2515_tx_buf){
 
 
@@ -4902,7 +4934,7 @@ void can_compose_msg_ext(can_msg * msg, uint8_t * mcp2515_tx_buf){
     mcp2515_tx_buf[12] = msg->data_field.data7;
 
 }
-# 539 "src/mcp2515.c"
+# 558 "src/mcp2515.c"
 void can_parse_msg_ext(can_msg * msg, uint8_t * mcp2515_rx_buf){
 
     msg->arb_field.sid = (((uint16_t) mcp2515_rx_buf[0]) << 3u) | (((uint16_t) mcp2515_rx_buf[1] & 0x00E0) >> 5u);
@@ -4922,21 +4954,76 @@ void can_parse_msg_ext(can_msg * msg, uint8_t * mcp2515_rx_buf){
     msg->data_field.data7 = mcp2515_rx_buf[12];
 
 }
-
-
-
-
-
+# 600 "src/mcp2515.c"
 uint8_t can_send(can_msg * msg){
 
-    uint8_t tx_buf[13u] = {0u};
-    can_compose_msg_ext(msg, tx_buf);
-# 581 "src/mcp2515.c"
+    uint8_t tx_msg_buf[13u] = {0u};
+    can_compose_msg_ext(msg, tx_msg_buf);
+
+
+
+
+
+    txbuf_t txbf_to_use = TXB0;
+    if(txbf0_full){
+        if(txbf1_full){
+            if(txbf2_full){
+                return 0;
+
+            } else {
+                txbf_to_use = TXB2;
+                txbf2_full = 0x01u;
+            }
+        } else {
+            txbf_to_use = TXB1;
+            txbf1_full = 0x01u;
+        }
+    } else {
+        txbf0_full = 0x01u;
+    }
+
+
+    mcp2515_cmd_load_tx_buf(txbf_to_use, tx_msg_buf);
+
+
+    mcp2515_cmd_rts(txbf_to_use);
+
+
+
+
+
+
     return 1;
 }
+# 649 "src/mcp2515.c"
+uint8_t can_receive(can_msg * msg_buf0, can_msg * msg_buf1){
+    uint8_t return_val = 0x00;
+    uint8_t rx_buf[13u] = {0};
 
-uint8_t can_receive(can_msg * msg){
 
+    if(rxbf0_full) {
 
-    return 1;
+        mcp2515_cmd_read_rx_buf(RXB0, rx_buf);
+        can_parse_msg_ext(msg_buf0, rx_buf);
+
+        mcp2515_cmd_write_bit(0x2C, 0x01, 0x00u);
+        mcp2515_cmd_write_bit(0x2D, 0x40, 0x00u);
+
+        rxbf0_full = 0x00u;
+
+        return_val |= 0x1u;
+    }
+    if(rxbf1_full) {
+        mcp2515_cmd_read_rx_buf(RXB1, rx_buf);
+        can_parse_msg_ext(msg_buf1, rx_buf);
+
+        mcp2515_cmd_write_bit(0x2C, 0x01, 0x00u);
+        mcp2515_cmd_write_bit(0x2D, 0x40, 0x00u);
+
+        rxbf1_full = 0x00u;
+
+        return_val |= 0x2u;
+    }
+
+    return return_val;
 }

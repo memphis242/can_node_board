@@ -4537,18 +4537,18 @@ typedef enum {
     MCP2515_OPMODE_LISTEN = 3u,
     MCP2515_OPMODE_CONFIG = 4u,
 } opmode_t;
-# 925 "inc\\mcp2515.h"
+# 926 "inc\\mcp2515.h"
 typedef enum { SPI_READ_RXB0_ID, SPI_READ_RXB0_D, SPI_READ_RXB1_ID, SPI_READ_RXB1_D } spi_read_rxb_inst_t;
 
 
 typedef enum { SPI_LOAD_TXB0_ID, SPI_LOAD_TXB0_D, SPI_LOAD_TXB1_ID, SPI_LOAD_TXB1_D, SPI_LOAD_TXB2_ID, SPI_LOAD_TXB2_D } spi_load_txb_inst_t;
-# 954 "inc\\mcp2515.h"
+# 955 "inc\\mcp2515.h"
 typedef enum { TXB0 = 1u, TXB1 = 2u, TXB2 = 4u } txbuf_t;
 typedef enum { RXB0, RXB1 } rxbuf_t;
 typedef enum { RX_MASK0, RX_MASK1 } rx_mask_t;
 typedef enum { RX_FILT0, RX_FILT1, RX_FILT2, RX_FILT3, RX_FILT4, RX_FILT5 } rx_filt_t;
 typedef enum { MCP2515_OPTION_ROLLOVER } mcp_2515_options_t;
-# 984 "inc\\mcp2515.h"
+# 985 "inc\\mcp2515.h"
 typedef struct {
     uint16_t sid;
     uint8_t exide;
@@ -4596,7 +4596,7 @@ void mcp2515_cmd_write_bit(uint8_t reg_address, uint8_t mask, uint8_t val);
 void mcp2515_cmd_read_rx_buf(rxbuf_t rxb, uint8_t * rx_buf);
 void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t * tx_buf);
 void mcp2515_cmd_rts(txbuf_t txb);
-# 1042 "inc\\mcp2515.h"
+# 1043 "inc\\mcp2515.h"
 void can_compose_msg_std(can_msg * msg, uint8_t * mcp2515_tx_buf);
 void can_parse_msg_std(can_msg * msg, uint8_t * mcp2515_rx_buf);
 void can_compose_msg_ext(can_msg * msg, uint8_t * mcp2515_tx_buf);
@@ -4604,7 +4604,11 @@ void can_parse_msg_ext(can_msg * msg, uint8_t * mcp2515_rx_buf);
 
 
 uint8_t can_send(can_msg * msg);
-uint8_t can_receive(can_msg * msg);
+
+
+
+
+uint8_t can_receive(can_msg * msg_buf0, can_msg * msg_buf1);
 uint8_t can_remote_frame(can_msg_arb_field arb_field);
 uint8_t can_tx_cancel(void);
 uint8_t can_tx_available(void);
@@ -4716,7 +4720,7 @@ typedef enum { FALLING_EDGE, RISING_EDGE } external_interrupt_edge_t;
 
 
 void external_interrupts_init_default(void);
-void external_interrupts_init(uint8_t which_pins, external_interrupt_edge_t trigger_edge);
+void external_interrupts_init(external_interrupts_t which_pin, external_interrupt_edge_t trigger_edge);
 # 74 "mcp2515_test.c" 2
 
 # 1 "inc\\mcp2515_test.h" 1

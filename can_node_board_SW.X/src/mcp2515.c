@@ -595,7 +595,7 @@ void can_parse_msg_ext(can_msg * msg, uint8_t * mcp2515_rx_buf){
  * buffers are currently all loaded.</p>
  * 
  * @param can_msg msg --> Message to send, placed in a can_msg struct
- * @return 
+ * @return EXEC_SUCCESS of EXEC_FAIL --> will only fail if all TX buffers are full
  */
 uint8_t can_send(can_msg * msg){    // TODO: Include priority at some point...
     // Translate msg into a buffer
@@ -643,21 +643,43 @@ uint8_t can_send(can_msg * msg){    // TODO: Include priority at some point...
  * <p>This is the routine that is called to handle the event a message is received.</p>
  * 
  * @param can_msg msg --> Message to send, placed in a can_msg struct
- * @return 
+ * @return uint8_t return_val --> 0 for nothing, 1 for RXB0, 2 for RXB1, and
+ *                                3 for RXB0 AND RXB1
  */
-uint8_t can_receive(can_msg * msg){
+uint8_t can_receive(can_msg * msg_buf0, can_msg * msg_buf1){
+    uint8_t return_val = 0x00;
+    uint8_t rx_buf[MCP2515_MSG_BUFF_SIZE_BYTES] = {0};
     
+    // Check the global variable flags for which buffer to read from and read accordingly
     if(rxbf0_full) {
+        // Read and parse buffer
+        mcp2515_cmd_read_rx_buf(RXB0, rx_buf);
+        can_parse_msg_ext(msg_buf0, rx_buf);
+        // Clear RXB0 flag and (just in case) the RX0OVR
+        mcp2515_cmd_write_bit(MCP2515_CANINTF, MCP2515_RX0I, 0x00u);
+        mcp2515_cmd_write_bit(MCP2515_EFLG, MCP2515_EFLG_RX0OVR, 0x00u);
         
+        rxbf0_full = 0x00u;
+        
+        return_val |= MCP2515_RECEIVED_BUF0;
+    }
+    if(rxbf1_full) {
+        mcp2515_cmd_read_rx_buf(RXB1, rx_buf);
+        can_parse_msg_ext(msg_buf1, rx_buf);
+        // Clear RXB0 flag and (just in case) the RX0OVR
+        mcp2515_cmd_write_bit(MCP2515_CANINTF, MCP2515_RX0I, 0x00u);
+        mcp2515_cmd_write_bit(MCP2515_EFLG, MCP2515_EFLG_RX0OVR, 0x00u);
+        
+        rxbf1_full = 0x00u;
+        
+        return_val |= MCP2515_RECEIVED_BUF1;
     }
     
-    return EXEC_SUCCESS;
+    return return_val;  // 0 for nothing, 1 for RXB0, 2 for RXB1, and 3 for RXB0 AND RXB1
 }
 
 //uint8_t can_remote_frame(can_msg_arb_field arb_field);
 //uint8_t can_tx_cancel(void);
-//uint8_t can_tx_available(void);
-//uint8_t can_rx_pending(void);
 //uint8_t can_rx_setmask(rx_mask_t mask_id, uint32_t mask, uint8_t is_extended);
 //uint8_t can_rx_setfilter(rx_filt_t filt_id, uint32_t filter);
 //uint8_t can_rx_mode(void);

@@ -43,23 +43,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6406
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6406: extern volatile INTCONbits_t INTCONbits __attribute__((address(0xFF2)));
 [v _INTCONbits `VS262 ~T0 @X0 0 e@4082 ]
-"6218
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6218:     struct {
-[s S256 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S256 . INT1IF INT2IF . INT1IE INT2IE . INT1IP INT2IP ]
-"6228
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6228:     struct {
-[s S257 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S257 . INT1F INT2F . INT1E INT2E . INT1P INT2P ]
-"6217
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6217: typedef union {
-[u S255 `S256 1 `S257 1 ]
-[n S255 . . . ]
-"6239
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6239: extern volatile INTCON3bits_t INTCON3bits __attribute__((address(0xFF0)));
-[v _INTCON3bits `VS255 ~T0 @X0 0 e@4080 ]
-"58 src/external_interrupts.c
-[; ;src/external_interrupts.c: 58: void external_interrupts_init(uint8_t which_pins, external_interrupt_edge_t trigger_edge){
+"54 src/external_interrupts.c
+[; ;src/external_interrupts.c: 54: void external_interrupts_init(external_interrupts_t which_pin, external_interrupt_edge_t trigger_edge){
+[c E2464 1 2 4 .. ]
+[n E2464 . EXT_INT_INT0 EXT_INT_INT1 EXT_INT_INT2  ]
 [c E2469 0 1 .. ]
 [n E2469 . FALLING_EDGE RISING_EDGE  ]
 "6310 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
@@ -81,6 +68,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6329
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6329: extern volatile INTCON2bits_t INTCON2bits __attribute__((address(0xFF1)));
 [v _INTCON2bits `VS258 ~T0 @X0 0 e@4081 ]
+"6218
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6218:     struct {
+[s S256 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S256 . INT1IF INT2IF . INT1IE INT2IE . INT1IP INT2IP ]
+"6228
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6228:     struct {
+[s S257 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S257 . INT1F INT2F . INT1E INT2E . INT1P INT2P ]
+"6217
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6217: typedef union {
+[u S255 `S256 1 `S257 1 ]
+[n S255 . . . ]
+"6239
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6239: extern volatile INTCON3bits_t INTCON3bits __attribute__((address(0xFF0)));
+[v _INTCON3bits `VS255 ~T0 @X0 0 e@4080 ]
 "54 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 54: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -502,102 +504,98 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/external_interrupts.c: 28:     (INTCON2 &= ~(0x70));
 [e =& _INTCON2 -> ~ -> 112 `i `Vuc ]
 "29
-[; ;src/external_interrupts.c: 29:     ADCON1bits.PCFG = 0xF; (TRISB |= 0x07);
+[; ;src/external_interrupts.c: 29:     ADCON1bits.PCFG = 0xF; (TRISB |= 0x01);
 [e = . . _ADCON1bits 0 0 -> -> 15 `i `uc ]
-[e =| _TRISB -> -> 7 `i `Vuc ]
+[e =| _TRISB -> -> 1 `i `Vuc ]
 "32
 [; ;src/external_interrupts.c: 32:     (INTCONbits.INT0IE = 1u);
 [e = . . _INTCONbits 0 4 -> -> 1 `ui `uc ]
-"33
-[; ;src/external_interrupts.c: 33:     (INTCON3bits.INT1IE = 1u);
-[e = . . _INTCON3bits 0 3 -> -> 1 `ui `uc ]
-"34
-[; ;src/external_interrupts.c: 34:     (INTCON3bits.INT2IE = 1u);
-[e = . . _INTCON3bits 0 4 -> -> 1 `ui `uc ]
-"37
-[; ;src/external_interrupts.c: 37:     (INTCONbits.INT0IF = 0u);
+"35
+[; ;src/external_interrupts.c: 35:     (INTCONbits.INT0IF = 0u);
 [e = . . _INTCONbits 0 1 -> -> 0 `ui `uc ]
-"38
-[; ;src/external_interrupts.c: 38:     (INTCON3bits.INT1IF = 0u);
-[e = . . _INTCON3bits 0 0 -> -> 0 `ui `uc ]
-"39
-[; ;src/external_interrupts.c: 39:     (INTCON3bits.INT2IF = 0u);
-[e = . . _INTCON3bits 0 1 -> -> 0 `ui `uc ]
-"41
-[; ;src/external_interrupts.c: 41: }
+"37
+[; ;src/external_interrupts.c: 37: }
 [e :UE 270 ]
 }
-"58
-[; ;src/external_interrupts.c: 58: void external_interrupts_init(uint8_t which_pins, external_interrupt_edge_t trigger_edge){
-[v _external_interrupts_init `(v ~T0 @X0 1 ef2`uc`E2469 ]
+"54
+[; ;src/external_interrupts.c: 54: void external_interrupts_init(external_interrupts_t which_pin, external_interrupt_edge_t trigger_edge){
+[v _external_interrupts_init `(v ~T0 @X0 1 ef2`E2464`E2469 ]
 {
 [e :U _external_interrupts_init ]
-[v _which_pins `uc ~T0 @X0 1 r1 ]
+[v _which_pin `E2464 ~T0 @X0 1 r1 ]
 [v _trigger_edge `E2469 ~T0 @X0 1 r2 ]
 [f ]
-"59
-[; ;src/external_interrupts.c: 59:     if((which_pins & (1u << 0))) {
-[e $ ! != & -> _which_pins `ui << -> 1 `ui -> 0 `i -> -> 0 `i `ui 272  ]
+"56
+[; ;src/external_interrupts.c: 56:     switch(which_pin){
+[e $U 273  ]
 {
-"60
-[; ;src/external_interrupts.c: 60:         INTCON2bits.INTEDG0 = trigger_edge;
+"57
+[; ;src/external_interrupts.c: 57:         case EXT_INT_INT0:
+[e :U 274 ]
+"58
+[; ;src/external_interrupts.c: 58:             INTCON2bits.INTEDG0 = trigger_edge;
 [e = . . _INTCON2bits 1 6 -> _trigger_edge `uc ]
-"61
-[; ;src/external_interrupts.c: 61:         ADCON1bits.PCFG = 0xF; (TRISB |= 0x01);
+"59
+[; ;src/external_interrupts.c: 59:             ADCON1bits.PCFG = 0xF; (TRISB |= 0x01);
 [e = . . _ADCON1bits 0 0 -> -> 15 `i `uc ]
 [e =| _TRISB -> -> 1 `i `Vuc ]
-"62
-[; ;src/external_interrupts.c: 62:         (INTCONbits.INT0IE = 1u);
+"60
+[; ;src/external_interrupts.c: 60:             (INTCONbits.INT0IE = 1u);
 [e = . . _INTCONbits 0 4 -> -> 1 `ui `uc ]
-"63
-[; ;src/external_interrupts.c: 63:         (INTCONbits.INT0IF = 0u);
+"61
+[; ;src/external_interrupts.c: 61:             (INTCONbits.INT0IF = 0u);
 [e = . . _INTCONbits 0 1 -> -> 0 `ui `uc ]
+"62
+[; ;src/external_interrupts.c: 62:             break;
+[e $U 272  ]
+"63
+[; ;src/external_interrupts.c: 63:         case EXT_INT_INT1:
+[e :U 275 ]
 "64
-[; ;src/external_interrupts.c: 64:     }
-}
-[e :U 272 ]
-"65
-[; ;src/external_interrupts.c: 65:     if((which_pins & (1u << 1))) {
-[e $ ! != & -> _which_pins `ui << -> 1 `ui -> 1 `i -> -> 0 `i `ui 273  ]
-{
-"66
-[; ;src/external_interrupts.c: 66:         INTCON2bits.INTEDG1 = trigger_edge;
+[; ;src/external_interrupts.c: 64:             INTCON2bits.INTEDG1 = trigger_edge;
 [e = . . _INTCON2bits 1 5 -> _trigger_edge `uc ]
-"67
-[; ;src/external_interrupts.c: 67:         ADCON1bits.PCFG = 0xF; (TRISB |= 0x02);
+"65
+[; ;src/external_interrupts.c: 65:             ADCON1bits.PCFG = 0xF; (TRISB |= 0x02);
 [e = . . _ADCON1bits 0 0 -> -> 15 `i `uc ]
 [e =| _TRISB -> -> 2 `i `Vuc ]
-"68
-[; ;src/external_interrupts.c: 68:         (INTCON3bits.INT1IE = 1u);
+"66
+[; ;src/external_interrupts.c: 66:             (INTCON3bits.INT1IE = 1u);
 [e = . . _INTCON3bits 0 3 -> -> 1 `ui `uc ]
-"69
-[; ;src/external_interrupts.c: 69:         (INTCON3bits.INT1IF = 0u);
+"67
+[; ;src/external_interrupts.c: 67:             (INTCON3bits.INT1IF = 0u);
 [e = . . _INTCON3bits 0 0 -> -> 0 `ui `uc ]
+"68
+[; ;src/external_interrupts.c: 68:             break;
+[e $U 272  ]
+"69
+[; ;src/external_interrupts.c: 69:         case EXT_INT_INT2:
+[e :U 276 ]
 "70
-[; ;src/external_interrupts.c: 70:     }
-}
-[e :U 273 ]
-"71
-[; ;src/external_interrupts.c: 71:     if((which_pins & (1u << 2))) {
-[e $ ! != & -> _which_pins `ui << -> 1 `ui -> 2 `i -> -> 0 `i `ui 274  ]
-{
-"72
-[; ;src/external_interrupts.c: 72:         INTCON2bits.INTEDG2 = trigger_edge;
+[; ;src/external_interrupts.c: 70:             INTCON2bits.INTEDG2 = trigger_edge;
 [e = . . _INTCON2bits 1 4 -> _trigger_edge `uc ]
-"73
-[; ;src/external_interrupts.c: 73:         ADCON1bits.PCFG = 0xF; (TRISB |= 0x04);
+"71
+[; ;src/external_interrupts.c: 71:             ADCON1bits.PCFG = 0xF; (TRISB |= 0x04);
 [e = . . _ADCON1bits 0 0 -> -> 15 `i `uc ]
 [e =| _TRISB -> -> 4 `i `Vuc ]
-"74
-[; ;src/external_interrupts.c: 74:         (INTCON3bits.INT2IE = 1u);
+"72
+[; ;src/external_interrupts.c: 72:             (INTCON3bits.INT2IE = 1u);
 [e = . . _INTCON3bits 0 4 -> -> 1 `ui `uc ]
-"75
-[; ;src/external_interrupts.c: 75:         (INTCON3bits.INT2IF = 0u);
+"73
+[; ;src/external_interrupts.c: 73:             (INTCON3bits.INT2IF = 0u);
 [e = . . _INTCON3bits 0 1 -> -> 0 `ui `uc ]
-"76
-[; ;src/external_interrupts.c: 76:     }
+"74
+[; ;src/external_interrupts.c: 74:             break;
+[e $U 272  ]
+"75
+[; ;src/external_interrupts.c: 75:     }
 }
-[e :U 274 ]
+[e $U 272  ]
+[e :U 273 ]
+[e [\ -> _which_pin `ui , $ -> . `E2464 0 `ui 274
+ , $ -> . `E2464 1 `ui 275
+ , $ -> . `E2464 2 `ui 276
+ 272 ]
+[e :U 272 ]
 "77
 [; ;src/external_interrupts.c: 77: }
 [e :UE 271 ]

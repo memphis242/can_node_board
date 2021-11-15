@@ -1047,7 +1047,11 @@ void can_parse_msg_ext(can_msg * msg, uint8_t * mcp2515_rx_buf);
 
 // This will be the highest level API layer
 uint8_t can_send(can_msg * msg);    // TODO: Include priority at some point...
-uint8_t can_receive(can_msg * msg);
+// The following macro constants are what will be returned by can_receive...
+#define MCP2515_RECEIVED_BUF0       0x1u
+#define MCP2515_RECEIVED_BUF1       0x2u
+#define MCP2515_NOTHING_RECEIVED    0x0u
+uint8_t can_receive(can_msg * msg_buf0, can_msg * msg_buf1);
 uint8_t can_remote_frame(can_msg_arb_field arb_field);
 uint8_t can_tx_cancel(void);
 uint8_t can_tx_available(void);
