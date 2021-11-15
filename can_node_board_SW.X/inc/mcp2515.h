@@ -1052,16 +1052,16 @@ uint8_t can_send(can_msg * msg);    // TODO: Include priority at some point...
 #define MCP2515_RECEIVED_BUF1       0x2u
 #define MCP2515_NOTHING_RECEIVED    0x0u
 uint8_t can_receive(can_msg * msg_buf0, can_msg * msg_buf1);
-uint8_t can_remote_frame(can_msg_arb_field arb_field);
-uint8_t can_tx_cancel(void);
-uint8_t can_tx_available(void);
-uint8_t can_rx_pending(void);
-uint8_t can_rx_setmask(rx_mask_t mask_id, uint32_t mask, uint8_t is_extended);
-uint8_t can_rx_setfilter(rx_filt_t filt_id, uint32_t filter);
-uint8_t can_rx_mode(void);
-uint8_t can_mcp2515_config_options(mcp_2515_options_t option, uint8_t val);
-uint8_t can_read_error(uint8_t reg);
-uint8_t can_clear_bus_error(void);
+//uint8_t can_remote_frame(can_msg_arb_field arb_field);
+//uint8_t can_tx_cancel(void);
+//uint8_t can_tx_available(void);
+//uint8_t can_rx_pending(void);
+//uint8_t can_rx_setmask(rx_mask_t mask_id, uint32_t mask, uint8_t is_extended);
+//uint8_t can_rx_setfilter(rx_filt_t filt_id, uint32_t filter);
+//uint8_t can_rx_mode(void);
+//uint8_t can_mcp2515_config_options(mcp_2515_options_t option, uint8_t val);
+//uint8_t can_read_error(uint8_t reg);
+//uint8_t can_clear_bus_error(void);
 
 #endif	/* MCP2515_HEADER */
 

@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=src/ccp.c src/lcd_driver.c src/timer.c src/mcp2515.c src/external_interrupts.c main.c spi_test.c src/mssp_spi.c mcp2515_test.c
+SOURCEFILES_QUOTED_IF_SPACED=src/ccp.c src/lcd_driver.c src/timer.c src/mcp2515.c src/external_interrupts.c src/mssp_spi.c main.c spi_test.c mcp2515_test.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/ccp.p1 ${OBJECTDIR}/src/lcd_driver.p1 ${OBJECTDIR}/src/timer.p1 ${OBJECTDIR}/src/mcp2515.p1 ${OBJECTDIR}/src/external_interrupts.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/spi_test.p1 ${OBJECTDIR}/src/mssp_spi.p1 ${OBJECTDIR}/mcp2515_test.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/src/ccp.p1.d ${OBJECTDIR}/src/lcd_driver.p1.d ${OBJECTDIR}/src/timer.p1.d ${OBJECTDIR}/src/mcp2515.p1.d ${OBJECTDIR}/src/external_interrupts.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/spi_test.p1.d ${OBJECTDIR}/src/mssp_spi.p1.d ${OBJECTDIR}/mcp2515_test.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/ccp.p1 ${OBJECTDIR}/src/lcd_driver.p1 ${OBJECTDIR}/src/timer.p1 ${OBJECTDIR}/src/mcp2515.p1 ${OBJECTDIR}/src/external_interrupts.p1 ${OBJECTDIR}/src/mssp_spi.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/spi_test.p1 ${OBJECTDIR}/mcp2515_test.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/src/ccp.p1.d ${OBJECTDIR}/src/lcd_driver.p1.d ${OBJECTDIR}/src/timer.p1.d ${OBJECTDIR}/src/mcp2515.p1.d ${OBJECTDIR}/src/external_interrupts.p1.d ${OBJECTDIR}/src/mssp_spi.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/spi_test.p1.d ${OBJECTDIR}/mcp2515_test.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/src/ccp.p1 ${OBJECTDIR}/src/lcd_driver.p1 ${OBJECTDIR}/src/timer.p1 ${OBJECTDIR}/src/mcp2515.p1 ${OBJECTDIR}/src/external_interrupts.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/spi_test.p1 ${OBJECTDIR}/src/mssp_spi.p1 ${OBJECTDIR}/mcp2515_test.p1
+OBJECTFILES=${OBJECTDIR}/src/ccp.p1 ${OBJECTDIR}/src/lcd_driver.p1 ${OBJECTDIR}/src/timer.p1 ${OBJECTDIR}/src/mcp2515.p1 ${OBJECTDIR}/src/external_interrupts.p1 ${OBJECTDIR}/src/mssp_spi.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/spi_test.p1 ${OBJECTDIR}/mcp2515_test.p1
 
 # Source Files
-SOURCEFILES=src/ccp.c src/lcd_driver.c src/timer.c src/mcp2515.c src/external_interrupts.c main.c spi_test.c src/mssp_spi.c mcp2515_test.c
+SOURCEFILES=src/ccp.c src/lcd_driver.c src/timer.c src/mcp2515.c src/external_interrupts.c src/mssp_spi.c main.c spi_test.c mcp2515_test.c
 
 
 
@@ -134,6 +134,14 @@ ${OBJECTDIR}/src/external_interrupts.p1: src/external_interrupts.c  nbproject/Ma
 	@-${MV} ${OBJECTDIR}/src/external_interrupts.d ${OBJECTDIR}/src/external_interrupts.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/src/external_interrupts.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/src/mssp_spi.p1: src/mssp_spi.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/mssp_spi.p1.d 
+	@${RM} ${OBJECTDIR}/src/mssp_spi.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O2 -fasmfile -maddrqual=ignore -xassembler-with-cpp -I"inc" -I"src" -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/src/mssp_spi.p1 src/mssp_spi.c 
+	@-${MV} ${OBJECTDIR}/src/mssp_spi.d ${OBJECTDIR}/src/mssp_spi.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/src/mssp_spi.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 ${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/main.p1.d 
@@ -149,14 +157,6 @@ ${OBJECTDIR}/spi_test.p1: spi_test.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O2 -fasmfile -maddrqual=ignore -xassembler-with-cpp -I"inc" -I"src" -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/spi_test.p1 spi_test.c 
 	@-${MV} ${OBJECTDIR}/spi_test.d ${OBJECTDIR}/spi_test.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/spi_test.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/src/mssp_spi.p1: src/mssp_spi.c  nbproject/Makefile-${CND_CONF}.mk 
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/mssp_spi.p1.d 
-	@${RM} ${OBJECTDIR}/src/mssp_spi.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O2 -fasmfile -maddrqual=ignore -xassembler-with-cpp -I"inc" -I"src" -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/src/mssp_spi.p1 src/mssp_spi.c 
-	@-${MV} ${OBJECTDIR}/src/mssp_spi.d ${OBJECTDIR}/src/mssp_spi.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/src/mssp_spi.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/mcp2515_test.p1: mcp2515_test.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
@@ -207,6 +207,14 @@ ${OBJECTDIR}/src/external_interrupts.p1: src/external_interrupts.c  nbproject/Ma
 	@-${MV} ${OBJECTDIR}/src/external_interrupts.d ${OBJECTDIR}/src/external_interrupts.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/src/external_interrupts.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/src/mssp_spi.p1: src/mssp_spi.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/mssp_spi.p1.d 
+	@${RM} ${OBJECTDIR}/src/mssp_spi.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O2 -fasmfile -maddrqual=ignore -xassembler-with-cpp -I"inc" -I"src" -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/src/mssp_spi.p1 src/mssp_spi.c 
+	@-${MV} ${OBJECTDIR}/src/mssp_spi.d ${OBJECTDIR}/src/mssp_spi.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/src/mssp_spi.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 ${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/main.p1.d 
@@ -222,14 +230,6 @@ ${OBJECTDIR}/spi_test.p1: spi_test.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O2 -fasmfile -maddrqual=ignore -xassembler-with-cpp -I"inc" -I"src" -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/spi_test.p1 spi_test.c 
 	@-${MV} ${OBJECTDIR}/spi_test.d ${OBJECTDIR}/spi_test.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/spi_test.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/src/mssp_spi.p1: src/mssp_spi.c  nbproject/Makefile-${CND_CONF}.mk 
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/mssp_spi.p1.d 
-	@${RM} ${OBJECTDIR}/src/mssp_spi.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O2 -fasmfile -maddrqual=ignore -xassembler-with-cpp -I"inc" -I"src" -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/src/mssp_spi.p1 src/mssp_spi.c 
-	@-${MV} ${OBJECTDIR}/src/mssp_spi.d ${OBJECTDIR}/src/mssp_spi.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/src/mssp_spi.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/mcp2515_test.p1: mcp2515_test.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 

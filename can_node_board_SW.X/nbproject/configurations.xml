@@ -11,9 +11,9 @@
         <itemPath>inc/mcp2515.h</itemPath>
         <itemPath>inc/mssp_spi.h</itemPath>
         <itemPath>inc/external_interrupts.h</itemPath>
+        <itemPath>inc/mcp2515_test.h</itemPath>
+        <itemPath>inc/spi_test.h</itemPath>
       </logicalFolder>
-      <itemPath>spi_test.h</itemPath>
-      <itemPath>inc/mcp2515_test.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
