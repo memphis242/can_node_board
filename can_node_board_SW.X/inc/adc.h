@@ -127,8 +127,8 @@
 #define ADC_TRIS_DEFAULT        (TRISAbits.RA0 = 1u)        // RA0 as input
 #define ADC_START_CONVERSION    (ADCON0bits.GO = 1u)
 #define ADC_IN_PROGRESS         (ADCON0bits.GO_NOT_DONE)
-#define ADC_ENABLE              (ADCON0bits.ADON = 1u)
-#define ADC_DISABLE             (ADCON0bits.ADON = 0u)
+#define ADC_ON                  (ADCON0bits.ADON = 1u)
+#define ADC_OFF                 (ADCON0bits.ADON = 0u)
 
 /* ADCON1 - A/D Control Register 1 -  Register 19-2 in Datasheet
  * Default/POR: 00 00 0qqq --> q as in, determined by configuration bits --> PCFG of PBADEN Config reg
@@ -194,7 +194,9 @@
 
 // Interrupt related
 #define ADC_INTERRUPT_ENABLE            (PIE1bits.ADIE = 1u)
+#define ADC_INTERRUPT_ENABLE_BIT        (PIE1bits.ADIE)
 #define ADC_INTERRUPT_DISABLE           (PIE1bits.ADIE = 0u)
+#define ADC_IF                          (PIR1bits.ADIF)
 #define ADC_CLEAR_IF                    (PIR1bits.ADIF = 0u)
 // TODO: Priority stuff...
 

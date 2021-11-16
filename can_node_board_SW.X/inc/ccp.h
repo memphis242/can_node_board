@@ -131,7 +131,7 @@
 #define T3CON_T3CCP_BITS                0x48    // Timer3 and Timer1 CCPx Enable bits --> BITS NOT NEXT TO EACH OTHER!
 #define TMR1_FOR_CCPx                   (T3CON &= ~T3CON_T3CCP_BITS)
 #define TMR3_FOR_CCPx                   (T3CON |= T3CON_T3CCP_BITS)
-#define TMR1_FOR_CCP1_TMR3_FOR_CCP2     (T3CON &= ~(1u << 3); (T3CON |= (1u << 6))
+#define TMR1_FOR_CCP1_TMR3_FOR_CCP2     do { T3CON &= ~(1u << 3); T3CON |= (1u << 6); } while(0);
 
 // Interrupt-Related
 #define CCP1_IF_BIT                 PIR1bits.CCP1IF

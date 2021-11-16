@@ -86,10 +86,13 @@
 #define INTx_FALLING_EDGE       (INTCON2 &= ~(0x70))    // All on falling edge
 
 #define INT0_ENABLE     (INTCONbits.INT0IE = 1u)
+#define INT0_ENABLE_BIT (INTCONbits.INT0IE)
 #define INT0_DISABLE    (INTCONbits.INT0IE = 0u)
 #define INT1_ENABLE     (INTCON3bits.INT1IE = 1u)
+#define INT1_ENABLE_BIT (INTCON3bits.INT1IE)
 #define INT1_DISABLE    (INTCON3bits.INT1IE = 0u)
 #define INT2_ENABLE     (INTCON3bits.INT2IE = 1u)
+#define INT2_ENABLE_BIT (INTCON3bits.INT2IE)
 #define INT2_DISABLE    (INTCON3bits.INT2IE = 0u)
 
 #define INT0_FLAG           INTCONbits.INT0IF

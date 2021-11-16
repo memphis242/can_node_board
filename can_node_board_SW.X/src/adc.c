@@ -25,7 +25,7 @@
  *          <li>ADC interrupt will also be enabled</li>
  *          <li>ADC will use VREF+ and - pins</li>
  *          <li>PCFG = 0xA (all but AN0 to AN4 are digital)</li>
- *          <li>ADC result will be left justified</li>
+ *          <li>ADC result will be right justified</li>
  *          <li>Acquisition time will be 4 TAD</li>
  *          <li>Clock source will be FOSC/64 = 625kHz --> 1.6us period</li>
  *          <li>CCP2 will trigger ADC conversion</li>
@@ -43,7 +43,7 @@ void adc_init_default(void){
     ADCON0_CHS_DEFAULT;
     ADC_TRIS_DEFAULT;
     ADC_USE_VREF;
-    ADC_RESULT_LEFT_JUSTIFY;
+    ADC_RESULT_RIGHT_JUSTIFY;
     
     // Configure acquisition time and adc conversion clock
     ADC_ACQ_TIME_DEFAULT;
@@ -56,7 +56,7 @@ void adc_init_default(void){
                     // as well as for any mode switching!
     
     // Turn on module
-    ADC_ENABLE;
+    ADC_ON;
     
     // Enable interrupts
     ADC_CLEAR_IF;

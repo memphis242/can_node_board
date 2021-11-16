@@ -4,11 +4,14 @@
  *
  * Created on November 11, 2021, 8:13 PM
  * 
- * The idea will be similar to my SPI test example --> I'll have Node 1 send
- * every 100ms the state of its two buttons. Node 2 will receive those states
- * and update its display. It will also reply with an acknowledge message which
- * Node 1 is waiting for. I will have Node 2 also send a message every 500ms to
- * toggle the LED in Node 1.
+ * I will have Node 1 send every 100ms the state of its two buttons, an "engine speed"
+ * signal (i.e., analog input from 10k pot), and two counters - a tx_counter and
+ * ack_counter. The tx_counter will be incremented on every successful message
+ * transmission, and the ack_counter will be incremented every time Node 2 sends
+ * an acknowledge message. Node 1 also receives a message from Node 2 every 500ms
+ * to toggle an LED.
+ * 
+ * I will have Node 2 receive the Node 1 state message 
  * 
  */
 
@@ -80,6 +83,7 @@
 #include "mssp_spi.h"
 #include "external_interrupts.h"
 #include "mcp2515_test.h"
+#include "adc.h"
 
 
 #ifndef _XTAL_FREQ
@@ -107,6 +111,7 @@
 // For SPI
 extern uint8_t spi_transfer_complete_flag;
 // For the MCP2515
+static volatile uint8_t mcp2515_interrupt_event = 0x00u;  // Used to represent if ~INT pin was cleared
 extern uint8_t txbf0_full;
 extern uint8_t txbf1_full;
 extern uint8_t txbf2_full;
@@ -116,13 +121,16 @@ extern uint8_t txbf2_sent;
 extern uint8_t rxbf0_full;
 extern uint8_t rxbf1_full;
 
-
-
 #if CURRENT_NODE == NODE1_BUTTONS
 static volatile uint8_t tmr_100ms_next = 0x00;  // This is used to indicate when 100ms has passed
 static can_msg node1_rx_msg;
-static can_msg node1_tx_msg;
+static can_msg node1_state_msg;     // byte 0: button states, bytes 1 & 2: eng_spd,
+                                    // bytes 3 & 4: tx_counter, bytes 5 & 6: ack_counter
 static volatile uint8_t node1_ready_to_tx = 0x00;
+static volatile uint16_t eng_spd_pot_reading = 0x0000u;
+static uint16_t tx_counter = 0x0000u;   // Counter to keep track of how many messages have been sent
+static uint16_t ack_counter = 0x0000u;  // Counter to keep track of how many messages have been
+                                        // acknowledged by Node2
 #endif
 
 #if CURRENT_NODE == NODE2_DISPLAY
@@ -154,10 +162,10 @@ static char hex_to_char(uint8_t hex_num);
  */
 void __interrupt() isr(void){
     
-    /* ****************************************************
-     * MSSP SPI INTERRUPT
-     * ****************************************************
-     */ 
+    //-------------------------------------------------------------------------
+    // INTERRUPTS HANDLED BY BOTH NODES
+    //-------------------------------------------------------------------------
+    // SPI interrupt to indicate a byte transfer has completed...
     if(MSSP_IF_BIT && MSSP_INT_ENABLE_BIT) {
         // Successful byte TXd and RXd
         spi_transfer_complete_flag = 0x01;  // Set the transf flag
@@ -165,13 +173,22 @@ void __interrupt() isr(void){
         CLEAR_MSSP_IFLAG;
     }
     
-    /* ****************************************************************
-     * CCP1 INTERRUPT --> Part of how the nodes keep up the periodicity
-     * ****************************************************************
-     */
-#if CURRENT_NODE == NODE1_BUTTONS
-    if(CCP1_IF_BIT && CCP1_INT_ENABLE_BIT){
+    // ~INT pin interrupt handling from MCP2515
+    // For now, I'll try just setting a flag here and doing the full event handle
+    // in main()
+    if(INT0_FLAG && INT0_ENABLE_BIT){
+        mcp2515_interrupt_event = 0x01u;
         
+        CLEAR_INT0_FLAG;
+    }
+    
+    
+    //-------------------------------------------------------------------------
+    // INTERRUPTS HANDLED BY NODE1 ONLY
+    //-------------------------------------------------------------------------
+#if CURRENT_NODE == NODE1_BUTTONS
+    // CCP1 used to set 100ms transmission rate period
+    if(CCP1_IF_BIT && CCP1_INT_ENABLE_BIT){
         // On every other compare match, transmit!
         if(tmr_100ms_next){
             // Reset flag
@@ -190,6 +207,27 @@ void __interrupt() isr(void){
             CLEAR_CCP1_IF;
         }
     }
+    
+    // CCP2 used to trigger ADC conversion on AN0 (RA0)
+    if(CCP2_IF_BIT && CCP2_INT_ENABLE_BIT) {
+        CLEAR_CCP2_IF;
+    }
+    
+    // ADC interrupt, assuming right justified ADC Result
+    if(ADC_IF && ADC_INTERRUPT_ENABLE_BIT) {
+        eng_spd_pot_reading = ADRES;
+        
+        ADC_CLEAR_IF;
+    }
+        
+#endif
+    
+#if CURRENT_NODE == NODE2_DISPLAY
+    //-------------------------------------------------------------------------
+    // INTERRUPTS HANDLED BY NODE2 ONLY
+    //-------------------------------------------------------------------------
+    
+    
 #endif
     
     return;
@@ -205,7 +243,7 @@ void main(void) {
     can_init_default();     // Initializes SPI Master mode and the MCP2515
     
 #if CURRENT_NODE == NODE1_BUTTONS
-    /**************************************************************************
+    /* ------------------------------------------------------------------------
      * Code for Node 1
      * Node 1 will 
      * 
@@ -222,26 +260,44 @@ void main(void) {
      * TODO: INCLUDE TX TIMESTAMPS
      */
     
-    // Configure TIMER1 and CCP1 to trigger a transmission every 100ms
+    // Configure TIMER1 and CCP1 to trigger a transmission every 100ms (10Hz)
     Timer1_Init_Default();
     CCP1_Compare_Init_Default(DEFAULT_CONFIG_PERIOD_50ms);
     
-    // Once done with all other initializations, turn on Timer1 and enable all
-    // unmasked interrupts like from the MSSP module
+    // Configure ADC and CCP2 to sample at 100Hz (10ms period)
+    Timer3_Init_Default();
+    CCP2_Compare_Init_Default(DEFAULT_CONFIG_PERIOD_10ms);
+    adc_init_default();
+    
+    
+    // Once done with all other initializations, turn on Timer1 and Timer3 and
+    // enable all unmasked interrupts like from the MSSP module
     TMR1_ON;
+    TMR3_ON;
     ENABLE_PERIPHERAL_INTERRUPTS;
     ei();
     
     // TX Node while(1) loop
     while(1){
 
-        if(node1_ready_to_tx){
+        if(node1_ready_to_tx) {
+            // Construct state message
             
             
-            
-            
+            // Send message
             
             node1_ready_to_tx = 0x00; // Reset ready-to-send flag for next 100ms            
+        }
+        
+        if(mcp2515_interrupt_event) {
+            // Read CANINTF from the MCP2515
+            
+            
+            // Check the various flags...
+            
+            
+            
+            mcp2515_interrupt_event = 0x00u;
         }
         
     }
@@ -249,7 +305,7 @@ void main(void) {
 #endif
     
 #if CURRENT_NODE == NODE2_DISPLAY
-    /**************************************************************************
+    /* ------------------------------------------------------------------------
      * Code for Test RX Node
      * The Test RX Node will update a display indicating the state of the two
      * switches connected to the TX Node. It obtains this state through the
@@ -357,7 +413,7 @@ void main(void) {
 
 
 /* Function: hex_to_char
- * --------------------------------------
+ * ------------------------------------------------------------------------
  * This is to help with printing out messages in their raw hex form. I use it
  * in the debug sections of code. You give it a 4-bit hex number (if the number
  * is greater than 0xF, then you will receive back a ' ' character) and it

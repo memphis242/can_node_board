@@ -33,8 +33,8 @@
 
 #define TMR1_16BIT_RW       T1CON |= T1CON_RD16_BIT
 #define TMR1_PRESCAL_8      T1CON |= 0x30
-#define TMR1_PRESCAL_4      T1CON |= 0x20; T1CON &= ~0x10
-#define TMR1_PRESCAL_2      T1CON &= ~0x20; T1CON |= 0x10
+#define TMR1_PRESCAL_4      do{ T1CON |= 0x20; T1CON &= ~0x10; } while(0);
+#define TMR1_PRESCAL_2      do{ T1CON &= ~0x20; T1CON |= 0x10; } while(0);
 #define TMR1_PRESCAL_1      T1CON &= ~0x30
 #define TMR1_OSC_OFF        T1CON &= ~0x08
 #define TMR1_OSC_ON         T1CON |= 0x08
@@ -43,31 +43,45 @@
 #define TMR1_OFF            T1CON &= ~T1CON_TMR1ON_BIT
 #define TMR1_DEFAULT        T1CON = 0x80        // 16-bit, prescaler of 1, tmr1 osc off, internal clock, tmr1 off
 
-#define TMR1_ENABLE_INTERRUPT   (PIE1bits.TMR1IE = 1u)
-#define TMR1_IF                 PIR1bits.TMR1IF
-#define TMR1_ENABLE_BIT         PIE1bits.TMR1IE
-#define CLEAR_TMR1_IF           (TMR1_IF = 0u)
 
 // TIMER3 MODULE
 // T3CON - Timer3 Control Register
+#define T3CON_RD16_BIT      0x80
+// TODO
 #define T3CON_T3CCP_BITS    0x48    // Timer3 and Timer1 CCPx Enable bits --> BITS NOT NEXT TO EACH OTHER!
+#define TMR3_DEFAULT        T3CON = 0x88u   // 16-bit, prescaler of 1, CCP1 with Timer1, CCP2 with Timer3, internal clock, tmr3 off
+#define TMR3_PRESCALE_8     T3CON |= 0x30u
+#define T3CON_TMR3ON_BIT    0x01u
+#define TMR3_ON             T3CON |= T3CON_TMR3ON_BIT
+#define TMR3_OFF            T3CON &= ~T3CON_TMR3ON_BIT
 
-#define TMR1_FOR_COMP_CCP  (T3CON = 0x00)
 
 // Interrupt-related
+#define TMR1_ENABLE_INTERRUPT   (PIE1bits.TMR1IE = 1u)
+#define TMR1_ENABLE_BIT         (PIE1bits.TMR1IE)
+#define TMR3_ENABLE_INTERRUPT   (PIE2bits.TMR3IE = 1u)
+#define TMR3_ENABLE_BIT         (PIE2bits.TMR3IE)
+#define TMR1_IF                 PIR1bits.TMR1IF
+#define CLEAR_TMR1_IF           (TMR1_IF = 0u)
+#define TMR3_IF                 (PIR2bits.TMR3IF)
+#define CLEAR_TMR3_IF           (PIR2bits.TMR3IF = 0u)
 
 
-// Some CCPRx values for 100ns instruction cycle, /8 prescalar, Timer1
+// Some CCPRx values for 100ns instruction cycle, /8 prescalar
 #define DEFAULT_CONFIG_PERIOD_50ms      62500u
-
+#define DEFAULT_CONFIG_PERIOD_10ms      12500u
 
 
 // Function declaration
 
 // Timer1
 void Timer1_Init_Default(void);
+void Timer3_Init_Default(void);
+
 void Timer1_Enable(void);
 void Timer1_Disable(void);
+void Timer3_Enable(void);
+void Timer3_Disable(void);
 
 
 

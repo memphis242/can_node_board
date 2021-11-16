@@ -31,8 +31,15 @@
 void Timer1_Init_Default(void){
     TMR1_DEFAULT;
     TMR1_PRESCAL_8;
-    TMR1_ENABLE_INTERRUPT;
-    ENABLE_PERIPHERAL_INTERRUPTS;
+//    TMR1_ENABLE_INTERRUPT;
+//    ENABLE_PERIPHERAL_INTERRUPTS;
+}
+
+void Timer3_Init_Default(void) {
+    TMR3_DEFAULT;
+    TMR3_PRESCALE_8;
+//    TMR3_ENABLE_INTERRUPT;
+//    ENABLE_PERIPHERAL_INTERRUPTS;
 }
 
 /* Function: Timer1_Enable
@@ -57,6 +64,30 @@ void Timer1_Enable(void){
  */
 void Timer1_Disable(void){
     TMR1_OFF;
+}
+
+/* Function: Timer3_Enable
+ * ---------------------------------
+ * Turns Timer3 on.
+ * 
+ * Parameters: none
+ * 
+ * Returns: none
+ */
+void Timer3_Enable(void){
+    TMR3_ON;
+}
+
+/* Function: Timer3_Disable
+ * ---------------------------------
+ * Turns Timer3 off.
+ * 
+ * Parameters: none
+ * 
+ * Returns: none
+ */
+void Timer3_Disable(void){
+    TMR3_OFF;
 }
 
 
