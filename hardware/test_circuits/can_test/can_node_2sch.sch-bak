@@ -8,8 +8,8 @@ Title "MCP2515 CAN TEST: Node 2"
 Date "2021-11-06"
 Rev "1.0"
 Comp ""
-Comment1 "and also send commands for Node 1's Debug LED state."
-Comment2 "This node will update a display with the state of Node 1's buttons"
+Comment1 " speed signal and also send commands for Node 1's Debug LED state."
+Comment2 "This node will update a display with the state of Node 1's buttons as well as the engine"
 Comment3 ""
 Comment4 "Author: Abdullah Almosalami"
 $EndDescr
@@ -1177,12 +1177,12 @@ $EndComp
 $Comp
 L power:+5VL #PWR0213
 U 1 1 61B1A552
-P 9300 2650
-F 0 "#PWR0213" H 9300 2500 50  0001 C CNN
-F 1 "+5VL" H 9450 2700 50  0000 C CNN
-F 2 "" H 9300 2650 50  0001 C CNN
-F 3 "" H 9300 2650 50  0001 C CNN
-	1    9300 2650
+P 9300 2800
+F 0 "#PWR0213" H 9300 2650 50  0001 C CNN
+F 1 "+5VL" H 9450 2850 50  0000 C CNN
+F 2 "" H 9300 2800 50  0001 C CNN
+F 3 "" H 9300 2800 50  0001 C CNN
+	1    9300 2800
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1283,16 +1283,11 @@ Text GLabel 4800 4400 2    50   Input ~ 0
 PIC2_~SS
 NoConn ~ 4800 2450
 NoConn ~ 4800 2300
-Wire Wire Line
-	8850 2750 9300 2750
-Wire Wire Line
-	9300 2750 9300 2650
-Wire Wire Line
-	9300 2850 9300 2750
 Connection ~ 9300 2850
-Connection ~ 9300 2750
 Wire Wire Line
-	8850 2650 9300 2650
+	9300 2800 9300 2850
+NoConn ~ 8850 2750
+NoConn ~ 8850 2650
 Wire Bus Line
 	1700 3750 1700 4850
 Wire Bus Line
@@ -1301,5 +1296,4 @@ Wire Bus Line
 	4000 4850 5350 4850
 Wire Bus Line
 	5000 3150 5000 3800
-Connection ~ 9300 2650
 $EndSCHEMATC
