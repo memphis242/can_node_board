@@ -3,6 +3,13 @@
  * Author: Abdullah Almosalami
  *
  * Created on November 11, 2021, 8:13 PM
+ * 
+ * The idea will be similar to my SPI test example --> I'll have Node 1 send
+ * every 100ms the state of its two buttons. Node 2 will receive those states
+ * and update its display. It will also reply with an acknowledge message which
+ * Node 1 is waiting for. I will have Node 2 also send a message every 500ms to
+ * toggle the LED in Node 1.
+ * 
  */
 
 
@@ -81,11 +88,11 @@
 
 
 // I will use the following to make it more convenient to write both the code
-// the Test TX Node and the Test RX Node in the same file
-#define TX_NODE         0u
-#define RX_NODE         1u
-#define CURRENT_NODE    TX_NODE
-//#define CURRENT_NODE    RX_NODE
+// the Test Node 1 and the Test Node 2 in the same file
+#define NODE1_BUTTONS         0u
+#define NODE2_DISPLAY         1u
+#define CURRENT_NODE    NODE1_BUTTONS
+//#define CURRENT_NODE    NODE2_DISPLAY
 
 //#define TX_RX_DEBUG
 
@@ -95,18 +102,31 @@
 #define ENABLE_PERIPHERAL_INTERRUPTS    (INTCONbits.PEIE = 1u)
 #define DISABLE_PERIPHERAL_INTERRUPTS   (INTCONbits.PEIE = 0u)
 #endif
-// External variables
-extern uint8_t transfer_complete_flag;
 
-#if CURRENT_NODE == TX_NODE
+// External variables
+// For SPI
+extern uint8_t spi_transfer_complete_flag;
+// For the MCP2515
+extern uint8_t txbf0_full;
+extern uint8_t txbf1_full;
+extern uint8_t txbf2_full;
+extern uint8_t txbf0_sent;
+extern uint8_t txbf1_sent;
+extern uint8_t txbf2_sent;
+extern uint8_t rxbf0_full;
+extern uint8_t rxbf1_full;
+
+
+
+#if CURRENT_NODE == NODE1_BUTTONS
 static volatile uint8_t tmr_100ms_next = 0x00;  // This is used to indicate when 100ms has passed
-static uint8_t tx_node_test_msg = 0x00;  // This holds the test byte to be sent over SPI
-static uint8_t tx_node_rx_buf = 0x00u;
-static volatile uint8_t tx_node_ready_to_tx = 0x00;
+static can_msg node1_rx_msg;
+static can_msg node1_tx_msg;
+static volatile uint8_t node1_ready_to_tx = 0x00;
 #endif
 
-#if CURRENT_NODE == RX_NODE
-static uint8_t tx_node_rx_buf = 0x00;
+#if CURRENT_NODE == NODE2_DISPLAY
+static uint8_t node1_rx_buf = 0x00;
 static uint8_t spi_rx_invalid_flag = 0x00;  // Flag to indicate invalid rx
 static uint8_t spi_rx_flag = 0x00;  // Flag to indicate an rx has occured
 static char debug_msg_1[16] = {'R','x',':',' '};
@@ -140,30 +160,16 @@ void __interrupt() isr(void){
      */ 
     if(MSSP_IF_BIT && MSSP_INT_ENABLE_BIT) {
         // Successful byte TXd and RXd
-        transfer_complete_flag = 0x01;  // Set the transf flag
-        
-#if CURRENT_NODE == RX_NODE
-        tx_node_rx_buf = SSPBUF;
-        spi_rx_flag = 0x01;
-        
-        // Check validity of message
-        if((tx_node_rx_buf & SPI_ID_BITS) != SPI_TX_NODE_ID){   // Wrong ID
-            SSPBUF = SPI_RX_NODE_FAIL_MSG;
-            spi_rx_invalid_flag = 0x01; // Set flag
-        } else {
-            SSPBUF = SPI_RX_ACK_MSG;
-        }
-        
-#endif
+        spi_transfer_complete_flag = 0x01;  // Set the transf flag
         
         CLEAR_MSSP_IFLAG;
     }
     
-    /* ****************************************************
-     * CCP1 INTERRUPT
-     * ****************************************************
+    /* ****************************************************************
+     * CCP1 INTERRUPT --> Part of how the nodes keep up the periodicity
+     * ****************************************************************
      */
-#if CURRENT_NODE == TX_NODE
+#if CURRENT_NODE == NODE1_BUTTONS
     if(CCP1_IF_BIT && CCP1_INT_ENABLE_BIT){
         
         // On every other compare match, transmit!
@@ -172,14 +178,14 @@ void __interrupt() isr(void){
             tmr_100ms_next = 0x00;
             
             // Set flag to indicate ready to transmit
-            tx_node_ready_to_tx = 0x01;
+            node1_ready_to_tx = 0x01;
             
             CLEAR_CCP1_IF;
             
         } else{
             // Set flag so next interrupt, we transmit
             tmr_100ms_next = 0x01;
-            tx_node_ready_to_tx = 0x00; // Just make sure this flag is still cleared
+            node1_ready_to_tx = 0x00; // Just make sure this flag is still cleared
             
             CLEAR_CCP1_IF;
         }
@@ -198,12 +204,20 @@ void main(void) {
     // Regardless of which node, the following code should be compiled...
     can_init_default();     // Initializes SPI Master mode and the MCP2515
     
-#if CURRENT_NODE == TX_NODE
+#if CURRENT_NODE == NODE1_BUTTONS
     /**************************************************************************
-     * Code for Test TX Node
-     * The Test TX Node will send a byte every 100ms indicating the state of 
-     * two switches it is connected to. The Test RX Node should then update
-     * its display indicating these states.
+     * Code for Node 1
+     * Node 1 will 
+     * 
+     *      1) send a message every 100ms indicating the state of  two
+     *      switches it is connected to (byte 0). Along with this message will
+     *      be Node 1's acknowledge counter (bytes 1 and 2) and transmit counter
+     *      (bytes 3 and 4). Finally, Node 1 will also send an "Engine Speed"
+     *      signal within bytes 5 and 6 based on the analog signal it reads
+     *      from a potentiometer.
+     * 
+     *      2) await an acknowledge message from Node 2 and if an acknowledge
+     *      was received, Node 1 will increment a counter.
      * 
      * TODO: INCLUDE TX TIMESTAMPS
      */
@@ -221,20 +235,20 @@ void main(void) {
     // TX Node while(1) loop
     while(1){
 
-        if(tx_node_ready_to_tx){
-            
-            tx_node_test_msg = 0x00;
+        if(node1_ready_to_tx){
             
             
             
-            tx_node_ready_to_tx = 0x00; // Reset ready-to-send flag for next 100ms            
+            
+            
+            node1_ready_to_tx = 0x00; // Reset ready-to-send flag for next 100ms            
         }
         
     }
     
 #endif
     
-#if CURRENT_NODE == RX_NODE
+#if CURRENT_NODE == NODE2_DISPLAY
     /**************************************************************************
      * Code for Test RX Node
      * The Test RX Node will update a display indicating the state of the two
@@ -271,12 +285,12 @@ void main(void) {
             
             // Top line message -- binary representation of rx msg
             for(int i=0; i<8; i++){
-                debug_msg_1[4+i] = (tx_node_rx_buf & (1u << (7-i))) ? '1' : '0';
+                debug_msg_1[4+i] = (node1_rx_buf & (1u << (7-i))) ? '1' : '0';
             }
             
             // Bottom line message -- hex representation of rx msg
-            debug_msg_2[6] = hex_to_char((tx_node_rx_buf & 0xF0) >> 4u);
-            debug_msg_2[7] = hex_to_char(tx_node_rx_buf & 0x0F);
+            debug_msg_2[6] = hex_to_char((node1_rx_buf & 0xF0) >> 4u);
+            debug_msg_2[7] = hex_to_char(node1_rx_buf & 0x0F);
             
             // Now put messages onto display!
             LCD_set_cursor_position(1,1);
@@ -310,8 +324,8 @@ void main(void) {
             } else {    // A valid message was received
                 
                 // Update button states
-                button1_state = (tx_node_rx_buf & (1u << SPI_TX_BYTE_BUTTON1_BIT_LOC)) ? '1' : '0';
-                button2_state = (tx_node_rx_buf & (1u << SPI_TX_BYTE_BUTTON2_BIT_LOC)) ? '1' : '0';
+                button1_state = (node1_rx_buf & (1u << NODE1_BYTE_BUTTON1_BIT_LOC)) ? '1' : '0';
+                button2_state = (node1_rx_buf & (1u << NODE1_BYTE_BUTTON2_BIT_LOC)) ? '1' : '0';
                 button1_msg[BUTTON_STATE_CHAR] = button1_state;
                 button2_msg[BUTTON_STATE_CHAR] = button2_state;
 

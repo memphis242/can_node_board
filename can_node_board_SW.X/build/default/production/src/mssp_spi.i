@@ -4553,7 +4553,7 @@ void LCD_write_uint32_number(uint32_t num);
 
 uint8_t receive_byte = 0x00;
 static enum spi_actor_t spi_actor = SPI_MASTER;
-uint8_t transfer_complete_flag = 0x00;
+uint8_t spi_transfer_complete_flag = 0x00;
 uint8_t manual_transfer = 0x00;
 # 31 "src/mssp_spi.c"
 void SPI_Init_Master_Default(void){
@@ -4684,17 +4684,17 @@ void SPI_Disable(void){
 # 207 "src/mssp_spi.c"
 void SPI_Transfer_Byte(uint8_t tx, uint8_t * rx){
     manual_transfer = 0x01;
-    transfer_complete_flag = 0x00;
+    spi_transfer_complete_flag = 0x00;
 
     if(spi_actor == SPI_MASTER) LATDbits.LATD2 = 0;
     SSPBUF = tx;
-    while(!transfer_complete_flag);
+    while(!spi_transfer_complete_flag);
 
     if(spi_actor == SPI_MASTER) LATDbits.LATD2 = 1;
     *rx = SSPBUF;
 
     manual_transfer = 0x00;
-    transfer_complete_flag = 0x00;
+    spi_transfer_complete_flag = 0x00;
 
     return;
 }
@@ -4708,16 +4708,16 @@ void SPI_Transfer_Packet(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_siz
 # 252 "src/mssp_spi.c"
 void SPI_Send_Byte(uint8_t tx){
     manual_transfer = 0x01;
-    transfer_complete_flag = 0x00;
+    spi_transfer_complete_flag = 0x00;
 
     if(spi_actor == SPI_MASTER) LATDbits.LATD2 = 0;
     SSPBUF = tx;
-    while(!transfer_complete_flag);
+    while(!spi_transfer_complete_flag);
     if(spi_actor == SPI_MASTER) LATDbits.LATD2 = 1;
-    transfer_complete_flag = 0x00;
+    spi_transfer_complete_flag = 0x00;
 
     manual_transfer = 0x00;
-    transfer_complete_flag = 0x00;
+    spi_transfer_complete_flag = 0x00;
 }
 # 276 "src/mssp_spi.c"
 void SPI_Send_Packet(uint8_t * tx_pack, uint16_t tx_size){
@@ -4743,14 +4743,14 @@ void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size){
 void SPI_Transfer_Byte_without_CS(uint8_t tx, uint8_t * rx){
 
     manual_transfer = 0x01;
-    transfer_complete_flag = 0x00;
+    spi_transfer_complete_flag = 0x00;
 
     SSPBUF = tx;
-    while(!transfer_complete_flag);
+    while(!spi_transfer_complete_flag);
     *rx = SSPBUF;
 
     manual_transfer = 0x00;
-    transfer_complete_flag = 0x00;
+    spi_transfer_complete_flag = 0x00;
 
 }
 # 362 "src/mssp_spi.c"

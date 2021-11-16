@@ -14,7 +14,7 @@
 // Global variables relevant to SPI
 uint8_t receive_byte = 0x00;    // Used by ISR when SPI mode is slave and receive has occurred
 static enum spi_actor_t spi_actor = SPI_MASTER;
-uint8_t transfer_complete_flag = 0x00;
+uint8_t spi_transfer_complete_flag = 0x00;
 uint8_t manual_transfer = 0x00; // Flag to indicate when we are manually (i.e., using the functions below) transferring data; may be used in ISR or debugging
 
 
@@ -206,17 +206,17 @@ void SPI_Disable(void){
  */
 void SPI_Transfer_Byte(uint8_t tx, uint8_t * rx){
     manual_transfer = 0x01; // Indicate the manual transfer is beginning.
-    transfer_complete_flag = 0x00;
+    spi_transfer_complete_flag = 0x00;
     
     if(spi_actor == SPI_MASTER) SPI_MASTER_CS_LOW;  // If in Master Mode...
     SSPBUF = tx;
-    while(!transfer_complete_flag);     // Wait until data ready variable flag is set
+    while(!spi_transfer_complete_flag);     // Wait until data ready variable flag is set
 //    while(!PIR1bits.SSPIF)
     if(spi_actor == SPI_MASTER) SPI_MASTER_CS_HIGH;  // If in Master Mode...MASTER_CS_HIGH;    
     *rx = SSPBUF;
     
     manual_transfer = 0x00; // Indicate the manual transfer is ending.
-    transfer_complete_flag = 0x00;  // Reset transfer complete flag
+    spi_transfer_complete_flag = 0x00;  // Reset transfer complete flag
     
     return;
 }
@@ -251,16 +251,16 @@ void SPI_Transfer_Packet(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_siz
  */
 void SPI_Send_Byte(uint8_t tx){
     manual_transfer = 0x01; // Indicate the manual transfer is beginning.
-    transfer_complete_flag = 0x00;
+    spi_transfer_complete_flag = 0x00;
     
     if(spi_actor == SPI_MASTER) SPI_MASTER_CS_LOW;  // If in Master Mode...
     SSPBUF = tx;
-    while(!transfer_complete_flag);     // Wait until data ready variable flag is set
+    while(!spi_transfer_complete_flag);     // Wait until data ready variable flag is set
     if(spi_actor == SPI_MASTER) SPI_MASTER_CS_HIGH;  // If in Master Mode...
-    transfer_complete_flag = 0x00;  // Reset transfer_complete_flag
+    spi_transfer_complete_flag = 0x00;  // Reset transfer_complete_flag
     
     manual_transfer = 0x00; // Indicate the manual transfer is ending.
-    transfer_complete_flag = 0x00;
+    spi_transfer_complete_flag = 0x00;
 }
 
 /* Function: SPI_Send_Packet
@@ -335,14 +335,14 @@ void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size){
 void SPI_Transfer_Byte_without_CS(uint8_t tx, uint8_t * rx){
     
     manual_transfer = 0x01; // Indicate the manual transfer is beginning.
-    transfer_complete_flag = 0x00;
+    spi_transfer_complete_flag = 0x00;
     
     SSPBUF = tx;
-    while(!transfer_complete_flag);     // Wait until data ready variable flag is set  
+    while(!spi_transfer_complete_flag);     // Wait until data ready variable flag is set  
     *rx = SSPBUF;
     
     manual_transfer = 0x00; // Indicate the manual transfer is ending.
-    transfer_complete_flag = 0x00;  // Reset transfer complete flag
+    spi_transfer_complete_flag = 0x00;  // Reset transfer complete flag
     
 }
 

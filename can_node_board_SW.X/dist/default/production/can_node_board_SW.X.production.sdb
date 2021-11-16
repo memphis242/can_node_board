@@ -24,12 +24,12 @@ MCP2515_OPMODE_LISTEN 3
 MCP2515_OPMODE_CONFIG 4
 ]
 "82
-[e E2702 . `uc
+[e E2683 . `uc
 EXT_INT_INT0 1
 EXT_INT_INT1 2
 EXT_INT_INT2 4
 ]
-[e E2707 . `uc
+[e E2688 . `uc
 FALLING_EDGE 0
 RISING_EDGE 1
 ]
@@ -75,6 +75,27 @@ RISING_EDGE 1
 SPI_MASTER 0
 SPI_SLAVE 1
 ]
+"49 C:\git\can_node_board\can_node_board_SW.X\src/adc.c
+[e E2464 . `uc
+ADC_ACQT_0TAD 0
+ADC_ACQT_2TAD 1
+ADC_ACQT_4TAD 2
+ADC_ACQT_6TAD 3
+ADC_ACQT_8TAD 4
+ADC_ACQT_12TAD 5
+ADC_ACQT_16TAD 6
+ADC_ACQT_20TAD 7
+]
+"50
+[e E2474 . `uc
+ADC_CLK_FOSC2 0
+ADC_CLK_FOSC4 4
+ADC_CLK_FOSC8 1
+ADC_CLK_FOSC16 5
+ADC_CLK_FOSC32 2
+ADC_CLK_FOSC64 6
+ADC_CLK_FRC 3
+]
 "7 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c99\common\__lldiv.c
 [v ___lldiv __lldiv `(ul  1 e 4 0 ]
 "4 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c99\common\fleq.c
@@ -103,9 +124,9 @@ SPI_SLAVE 1
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "91 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c99\common\Umul64.c
 [v ___omul __omul `(uo  1 e 8 0 ]
-"135 C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+"155 C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
 [v _isr isr `IIH(v  1 e 1 0 ]
-"196
+"202
 [v _main main `(v  1 e 1 0 ]
 "42 C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
 [v _CCP1_Compare_Init_Default CCP1_Compare_Init_Default `(v  1 e 1 0 ]
@@ -347,24 +368,22 @@ SPI_SLAVE 1
 ]
 [u S79 . 1 `S57 1 . 1 0 `S66 1 . 1 0 `S75 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES79  1 e 1 @4082 ]
-"102 C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+"122 C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
 [v _tmr_100ms_next tmr_100ms_next `VEuc  1 s 1 tmr_100ms_next ]
-"103
-[v _tx_node_test_msg tx_node_test_msg `uc  1 s 1 tx_node_test_msg ]
-"105
-[v _tx_node_ready_to_tx tx_node_ready_to_tx `VEuc  1 s 1 tx_node_ready_to_tx ]
+"125
+[v _node1_ready_to_tx node1_ready_to_tx `VEuc  1 s 1 node1_ready_to_tx ]
 "15 C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
 [v _receive_byte receive_byte `uc  1 e 1 0 ]
 "16
 [v _spi_actor spi_actor `E2464  1 s 1 spi_actor ]
 "17
-[v _transfer_complete_flag transfer_complete_flag `uc  1 e 1 0 ]
+[v _spi_transfer_complete_flag spi_transfer_complete_flag `uc  1 e 1 0 ]
 "18
 [v _manual_transfer manual_transfer `uc  1 e 1 0 ]
-"196 C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+"202 C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
 [v _main main `(v  1 e 1 0 ]
 {
-"342
+"356
 } 0
 "66 C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
 [v _can_init_default can_init_default `(v  1 e 1 0 ]
@@ -465,8 +484,8 @@ SPI_SLAVE 1
 [v CCP1_Compare_Init_Default@comp_val comp_val `us  1 p 2 0 ]
 "48
 } 0
-"135 C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+"155 C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
 [v _isr isr `IIH(v  1 e 1 0 ]
 {
-"190
+"196
 } 0

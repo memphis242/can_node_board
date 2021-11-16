@@ -14,25 +14,30 @@
 
 // Definitions
 // Test inputs
-#define BUTTON_PORT                         PORTE
-#define BUTTON1_PIN                         PORTEbits.RE0
-#define BUTTON2_PIN                         PORTEbits.RE1
-#define BUTTON1_TRIS                        TRISEbits.RE0 = 1u
-#define BUTTON2_TRIS                        TRISEbits.RE1 = 1u
-#define BUTTON_ADCON                        (ADCON1bits.PCFG = 0xA)
+#define NODE1_BUTTON_PORT                         PORTE
+#define NODE1_BUTTON1_PIN                         PORTEbits.RE0
+#define NODE1_BUTTON2_PIN                         PORTEbits.RE1
+#define NODE1_BUTTON1_TRIS                        TRISEbits.RE0 = 1u
+#define NODE1_BUTTON2_TRIS                        TRISEbits.RE1 = 1u
+#define NODE1_ENG_SPD_POT                         PORTAbits.RA0
+#define NODE1_BUTTON_ADCON                        (ADCON1bits.PCFG = 0xA)
 
-// SPI TX Node message format
-#define SPI_TX_BYTE_BUTTON1_BIT_LOC         0u
-#define SPI_TX_BYTE_BUTTON2_BIT_LOC         1u
-#define SPI_ID_BITS                         0xC0u   // bits 7 and 6 will be used as IDs for now
-#define SPI_TX_NODE_ID                      0x00u
-#define SPI_RX_NODE_ID                      0x40u
+// Test outputs
+#define NODE1_BUTTONS_LED                  LATDbits.LATD3
 
-// SPI specific messages
-#define SPI_RX_ACK_MSG                      0x3Bu    // This will be used as an "acknowledge" msg from a receiver
-#define SPI_RX_NODE_ACK_MSG                 (SPI_RX_NODE_ID | SPI_RX_ACK_MSG)
-#define SPI_RX_FAIL_MSG                     0x2Au    // This will be used as a "failed to receive" msg from a receiver
-#define SPI_RX_NODE_FAIL_MSG                (SPI_RX_NODE_ID | SPI_RX_FAIL_MSG)
+// Node message formats
+#define NODE1_BUTTON_BYTE                   0u  // i.e., the first byte in the CAN
+                                                // message will be for the button states
+#define NODE1_BYTE_BUTTON1_BIT_LOC          0u
+#define NODE1_BYTE_BUTTON2_BIT_LOC          1u
+#define NODE1_CONSTRUCT_BUTTON_BYTE(b1,b2)  (((b1)<<NODE1_BYTE_BUTTON1_BIT_LOC) | ((b2)<<NODE1_BYTE_BUTTON2_BIT_LOC))
+#define NODE1_ID                            0x00u
+#define NODE2_ID                            0x40u
+#define NODE2_ACK_MSG                       0x3Bu    // This will be used as an "acknowledge" msg from a receiver
+#define NODE2_RX_FAIL_MSG                   0x2Au    // This will be used as a "failed to receive" msg from a receiver
+#define NODE1_ACK_COUNTER_BYTES             1u       // Node1 will include an ack counter with each message in bytes 1 and 2
+#define NODE1_TRANSMIT_COUNTER_BYTES        3u       // Node 1 will include a transmit counter with each message in bytes 3 and 4
+#define NODE1_ENG_SPD_BYTES                 5u       // Node 1 will include an "engine speed" signal contained in bytes 5 and 6
 
 #endif	/* MCP2515_TEST_HEADER */
 

@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files\Microchip\xc8\v2.31\pic\dat\en_msgs.txt -cn \
   -h+dist/default/production\can_node_board_SW.X.production.sym \
   --cmf=dist/default/production\can_node_board_SW.X.production.cmf -z \
-  -Q18F4620 -oC:\Users\almos\AppData\Local\Temp\sl14.2 \
+  -Q18F4620 -oC:\Users\almos\AppData\Local\Temp\snfo.2 \
   --defsym=__MPLAB_BUILD=1 \
   -Mdist/default/production/can_node_board_SW.X.production.map -E1 \
   -ver=XC8 Compiler --acfsm=1493 -ASTACK=080h-0F7Fh -pstack=STACK \
@@ -26,7 +26,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\almos\AppData\Local\Temp\sl14.o \
+  C:\Users\almos\AppData\Local\Temp\snfo.o \
   dist/default/production\can_node_board_SW.X.production.o 
 
 Object code version is 3.11
@@ -36,7 +36,7 @@ Machine type is 18F4620
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\almos\AppData\Local\Temp\sl14.o
+C:\Users\almos\AppData\Local\Temp\snfo.o
                 idloc                            200000   200000        8        0       5
                 config                           300000   300000        E        0       4
                 init                                  E        E        4        4       0
@@ -45,28 +45,28 @@ dist/default/production\can_node_board_SW.X.production.o
                 intcode                               8        8        6        4       0
                 idloc                            200000   200000        8        0       5
                 config                           300000   300000        E        0       4
-                temp                                 47       47        1        1       1
+                temp                                 67       67        1        1       1
                 intcode_body                        21C      21C       30        4       0
-                text13                              32A      32A       16        4       0
-                text12                              350      350        E        4       0
-                text11                              29E      29E       28        4       0
+                text13                              326      326       16        4       0
+                text12                              34C      34C        E        4       0
+                text11                              274      274       28        4       0
                 text10                              114      114       6A        4       0
                 text9                               1B8      1B8       34        4       0
-                text8                               35E      35E        C        4       0
-                text7                               276      276       28        4       0
-                text6                               2EC      2EC       26        4       0
-                text5                               2C6      2C6       26        4       0
-                text4                               312      312       18        4       0
+                text8                               35A      35A        C        4       0
+                text7                               24C      24C       28        4       0
+                text6                               2E8      2E8       26        4       0
+                text5                               2C2      2C2       26        4       0
+                text4                               30E      30E       18        4       0
                 text3                               1EC      1EC       30        4       0
-                text2                               340      340       10        4       0
+                text2                               33C      33C       10        4       0
                 text1                                12       12      102        4       0
-                text0                               24C      24C       2A        4       0
-                cstackCOMRAM                         3A       3A        8        1       1
-                dataCOMRAM                           42       42        4        1       1
-                bssCOMRAM                             1        1       39        1       1
+                text0                               29C      29C       26        4       0
+                cstackCOMRAM                         5A       5A        8        1       1
+                dataCOMRAM                           62       62        4        1       1
+                bssCOMRAM                             1        1       59        1       1
                 cinit                               17E      17E       3A        4       0
-                nvCOMRAM                             46       46        1        1       1
-                idataCOMRAM                         36A      36A        4        4       0
+                nvCOMRAM                             66       66        1        1       1
+                idataCOMRAM                         366      366        4        4       0
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   STACK          
@@ -76,22 +76,22 @@ TOTAL           Name                               Link     Load   Length     Sp
                 init                                  E        E        4         0
                 reset_vec                             0        0        4         0
                 intcode_body                        21C      21C       30         0
-                text13                              32A      32A       16         0
-                text12                              350      350        E         0
-                text11                              29E      29E       28         0
+                text13                              326      326       16         0
+                text12                              34C      34C        E         0
+                text11                              274      274       28         0
                 text10                              114      114       6A         0
                 text9                               1B8      1B8       34         0
-                text8                               35E      35E        C         0
-                text7                               276      276       28         0
-                text6                               2EC      2EC       26         0
-                text5                               2C6      2C6       26         0
-                text4                               312      312       18         0
+                text8                               35A      35A        C         0
+                text7                               24C      24C       28         0
+                text6                               2E8      2E8       26         0
+                text5                               2C2      2C2       26         0
+                text4                               30E      30E       18         0
                 text3                               1EC      1EC       30         0
-                text2                               340      340       10         0
+                text2                               33C      33C       10         0
                 text1                                12       12      102         0
-                text0                               24C      24C       2A         0
+                text0                               29C      29C       26         0
                 cinit                               17E      17E       3A         0
-                idataCOMRAM                         36A      36A        4         0
+                idataCOMRAM                         366      366        4         0
 
         CLASS   CONST          
 
@@ -100,11 +100,11 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   MEDIUMCONST    
 
         CLASS   COMRAM         
-                temp                                 47       47        1         1
-                cstackCOMRAM                         3A       3A        8         1
-                dataCOMRAM                           42       42        4         1
-                bssCOMRAM                             1        1       39         1
-                nvCOMRAM                             46       46        1         1
+                temp                                 67       67        1         1
+                cstackCOMRAM                         5A       5A        8         1
+                dataCOMRAM                           62       62        4         1
+                bssCOMRAM                             1        1       59         1
+                nvCOMRAM                             66       66        1         1
 
         CLASS   ABS1           
 
@@ -161,8 +161,8 @@ TOTAL           Name                               Link     Load   Length     Sp
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class
 
                 reset_vec                      000000  000004  000004         0       0  CODE    
-                bssCOMRAM                      000001  000047  000048         1       1  COMRAM  
-                intcode                        000008  000366  00036E         4       0  CODE    
+                bssCOMRAM                      000001  000067  000068         1       1  COMRAM  
+                intcode                        000008  000362  00036A         4       0  CODE    
 
 
 UNUSED ADDRESS RANGES
@@ -184,12 +184,12 @@ UNUSED ADDRESS RANGES
         BANK7            000700-0007FF              100
         BANK8            000800-0008FF              100
         BANK9            000900-0009FF              100
-        BIGRAM           000048-000F7F              F38
+        BIGRAM           000068-000F7F              F18
         CODE             000004-000007                4
-                         00036E-00FFFF             FC92
-        COMRAM           000048-00007F               38
+                         00036A-00FFFF             FC96
+        COMRAM           000068-00007F               18
         CONST            000004-000007                4
-                         00036E-00FFFF             FC92
+                         00036A-00FFFF             FC96
         EEDATA           F00000-F003FF              400
         MEDIUMCONST      001000-00FFFF             F000
         RAM              000080-000F7F              100
@@ -199,14 +199,14 @@ UNUSED ADDRESS RANGES
 
                                   Symbol Table
 
-CCP1_Compare_Init_Default@comp_val     cstackCOMRAM 00003A
-SPI_Transfer_Byte@rx                   cstackCOMRAM 00003A
-SPI_Transfer_Byte@tx                   cstackCOMRAM 00003B
-SPI_Transfer_Byte_without_CS@rx        cstackCOMRAM 00003A
-SPI_Transfer_Byte_without_CS@tx        cstackCOMRAM 00003B
+CCP1_Compare_Init_Default@comp_val     cstackCOMRAM 00005A
+SPI_Transfer_Byte@rx                   cstackCOMRAM 00005A
+SPI_Transfer_Byte@tx                   cstackCOMRAM 00005B
+SPI_Transfer_Byte_without_CS@rx        cstackCOMRAM 00005A
+SPI_Transfer_Byte_without_CS@tx        cstackCOMRAM 00005B
 _ADCON1bits                            (abs)        000FC1
 _CCP1CON                               (abs)        000FBD
-_CCP1_Compare_Init_Default             text13       00032A
+_CCP1_Compare_Init_Default             text13       000326
 _CCPR1                                 (abs)        000FBE
 _INTCON2bits                           (abs)        000FF1
 _INTCON3bits                           (abs)        000FF0
@@ -214,9 +214,9 @@ _INTCONbits                            (abs)        000FF2
 _LATDbits                              (abs)        000F8C
 _PIE1bits                              (abs)        000F9D
 _PIR1bits                              (abs)        000F9E
-_SPI_Init_Master_Default               text11       00029E
+_SPI_Init_Master_Default               text11       000274
 _SPI_Transfer_Byte                     text9        0001B8
-_SPI_Transfer_Byte_without_CS          text7        000276
+_SPI_Transfer_Byte_without_CS          text7        00024C
 _SSPBUF                                (abs)        000FC9
 _SSPCON1                               (abs)        000FC6
 _SSPCON1bits                           (abs)        000FC6
@@ -226,7 +226,7 @@ _T3CON                                 (abs)        000FB1
 _TRISB                                 (abs)        000F93
 _TRISC                                 (abs)        000F94
 _TRISDbits                             (abs)        000F95
-_Timer1_Init_Default                   text12       000350
+_Timer1_Init_Default                   text12       00034C
 __HRAM                                 (abs)        000000
 __Habs1                                abs1         000000
 __Hbank0                               bank0        000000
@@ -291,12 +291,12 @@ __Hrparam                              rparam       000000
 __Hsfr                                 sfr          000000
 __Hsmallconst                          smallconst   000000
 __Hspace_0                             (abs)        001000
-__Hspace_1                             (abs)        000048
+__Hspace_1                             (abs)        000068
 __Hspace_2                             (abs)        000000
 __Hspace_4                             (abs)        60000E
 __Hstack                               stack        000000
 __Hstruct                              struct       000000
-__Htemp                                temp         000048
+__Htemp                                temp         000068
 __Htext                                text         000000
 __Htext0                               text0        000000
 __Htext1                               text1        000000
@@ -381,7 +381,7 @@ __Lspace_2                             (abs)        000000
 __Lspace_4                             (abs)        000000
 __Lstack                               stack        000000
 __Lstruct                              struct       000000
-__Ltemp                                temp         000047
+__Ltemp                                temp         000067
 __Ltext                                text         000000
 __Ltext0                               text0        000000
 __Ltext1                               text1        000000
@@ -397,8 +397,8 @@ __Ltext6                               text6        000000
 __Ltext7                               text7        000000
 __Ltext8                               text8        000000
 __Ltext9                               text9        000000
-__S0                                   (abs)        00036E
-__S1                                   (abs)        000048
+__S0                                   (abs)        00036A
+__S1                                   (abs)        000068
 __S2                                   (abs)        000000
 __S4                                   (abs)        000000
 __S5                                   (abs)        000000
@@ -409,45 +409,45 @@ ___rparam_used                         (abs)        000001
 ___sp                                  stack        000000
 __accesstop                            (abs)        000080
 __activetblptr                         (abs)        000002
-__end_of_CCP1_Compare_Init_Default     text13       000340
-__end_of_SPI_Init_Master_Default       text11       0002C6
+__end_of_CCP1_Compare_Init_Default     text13       00033C
+__end_of_SPI_Init_Master_Default       text11       00029C
 __end_of_SPI_Transfer_Byte             text9        0001EC
-__end_of_SPI_Transfer_Byte_without_CS  text7        00029E
-__end_of_Timer1_Init_Default           text12       00035E
+__end_of_SPI_Transfer_Byte_without_CS  text7        000274
+__end_of_Timer1_Init_Default           text12       00035A
 __end_of__initialization               cinit        0001AA
 __end_of_can_init_default              text1        000114
 __end_of_external_interrupts_init      text10       00017E
 __end_of_isr                           intcode_body 00024C
-__end_of_main                          text0        000276
-__end_of_mcp2515_cmd_read              text5        0002EC
-__end_of_mcp2515_cmd_reset             text8        00036A
-__end_of_mcp2515_cmd_write             text6        000312
+__end_of_main                          text0        0002C2
+__end_of_mcp2515_cmd_read              text5        0002E8
+__end_of_mcp2515_cmd_reset             text8        000366
+__end_of_mcp2515_cmd_write             text6        00030E
 __end_of_mcp2515_cmd_write_bit         text3        00021C
-__end_of_mcp2515_current_opmode        text4        00032A
-__end_of_mcp2515_normal_mode           text2        000350
+__end_of_mcp2515_current_opmode        text4        000326
+__end_of_mcp2515_normal_mode           text2        00034C
 __initialization                       cinit        00017E
 __mediumconst                          mediumconst  000000
 __pbssCOMRAM                           bssCOMRAM    000001
 __pcinit                               cinit        00017E
-__pcstackCOMRAM                        cstackCOMRAM 00003A
-__pdataCOMRAM                          dataCOMRAM   000042
-__pidataCOMRAM                         idataCOMRAM  00036A
+__pcstackCOMRAM                        cstackCOMRAM 00005A
+__pdataCOMRAM                          dataCOMRAM   000062
+__pidataCOMRAM                         idataCOMRAM  000366
 __pintcode                             intcode      000008
 __pintcode_body                        intcode_body 00021C
-__pnvCOMRAM                            nvCOMRAM     000046
-__ptext0                               text0        00024C
+__pnvCOMRAM                            nvCOMRAM     000066
+__ptext0                               text0        00029C
 __ptext1                               text1        000012
 __ptext10                              text10       000114
-__ptext11                              text11       00029E
-__ptext12                              text12       000350
-__ptext13                              text13       00032A
-__ptext2                               text2        000340
+__ptext11                              text11       000274
+__ptext12                              text12       00034C
+__ptext13                              text13       000326
+__ptext2                               text2        00033C
 __ptext3                               text3        0001EC
-__ptext4                               text4        000312
-__ptext5                               text5        0002C6
-__ptext6                               text6        0002EC
-__ptext7                               text7        000276
-__ptext8                               text8        00035E
+__ptext4                               text4        00030E
+__ptext5                               text5        0002C2
+__ptext6                               text6        0002E8
+__ptext7                               text7        00024C
+__ptext8                               text8        00035A
 __ptext9                               text9        0001B8
 __ramtop                               ramtop       001000
 __size_of_CCP1_Compare_Init_Default    (abs)        000000
@@ -469,62 +469,61 @@ __smallconst                           smallconst   000000
 _can_init_default                      text1        000012
 _external_interrupts_init              text10       000114
 _isr                                   intcode      000008
-_main                                  text0        00024C
-_manual_transfer                       nvCOMRAM     000046
-_mcp2515_cmd_read                      text5        0002C6
-_mcp2515_cmd_reset                     text8        00035E
-_mcp2515_cmd_write                     text6        0002EC
+_main                                  text0        00029C
+_manual_transfer                       nvCOMRAM     000066
+_mcp2515_cmd_read                      text5        0002C2
+_mcp2515_cmd_reset                     text8        00035A
+_mcp2515_cmd_write                     text6        0002E8
 _mcp2515_cmd_write_bit                 text3        0001EC
-_mcp2515_current_opmode                text4        000312
-_mcp2515_normal_mode                   text2        000340
-_receive_byte                          bssCOMRAM    000039
-_rxbf0_full                            bssCOMRAM    00002D
-_rxbf1_full                            bssCOMRAM    00002C
-_spi_actor                             bssCOMRAM    00002A
-_tmr_100ms_next                        bssCOMRAM    000028
-_transfer_complete_flag                bssCOMRAM    000029
-_tx_node_ready_to_tx                   bssCOMRAM    000025
-_tx_node_test_msg                      bssCOMRAM    000027
-_txbf0_full                            bssCOMRAM    000033
-_txbf0_sent                            bssCOMRAM    000030
-_txbf1_full                            bssCOMRAM    000032
-_txbf1_sent                            bssCOMRAM    00002F
-_txbf2_full                            bssCOMRAM    000031
-_txbf2_sent                            bssCOMRAM    00002E
-btemp                                  temp         000047
+_mcp2515_current_opmode                text4        00030E
+_mcp2515_normal_mode                   text2        00033C
+_node1_ready_to_tx                     bssCOMRAM    000047
+_receive_byte                          bssCOMRAM    000059
+_rxbf0_full                            bssCOMRAM    00004D
+_rxbf1_full                            bssCOMRAM    00004C
+_spi_actor                             bssCOMRAM    00004A
+_spi_transfer_complete_flag            bssCOMRAM    000049
+_tmr_100ms_next                        bssCOMRAM    000048
+_txbf0_full                            bssCOMRAM    000053
+_txbf0_sent                            bssCOMRAM    000050
+_txbf1_full                            bssCOMRAM    000052
+_txbf1_sent                            bssCOMRAM    00004F
+_txbf2_full                            bssCOMRAM    000051
+_txbf2_sent                            bssCOMRAM    00004E
+btemp                                  temp         000067
 end_of_initialization                  cinit        0001AA
-external_interrupts_init@trigger_edge  cstackCOMRAM 00003A
-external_interrupts_init@which_pin     cstackCOMRAM 00003D
-int$flags                              temp         000047
+external_interrupts_init@trigger_edge  cstackCOMRAM 00005A
+external_interrupts_init@which_pin     cstackCOMRAM 00005D
+int$flags                              temp         000067
 int_func                               intcode_body 00021C
 intlevel0                              text         000000
 intlevel1                              text         000000
 intlevel2                              text         000000
 intlevel3                              text         000000
-mcp2515_cmd_read@buf                   cstackCOMRAM 00003C
-mcp2515_cmd_read@reg_address           cstackCOMRAM 00003D
-mcp2515_cmd_write@reg_address          cstackCOMRAM 00003D
-mcp2515_cmd_write@val                  cstackCOMRAM 00003C
-mcp2515_cmd_write_bit@mask             cstackCOMRAM 00003C
-mcp2515_cmd_write_bit@reg_address      cstackCOMRAM 00003E
-mcp2515_cmd_write_bit@val              cstackCOMRAM 00003D
-mcp2515_current_opmode@current_opmode  cstackCOMRAM 00003E
-mcp2515_current_opmode@opmode          cstackCOMRAM 00003F
+mcp2515_cmd_read@buf                   cstackCOMRAM 00005C
+mcp2515_cmd_read@reg_address           cstackCOMRAM 00005D
+mcp2515_cmd_write@reg_address          cstackCOMRAM 00005D
+mcp2515_cmd_write@val                  cstackCOMRAM 00005C
+mcp2515_cmd_write_bit@mask             cstackCOMRAM 00005C
+mcp2515_cmd_write_bit@reg_address      cstackCOMRAM 00005E
+mcp2515_cmd_write_bit@val              cstackCOMRAM 00005D
+mcp2515_current_opmode@current_opmode  cstackCOMRAM 00005E
+mcp2515_current_opmode@opmode          cstackCOMRAM 00005F
 stackhi                                (abs)        000F7F
 stacklo                                (abs)        000080
 start                                  init         00000E
 start_initialization                   cinit        00017E
-ttemp5                                 temp         000048
-ttemp6                                 temp         00004B
-ttemp7                                 temp         00004F
-wtemp8                                 temp         000048
+ttemp5                                 temp         000068
+ttemp6                                 temp         00006B
+ttemp7                                 temp         00006F
+wtemp8                                 temp         000068
 
 
 FUNCTION INFORMATION:
 
  *************** function _main *****************
  Defined at:
-		line 196 in file "mcp2515_test.c"
+		line 202 in file "mcp2515_test.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -965,7 +964,7 @@ Total ram usage:        2 bytes
 
  *************** function _isr *****************
  Defined at:
-		line 135 in file "mcp2515_test.c"
+		line 155 in file "mcp2515_test.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -997,7 +996,7 @@ MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
 src/ccp.c
-		_CCP1_Compare_Init_Default		CODE           	032A	0000	22
+		_CCP1_Compare_Init_Default		CODE           	0326	0000	22
 
 src/ccp.c estimated size: 22
 
@@ -1007,31 +1006,31 @@ shared
 shared estimated size: 44
 
 src/mssp_spi.c
-		_SPI_Init_Master_Default		CODE           	029E	0000	40
+		_SPI_Init_Master_Default		CODE           	0274	0000	40
 		_SPI_Transfer_Byte		CODE           	01B8	0000	52
-		_SPI_Transfer_Byte_without_CS		CODE           	0276	0000	40
+		_SPI_Transfer_Byte_without_CS		CODE           	024C	0000	40
 
 src/mssp_spi.c estimated size: 132
 
 mcp2515_test.c
-		_main          		CODE           	024C	0000	42
+		_main          		CODE           	029C	0000	38
 		_isr           		CODE           	0008	0000	54
 
-mcp2515_test.c estimated size: 96
+mcp2515_test.c estimated size: 92
 
 src/mcp2515.c
-		_mcp2515_cmd_write		CODE           	02EC	0000	38
-		_mcp2515_cmd_reset		CODE           	035E	0000	12
+		_mcp2515_cmd_write		CODE           	02E8	0000	38
+		_mcp2515_cmd_reset		CODE           	035A	0000	12
 		_mcp2515_cmd_write_bit		CODE           	01EC	0000	48
 		_can_init_default		CODE           	0012	0000	258
-		_mcp2515_normal_mode		CODE           	0340	0000	16
-		_mcp2515_current_opmode		CODE           	0312	0000	24
-		_mcp2515_cmd_read		CODE           	02C6	0000	38
+		_mcp2515_normal_mode		CODE           	033C	0000	16
+		_mcp2515_current_opmode		CODE           	030E	0000	24
+		_mcp2515_cmd_read		CODE           	02C2	0000	38
 
 src/mcp2515.c estimated size: 434
 
 src/timer.c
-		_Timer1_Init_Default		CODE           	0350	0000	14
+		_Timer1_Init_Default		CODE           	034C	0000	14
 
 src/timer.c estimated size: 14
 

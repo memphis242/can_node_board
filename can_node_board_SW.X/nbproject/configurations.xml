@@ -13,6 +13,7 @@
         <itemPath>inc/external_interrupts.h</itemPath>
         <itemPath>inc/mcp2515_test.h</itemPath>
         <itemPath>inc/spi_test.h</itemPath>
+        <itemPath>inc/adc.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
@@ -29,6 +30,7 @@
         <itemPath>src/mcp2515.c</itemPath>
         <itemPath>src/external_interrupts.c</itemPath>
         <itemPath>src/mssp_spi.c</itemPath>
+        <itemPath>src/adc.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
       <itemPath>spi_test.c</itemPath>

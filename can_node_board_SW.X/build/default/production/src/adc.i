@@ -1,4 +1,4 @@
-# 1 "mcp2515_test.c"
+# 1 "src/adc.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,61 +6,11 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "mcp2515_test.c" 2
-# 18 "mcp2515_test.c"
-#pragma config OSC = HSPLL
-#pragma config FCMEN = OFF
-#pragma config IESO = OFF
+# 1 "src/adc.c" 2
 
 
-#pragma config PWRT = OFF
-#pragma config BOREN = SBORDIS
-#pragma config BORV = 3
 
 
-#pragma config WDT = OFF
-#pragma config WDTPS = 32768
-
-
-#pragma config CCP2MX = PORTBE
-#pragma config PBADEN = OFF
-#pragma config LPT1OSC = OFF
-#pragma config MCLRE = ON
-
-
-#pragma config STVREN = ON
-#pragma config LVP = OFF
-#pragma config XINST = OFF
-
-
-#pragma config CP0 = OFF
-#pragma config CP1 = OFF
-#pragma config CP2 = OFF
-#pragma config CP3 = OFF
-
-
-#pragma config CPB = OFF
-#pragma config CPD = OFF
-
-
-#pragma config WRT0 = OFF
-#pragma config WRT1 = OFF
-#pragma config WRT2 = OFF
-#pragma config WRT3 = OFF
-
-
-#pragma config WRTC = OFF
-#pragma config WRTB = OFF
-#pragma config WRTD = OFF
-
-
-#pragma config EBTR0 = OFF
-#pragma config EBTR1 = OFF
-#pragma config EBTR2 = OFF
-#pragma config EBTR3 = OFF
-
-
-#pragma config EBTRB = OFF
 
 
 
@@ -4439,8 +4389,10 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 33 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 2 3
-# 74 "mcp2515_test.c" 2
+# 9 "src/adc.c" 2
 
+# 1 "inc\\adc.h" 1
+# 100 "inc\\adc.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 1 3
 # 22 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 3
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\bits/alltypes.h" 1 3
@@ -4526,132 +4478,18 @@ typedef int32_t int_fast32_t;
 typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
-# 75 "mcp2515_test.c" 2
-
-# 1 "inc\\mcp2515.h" 1
-# 163 "inc\\mcp2515.h"
-typedef enum {
-    MCP2515_OPMODE_NORMAL = 0u,
-    MCP2515_OPMODE_SLEEP = 1u,
-    MCP2515_OPMODE_LOOPBACK = 2u,
-    MCP2515_OPMODE_LISTEN = 3u,
-    MCP2515_OPMODE_CONFIG = 4u,
-} opmode_t;
-# 926 "inc\\mcp2515.h"
-typedef enum { SPI_READ_RXB0_ID, SPI_READ_RXB0_D, SPI_READ_RXB1_ID, SPI_READ_RXB1_D } spi_read_rxb_inst_t;
+# 100 "inc\\adc.h" 2
+# 206 "inc\\adc.h"
+typedef enum { ADC_ACQT_0TAD, ADC_ACQT_2TAD, ADC_ACQT_4TAD, ADC_ACQT_6TAD, ADC_ACQT_8TAD, ADC_ACQT_12TAD, ADC_ACQT_16TAD, ADC_ACQT_20TAD } adc_acqt_t;
+typedef enum { ADC_CLK_FOSC2=0u, ADC_CLK_FOSC4=4u, ADC_CLK_FOSC8=1u, ADC_CLK_FOSC16=5u, ADC_CLK_FOSC32=2u, ADC_CLK_FOSC64=6u, ADC_CLK_FRC=3u } adc_clk_t;
+typedef enum { ADC_AN0, ADC_AN1, ADC_AN2, ADC_AN3, ADC_AN4, ADC_AN5, ADC_AN6, ADC_AN7, ADC_AN8, ADC_AN9, ADC_AN10, ADC_AN11, ADC_AN12 } adc_pin_t;
+typedef enum { ADC_VREF, ADC_NOT_VREF } adc_vref_t;
 
 
-typedef enum { SPI_LOAD_TXB0_ID, SPI_LOAD_TXB0_D, SPI_LOAD_TXB1_ID, SPI_LOAD_TXB1_D, SPI_LOAD_TXB2_ID, SPI_LOAD_TXB2_D } spi_load_txb_inst_t;
-# 955 "inc\\mcp2515.h"
-typedef enum { TXB0 = 1u, TXB1 = 2u, TXB2 = 4u } txbuf_t;
-typedef enum { RXB0, RXB1 } rxbuf_t;
-typedef enum { RX_MASK0, RX_MASK1 } rx_mask_t;
-typedef enum { RX_FILT0, RX_FILT1, RX_FILT2, RX_FILT3, RX_FILT4, RX_FILT5 } rx_filt_t;
-typedef enum { MCP2515_OPTION_ROLLOVER } mcp_2515_options_t;
-# 985 "inc\\mcp2515.h"
-typedef struct {
-    uint16_t sid;
-    uint8_t exide;
-    uint32_t eid;
-    uint8_t rtr;
-} can_msg_arb_field;
-
-typedef struct {
-    uint8_t dlc;
-} can_msg_ctrl_field;
-
-typedef struct {
-    uint8_t data0;
-    uint8_t data1;
-    uint8_t data2;
-    uint8_t data3;
-    uint8_t data4;
-    uint8_t data5;
-    uint8_t data6;
-    uint8_t data7;
-} can_msg_data_field;
-
-typedef struct {
-    can_msg_arb_field arb_field;
-    can_msg_ctrl_field ctrl_field;
-    can_msg_data_field data_field;
-} can_msg;
-
-
-
-void can_init_default(void);
-void can_set_baud_rate(uint32_t baudrate, uint8_t propsec, uint8_t syncjump);
-
-opmode_t mcp2515_current_opmode(void);
-void mcp2515_config_mode(void);
-void mcp2515_normal_mode(void);
-void mcp2515_cmd_reset(void);
-uint8_t mcp2515_cmd_read_status(void);
-uint8_t mcp2515_cmd_rx_status(void);
-void mcp2515_cmd_read(uint8_t reg_address, uint8_t * buf);
-void mcp2515_cmd_read_sequential(uint8_t start_reg_addr, uint8_t * rxbuf, uint8_t len);
-void mcp2515_cmd_write(uint8_t reg_address, uint8_t val);
-void mcp2515_cmd_write_sequential(uint8_t start_reg_addr, uint8_t * txbuf, uint8_t len);
-void mcp2515_cmd_write_bit(uint8_t reg_address, uint8_t mask, uint8_t val);
-void mcp2515_cmd_read_rx_buf(rxbuf_t rxb, uint8_t * rx_buf);
-void mcp2515_cmd_load_tx_buf(txbuf_t txb, uint8_t * tx_buf);
-void mcp2515_cmd_rts(txbuf_t txb);
-# 1043 "inc\\mcp2515.h"
-void can_compose_msg_std(can_msg * msg, uint8_t * mcp2515_tx_buf);
-void can_parse_msg_std(can_msg * msg, uint8_t * mcp2515_rx_buf);
-void can_compose_msg_ext(can_msg * msg, uint8_t * mcp2515_tx_buf);
-void can_parse_msg_ext(can_msg * msg, uint8_t * mcp2515_rx_buf);
-
-
-uint8_t can_send(can_msg * msg);
-
-
-
-
-uint8_t can_receive(can_msg * msg_buf0, can_msg * msg_buf1);
-# 76 "mcp2515_test.c" 2
-
-# 1 "inc\\lcd_driver.h" 1
-# 207 "inc\\lcd_driver.h"
-enum lcd_display_t {
-    QAPASS_EBAY,
-    QAPASS_AMAZON,
-    ADAFRUIT_STANDARD_16x2,
-    ADAFRUIT_STANDARD_20x4
-};
-enum lcd_bit_mode_t {
-    MODE_4BIT,
-    MODE_8BIT
-};
-
-
-
-
-
-void static LCD_enable_toggle(void);
-void static LCD_wait_for_BF(void);
-
-void LCD_write_data_byte_4bit(uint8_t data);
-void LCD_write_data_byte_8bit(uint8_t data);
-void LCD_write_instr_byte_4bit(uint8_t instr);
-void LCD_write_instr_byte_8bit(uint8_t instr);
-void LCD_Init_ECE376(void);
-void LCD_Init_amazonLCD(uint8_t mode_4bit);
-void LCD_Init(uint8_t entry_mode, uint8_t disp_ctrl, uint8_t func_set, enum lcd_display_t disp_to_be_used);
-
-
-uint8_t LCD_isInit(void);
-uint8_t LCD_clear_display(void);
-uint8_t LCD_return_home(void);
-uint8_t LCD_read_current_address_counter(void);
-uint8_t LCD_set_cursor_position(uint8_t line, uint8_t pos_on_line);
-uint8_t LCD_write_characters(char * toWrite, uint8_t size);
-uint8_t LCD_turn_off_cursor(void);
-uint8_t LCD_turn_on_cursor(void);
-
-
-void LCD_write_uint32_number(uint32_t num);
-# 77 "mcp2515_test.c" 2
+void adc_init(adc_pin_t adc_pin, adc_vref_t adc_vref, adc_acqt_t adc_acqt, adc_clk_t adc_clk);
+void adc_init_default(void);
+void adc_use_ccp2(void);
+# 10 "src/adc.c" 2
 
 # 1 "inc\\ccp.h" 1
 # 159 "inc\\ccp.h"
@@ -4665,215 +4503,39 @@ void CCP1_Compare_Init_Default(uint16_t comp_val);
 void CCP2_Compare_Init_Default(uint16_t comp_val);
 void CCP1_Capture_Init_Default(void);
 void CCP2_Capture_Init_Default(void);
-# 78 "mcp2515_test.c" 2
+# 11 "src/adc.c" 2
 
 # 1 "inc\\timer.h" 1
 # 68 "inc\\timer.h"
 void Timer1_Init_Default(void);
 void Timer1_Enable(void);
 void Timer1_Disable(void);
-# 79 "mcp2515_test.c" 2
+# 12 "src/adc.c" 2
+# 39 "src/adc.c"
+void adc_init_default(void){
 
-# 1 "inc\\mssp_spi.h" 1
-# 114 "inc\\mssp_spi.h"
-enum spi_actor_t { SPI_MASTER, SPI_SLAVE };
-enum spi_mode_t { SPI_MODE_00, SPI_MODE_01, SPI_MODE_10, SPI_MODE_11 };
 
+    (ADCON1bits.PCFG = 0xA);
+    (ADCON0bits.CHS = 0x0u);
+    (TRISAbits.RA0 = 1u);
+    (ADCON1bits.VCFG = 0x3);
+    (ADCON2bits.ADFM = 0u);
 
 
-void SPI_Init_Master_Default(void);
-void SPI_Init_Slave_Default(void);
-uint8_t SPI_Init(uint8_t clock_pol, uint8_t clock_tx_pha, uint8_t smp_bit, uint8_t fosc_div, enum spi_actor_t spi_actor_type);
+    (ADCON2bits.ACQT = ADC_ACQT_4TAD);
+    (ADCON2bits.ADCS = (ADC_CLK_FOSC64));
 
-void SPI_Disable(void);
 
-void SPI_Transfer_Byte(uint8_t tx, uint8_t * rx);
-void SPI_Transfer_Packet(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_size);
-void SPI_Send_Byte(uint8_t tx);
-void SPI_Send_Packet(uint8_t * tx_pack, uint16_t tx_size);
-void SPI_Receive_Byte(uint8_t * rx);
-void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size);
+    (CCP2CONbits.CCP2M = 0xB);
 
 
 
 
 
-void SPI_Transfer_Byte_without_CS(uint8_t tx, uint8_t * rx);
-void SPI_Transfer_Packet_without_CS(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_size);
-# 80 "mcp2515_test.c" 2
+    (ADCON0bits.ADON = 1u);
 
-# 1 "inc\\external_interrupts.h" 1
-# 120 "inc\\external_interrupts.h"
-typedef enum { EXT_INT_INT0 = 1u, EXT_INT_INT1 = 2u, EXT_INT_INT2 = 4u } external_interrupts_t;
-typedef enum { FALLING_EDGE, RISING_EDGE } external_interrupt_edge_t;
 
+    (PIR1bits.ADIF = 0u);
+    (PIE1bits.ADIE = 1u);
 
-
-void external_interrupts_init_default(void);
-void external_interrupts_init(external_interrupts_t which_pin, external_interrupt_edge_t trigger_edge);
-# 81 "mcp2515_test.c" 2
-
-# 1 "inc\\mcp2515_test.h" 1
-# 82 "mcp2515_test.c" 2
-# 108 "mcp2515_test.c"
-extern uint8_t spi_transfer_complete_flag;
-
-extern uint8_t txbf0_full;
-extern uint8_t txbf1_full;
-extern uint8_t txbf2_full;
-extern uint8_t txbf0_sent;
-extern uint8_t txbf1_sent;
-extern uint8_t txbf2_sent;
-extern uint8_t rxbf0_full;
-extern uint8_t rxbf1_full;
-
-
-
-
-static volatile uint8_t tmr_100ms_next = 0x00;
-static can_msg node1_rx_msg;
-static can_msg node1_tx_msg;
-static volatile uint8_t node1_ready_to_tx = 0x00;
-# 147 "mcp2515_test.c"
-static char hex_to_char(uint8_t hex_num);
-
-
-
-
-
-
-
-void __attribute__((picinterrupt(("")))) isr(void){
-
-
-
-
-
-    if(PIR1bits.SSPIF && PIE1bits.SSPIE) {
-
-        spi_transfer_complete_flag = 0x01;
-
-        PIR1bits.SSPIF = 0;
-    }
-
-
-
-
-
-
-    if(PIR1bits.CCP1IF && PIE1bits.CCP1IE){
-
-
-        if(tmr_100ms_next){
-
-            tmr_100ms_next = 0x00;
-
-
-            node1_ready_to_tx = 0x01;
-
-            (PIR1bits.CCP1IF = 0u);
-
-        } else{
-
-            tmr_100ms_next = 0x01;
-            node1_ready_to_tx = 0x00;
-
-            (PIR1bits.CCP1IF = 0u);
-        }
-    }
-
-
-    return;
-}
-
-
-
-
-
-void main(void) {
-
-
-    can_init_default();
-# 226 "mcp2515_test.c"
-    Timer1_Init_Default();
-    CCP1_Compare_Init_Default(62500u);
-
-
-
-    T1CON |= 0x01;
-    (INTCONbits.PEIE = 1u);
-    (INTCONbits.GIE = 1);
-
-
-    while(1){
-
-        if(node1_ready_to_tx){
-
-
-
-
-
-            node1_ready_to_tx = 0x00;
-        }
-
-    }
-# 355 "mcp2515_test.c"
-    return;
-}
-# 374 "mcp2515_test.c"
-static char hex_to_char(uint8_t hex_num){
-    switch(hex_num){
-
-        case 0x0:
-            return '0';
-
-        case 0x1:
-            return '1';
-
-        case 0x2:
-            return '2';
-
-        case 0x3:
-            return '3';
-
-        case 0x4:
-            return '4';
-
-        case 0x5:
-            return '5';
-
-        case 0x6:
-            return '6';
-
-        case 0x7:
-            return '7';
-
-        case 0x8:
-            return '8';
-
-        case 0x9:
-            return '9';
-
-        case 0xA:
-            return 'A';
-
-        case 0xB:
-            return 'B';
-
-        case 0xC:
-            return 'C';
-
-        case 0xD:
-            return 'D';
-
-        case 0xE:
-            return 'E';
-
-        case 0xF:
-            return 'F';
-
-        default:
-            return ' ';
-
-    }
 }

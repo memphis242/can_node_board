@@ -37,13 +37,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _mcp2515_current_opmode `(E2464 ~T0 @X0 0 ef ]
 "82 src/mcp2515.c
 [; ;src/mcp2515.c: 82:     external_interrupts_init(EXT_INT_INT0, FALLING_EDGE);
-[c E2702 1 2 4 .. ]
-[n E2702 . EXT_INT_INT0 EXT_INT_INT1 EXT_INT_INT2  ]
-[c E2707 0 1 .. ]
-[n E2707 . FALLING_EDGE RISING_EDGE  ]
+[c E2683 1 2 4 .. ]
+[n E2683 . EXT_INT_INT0 EXT_INT_INT1 EXT_INT_INT2  ]
+[c E2688 0 1 .. ]
+[n E2688 . FALLING_EDGE RISING_EDGE  ]
 "126 inc\external_interrupts.h
 [; ;inc\external_interrupts.h: 126: void external_interrupts_init(external_interrupts_t which_pin, external_interrupt_edge_t trigger_edge);
-[v _external_interrupts_init `(v ~T0 @X0 0 ef2`E2702`E2707 ]
+[v _external_interrupts_init `(v ~T0 @X0 0 ef2`E2683`E2688 ]
 "1028 inc\mcp2515.h
 [; ;inc\mcp2515.h: 1028: void mcp2515_cmd_write_bit(uint8_t reg_address, uint8_t mask, uint8_t val);
 [v _mcp2515_cmd_write_bit `(v ~T0 @X0 0 ef3`uc`uc`uc ]
@@ -609,7 +609,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
 "82
 [; ;src/mcp2515.c: 82:     external_interrupts_init(EXT_INT_INT0, FALLING_EDGE);
-[e ( _external_interrupts_init (2 , . `E2702 0 . `E2707 0 ]
+[e ( _external_interrupts_init (2 , . `E2683 0 . `E2688 0 ]
 "83
 [; ;src/mcp2515.c: 83:     (INTCONbits.GIE = 1);
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
@@ -1193,8 +1193,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _can_send ]
 [v _msg `*S273 ~T0 @X0 1 r1 ]
 [f ]
-[v F2783 `uc ~T0 @X0 -> 13 `i s ]
-[i F2783
+[v F2764 `uc ~T0 @X0 -> 13 `i s ]
+[i F2764
 :U ..
 "602
 [; ;src/mcp2515.c: 602:     uint8_t tx_msg_buf[13u] = {0u};
@@ -1202,7 +1202,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 [v _tx_msg_buf `uc ~T0 @X0 -> 13 `i a ]
-[e = _tx_msg_buf F2783 ]
+[e = _tx_msg_buf F2764 ]
 "603
 [; ;src/mcp2515.c: 603:     can_compose_msg_ext(msg, tx_msg_buf);
 [e ( _can_compose_msg_ext (2 , _msg &U _tx_msg_buf ]
@@ -1297,8 +1297,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/mcp2515.c: 650:     uint8_t return_val = 0x00;
 [v _return_val `uc ~T0 @X0 1 a ]
 [e = _return_val -> -> 0 `i `uc ]
-[v F2790 `uc ~T0 @X0 -> 13 `i s ]
-[i F2790
+[v F2771 `uc ~T0 @X0 -> 13 `i s ]
+[i F2771
 :U ..
 "651
 [; ;src/mcp2515.c: 651:     uint8_t rx_buf[13u] = {0};
@@ -1306,7 +1306,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 [v _rx_buf `uc ~T0 @X0 -> 13 `i a ]
-[e = _rx_buf F2790 ]
+[e = _rx_buf F2771 ]
 "654
 [; ;src/mcp2515.c: 654:     if(rxbf0_full) {
 [e $ ! != -> _rxbf0_full `i -> 0 `i 324  ]

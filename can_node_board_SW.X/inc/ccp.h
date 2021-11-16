@@ -98,7 +98,7 @@
 #define CCP1M_COMPARE_DEFAULT   (CCP1CON = 0xB)  // 1011 for Compare mode /w Special
                                                  // Trigger Event
 #define CCP2M_COMPARE_DEFAULT   (CCP2CON = 0xB)  // Likewise, but I believe Special
-                                                 // Trigger Event also starts A/D
+                                                 // Trigger Event also starts A/D --> ONLY IF ADC IS ENABLED!
 #define CCP1M_CAPTURE_DEFAULT   (CCP1CON = 0x5)  // Capture mode, every rising edge of the CCP1 pin
 #define CCP2M_CAPTURE_DEFAULT   (CCP2CON = 0x5)  // Capture mode, every rising edge of the CCP2 pin
 
