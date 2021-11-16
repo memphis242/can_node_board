@@ -1207,18 +1207,10 @@ Wire Wire Line
 	9450 2250 9550 2250
 Text Notes 9700 3000 0    25   ~ 0
 Vio is for what voltage level the logic\ncircuitry is at, which is 5V here.\n\nSTBY is for putting the transceiver in\nstandby mode or normal mode. 0V for normal.
-Text GLabel 10550 1950 2    50   Input ~ 0
+Text GLabel 10900 1950 2    50   Input ~ 0
 CANH
-Text GLabel 10550 2150 2    50   Input ~ 0
+Text GLabel 10900 2150 2    50   Input ~ 0
 CANL
-Wire Notes Line
-	6350 650  10950 650 
-Wire Notes Line
-	10950 650  10950 4300
-Wire Notes Line
-	10950 4300 6350 4300
-Wire Notes Line
-	6350 650  6350 4300
 Text Notes 6450 1050 0    100  ~ 20
 CAN CONTROLLER +\nTRANSCEIVER
 Text Notes 6500 4150 0    50   ~ 0
@@ -1281,4 +1273,29 @@ Text GLabel 5550 6850 2    50   Input ~ 0
 ENG_SPD_POT
 Text GLabel 2150 2900 0    40   Input ~ 0
 ENG_SPD_POT
+$Comp
+L Device:R_Small R?
+U 1 1 6193BA87
+P 10700 2050
+F 0 "R?" H 10759 2096 50  0000 L CNN
+F 1 "120" H 10759 2005 50  0000 L CNN
+F 2 "" H 10700 2050 50  0001 C CNN
+F 3 "~" H 10700 2050 50  0001 C CNN
+	1    10700 2050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10550 2150 10700 2150
+Connection ~ 10700 2150
+Wire Wire Line
+	10700 2150 10900 2150
+Wire Wire Line
+	10900 1950 10700 1950
+Connection ~ 10700 1950
+Wire Wire Line
+	10700 1950 10550 1950
+Wire Notes Line
+	6350 4300 11200 4300
+Wire Notes Line
+	6350 500  6350 4300
 $EndSCHEMATC
