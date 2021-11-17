@@ -39,11 +39,11 @@
 void adc_init_default(void){
     
     // Configure channel, pin, vref, and justification
-    ADC_PCFG_DEFAULT;
-    ADCON0_CHS_DEFAULT;
-    ADC_TRIS_DEFAULT;
-    ADC_USE_VREF;
-    ADC_RESULT_RIGHT_JUSTIFY;
+    ADC_PCFG_DEFAULT;       // Configuring pins as digital or analog
+    ADCON0_CHS_DEFAULT;     // Selecting analog channel
+    ADC_TRIS_DEFAULT;       // Setting pin directions
+    ADC_USE_VREF;           // Have analog reference come from VREF+ and - pins
+    ADC_RESULT_RIGHT_JUSTIFY;   // Right justify the 10-bit result in ADRESH and ADRESL
     
     // Configure acquisition time and adc conversion clock
     ADC_ACQ_TIME_DEFAULT;

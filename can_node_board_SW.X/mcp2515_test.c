@@ -131,6 +131,7 @@ static volatile uint16_t eng_spd_pot_reading = 0x0000u;
 static uint16_t tx_counter = 0x0000u;   // Counter to keep track of how many messages have been sent
 static uint16_t ack_counter = 0x0000u;  // Counter to keep track of how many messages have been
                                         // acknowledged by Node2
+static uint8_t can_intf_buf = 0x00u;
 #endif
 
 #if CURRENT_NODE == NODE2_DISPLAY
@@ -260,6 +261,10 @@ void main(void) {
      * TODO: INCLUDE TX TIMESTAMPS
      */
     
+    // Set up I/O for buttons
+    NODE1_BUTTON1_TRIS;
+    NODE1_BUTTON2_TRIS;
+    
     // Configure TIMER1 and CCP1 to trigger a transmission every 100ms (10Hz)
     Timer1_Init_Default();
     CCP1_Compare_Init_Default(DEFAULT_CONFIG_PERIOD_50ms);
@@ -277,24 +282,64 @@ void main(void) {
     ENABLE_PERIPHERAL_INTERRUPTS;
     ei();
     
+    // Node1's arbitration ID will always be the same since there's only one message
+    // here from it. I'll also always set the DLC field to 8 bytes.
+    node1_state_msg.arb_field.sid = NODE1_SID;
+    node1_state_msg.arb_field.eid = NODE1_EID;
+    node1_state_msg.arb_field.exide = 1u;   // Always extended frame format!
+    node1_state_msg.arb_field.rtr = 0u;     // Always a data frame and not a remote frame
+    
+    node1_state_msg.ctrl_field.dlc = 0x8u;  // 8 data bytes in message
+    
     // TX Node while(1) loop
     while(1){
 
         if(node1_ready_to_tx) {
             // Construct state message
-            
+            // Button states (byte 0)
+            node1_state_msg.data_field.data0 = (NODE1_BUTTON1_PIN << NODE1_BYTE_BUTTON1_BIT_LOC) |
+                    (NODE1_BUTTON2_PIN << NODE1_BYTE_BUTTON2_BIT_LOC);
+            // Engine Speed (bytes 1 & 2) --> recall that J1939 will be Intel byte order (i.e., LSB first)
+            // but the individual bytes themselves are big-endian
+            node1_state_msg.data_field.data1 = (uint8_t) (eng_spd_pot_reading & 0x00FF);
+            node1_state_msg.data_field.data2 = (uint8_t) ((eng_spd_pot_reading & 0xFF00) >> 8u);
+            // tx_counter (bytes 3 & 4)
+            node1_state_msg.data_field.data3 = (uint8_t) (tx_counter & 0x00FF);
+            node1_state_msg.data_field.data4 = (uint8_t) ((tx_counter & 0xFF00) >> 8u);
+            // ack_counter (bytes 5 & 6)
+            node1_state_msg.data_field.data5 = (uint8_t) (ack_counter & 0x00FF);
+            node1_state_msg.data_field.data6 = (uint8_t) ((ack_counter & 0xFF00) >> 8u);
+            // Last byte --> just nothing I guess
+            node1_state_msg.data_field.data7 = 0x00u;
             
             // Send message
+            can_send(&node1_state_msg);
             
-            node1_ready_to_tx = 0x00; // Reset ready-to-send flag for next 100ms            
+            node1_ready_to_tx = 0x00; // Reset ready-to-send flag for next 100 ms
         }
         
         if(mcp2515_interrupt_event) {
-            // Read CANINTF from the MCP2515
+//            extern uint8_t txbf0_full;
+//            extern uint8_t txbf1_full;
+//            extern uint8_t txbf2_full;
+//            extern uint8_t txbf0_sent;
+//            extern uint8_t txbf1_sent;
+//            extern uint8_t txbf2_sent;
+//            extern uint8_t rxbf0_full;
+//            extern uint8_t rxbf1_full;
             
+//            static can_msg node1_rx_msg;
+            
+            // Read CANINTF from the MCP2515
+            mcp2515_cmd_read(MCP2515_CANINTF, &can_intf_buf);
             
             // Check the various flags...
-            
+            if(can_intf_buf & MCP2515_MERR) {      // Message error?
+                
+            }
+            if(can_intf_buf & MCP2515_ERRI) {       // Error shown from EFLG
+                
+            }
             
             
             mcp2515_interrupt_event = 0x00u;
