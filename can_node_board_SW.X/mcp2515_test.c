@@ -93,10 +93,10 @@
 
 // I will use the following to make it more convenient to write both the code
 // the Test Node 1 and the Test Node 2 in the same file
-#define NODE1_BUTTONS         0u
-#define NODE2_DISPLAY         1u
-#define CURRENT_NODE    NODE1_BUTTONS
-//#define CURRENT_NODE    NODE2_DISPLAY
+#define NODE1         0u
+#define NODE2         1u
+#define CURRENT_NODE    NODE1
+//#define CURRENT_NODE    NODE2
 
 //#define TX_RX_DEBUG
 
@@ -121,9 +121,10 @@ extern uint8_t txbf2_sent;
 extern uint8_t rxbf0_full;
 extern uint8_t rxbf1_full;
 
-#if CURRENT_NODE == NODE1_BUTTONS
+#if CURRENT_NODE == NODE1
 static volatile uint8_t tmr_100ms_next = 0x00;  // This is used to indicate when 100ms has passed
-static can_msg node1_rx_msg;
+static can_msg node1_rxbf0_msg;
+static can_msg node1_rxbf1_msg;
 static can_msg node1_state_msg;     // byte 0: button states, bytes 1 & 2: eng_spd,
                                     // bytes 3 & 4: tx_counter, bytes 5 & 6: ack_counter
 static volatile uint8_t node1_ready_to_tx = 0x00;
@@ -131,10 +132,22 @@ static volatile uint16_t eng_spd_pot_reading = 0x0000u;
 static uint16_t tx_counter = 0x0000u;   // Counter to keep track of how many messages have been sent
 static uint16_t ack_counter = 0x0000u;  // Counter to keep track of how many messages have been
                                         // acknowledged by Node2
-static uint8_t can_intf_buf = 0x00u;
+static uint8_t mcp2515_intf_buf = 0x00u;
+static uint8_t mcp2515_eflg_buf = 0x00u;
+static uint8_t mcp2515_txb0ctrl_buf = 0x00u;
+static uint8_t mcp2515_txb1ctrl_buf = 0x00u;
+static uint8_t mcp2515_txb2ctrl_buf = 0x00u;
+static uint8_t mcp2515_canctrl_buf = 0x00u;
+static uint8_t mcp2515_one_shot_mode = 0x00u;
+static uint8_t mcp2515_txb0_reattempt_counter = 0x00u;
+static uint8_t mcp2515_txb1_reattempt_counter = 0x00u;
+static uint8_t mcp2515_txb2_reattempt_counter = 0x00u;
+static uint8_t msg_received = 0x00u;
+static uint8_t rxbf0_received = 0x00u;
+static uint8_t rxbf1_received = 0x00u;
 #endif
 
-#if CURRENT_NODE == NODE2_DISPLAY
+#if CURRENT_NODE == NODE2
 static uint8_t node1_rx_buf = 0x00;
 static uint8_t spi_rx_invalid_flag = 0x00;  // Flag to indicate invalid rx
 static uint8_t spi_rx_flag = 0x00;  // Flag to indicate an rx has occured
@@ -187,7 +200,7 @@ void __interrupt() isr(void){
     //-------------------------------------------------------------------------
     // INTERRUPTS HANDLED BY NODE1 ONLY
     //-------------------------------------------------------------------------
-#if CURRENT_NODE == NODE1_BUTTONS
+#if CURRENT_NODE == NODE1
     // CCP1 used to set 100ms transmission rate period
     if(CCP1_IF_BIT && CCP1_INT_ENABLE_BIT){
         // On every other compare match, transmit!
@@ -223,7 +236,7 @@ void __interrupt() isr(void){
         
 #endif
     
-#if CURRENT_NODE == NODE2_DISPLAY
+#if CURRENT_NODE == NODE2
     //-------------------------------------------------------------------------
     // INTERRUPTS HANDLED BY NODE2 ONLY
     //-------------------------------------------------------------------------
@@ -243,24 +256,24 @@ void main(void) {
     // Regardless of which node, the following code should be compiled...
     can_init_default();     // Initializes SPI Master mode and the MCP2515
     
-#if CURRENT_NODE == NODE1_BUTTONS
+#if CURRENT_NODE == NODE1
     /* ------------------------------------------------------------------------
      * Code for Node 1
      * Node 1 will 
      * 
      *      1) send a message every 100ms indicating the state of  two
-     *      switches it is connected to (byte 0). Along with this message will
-     *      be Node 1's acknowledge counter (bytes 1 and 2) and transmit counter
-     *      (bytes 3 and 4). Finally, Node 1 will also send an "Engine Speed"
-     *      signal within bytes 5 and 6 based on the analog signal it reads
-     *      from a potentiometer.
+     *      switches it is connected to (byte 0), engine speed (bytes 1 & 2),
+     *      tx_counter (bytes 3 & 4), and ack_counter (bytes 5 & 6).
      * 
      *      2) await an acknowledge message from Node 2 and if an acknowledge
      *      was received, Node 1 will increment a counter.
      * 
+     *      3) respond to Node 2's command message to toggle Node 1's LED
+     * 
      * TODO: INCLUDE TX TIMESTAMPS
      */
     
+    //<editor-fold defaultstate="collapsed" desc="NODE 1 INITIALIZATION">
     // Set up I/O for buttons
     NODE1_BUTTON1_TRIS;
     NODE1_BUTTON2_TRIS;
@@ -281,6 +294,7 @@ void main(void) {
     TMR3_ON;
     ENABLE_PERIPHERAL_INTERRUPTS;
     ei();
+    // </editor-fold>
     
     // Node1's arbitration ID will always be the same since there's only one message
     // here from it. I'll also always set the DLC field to 8 bytes.
@@ -291,14 +305,14 @@ void main(void) {
     
     node1_state_msg.ctrl_field.dlc = 0x8u;  // 8 data bytes in message
     
-    // TX Node while(1) loop
+    // TX Node while(1) loop which will include event handling
     while(1){
-
+        
+        // <editor-fold defaultstate="collapsed" desc="READY TO TX">
         if(node1_ready_to_tx) {
             // Construct state message
             // Button states (byte 0)
-            node1_state_msg.data_field.data0 = (NODE1_BUTTON1_PIN << NODE1_BYTE_BUTTON1_BIT_LOC) |
-                    (NODE1_BUTTON2_PIN << NODE1_BYTE_BUTTON2_BIT_LOC);
+            node1_state_msg.data_field.data0 = (uint8_t) NODE1_CONSTRUCT_BUTTON_BYTE;
             // Engine Speed (bytes 1 & 2) --> recall that J1939 will be Intel byte order (i.e., LSB first)
             // but the individual bytes themselves are big-endian
             node1_state_msg.data_field.data1 = (uint8_t) (eng_spd_pot_reading & 0x00FF);
@@ -315,41 +329,188 @@ void main(void) {
             // Send message
             can_send(&node1_state_msg);
             
-            node1_ready_to_tx = 0x00; // Reset ready-to-send flag for next 100 ms
+            // Clear event flag
+            node1_ready_to_tx = 0x00;
         }
+        // </editor-fold>
         
-        if(mcp2515_interrupt_event) {
-//            extern uint8_t txbf0_full;
-//            extern uint8_t txbf1_full;
-//            extern uint8_t txbf2_full;
-//            extern uint8_t txbf0_sent;
-//            extern uint8_t txbf1_sent;
-//            extern uint8_t txbf2_sent;
-//            extern uint8_t rxbf0_full;
-//            extern uint8_t rxbf1_full;
-            
-//            static can_msg node1_rx_msg;
-            
+        // <editor-fold defaultstate="collapsed" desc="MCP2515 ~INT HANDLE">
+        if(mcp2515_interrupt_event) {            
             // Read CANINTF from the MCP2515
-            mcp2515_cmd_read(MCP2515_CANINTF, &can_intf_buf);
+            // TODO: See if ICOD would also be useful here or ... ?
+            mcp2515_cmd_read(MCP2515_CANINTF, &mcp2515_intf_buf);
+            
             
             // Check the various flags...
-            if(can_intf_buf & MCP2515_MERR) {      // Message error?
+            // <editor-fold defaultstate="collapsed" desc="Message Error">
+            if(mcp2515_intf_buf & MCP2515_MERR) {      // Message error? --> i.e., message failed to send
+                // Check whether we are in one-shot mode or not
+                mcp2515_cmd_read(MCP2515_CANCTRL, &mcp2515_canctrl_buf);
+                mcp2515_one_shot_mode = mcp2515_canctrl_buf & MCP2515_ONE_SHOT_MODE;
                 
-            }
-            if(can_intf_buf & MCP2515_ERRI) {       // Error shown from EFLG
+                // If in one-shot mode, We will re-attempt three times at most for each TX buffer
+                // if a message error has occurred (totaling three attempts per message);
+                // If not in one-shot mode, we will let the MCP2515 handle things and
+                // just clear the MERR flag
+                // NOTE: The TXERR bit in each TXBnCTRL register automatically gets
+                //      reset whenever another re-attempt to transmit has been made
+                //      for that buffer, so no need to reset it manually here
+                if(mcp2515_one_shot_mode) {
+                    // Figure out for which TX Buffer the error has occurred...
+                    mcp2515_cmd_read(MCP2515_TXB0CTRL, &mcp2515_txb0ctrl_buf);
+                    mcp2515_cmd_read(MCP2515_TXB1CTRL, &mcp2515_txb1ctrl_buf);
+                    mcp2515_cmd_read(MCP2515_TXB2CTRL, &mcp2515_txb2ctrl_buf);
+
+                    if(mcp2515_txb0ctrl_buf & MCP2515_TXBnCTRL_TXERR) {
+                        mcp2515_txb0_reattempt_counter++;
+                        
+                        if(mcp2515_txb0_reattempt_counter < 4) {
+                            can_send(&node1_state_msg); // Re-attempt transmission
+                        } else {
+                            // TODO...
+                        }
+                        
+                    }
+                    if(mcp2515_txb1ctrl_buf & MCP2515_TXBnCTRL_TXERR) {
+                        
+                        mcp2515_txb1_reattempt_counter++;
+                        
+                        if(mcp2515_txb1_reattempt_counter < 4) {
+                            can_send(&node1_state_msg); // Re-attempt transmission
+                        } else {
+                            // TODO...
+                        }
+                        
+                    }
+                    if(mcp2515_txb2ctrl_buf & MCP2515_TXBnCTRL_TXERR) {
+                        
+                        mcp2515_txb2_reattempt_counter++;
+                        
+                        if(mcp2515_txb2_reattempt_counter < 4) {
+                            can_send(&node1_state_msg); // Re-attempt transmission
+                        } else {
+                            // TODO...
+                        }
+                        
+                    }
+                    
+                }
                 
+                // Clear flag to reset interrupt condition
+                mcp2515_cmd_write_bit(MCP2515_CANINTF, MCP2515_MERR, 0x00u);
             }
+            // </editor-fold>
             
+            // <editor-fold defaultstate="collapsed" desc="Error Flag">
+            if(mcp2515_intf_buf & MCP2515_ERRI) {       // Error shown from EFLG
+                // Read the EFLG register to determine which error has occurred
+                mcp2515_cmd_read(MCP2515_EFLG, &mcp2515_eflg_buf);
+                
+                if(mcp2515_eflg_buf & MCP2515_EFLG_RX1OVR) {
+                    // TODO...
+                }
+                if(mcp2515_eflg_buf & MCP2515_EFLG_RX0OVR) {
+                    // TODO...
+                }
+                if(mcp2515_eflg_buf & MCP2515_EFLG_TXBO) {
+                    // TODO...
+                }
+                
+                // Clear flag to reset interrupt condition
+                mcp2515_cmd_write_bit(MCP2515_CANINTF, MCP2515_EFLG, 0x00u);
+            }
+            // </editor-fold>
             
+            // <editor-fold defaultstate="collapsed" desc="TX Successful!">
+            if(mcp2515_intf_buf & MCP2515_TX2I) {
+                // TODO... Not sure if there's anything more needed here...
+                tx_counter++;
+                
+                // Clear flag to reset interrupt condition
+                mcp2515_cmd_write_bit(MCP2515_CANINTF, MCP2515_TX2I, 0x00u);
+            }
+            if(mcp2515_intf_buf & MCP2515_TX1I) {
+                // TODO... Not sure if there's anything more needed here...
+                tx_counter++;
+                
+                // Clear flag to reset interrupt condition
+                mcp2515_cmd_write_bit(MCP2515_CANINTF, MCP2515_TX1I, 0x00u);
+            }
+            if(mcp2515_intf_buf & MCP2515_TX0I) {
+                // TODO... Not sure if there's anything more needed here...
+                tx_counter++;
+                
+                // Clear flag to reset interrupt condition
+                mcp2515_cmd_write_bit(MCP2515_CANINTF, MCP2515_TX0I, 0x00u);
+            }
+            // </editor-fold>
+            
+            // <editor-fold defaultstate="collapsed" desc="Received Message!">
+            if(mcp2515_intf_buf & MCP2515_RX1I) {
+                rxbf1_full = 0x01u;  // Indicate this receive buffer has a message
+                can_receive(&node1_rxbf0_msg, &node1_rxbf1_msg);    // Read the message
+                rxbf1_received = 0x01u;     // Indicate message received event has occured
+                msg_received = 0x01u;
+                
+                // Clear flag to reset interrupt condition
+                mcp2515_cmd_write_bit(MCP2515_CANINTF, MCP2515_RX1I, 0x00u);
+            }
+            if(mcp2515_intf_buf & MCP2515_RX0I) {
+                rxbf0_full = 0x01;  // Indicate this receive buffer has a message
+                can_receive(&node1_rxbf0_msg, &node1_rxbf1_msg);    // Read the message
+                rxbf0_received = 0x01u;
+                msg_received = 0x01u;
+                
+                // Clear flag to reset interrupt condition
+                mcp2515_cmd_write_bit(MCP2515_CANINTF, MCP2515_RX0I, 0x00u);
+            }
+
+            // </editor-fold>
+            
+            // Clear event flag
             mcp2515_interrupt_event = 0x00u;
         }
+        // </editor-fold>
+        
+        // <editor-fold defaultstate="collapsed" desc="MESSAGE RECEIVED">
+        if(msg_received) {
+            /* Node 1 is only expecting to deal with two kinds of received messages:
+             * 
+             *      1) Acknowledge message from Node 2
+             *      2) LED Toggle Command message from Node 2
+             * 
+             */
+            
+            if(rxbf0_received) {
+                if( (node1_rxbf0_msg.arb_field.sid == NODE2_SID) && (node1_rxbf0_msg.arb_field.eid == NODE2_EID_ACK) ) {
+                    ack_counter++;
+                    rxbf0_received = 0x00u; // Clear event flag
+                } else if( (node1_rxbf0_msg.arb_field.sid == NODE2_SID) && (node1_rxbf0_msg.arb_field.eid == NODE2_EID_LED_CMD) ) {
+                    NODE1_TOGGLE_LED;
+                    rxbf0_received = 0x00u; // Clear event flag
+                }
+            }
+            
+            if(rxbf1_received) {
+                if( (node1_rxbf1_msg.arb_field.sid == NODE2_SID) && (node1_rxbf1_msg.arb_field.eid == NODE2_EID_ACK) ) {
+                    ack_counter++;
+                    rxbf1_received = 0x00u; // Clear event flag
+                } else if( (node1_rxbf1_msg.arb_field.sid == NODE2_SID) && (node1_rxbf1_msg.arb_field.eid == NODE2_EID_LED_CMD) ) {
+                    NODE1_TOGGLE_LED;
+                    rxbf1_received = 0x00u; // Clear event flag
+                }
+            }
+            
+            msg_received = 0x00u;   // Clear event flag
+            
+        }
+        // </editor-fold>
         
     }
     
 #endif
     
-#if CURRENT_NODE == NODE2_DISPLAY
+#if CURRENT_NODE == NODE2
     /* ------------------------------------------------------------------------
      * Code for Test RX Node
      * The Test RX Node will update a display indicating the state of the two

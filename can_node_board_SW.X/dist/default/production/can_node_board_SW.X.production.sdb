@@ -24,12 +24,12 @@ MCP2515_OPMODE_LISTEN 3
 MCP2515_OPMODE_CONFIG 4
 ]
 "82
-[e E2683 . `uc
+[e E2686 . `uc
 EXT_INT_INT0 1
 EXT_INT_INT1 2
 EXT_INT_INT2 4
 ]
-[e E2688 . `uc
+[e E2691 . `uc
 FALLING_EDGE 0
 RISING_EDGE 1
 ]
@@ -124,12 +124,16 @@ ADC_CLK_FRC 3
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "91 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c99\common\Umul64.c
 [v ___omul __omul `(uo  1 e 8 0 ]
-"155 C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+"177 C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
 [v _isr isr `IIH(v  1 e 1 0 ]
-"202
+"254
 [v _main main `(v  1 e 1 0 ]
+"39 C:\git\can_node_board\can_node_board_SW.X\src/adc.c
+[v _adc_init_default adc_init_default `(v  1 e 1 0 ]
 "42 C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
 [v _CCP1_Compare_Init_Default CCP1_Compare_Init_Default `(v  1 e 1 0 ]
+"49
+[v _CCP2_Compare_Init_Default CCP2_Compare_Init_Default `(v  1 e 1 0 ]
 "54 C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
 [v _external_interrupts_init external_interrupts_init `(v  1 e 1 0 ]
 "45 C:\git\can_node_board\can_node_board_SW.X\src/lcd_driver.c
@@ -168,6 +172,10 @@ ADC_CLK_FRC 3
 [v _can_compose_msg_ext can_compose_msg_ext `(v  1 e 1 0 ]
 "558
 [v _can_parse_msg_ext can_parse_msg_ext `(v  1 e 1 0 ]
+"600
+[v _can_send can_send `(uc  1 e 1 0 ]
+"649
+[v _can_receive can_receive `(uc  1 e 1 0 ]
 "31 C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
 [v _SPI_Init_Master_Default SPI_Init_Master_Default `(v  1 e 1 0 ]
 "207
@@ -180,6 +188,52 @@ ADC_CLK_FRC 3
 [v _SPI_Transfer_Byte_without_CS SPI_Transfer_Byte_without_CS `(v  1 e 1 0 ]
 "31 C:\git\can_node_board\can_node_board_SW.X\src/timer.c
 [v _Timer1_Init_Default Timer1_Init_Default `(v  1 e 1 0 ]
+"38
+[v _Timer3_Init_Default Timer3_Init_Default `(v  1 e 1 0 ]
+[s S1230 . 1 `uc 1 RE0 1 0 :1:0 
+`uc 1 RE1 1 0 :1:1 
+`uc 1 RE2 1 0 :1:2 
+`uc 1 RE3 1 0 :1:3 
+]
+"735 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
+[s S1268 . 1 `uc 1 RD 1 0 :1:0 
+`uc 1 WR 1 0 :1:1 
+`uc 1 CS 1 0 :1:2 
+`uc 1 MCLR 1 0 :1:3 
+]
+[s S1273 . 1 `uc 1 NOT_RD 1 0 :1:0 
+]
+[s S1275 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 NOT_WR 1 0 :1:1 
+]
+[s S1278 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_CS 1 0 :1:2 
+]
+[s S1281 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 NOT_MCLR 1 0 :1:3 
+]
+[s S1284 . 1 `uc 1 nRD 1 0 :1:0 
+`uc 1 nWR 1 0 :1:1 
+`uc 1 nCS 1 0 :1:2 
+`uc 1 nMCLR 1 0 :1:3 
+]
+[s S1289 . 1 `uc 1 AN5 1 0 :1:0 
+`uc 1 AN6 1 0 :1:1 
+`uc 1 AN7 1 0 :1:2 
+`uc 1 VPP 1 0 :1:3 
+]
+[s S1294 . 1 `uc 1 PD2 1 0 :1:0 
+`uc 1 PC2 1 0 :1:1 
+`uc 1 CCP10 1 0 :1:2 
+`uc 1 CCP9E 1 0 :1:3 
+]
+[s S1299 . 1 `uc 1 RDE 1 0 :1:0 
+`uc 1 WRE 1 0 :1:1 
+`uc 1 PB2 1 0 :1:2 
+`uc 1 PC3E 1 0 :1:3 
+]
+[u S1304 . 1 `S1230 1 . 1 0 `S1268 1 . 1 0 `S1273 1 . 1 0 `S1275 1 . 1 0 `S1278 1 . 1 0 `S1281 1 . 1 0 `S1284 1 . 1 0 `S1289 1 . 1 0 `S1294 1 . 1 0 `S1299 1 . 1 0 ]
+[v _PORTEbits PORTEbits `VES1304  1 e 1 @3972 ]
 [s S174 . 1 `uc 1 LATD0 1 0 :1:0 
 `uc 1 LATD1 1 0 :1:1 
 `uc 1 LATD2 1 0 :1:2 
@@ -189,7 +243,7 @@ ADC_CLK_FRC 3
 `uc 1 LATD6 1 0 :1:6 
 `uc 1 LATD7 1 0 :1:7 
 ]
-"1243 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h
+"1243
 [s S183 . 1 `uc 1 LD0 1 0 :1:0 
 `uc 1 LD1 1 0 :1:1 
 `uc 1 LD2 1 0 :1:2 
@@ -201,11 +255,32 @@ ADC_CLK_FRC 3
 ]
 [u S192 . 1 `S174 1 . 1 0 `S183 1 . 1 0 ]
 [v _LATDbits LATDbits `VES192  1 e 1 @3980 ]
+[s S1578 . 1 `uc 1 TRISA0 1 0 :1:0 
+`uc 1 TRISA1 1 0 :1:1 
+`uc 1 TRISA2 1 0 :1:2 
+`uc 1 TRISA3 1 0 :1:3 
+`uc 1 TRISA4 1 0 :1:4 
+`uc 1 TRISA5 1 0 :1:5 
+`uc 1 TRISA6 1 0 :1:6 
+`uc 1 TRISA7 1 0 :1:7 
+]
+"1412
+[s S1587 . 1 `uc 1 RA0 1 0 :1:0 
+`uc 1 RA1 1 0 :1:1 
+`uc 1 RA2 1 0 :1:2 
+`uc 1 RA3 1 0 :1:3 
+`uc 1 RA4 1 0 :1:4 
+`uc 1 RA5 1 0 :1:5 
+`uc 1 RA6 1 0 :1:6 
+`uc 1 RA7 1 0 :1:7 
+]
+[u S1596 . 1 `S1578 1 . 1 0 `S1587 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES1596  1 e 1 @3986 ]
 "1602
 [v _TRISB TRISB `VEuc  1 e 1 @3987 ]
 "1824
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
-[s S931 . 1 `uc 1 TRISD0 1 0 :1:0 
+[s S891 . 1 `uc 1 TRISD0 1 0 :1:0 
 `uc 1 TRISD1 1 0 :1:1 
 `uc 1 TRISD2 1 0 :1:2 
 `uc 1 TRISD3 1 0 :1:3 
@@ -224,8 +299,20 @@ ADC_CLK_FRC 3
 `uc 1 RD6 1 0 :1:6 
 `uc 1 RD7 1 0 :1:7 
 ]
-[u S949 . 1 `S931 1 . 1 0 `S261 1 . 1 0 ]
-[v _TRISDbits TRISDbits `VES949  1 e 1 @3989 ]
+[u S909 . 1 `S891 1 . 1 0 `S261 1 . 1 0 ]
+[v _TRISDbits TRISDbits `VES909  1 e 1 @3989 ]
+[s S1221 . 1 `uc 1 TRISE0 1 0 :1:0 
+`uc 1 TRISE1 1 0 :1:1 
+`uc 1 TRISE2 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 PSPMODE 1 0 :1:4 
+`uc 1 IBOV 1 0 :1:5 
+`uc 1 OBF 1 0 :1:6 
+`uc 1 IBF 1 0 :1:7 
+]
+"2296
+[u S1235 . 1 `S1221 1 . 1 0 `S1230 1 . 1 0 ]
+[v _TRISEbits TRISEbits `VES1235  1 e 1 @3990 ]
 [s S27 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
@@ -242,7 +329,7 @@ ADC_CLK_FRC 3
 ]
 [u S40 . 1 `S27 1 . 1 0 `S36 1 . 1 0 ]
 [v _PIE1bits PIE1bits `VES40  1 e 1 @3997 ]
-[s S972 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[s S932 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
 `uc 1 SSPIF 1 0 :1:3 
@@ -252,59 +339,159 @@ ADC_CLK_FRC 3
 `uc 1 PSPIF 1 0 :1:7 
 ]
 "2596
-[s S981 . 1 `uc 1 . 1 0 :4:0 
+[s S941 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TX1IF 1 0 :1:4 
 `uc 1 RC1IF 1 0 :1:5 
 ]
-[u S985 . 1 `S972 1 . 1 0 `S981 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES985  1 e 1 @3998 ]
+[u S945 . 1 `S932 1 . 1 0 `S941 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES945  1 e 1 @3998 ]
+[s S108 . 1 `uc 1 CCP2IE 1 0 :1:0 
+`uc 1 TMR3IE 1 0 :1:1 
+`uc 1 HLVDIE 1 0 :1:2 
+`uc 1 BCLIE 1 0 :1:3 
+`uc 1 EEIE 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 CMIE 1 0 :1:6 
+`uc 1 OSCFIE 1 0 :1:7 
+]
+"2749
+[s S117 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 LVDIE 1 0 :1:2 
+]
+[u S120 . 1 `S108 1 . 1 0 `S117 1 . 1 0 ]
+[v _PIE2bits PIE2bits `VES120  1 e 1 @4000 ]
+[s S1175 . 1 `uc 1 CCP2IF 1 0 :1:0 
+`uc 1 TMR3IF 1 0 :1:1 
+`uc 1 HLVDIF 1 0 :1:2 
+`uc 1 BCLIF 1 0 :1:3 
+`uc 1 EEIF 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 CMIF 1 0 :1:6 
+`uc 1 OSCFIF 1 0 :1:7 
+]
+"2815
+[s S1184 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 LVDIF 1 0 :1:2 
+]
+[u S1187 . 1 `S1175 1 . 1 0 `S1184 1 . 1 0 ]
+[v _PIR2bits PIR2bits `VES1187  1 e 1 @4001 ]
 "3529
 [v _T3CON T3CON `VEuc  1 e 1 @4017 ]
+"4155
+[v _CCP2CON CCP2CON `VEuc  1 e 1 @4026 ]
+[s S1663 . 1 `uc 1 CCP2M 1 0 :4:0 
+`uc 1 DC2B 1 0 :2:4 
+]
+"4179
+[s S1666 . 1 `uc 1 CCP2M0 1 0 :1:0 
+`uc 1 CCP2M1 1 0 :1:1 
+`uc 1 CCP2M2 1 0 :1:2 
+`uc 1 CCP2M3 1 0 :1:3 
+`uc 1 CCP2Y 1 0 :1:4 
+`uc 1 CCP2X 1 0 :1:5 
+]
+[s S1673 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 DC2B0 1 0 :1:4 
+`uc 1 DC2B1 1 0 :1:5 
+]
+[u S1677 . 1 `S1663 1 . 1 0 `S1666 1 . 1 0 `S1673 1 . 1 0 ]
+[v _CCP2CONbits CCP2CONbits `VES1677  1 e 1 @4026 ]
+"4234
+[v _CCPR2 CCPR2 `VEus  1 e 2 @4027 ]
 "4255
 [v _CCP1CON CCP1CON `VEuc  1 e 1 @4029 ]
 "4352
 [v _CCPR1 CCPR1 `VEus  1 e 2 @4030 ]
-[s S724 . 1 `uc 1 PCFG 1 0 :4:0 
+[s S1618 . 1 `uc 1 ADCS 1 0 :3:0 
+`uc 1 ACQT 1 0 :3:3 
+`uc 1 . 1 0 :1:6 
+`uc 1 ADFM 1 0 :1:7 
+]
+"4394
+[s S1623 . 1 `uc 1 ADCS0 1 0 :1:0 
+`uc 1 ADCS1 1 0 :1:1 
+`uc 1 ADCS2 1 0 :1:2 
+`uc 1 ACQT0 1 0 :1:3 
+`uc 1 ACQT1 1 0 :1:4 
+`uc 1 ACQT2 1 0 :1:5 
+]
+[u S1630 . 1 `S1618 1 . 1 0 `S1623 1 . 1 0 ]
+[v _ADCON2bits ADCON2bits `VES1630  1 e 1 @4032 ]
+[s S684 . 1 `uc 1 PCFG 1 0 :4:0 
 `uc 1 VCFG 1 0 :2:4 
 ]
 "4469
-[s S727 . 1 `uc 1 PCFG0 1 0 :1:0 
+[s S687 . 1 `uc 1 PCFG0 1 0 :1:0 
 `uc 1 PCFG1 1 0 :1:1 
 `uc 1 PCFG2 1 0 :1:2 
 `uc 1 PCFG3 1 0 :1:3 
 `uc 1 VCFG0 1 0 :1:4 
 `uc 1 VCFG1 1 0 :1:5 
 ]
-[s S734 . 1 `uc 1 . 1 0 :3:0 
+[s S694 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 CHSN3 1 0 :1:3 
 `uc 1 VCFG01 1 0 :1:4 
 `uc 1 VCFG11 1 0 :1:5 
 ]
-[u S739 . 1 `S724 1 . 1 0 `S727 1 . 1 0 `S734 1 . 1 0 ]
-[v _ADCON1bits ADCON1bits `VES739  1 e 1 @4033 ]
+[u S699 . 1 `S684 1 . 1 0 `S687 1 . 1 0 `S694 1 . 1 0 ]
+[v _ADCON1bits ADCON1bits `VES699  1 e 1 @4033 ]
+[s S1510 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_NOT_DONE 1 0 :1:1 
+]
+"4573
+[s S1513 . 1 `uc 1 ADON 1 0 :1:0 
+`uc 1 GO_nDONE 1 0 :1:1 
+`uc 1 CHS 1 0 :4:2 
+]
+[s S1517 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO 1 0 :1:1 
+`uc 1 CHS0 1 0 :1:2 
+`uc 1 CHS1 1 0 :1:3 
+`uc 1 CHS2 1 0 :1:4 
+`uc 1 CHS3 1 0 :1:5 
+]
+[s S1524 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 DONE 1 0 :1:1 
+]
+[s S1527 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 NOT_DONE 1 0 :1:1 
+]
+[s S1530 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 nDONE 1 0 :1:1 
+]
+[s S1533 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_DONE 1 0 :1:1 
+]
+[s S1536 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GODONE 1 0 :1:1 
+]
+[u S1539 . 1 `S1510 1 . 1 0 `S1513 1 . 1 0 `S1517 1 . 1 0 `S1524 1 . 1 0 `S1527 1 . 1 0 `S1530 1 . 1 0 `S1533 1 . 1 0 `S1536 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES1539  1 e 1 @4034 ]
+"4648
+[v _ADRES ADRES `VEus  1 e 2 @4035 ]
 "4731
 [v _SSPCON1 SSPCON1 `VEuc  1 e 1 @4038 ]
-[s S902 . 1 `uc 1 SSPM 1 0 :4:0 
+[s S862 . 1 `uc 1 SSPM 1 0 :4:0 
 `uc 1 CKP 1 0 :1:4 
 `uc 1 SSPEN 1 0 :1:5 
 `uc 1 SSPOV 1 0 :1:6 
 `uc 1 WCOL 1 0 :1:7 
 ]
 "4751
-[s S908 . 1 `uc 1 SSPM0 1 0 :1:0 
+[s S868 . 1 `uc 1 SSPM0 1 0 :1:0 
 `uc 1 SSPM1 1 0 :1:1 
 `uc 1 SSPM2 1 0 :1:2 
 `uc 1 SSPM3 1 0 :1:3 
 ]
-[u S913 . 1 `S902 1 . 1 0 `S908 1 . 1 0 ]
-[v _SSPCON1bits SSPCON1bits `VES913  1 e 1 @4038 ]
+[u S873 . 1 `S862 1 . 1 0 `S868 1 . 1 0 ]
+[v _SSPCON1bits SSPCON1bits `VES873  1 e 1 @4038 ]
 "4801
 [v _SSPSTAT SSPSTAT `VEuc  1 e 1 @4039 ]
 "5029
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @4041 ]
 "5224
 [v _T1CON T1CON `VEuc  1 e 1 @4045 ]
-[s S829 . 1 `uc 1 INT1IF 1 0 :1:0 
+[s S789 . 1 `uc 1 INT1IF 1 0 :1:0 
 `uc 1 INT2IF 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 INT1IE 1 0 :1:3 
@@ -314,7 +501,7 @@ ADC_CLK_FRC 3
 `uc 1 INT2IP 1 0 :1:7 
 ]
 "6239
-[s S838 . 1 `uc 1 INT1F 1 0 :1:0 
+[s S798 . 1 `uc 1 INT1F 1 0 :1:0 
 `uc 1 INT2F 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 INT1E 1 0 :1:3 
@@ -323,13 +510,13 @@ ADC_CLK_FRC 3
 `uc 1 INT1P 1 0 :1:6 
 `uc 1 INT2P 1 0 :1:7 
 ]
-[u S847 . 1 `S829 1 . 1 0 `S838 1 . 1 0 ]
-[v _INTCON3bits INTCON3bits `VES847  1 e 1 @4080 ]
-[s S794 . 1 `uc 1 . 1 0 :7:0 
+[u S807 . 1 `S789 1 . 1 0 `S798 1 . 1 0 ]
+[v _INTCON3bits INTCON3bits `VES807  1 e 1 @4080 ]
+[s S754 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 NOT_RBPU 1 0 :1:7 
 ]
 "6329
-[s S797 . 1 `uc 1 RBIP 1 0 :1:0 
+[s S757 . 1 `uc 1 RBIP 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 TMR0IP 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -338,11 +525,11 @@ ADC_CLK_FRC 3
 `uc 1 INTEDG0 1 0 :1:6 
 `uc 1 nRBPU 1 0 :1:7 
 ]
-[s S806 . 1 `uc 1 . 1 0 :7:0 
+[s S766 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 RBPU 1 0 :1:7 
 ]
-[u S809 . 1 `S794 1 . 1 0 `S797 1 . 1 0 `S806 1 . 1 0 ]
-[v _INTCON2bits INTCON2bits `VES809  1 e 1 @4081 ]
+[u S769 . 1 `S754 1 . 1 0 `S757 1 . 1 0 `S766 1 . 1 0 ]
+[v _INTCON2bits INTCON2bits `VES769  1 e 1 @4081 ]
 [s S57 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
@@ -368,10 +555,64 @@ ADC_CLK_FRC 3
 ]
 [u S79 . 1 `S57 1 . 1 0 `S66 1 . 1 0 `S75 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES79  1 e 1 @4082 ]
-"122 C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-[v _tmr_100ms_next tmr_100ms_next `VEuc  1 s 1 tmr_100ms_next ]
+"114 C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+[v _mcp2515_interrupt_event mcp2515_interrupt_event `VEuc  1 s 1 mcp2515_interrupt_event ]
 "125
+[v _tmr_100ms_next tmr_100ms_next `VEuc  1 s 1 tmr_100ms_next ]
+[s S549 . 8 `us 1 sid 2 0 `uc 1 exide 1 2 `ul 1 eid 4 3 `uc 1 rtr 1 7 ]
+"126
+[s S554 . 1 `uc 1 dlc 1 0 ]
+[s S556 . 8 `uc 1 data0 1 0 `uc 1 data1 1 1 `uc 1 data2 1 2 `uc 1 data3 1 3 `uc 1 data4 1 4 `uc 1 data5 1 5 `uc 1 data6 1 6 `uc 1 data7 1 7 ]
+[s S565 . 17 `S549 1 arb_field 8 0 `S554 1 ctrl_field 1 8 `S556 1 data_field 8 9 ]
+[v _node1_rxbf0_msg node1_rxbf0_msg `S565  1 s 17 node1_rxbf0_msg ]
+"127
+[v _node1_rxbf1_msg node1_rxbf1_msg `S565  1 s 17 node1_rxbf1_msg ]
+"128
+[v _node1_state_msg node1_state_msg `S565  1 s 17 node1_state_msg ]
+"130
 [v _node1_ready_to_tx node1_ready_to_tx `VEuc  1 s 1 node1_ready_to_tx ]
+"131
+[v _eng_spd_pot_reading eng_spd_pot_reading `VEus  1 s 2 eng_spd_pot_reading ]
+"132
+[v _tx_counter tx_counter `us  1 s 2 tx_counter ]
+"133
+[v _ack_counter ack_counter `us  1 s 2 ack_counter ]
+"135
+[v _mcp2515_intf_buf mcp2515_intf_buf `uc  1 s 1 mcp2515_intf_buf ]
+"136
+[v _mcp2515_eflg_buf mcp2515_eflg_buf `uc  1 s 1 mcp2515_eflg_buf ]
+"137
+[v _mcp2515_txb0ctrl_buf mcp2515_txb0ctrl_buf `uc  1 s 1 mcp2515_txb0ctrl_buf ]
+"138
+[v _mcp2515_txb1ctrl_buf mcp2515_txb1ctrl_buf `uc  1 s 1 mcp2515_txb1ctrl_buf ]
+"139
+[v _mcp2515_txb2ctrl_buf mcp2515_txb2ctrl_buf `uc  1 s 1 mcp2515_txb2ctrl_buf ]
+"140
+[v _mcp2515_canctrl_buf mcp2515_canctrl_buf `uc  1 s 1 mcp2515_canctrl_buf ]
+"141
+[v _mcp2515_one_shot_mode mcp2515_one_shot_mode `uc  1 s 1 mcp2515_one_shot_mode ]
+"142
+[v _mcp2515_txb0_reattempt_counter mcp2515_txb0_reattempt_counter `uc  1 s 1 mcp2515_txb0_reattempt_counter ]
+"143
+[v _mcp2515_txb1_reattempt_counter mcp2515_txb1_reattempt_counter `uc  1 s 1 mcp2515_txb1_reattempt_counter ]
+"144
+[v _mcp2515_txb2_reattempt_counter mcp2515_txb2_reattempt_counter `uc  1 s 1 mcp2515_txb2_reattempt_counter ]
+"145
+[v _msg_received msg_received `uc  1 s 1 msg_received ]
+"146
+[v _rxbf0_received rxbf0_received `uc  1 s 1 rxbf0_received ]
+"147
+[v _rxbf1_received rxbf1_received `uc  1 s 1 rxbf1_received ]
+"23 C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+[v _txbf0_full txbf0_full `uc  1 e 1 0 ]
+"24
+[v _txbf1_full txbf1_full `uc  1 e 1 0 ]
+"25
+[v _txbf2_full txbf2_full `uc  1 e 1 0 ]
+"31
+[v _rxbf0_full rxbf0_full `uc  1 e 1 0 ]
+"32
+[v _rxbf1_full rxbf1_full `uc  1 e 1 0 ]
 "15 C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
 [v _receive_byte receive_byte `uc  1 e 1 0 ]
 "16
@@ -380,12 +621,100 @@ ADC_CLK_FRC 3
 [v _spi_transfer_complete_flag spi_transfer_complete_flag `uc  1 e 1 0 ]
 "18
 [v _manual_transfer manual_transfer `uc  1 e 1 0 ]
-"202 C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+"254 C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
 [v _main main `(v  1 e 1 0 ]
 {
-"356
+"618
 } 0
-"66 C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+"600 C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+[v _can_send can_send `(uc  1 e 1 0 ]
+{
+"602
+[v can_send@tx_msg_buf tx_msg_buf `[13]uc  1 a 13 10 ]
+"609
+[v can_send@txbf_to_use txbf_to_use `E2485  1 a 1 23 ]
+[s S549 . 8 `us 1 sid 2 0 `uc 1 exide 1 2 `ul 1 eid 4 3 `uc 1 rtr 1 7 ]
+"600
+[s S554 . 1 `uc 1 dlc 1 0 ]
+[s S556 . 8 `uc 1 data0 1 0 `uc 1 data1 1 1 `uc 1 data2 1 2 `uc 1 data3 1 3 `uc 1 data4 1 4 `uc 1 data5 1 5 `uc 1 data6 1 6 `uc 1 data7 1 7 ]
+[s S565 . 17 `S549 1 arb_field 8 0 `S554 1 ctrl_field 1 8 `S556 1 data_field 8 9 ]
+[v can_send@msg msg `*.30S565  1 p 1 9 ]
+"639
+} 0
+"469
+[v _mcp2515_cmd_rts mcp2515_cmd_rts `(v  1 e 1 0 ]
+{
+[v mcp2515_cmd_rts@txb txb `E2485  1 a 1 wreg ]
+[v mcp2515_cmd_rts@txb txb `E2485  1 a 1 wreg ]
+[v mcp2515_cmd_rts@txb txb `E2485  1 a 1 2 ]
+"471
+} 0
+"432
+[v _mcp2515_cmd_load_tx_buf mcp2515_cmd_load_tx_buf `(v  1 e 1 0 ]
+{
+[v mcp2515_cmd_load_tx_buf@txb txb `E2485  1 a 1 wreg ]
+"454
+[v mcp2515_cmd_load_tx_buf@i i `uc  1 a 1 7 ]
+"433
+[v mcp2515_cmd_load_tx_buf@selected_txb selected_txb `E2477  1 a 1 6 ]
+"432
+[v mcp2515_cmd_load_tx_buf@txb txb `E2485  1 a 1 wreg ]
+[v mcp2515_cmd_load_tx_buf@tx_buf tx_buf `*.30uc  1 p 1 2 ]
+[v mcp2515_cmd_load_tx_buf@txb txb `E2485  1 a 1 5 ]
+"458
+} 0
+"515
+[v _can_compose_msg_ext can_compose_msg_ext `(v  1 e 1 0 ]
+{
+[s S549 . 8 `us 1 sid 2 0 `uc 1 exide 1 2 `ul 1 eid 4 3 `uc 1 rtr 1 7 ]
+[s S554 . 1 `uc 1 dlc 1 0 ]
+[s S556 . 8 `uc 1 data0 1 0 `uc 1 data1 1 1 `uc 1 data2 1 2 `uc 1 data3 1 3 `uc 1 data4 1 4 `uc 1 data5 1 5 `uc 1 data6 1 6 `uc 1 data7 1 7 ]
+[s S565 . 17 `S549 1 arb_field 8 0 `S554 1 ctrl_field 1 8 `S556 1 data_field 8 9 ]
+[v can_compose_msg_ext@msg msg `*.30S565  1 p 1 0 ]
+[v can_compose_msg_ext@mcp2515_tx_buf mcp2515_tx_buf `*.30uc  1 p 1 1 ]
+"535
+} 0
+"649
+[v _can_receive can_receive `(uc  1 e 1 0 ]
+{
+"651
+[v can_receive@rx_buf rx_buf `[13]uc  1 a 13 23 ]
+"650
+[v can_receive@return_val return_val `uc  1 a 1 36 ]
+[s S549 . 8 `us 1 sid 2 0 `uc 1 exide 1 2 `ul 1 eid 4 3 `uc 1 rtr 1 7 ]
+"649
+[s S554 . 1 `uc 1 dlc 1 0 ]
+[s S556 . 8 `uc 1 data0 1 0 `uc 1 data1 1 1 `uc 1 data2 1 2 `uc 1 data3 1 3 `uc 1 data4 1 4 `uc 1 data5 1 5 `uc 1 data6 1 6 `uc 1 data7 1 7 ]
+[s S565 . 17 `S549 1 arb_field 8 0 `S554 1 ctrl_field 1 8 `S556 1 data_field 8 9 ]
+[v can_receive@msg_buf0 msg_buf0 `*.30S565  1 p 1 21 ]
+[v can_receive@msg_buf1 msg_buf1 `*.30S565  1 p 1 22 ]
+"679
+} 0
+"402
+[v _mcp2515_cmd_read_rx_buf mcp2515_cmd_read_rx_buf `(v  1 e 1 0 ]
+{
+[v mcp2515_cmd_read_rx_buf@rxb rxb `E2490  1 a 1 wreg ]
+"410
+[v mcp2515_cmd_read_rx_buf@i i `uc  1 a 1 5 ]
+"402
+[v mcp2515_cmd_read_rx_buf@rxb rxb `E2490  1 a 1 wreg ]
+[v mcp2515_cmd_read_rx_buf@rx_buf rx_buf `*.30uc  1 p 1 2 ]
+"404
+[v mcp2515_cmd_read_rx_buf@rxb rxb `E2490  1 a 1 3 ]
+"414
+} 0
+"558
+[v _can_parse_msg_ext can_parse_msg_ext `(v  1 e 1 0 ]
+{
+[s S549 . 8 `us 1 sid 2 0 `uc 1 exide 1 2 `ul 1 eid 4 3 `uc 1 rtr 1 7 ]
+[s S554 . 1 `uc 1 dlc 1 0 ]
+[s S556 . 8 `uc 1 data0 1 0 `uc 1 data1 1 1 `uc 1 data2 1 2 `uc 1 data3 1 3 `uc 1 data4 1 4 `uc 1 data5 1 5 `uc 1 data6 1 6 `uc 1 data7 1 7 ]
+[s S565 . 17 `S549 1 arb_field 8 0 `S554 1 ctrl_field 1 8 `S556 1 data_field 8 9 ]
+[v can_parse_msg_ext@msg msg `*.30S565  1 p 1 0 ]
+[v can_parse_msg_ext@mcp2515_rx_buf mcp2515_rx_buf `*.30uc  1 p 1 1 ]
+"576
+} 0
+"66
 [v _can_init_default can_init_default `(v  1 e 1 0 ]
 {
 "150
@@ -473,19 +802,35 @@ ADC_CLK_FRC 3
 {
 "58
 } 0
-"31 C:\git\can_node_board\can_node_board_SW.X\src/timer.c
+"39 C:\git\can_node_board\can_node_board_SW.X\src/adc.c
+[v _adc_init_default adc_init_default `(v  1 e 1 0 ]
+{
+"65
+} 0
+"38 C:\git\can_node_board\can_node_board_SW.X\src/timer.c
+[v _Timer3_Init_Default Timer3_Init_Default `(v  1 e 1 0 ]
+{
+"43
+} 0
+"31
 [v _Timer1_Init_Default Timer1_Init_Default `(v  1 e 1 0 ]
 {
 "36
 } 0
-"42 C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
+"49 C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
+[v _CCP2_Compare_Init_Default CCP2_Compare_Init_Default `(v  1 e 1 0 ]
+{
+[v CCP2_Compare_Init_Default@comp_val comp_val `us  1 p 2 0 ]
+"55
+} 0
+"42
 [v _CCP1_Compare_Init_Default CCP1_Compare_Init_Default `(v  1 e 1 0 ]
 {
 [v CCP1_Compare_Init_Default@comp_val comp_val `us  1 p 2 0 ]
 "48
 } 0
-"155 C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+"177 C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
 [v _isr isr `IIH(v  1 e 1 0 ]
 {
-"196
+"248
 } 0

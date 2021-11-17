@@ -4479,10 +4479,14 @@ typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
 # 15 "inc\\timer.h" 2
-# 68 "inc\\timer.h"
+# 78 "inc\\timer.h"
 void Timer1_Init_Default(void);
+void Timer3_Init_Default(void);
+
 void Timer1_Enable(void);
 void Timer1_Disable(void);
+void Timer3_Enable(void);
+void Timer3_Disable(void);
 # 10 "src/timer.c" 2
 
 # 1 "inc\\ccp.h" 1
@@ -4502,14 +4506,29 @@ void CCP2_Capture_Init_Default(void);
 void Timer1_Init_Default(void){
     T1CON = 0x80;
     T1CON |= 0x30;
-    (PIE1bits.TMR1IE = 1u);
-    (INTCONbits.PEIE = 1u);
+
+
 }
-# 46 "src/timer.c"
+
+void Timer3_Init_Default(void) {
+    T3CON = 0x88u;
+    T3CON |= 0x30u;
+
+
+}
+# 53 "src/timer.c"
 void Timer1_Enable(void){
     T1CON |= 0x01;
 }
-# 58 "src/timer.c"
+# 65 "src/timer.c"
 void Timer1_Disable(void){
     T1CON &= ~0x01;
+}
+# 77 "src/timer.c"
+void Timer3_Enable(void){
+    T3CON |= 0x01u;
+}
+# 89 "src/timer.c"
+void Timer3_Disable(void){
+    T3CON &= ~0x01u;
 }

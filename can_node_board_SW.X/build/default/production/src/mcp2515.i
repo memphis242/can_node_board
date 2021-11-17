@@ -4611,10 +4611,14 @@ void CCP2_Capture_Init_Default(void);
 # 13 "src/mcp2515.c" 2
 
 # 1 "inc\\timer.h" 1
-# 68 "inc\\timer.h"
+# 78 "inc\\timer.h"
 void Timer1_Init_Default(void);
+void Timer3_Init_Default(void);
+
 void Timer1_Enable(void);
 void Timer1_Disable(void);
+void Timer3_Enable(void);
+void Timer3_Disable(void);
 # 14 "src/mcp2515.c" 2
 
 # 1 "inc\\mssp_spi.h" 1
@@ -4646,7 +4650,7 @@ void SPI_Transfer_Packet_without_CS(uint8_t * tx_pack, uint8_t * rx_pack, uint16
 # 15 "src/mcp2515.c" 2
 
 # 1 "inc\\external_interrupts.h" 1
-# 120 "inc\\external_interrupts.h"
+# 123 "inc\\external_interrupts.h"
 typedef enum { EXT_INT_INT0 = 1u, EXT_INT_INT1 = 2u, EXT_INT_INT2 = 4u } external_interrupts_t;
 typedef enum { FALLING_EDGE, RISING_EDGE } external_interrupt_edge_t;
 
@@ -4722,7 +4726,7 @@ void can_init_default(void){
 
 
 
-    mcp2515_cmd_write(0x2B, (0x20 | 0x10 | 0x08 | 0x04 | 0x02 | 0x01));
+    mcp2515_cmd_write(0x2B, (0x80 | 0x20 | 0x10 | 0x08 | 0x04 | 0x02 | 0x01));
     mcp2515_cmd_write(0x2C, 0x00u);
 
 

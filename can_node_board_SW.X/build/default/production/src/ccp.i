@@ -4493,22 +4493,26 @@ void CCP2_Capture_Init_Default(void);
 # 10 "src/ccp.c" 2
 
 # 1 "inc\\timer.h" 1
-# 68 "inc\\timer.h"
+# 78 "inc\\timer.h"
 void Timer1_Init_Default(void);
+void Timer3_Init_Default(void);
+
 void Timer1_Enable(void);
 void Timer1_Disable(void);
+void Timer3_Enable(void);
+void Timer3_Disable(void);
 # 11 "src/ccp.c" 2
 # 42 "src/ccp.c"
 void CCP1_Compare_Init_Default(uint16_t comp_val){
     (CCP1CON = 0xB);
-    (T3CON &= ~0x48);
+    do { T3CON &= ~(1u << 3); T3CON |= (1u << 6); } while(0);;
     (CCPR1 = comp_val);
     (PIE1bits.CCP1IE = 1u);
     (INTCONbits.PEIE = 1u);
 }
 void CCP2_Compare_Init_Default(uint16_t comp_val){
     (CCP2CON = 0xB);
-    (T3CON &= ~0x48);
+    do { T3CON &= ~(1u << 3); T3CON |= (1u << 6); } while(0);;
     (CCPR2 = comp_val);
     (PIE2bits.CCP2IE = 1u);
     (INTCONbits.PEIE = 1u);

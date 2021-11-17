@@ -4479,7 +4479,7 @@ typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
 # 100 "inc\\adc.h" 2
-# 206 "inc\\adc.h"
+# 208 "inc\\adc.h"
 typedef enum { ADC_ACQT_0TAD, ADC_ACQT_2TAD, ADC_ACQT_4TAD, ADC_ACQT_6TAD, ADC_ACQT_8TAD, ADC_ACQT_12TAD, ADC_ACQT_16TAD, ADC_ACQT_20TAD } adc_acqt_t;
 typedef enum { ADC_CLK_FOSC2=0u, ADC_CLK_FOSC4=4u, ADC_CLK_FOSC8=1u, ADC_CLK_FOSC16=5u, ADC_CLK_FOSC32=2u, ADC_CLK_FOSC64=6u, ADC_CLK_FRC=3u } adc_clk_t;
 typedef enum { ADC_AN0, ADC_AN1, ADC_AN2, ADC_AN3, ADC_AN4, ADC_AN5, ADC_AN6, ADC_AN7, ADC_AN8, ADC_AN9, ADC_AN10, ADC_AN11, ADC_AN12 } adc_pin_t;
@@ -4506,10 +4506,14 @@ void CCP2_Capture_Init_Default(void);
 # 11 "src/adc.c" 2
 
 # 1 "inc\\timer.h" 1
-# 68 "inc\\timer.h"
+# 78 "inc\\timer.h"
 void Timer1_Init_Default(void);
+void Timer3_Init_Default(void);
+
 void Timer1_Enable(void);
 void Timer1_Disable(void);
+void Timer3_Enable(void);
+void Timer3_Disable(void);
 # 12 "src/adc.c" 2
 # 39 "src/adc.c"
 void adc_init_default(void){
@@ -4519,7 +4523,7 @@ void adc_init_default(void){
     (ADCON0bits.CHS = 0x0u);
     (TRISAbits.RA0 = 1u);
     (ADCON1bits.VCFG = 0x3);
-    (ADCON2bits.ADFM = 0u);
+    (ADCON2bits.ADFM = 1u);
 
 
     (ADCON2bits.ACQT = ADC_ACQT_4TAD);

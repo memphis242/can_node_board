@@ -11,36 +11,47 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\almos\AppData\Local\Temp\snfo.o
+$C:\Users\almos\AppData\Local\Temp\sldo.o
 idloc IDLOC 5 200000 200000 8 1
 init CODE 0 E E 4 1
 reset_vec CODE 0 0 0 4 1
 config CONFIG 4 300000 300000 E 1
 $dist/default/production\can_node_board_SW.X.production.o
-cinit CODE 0 17E 17E 3A 1
+cinit CODE 0 9C0 9C0 46 1
 idloc IDLOC 5 200000 200000 8 1
-intcode_body CODE 0 21C 21C 30 1
-text0 CODE 0 29C 29C 26 1
-text1 CODE 0 12 12 102 1
-text2 CODE 0 33C 33C 10 1
-text3 CODE 0 1EC 1EC 30 1
-text4 CODE 0 30E 30E 18 1
-text5 CODE 0 2C2 2C2 26 1
-text6 CODE 0 2E8 2E8 26 1
-text7 CODE 0 24C 24C 28 1
-text8 CODE 0 35A 35A C 1
-text9 CODE 0 1B8 1B8 34 1
-nvCOMRAM COMRAM 1 66 66 1 1
-text10 CODE 0 114 114 6A 1
-text11 CODE 0 274 274 28 1
-text12 CODE 0 34C 34C E 1
-text13 CODE 0 326 326 16 1
-idataCOMRAM CODE 0 366 366 4 1
-cstackCOMRAM COMRAM 1 5A 5A 8 1
-temp COMRAM 1 67 67 1 1
+intcode_body CODE 0 96C 96C 54 1
+text0 CODE 0 12 12 29C 1
+text1 CODE 0 914 914 58 1
+text2 CODE 0 BC2 BC2 10 1
+text3 CODE 0 8B0 8B0 64 1
+text4 CODE 0 4CE 4CE 1E8 1
+text5 CODE 0 7B8 7B8 8E 1
+text6 CODE 0 A06 A06 3C 1
+text7 CODE 0 2AE 2AE 220 1
+text8 CODE 0 6B6 6B6 102 1
+text9 CODE 0 BD2 BD2 10 1
+text10 CODE 0 AAE AAE 30 1
+text11 CODE 0 B7E B7E 18 1
+text12 CODE 0 B32 B32 26 1
+text13 CODE 0 B58 B58 26 1
+text14 CODE 0 ADE ADE 2C 1
+text15 CODE 0 BE2 BE2 C 1
+text16 CODE 0 A42 A42 38 1
+text17 CODE 0 846 846 6A 1
+text18 CODE 0 B0A B0A 28 1
+text19 CODE 0 A7A A7A 34 1
+text20 CODE 0 BEE BEE A 1
+text21 CODE 0 BF8 BF8 A 1
+text22 CODE 0 B96 B96 16 1
+text23 CODE 0 BAC BAC 16 1
+nvBANK0 BANK0 1 AB AB 1 1
+idataCOMRAM CODE 0 C02 C02 4 1
+cstackCOMRAM COMRAM 1 54 54 27 1
+temp COMRAM 1 7F 7F 1 1
+bssBANK0 BANK0 1 80 80 2B 1
 intcode CODE 0 8 8 6 1
-dataCOMRAM COMRAM 1 62 62 4 1
-bssCOMRAM COMRAM 1 1 1 59 1
+dataCOMRAM COMRAM 1 7B 7B 4 1
+bssCOMRAM COMRAM 1 1 1 53 1
 config CONFIG 4 300000 300000 E 1
 # %UNUSED Section
 # This section enumerates the unused ranges of each CLASS. Each entry
@@ -48,9 +59,9 @@ config CONFIG 4 300000 300000 E 1
 #    <class name> <range> <delta>
 # Addresses given in the range are in hexadecimal and units of delta.
 %UNUSED
-RAM 80-F7F 1
+RAM AC-F7F 1
 SFR F80-FFF 1
-BANK0 80-FF 1
+BANK0 AC-FF 1
 BANK1 100-1FF 1
 BANK2 200-2FF 1
 BANK3 300-3FF 1
@@ -61,19 +72,18 @@ BANK7 700-7FF 1
 BANK8 800-8FF 1
 BANK9 900-9FF 1
 CONST 4-7 1
-CONST 36A-FFFF 1
-STACK 80-F7F 1
+CONST C06-FFFF 1
+STACK AC-F7F 1
 SMALLCONST 1000-FFFF 1
 CODE 4-7 1
-CODE 36A-FFFF 1
+CODE C06-FFFF 1
 BANK10 A00-AFF 1
 BANK11 B00-BFF 1
 BANK12 C00-CFF 1
 BANK13 D00-DFF 1
 BANK14 E00-EFF 1
 BANK15 F00-F7F 1
-BIGRAM 68-F7F 1
-COMRAM 68-7F 1
+BIGRAM AC-F7F 1
 EEDATA F00000-F003FF 1
 MEDIUMCONST 1000-FFFF 1
 # %LINETAB Section
@@ -90,187 +100,392 @@ MEDIUMCONST 1000-FFFF 1
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\can_node_board_SW.X.production.o
-8 intcode CODE >4614:C:\Users\almos\AppData\Local\Temp\snfo.s
-8 intcode CODE >155:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-21C intcode_body CODE >155:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-21E intcode_body CODE >161:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-224 intcode_body CODE >163:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-228 intcode_body CODE >165:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-22A intcode_body CODE >173:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-230 intcode_body CODE >176:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-236 intcode_body CODE >178:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-23A intcode_body CODE >181:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-23E intcode_body CODE >187:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-242 intcode_body CODE >188:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-246 intcode_body CODE >190:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-248 intcode_body CODE >196:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-326 text13 CODE >42:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
-326 text13 CODE >43:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
-32A text13 CODE >44:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
-32E text13 CODE >45:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
-336 text13 CODE >46:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
-338 text13 CODE >47:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
-33A text13 CODE >48:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
-34C text12 CODE >31:C:\git\can_node_board\can_node_board_SW.X\src/timer.c
-34C text12 CODE >32:C:\git\can_node_board\can_node_board_SW.X\src/timer.c
-350 text12 CODE >33:C:\git\can_node_board\can_node_board_SW.X\src/timer.c
-354 text12 CODE >34:C:\git\can_node_board\can_node_board_SW.X\src/timer.c
-356 text12 CODE >35:C:\git\can_node_board\can_node_board_SW.X\src/timer.c
-358 text12 CODE >36:C:\git\can_node_board\can_node_board_SW.X\src/timer.c
-274 text11 CODE >31:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-274 text11 CODE >33:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-276 text11 CODE >36:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-27A text11 CODE >37:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-27E text11 CODE >40:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-286 text11 CODE >43:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-288 text11 CODE >44:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-28A text11 CODE >45:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-28C text11 CODE >46:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-28E text11 CODE >47:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-290 text11 CODE >50:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-292 text11 CODE >52:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-296 text11 CODE >55:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-298 text11 CODE >56:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-29A text11 CODE >58:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-114 text10 CODE >54:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-116 text10 CODE >56:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-118 text10 CODE >57:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-118 text10 CODE >58:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-122 text10 CODE >59:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-128 text10 CODE >60:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-12A text10 CODE >61:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-12C text10 CODE >62:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-12E text10 CODE >63:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-12E text10 CODE >64:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-138 text10 CODE >65:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-13E text10 CODE >66:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-140 text10 CODE >67:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-142 text10 CODE >68:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-144 text10 CODE >69:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-144 text10 CODE >70:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-14E text10 CODE >71:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-154 text10 CODE >72:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-156 text10 CODE >73:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-158 text10 CODE >74:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-15A text10 CODE >75:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
-1B8 text9 CODE >207:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-1BA text9 CODE >208:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-1BE text9 CODE >209:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-1C2 text9 CODE >211:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-1C8 text9 CODE >212:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-1CC text9 CODE >213:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-1D2 text9 CODE >215:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-1D8 text9 CODE >216:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-1E2 text9 CODE >218:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-1E6 text9 CODE >219:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-1EA text9 CODE >222:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-35A text8 CODE >213:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-35A text8 CODE >214:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-364 text8 CODE >215:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-24C text7 CODE >335:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-24E text7 CODE >337:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-252 text7 CODE >338:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-256 text7 CODE >340:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-25A text7 CODE >341:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-260 text7 CODE >342:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-26A text7 CODE >344:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-26E text7 CODE >345:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-272 text7 CODE >347:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
-2E8 text6 CODE >309:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-2EA text6 CODE >311:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-2EC text6 CODE >314:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-2F6 text6 CODE >316:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-300 text6 CODE >318:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-30A text6 CODE >320:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-30C text6 CODE >322:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-2C2 text5 CODE >256:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-2C4 text5 CODE >258:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-2C6 text5 CODE >261:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-2D0 text5 CODE >263:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-2DA text5 CODE >265:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-2E4 text5 CODE >267:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-2E6 text5 CODE >269:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-30E text4 CODE >170:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-30E text4 CODE >171:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-312 text4 CODE >172:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-31C text4 CODE >173:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-322 text4 CODE >175:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-324 text4 CODE >176:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-1EC text3 CODE >369:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-1EE text3 CODE >371:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-1F0 text3 CODE >374:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-1FA text3 CODE >376:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-204 text3 CODE >378:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-20E text3 CODE >380:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-218 text3 CODE >382:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-21A text3 CODE >384:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-33C text2 CODE >200:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-33C text2 CODE >201:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-34A text2 CODE >202:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-12 text1 CODE >66:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-12 text1 CODE >69:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-16 text1 CODE >70:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-18 text1 CODE >75:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-1C text1 CODE >76:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-32 text1 CODE >77:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-3C text1 CODE >80:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-3E text1 CODE >82:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-48 text1 CODE >83:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-4A text1 CODE >87:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-58 text1 CODE >94:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-66 text1 CODE >95:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-74 text1 CODE >96:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-82 text1 CODE >97:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-90 text1 CODE >98:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-9E text1 CODE >99:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-AC text1 CODE >100:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-BA text1 CODE >126:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-C8 text1 CODE >127:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-D6 text1 CODE >129:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-E4 text1 CODE >137:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-EE text1 CODE >138:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-F8 text1 CODE >145:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-FC text1 CODE >148:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-112 text1 CODE >150:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
-29C text0 CODE >202:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-29C text0 CODE >205:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-2A0 text0 CODE >226:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-2A4 text0 CODE >227:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-2B0 text0 CODE >231:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-2B2 text0 CODE >232:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-2B4 text0 CODE >233:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-2B6 text0 CODE >238:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-2BC text0 CODE >244:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
-17E cinit CODE >2431:C:\Users\almos\AppData\Local\Temp\snfo.s
-17E cinit CODE >2433:C:\Users\almos\AppData\Local\Temp\snfo.s
-17E cinit CODE >2436:C:\Users\almos\AppData\Local\Temp\snfo.s
-17E cinit CODE >2529:C:\Users\almos\AppData\Local\Temp\snfo.s
-180 cinit CODE >2530:C:\Users\almos\AppData\Local\Temp\snfo.s
-182 cinit CODE >2531:C:\Users\almos\AppData\Local\Temp\snfo.s
-184 cinit CODE >2532:C:\Users\almos\AppData\Local\Temp\snfo.s
-186 cinit CODE >2533:C:\Users\almos\AppData\Local\Temp\snfo.s
-188 cinit CODE >2534:C:\Users\almos\AppData\Local\Temp\snfo.s
-18A cinit CODE >2535:C:\Users\almos\AppData\Local\Temp\snfo.s
-18E cinit CODE >2536:C:\Users\almos\AppData\Local\Temp\snfo.s
-192 cinit CODE >2537:C:\Users\almos\AppData\Local\Temp\snfo.s
-192 cinit CODE >2538:C:\Users\almos\AppData\Local\Temp\snfo.s
-194 cinit CODE >2539:C:\Users\almos\AppData\Local\Temp\snfo.s
-198 cinit CODE >2540:C:\Users\almos\AppData\Local\Temp\snfo.s
-19A cinit CODE >2541:C:\Users\almos\AppData\Local\Temp\snfo.s
-19C cinit CODE >2542:C:\Users\almos\AppData\Local\Temp\snfo.s
-19E cinit CODE >2546:C:\Users\almos\AppData\Local\Temp\snfo.s
-1A2 cinit CODE >2547:C:\Users\almos\AppData\Local\Temp\snfo.s
-1A4 cinit CODE >2548:C:\Users\almos\AppData\Local\Temp\snfo.s
-1A4 cinit CODE >2549:C:\Users\almos\AppData\Local\Temp\snfo.s
-1A6 cinit CODE >2550:C:\Users\almos\AppData\Local\Temp\snfo.s
-1A8 cinit CODE >2551:C:\Users\almos\AppData\Local\Temp\snfo.s
-1AA cinit CODE >2557:C:\Users\almos\AppData\Local\Temp\snfo.s
-1AA cinit CODE >2559:C:\Users\almos\AppData\Local\Temp\snfo.s
-1AC cinit CODE >2560:C:\Users\almos\AppData\Local\Temp\snfo.s
-1AE cinit CODE >2562:C:\Users\almos\AppData\Local\Temp\snfo.s
-1B0 cinit CODE >2563:C:\Users\almos\AppData\Local\Temp\snfo.s
-1B2 cinit CODE >2564:C:\Users\almos\AppData\Local\Temp\snfo.s
-1B4 cinit CODE >2565:C:\Users\almos\AppData\Local\Temp\snfo.s
+8 intcode CODE >7522:C:\Users\almos\AppData\Local\Temp\sldo.s
+8 intcode CODE >177:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+96C intcode_body CODE >177:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+96E intcode_body CODE >183:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+974 intcode_body CODE >185:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+978 intcode_body CODE >187:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+97A intcode_body CODE >193:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+980 intcode_body CODE >194:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+984 intcode_body CODE >196:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+986 intcode_body CODE >205:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+98C intcode_body CODE >207:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+992 intcode_body CODE >209:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+996 intcode_body CODE >212:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+99A intcode_body CODE >218:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+99E intcode_body CODE >219:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+9A2 intcode_body CODE >221:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+9A4 intcode_body CODE >226:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+9AA intcode_body CODE >227:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+9AC intcode_body CODE >228:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+9AC intcode_body CODE >231:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+9B2 intcode_body CODE >232:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+9BA intcode_body CODE >234:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+9BC intcode_body CODE >248:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+BAC text23 CODE >42:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
+BAC text23 CODE >43:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
+BB0 text23 CODE >44:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
+BB4 text23 CODE >45:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
+BBC text23 CODE >46:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
+BBE text23 CODE >47:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
+BC0 text23 CODE >48:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
+B96 text22 CODE >49:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
+B96 text22 CODE >50:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
+B9A text22 CODE >51:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
+B9E text22 CODE >52:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
+BA6 text22 CODE >53:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
+BA8 text22 CODE >54:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
+BAA text22 CODE >55:C:\git\can_node_board\can_node_board_SW.X\src/ccp.c
+BF8 text21 CODE >31:C:\git\can_node_board\can_node_board_SW.X\src/timer.c
+BF8 text21 CODE >32:C:\git\can_node_board\can_node_board_SW.X\src/timer.c
+BFC text21 CODE >33:C:\git\can_node_board\can_node_board_SW.X\src/timer.c
+C00 text21 CODE >36:C:\git\can_node_board\can_node_board_SW.X\src/timer.c
+BEE text20 CODE >38:C:\git\can_node_board\can_node_board_SW.X\src/timer.c
+BEE text20 CODE >39:C:\git\can_node_board\can_node_board_SW.X\src/timer.c
+BF2 text20 CODE >40:C:\git\can_node_board\can_node_board_SW.X\src/timer.c
+BF6 text20 CODE >43:C:\git\can_node_board\can_node_board_SW.X\src/timer.c
+A7A text19 CODE >39:C:\git\can_node_board\can_node_board_SW.X\src/adc.c
+A7A text19 CODE >42:C:\git\can_node_board\can_node_board_SW.X\src/adc.c
+A82 text19 CODE >43:C:\git\can_node_board\can_node_board_SW.X\src/adc.c
+A86 text19 CODE >44:C:\git\can_node_board\can_node_board_SW.X\src/adc.c
+A88 text19 CODE >45:C:\git\can_node_board\can_node_board_SW.X\src/adc.c
+A8C text19 CODE >46:C:\git\can_node_board\can_node_board_SW.X\src/adc.c
+A8E text19 CODE >49:C:\git\can_node_board\can_node_board_SW.X\src/adc.c
+A96 text19 CODE >50:C:\git\can_node_board\can_node_board_SW.X\src/adc.c
+A9E text19 CODE >53:C:\git\can_node_board\can_node_board_SW.X\src/adc.c
+AA6 text19 CODE >59:C:\git\can_node_board\can_node_board_SW.X\src/adc.c
+AA8 text19 CODE >62:C:\git\can_node_board\can_node_board_SW.X\src/adc.c
+AAA text19 CODE >63:C:\git\can_node_board\can_node_board_SW.X\src/adc.c
+AAC text19 CODE >65:C:\git\can_node_board\can_node_board_SW.X\src/adc.c
+B0A text18 CODE >31:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+B0A text18 CODE >33:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+B0C text18 CODE >36:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+B10 text18 CODE >37:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+B14 text18 CODE >40:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+B1C text18 CODE >43:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+B1E text18 CODE >44:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+B20 text18 CODE >45:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+B22 text18 CODE >46:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+B24 text18 CODE >47:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+B26 text18 CODE >50:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+B28 text18 CODE >52:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+B2C text18 CODE >55:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+B2E text18 CODE >56:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+B30 text18 CODE >58:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+846 text17 CODE >54:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+848 text17 CODE >56:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+84A text17 CODE >57:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+84A text17 CODE >58:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+854 text17 CODE >59:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+85A text17 CODE >60:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+85C text17 CODE >61:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+85E text17 CODE >62:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+860 text17 CODE >63:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+860 text17 CODE >64:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+86A text17 CODE >65:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+870 text17 CODE >66:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+872 text17 CODE >67:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+874 text17 CODE >68:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+876 text17 CODE >69:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+876 text17 CODE >70:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+880 text17 CODE >71:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+886 text17 CODE >72:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+888 text17 CODE >73:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+88A text17 CODE >74:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+88C text17 CODE >75:C:\git\can_node_board\can_node_board_SW.X\src/external_interrupts.c
+A42 text16 CODE >207:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+A44 text16 CODE >208:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+A4A text16 CODE >209:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+A4E text16 CODE >211:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+A54 text16 CODE >212:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+A58 text16 CODE >213:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+A5E text16 CODE >215:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+A64 text16 CODE >216:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+A6E text16 CODE >218:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+A74 text16 CODE >219:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+A78 text16 CODE >222:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+BE2 text15 CODE >213:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+BE2 text15 CODE >214:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+BEC text15 CODE >215:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+ADE text14 CODE >335:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+AE0 text14 CODE >337:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+AE6 text14 CODE >338:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+AEA text14 CODE >340:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+AEE text14 CODE >341:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+AF4 text14 CODE >342:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+AFE text14 CODE >344:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+B04 text14 CODE >345:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+B08 text14 CODE >347:C:\git\can_node_board\can_node_board_SW.X\src/mssp_spi.c
+B58 text13 CODE >309:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+B5A text13 CODE >311:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+B5C text13 CODE >314:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+B66 text13 CODE >316:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+B70 text13 CODE >318:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+B7A text13 CODE >320:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+B7C text13 CODE >322:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+B32 text12 CODE >256:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+B34 text12 CODE >258:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+B36 text12 CODE >261:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+B40 text12 CODE >263:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+B4A text12 CODE >265:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+B54 text12 CODE >267:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+B56 text12 CODE >269:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+B7E text11 CODE >170:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+B7E text11 CODE >171:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+B82 text11 CODE >172:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+B8C text11 CODE >173:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+B92 text11 CODE >175:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+B94 text11 CODE >176:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+AAE text10 CODE >369:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+AB0 text10 CODE >371:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+AB2 text10 CODE >374:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+ABC text10 CODE >376:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+AC6 text10 CODE >378:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+AD0 text10 CODE >380:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+ADA text10 CODE >382:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+ADC text10 CODE >384:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+BD2 text9 CODE >200:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+BD2 text9 CODE >201:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+BE0 text9 CODE >202:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+6B6 text8 CODE >66:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+6B6 text8 CODE >69:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+6BA text8 CODE >70:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+6BC text8 CODE >75:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+6C0 text8 CODE >76:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+6D6 text8 CODE >77:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+6E0 text8 CODE >80:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+6E2 text8 CODE >82:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+6EC text8 CODE >83:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+6EE text8 CODE >87:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+6FC text8 CODE >94:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+70A text8 CODE >95:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+718 text8 CODE >96:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+726 text8 CODE >97:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+734 text8 CODE >98:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+742 text8 CODE >99:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+750 text8 CODE >100:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+75E text8 CODE >126:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+76C text8 CODE >127:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+77A text8 CODE >129:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+788 text8 CODE >137:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+792 text8 CODE >138:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+79C text8 CODE >145:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+7A0 text8 CODE >148:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+7B6 text8 CODE >150:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+2AE text7 CODE >558:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+2AE text7 CODE >560:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+300 text7 CODE >561:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+328 text7 CODE >562:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+3C8 text7 CODE >565:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+3F2 text7 CODE >566:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+40C text7 CODE >567:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+424 text7 CODE >568:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+43C text7 CODE >569:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+454 text7 CODE >570:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+46C text7 CODE >571:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+484 text7 CODE >572:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+49C text7 CODE >573:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+4B4 text7 CODE >574:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+4CC text7 CODE >576:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+A06 text6 CODE >402:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+A08 text6 CODE >404:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+A0A text6 CODE >408:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+A26 text6 CODE >410:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+A3E text6 CODE >412:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+A40 text6 CODE >414:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+7B8 text5 CODE >649:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+7B8 text5 CODE >650:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+7BC text5 CODE >651:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+7C8 text5 CODE >654:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+7CE text5 CODE >656:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+7D8 text5 CODE >657:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+7E4 text5 CODE >659:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+7F2 text5 CODE >660:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+800 text5 CODE >662:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+804 text5 CODE >664:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+806 text5 CODE >666:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+80C text5 CODE >667:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+816 text5 CODE >668:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+822 text5 CODE >670:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+830 text5 CODE >671:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+83E text5 CODE >673:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+842 text5 CODE >675:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+844 text5 CODE >679:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+4CE text4 CODE >515:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+4CE text4 CODE >518:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+4F8 text4 CODE >519:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+56E text4 CODE >522:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+5A4 text4 CODE >523:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+5BC text4 CODE >524:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+5F4 text4 CODE >526:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+60C text4 CODE >527:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+624 text4 CODE >528:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+63C text4 CODE >529:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+654 text4 CODE >530:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+66C text4 CODE >531:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+684 text4 CODE >532:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+69C text4 CODE >533:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+6B4 text4 CODE >535:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+8B0 text3 CODE >432:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+8B2 text3 CODE >436:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+8B4 text3 CODE >438:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+8B8 text3 CODE >441:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+8BC text3 CODE >444:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+8C0 text3 CODE >445:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+8C2 text3 CODE >446:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+8E4 text3 CODE >448:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+8E6 text3 CODE >452:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+8F2 text3 CODE >454:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+910 text3 CODE >456:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+912 text3 CODE >458:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+BC2 text2 CODE >469:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+BC4 text2 CODE >470:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+BD0 text2 CODE >471:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+914 text1 CODE >600:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+914 text1 CODE >602:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+920 text1 CODE >603:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+92C text1 CODE >609:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+930 text1 CODE >610:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+936 text1 CODE >611:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+93C text1 CODE >612:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+942 text1 CODE >616:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+946 text1 CODE >617:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+94C text1 CODE >620:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+950 text1 CODE >621:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+956 text1 CODE >624:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+95A text1 CODE >628:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+964 text1 CODE >631:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+96A text1 CODE >639:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
+12 text0 CODE >254:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+12 text0 CODE >257:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+16 text0 CODE >278:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+18 text0 CODE >279:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+1A text0 CODE >282:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+1E text0 CODE >283:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+2A text0 CODE >286:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+2E text0 CODE >287:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+3A text0 CODE >288:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+3E text0 CODE >293:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+40 text0 CODE >294:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+42 text0 CODE >295:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+44 text0 CODE >296:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+46 text0 CODE >301:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+4E text0 CODE >302:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+5E text0 CODE >303:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+62 text0 CODE >304:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+66 text0 CODE >306:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+6A text0 CODE >312:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+70 text0 CODE >315:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+90 text0 CODE >318:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+94 text0 CODE >319:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+98 text0 CODE >321:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+9C text0 CODE >322:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+A0 text0 CODE >324:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+A4 text0 CODE >325:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+A8 text0 CODE >327:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+AC text0 CODE >330:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+B4 text0 CODE >333:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+B8 text0 CODE >338:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+BE text0 CODE >341:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+C8 text0 CODE >346:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+CC text0 CODE >348:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+D6 text0 CODE >349:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+DC text0 CODE >358:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+E2 text0 CODE >360:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+EC text0 CODE >361:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+F6 text0 CODE >362:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+100 text0 CODE >364:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+104 text0 CODE >365:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+106 text0 CODE >367:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+10C text0 CODE >368:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+114 text0 CODE >373:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+114 text0 CODE >374:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+118 text0 CODE >376:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+11A text0 CODE >378:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+120 text0 CODE >379:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+128 text0 CODE >384:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+128 text0 CODE >385:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+12C text0 CODE >387:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+12E text0 CODE >389:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+134 text0 CODE >390:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+13C text0 CODE >395:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+13C text0 CODE >400:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+14A text0 CODE >405:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+14E text0 CODE >407:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+158 text0 CODE >420:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+166 text0 CODE >425:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+16A text0 CODE >427:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+16E text0 CODE >430:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+17C text0 CODE >432:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+180 text0 CODE >434:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+184 text0 CODE >437:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+192 text0 CODE >439:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+196 text0 CODE >441:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+19A text0 CODE >444:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+1A8 text0 CODE >449:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+1AC text0 CODE >450:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+1B0 text0 CODE >451:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+1BC text0 CODE >452:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+1C0 text0 CODE >453:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+1C4 text0 CODE >456:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+1D2 text0 CODE >458:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+1D6 text0 CODE >459:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+1DA text0 CODE >460:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+1E6 text0 CODE >461:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+1EA text0 CODE >462:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+1EE text0 CODE >465:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+1FC text0 CODE >471:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+200 text0 CODE >476:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+206 text0 CODE >484:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+20C text0 CODE >485:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+22C text0 CODE >486:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+230 text0 CODE >487:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+234 text0 CODE >488:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+252 text0 CODE >489:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+256 text0 CODE >494:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+25C text0 CODE >495:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+27E text0 CODE >496:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+282 text0 CODE >497:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+286 text0 CODE >498:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+2A4 text0 CODE >499:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+2A8 text0 CODE >504:C:\git\can_node_board\can_node_board_SW.X\mcp2515_test.c
+9C0 cinit CODE >2494:C:\Users\almos\AppData\Local\Temp\sldo.s
+9C0 cinit CODE >2496:C:\Users\almos\AppData\Local\Temp\sldo.s
+9C0 cinit CODE >2499:C:\Users\almos\AppData\Local\Temp\sldo.s
+9C0 cinit CODE >2631:C:\Users\almos\AppData\Local\Temp\sldo.s
+9C2 cinit CODE >2632:C:\Users\almos\AppData\Local\Temp\sldo.s
+9C4 cinit CODE >2633:C:\Users\almos\AppData\Local\Temp\sldo.s
+9C6 cinit CODE >2634:C:\Users\almos\AppData\Local\Temp\sldo.s
+9C8 cinit CODE >2635:C:\Users\almos\AppData\Local\Temp\sldo.s
+9CA cinit CODE >2636:C:\Users\almos\AppData\Local\Temp\sldo.s
+9CC cinit CODE >2637:C:\Users\almos\AppData\Local\Temp\sldo.s
+9D0 cinit CODE >2638:C:\Users\almos\AppData\Local\Temp\sldo.s
+9D4 cinit CODE >2639:C:\Users\almos\AppData\Local\Temp\sldo.s
+9D4 cinit CODE >2640:C:\Users\almos\AppData\Local\Temp\sldo.s
+9D6 cinit CODE >2641:C:\Users\almos\AppData\Local\Temp\sldo.s
+9DA cinit CODE >2642:C:\Users\almos\AppData\Local\Temp\sldo.s
+9DC cinit CODE >2643:C:\Users\almos\AppData\Local\Temp\sldo.s
+9DE cinit CODE >2644:C:\Users\almos\AppData\Local\Temp\sldo.s
+9E0 cinit CODE >2648:C:\Users\almos\AppData\Local\Temp\sldo.s
+9E4 cinit CODE >2649:C:\Users\almos\AppData\Local\Temp\sldo.s
+9E6 cinit CODE >2650:C:\Users\almos\AppData\Local\Temp\sldo.s
+9E6 cinit CODE >2651:C:\Users\almos\AppData\Local\Temp\sldo.s
+9E8 cinit CODE >2652:C:\Users\almos\AppData\Local\Temp\sldo.s
+9EA cinit CODE >2653:C:\Users\almos\AppData\Local\Temp\sldo.s
+9EC cinit CODE >2656:C:\Users\almos\AppData\Local\Temp\sldo.s
+9F0 cinit CODE >2657:C:\Users\almos\AppData\Local\Temp\sldo.s
+9F2 cinit CODE >2658:C:\Users\almos\AppData\Local\Temp\sldo.s
+9F2 cinit CODE >2659:C:\Users\almos\AppData\Local\Temp\sldo.s
+9F4 cinit CODE >2660:C:\Users\almos\AppData\Local\Temp\sldo.s
+9F6 cinit CODE >2661:C:\Users\almos\AppData\Local\Temp\sldo.s
+9F8 cinit CODE >2667:C:\Users\almos\AppData\Local\Temp\sldo.s
+9F8 cinit CODE >2669:C:\Users\almos\AppData\Local\Temp\sldo.s
+9FA cinit CODE >2670:C:\Users\almos\AppData\Local\Temp\sldo.s
+9FC cinit CODE >2672:C:\Users\almos\AppData\Local\Temp\sldo.s
+9FE cinit CODE >2673:C:\Users\almos\AppData\Local\Temp\sldo.s
+A00 cinit CODE >2674:C:\Users\almos\AppData\Local\Temp\sldo.s
+A02 cinit CODE >2675:C:\Users\almos\AppData\Local\Temp\sldo.s
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -284,88 +499,116 @@ FC text1 CODE >148:C:\git\can_node_board\can_node_board_SW.X\src/mcp2515.c
 # is the name of the object file in which the symbol was defined.
 %SYMTAB
 __Lmediumconst 0 0 MEDIUMCONST 0 mediumconst dist/default/production\can_node_board_SW.X.production.o
-SPI_Transfer_Byte@rx 5A 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
-SPI_Transfer_Byte@tx 5B 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+__end_of_can_compose_msg_ext 6B6 0 CODE 0 text4 dist/default/production\can_node_board_SW.X.production.o
+SPI_Transfer_Byte@rx 54 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+SPI_Transfer_Byte@tx 55 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Hspace_0 1000 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
-__Hspace_1 68 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
+__Hspace_1 AC 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __Hspace_2 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __Hspace_4 60000E 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
-_SPI_Transfer_Byte_without_CS 24C 0 CODE 0 text7 dist/default/production\can_node_board_SW.X.production.o
-mcp2515_current_opmode@current_opmode 5E 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
-__end_of_mcp2515_current_opmode 326 0 CODE 0 text4 dist/default/production\can_node_board_SW.X.production.o
+_SPI_Transfer_Byte_without_CS ADE 0 CODE 0 text14 dist/default/production\can_node_board_SW.X.production.o
+mcp2515_current_opmode@current_opmode 58 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+__end_of_mcp2515_current_opmode B96 0 CODE 0 text11 dist/default/production\can_node_board_SW.X.production.o
 __Hibigdata 0 0 CODE 0 ibigdata dist/default/production\can_node_board_SW.X.production.o
-__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\almos\AppData\Local\Temp\snfo.o
+__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\almos\AppData\Local\Temp\sldo.o
 __Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\can_node_board_SW.X.production.o
+can_receive@rx_buf 6B 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __size_of_CCP1_Compare_Init_Default 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
-external_interrupts_init@which_pin 5D 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
-__end_of_mcp2515_normal_mode 34C 0 CODE 0 text2 dist/default/production\can_node_board_SW.X.production.o
+external_interrupts_init@which_pin 57 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_txb1_reattempt_counter 15 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+__end_of_mcp2515_normal_mode BE2 0 CODE 0 text9 dist/default/production\can_node_board_SW.X.production.o
 __Lsmallconst 0 0 SMALLCONST 0 smallconst dist/default/production\can_node_board_SW.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\almos\AppData\Local\Temp\snfo.o
-_main 29C 0 CODE 0 text0 dist/default/production\can_node_board_SW.X.production.o
-btemp 67 0 COMRAM 1 temp dist/default/production\can_node_board_SW.X.production.o
-start E 0 CODE 0 init C:\Users\almos\AppData\Local\Temp\snfo.o
+___sp 0 0 STACK 2 stack C:\Users\almos\AppData\Local\Temp\sldo.o
+_main 12 0 CODE 0 text0 dist/default/production\can_node_board_SW.X.production.o
+btemp 7F 0 COMRAM 1 temp dist/default/production\can_node_board_SW.X.production.o
+__end_of_can_parse_msg_ext 4CE 0 CODE 0 text7 dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_one_shot_mode 17 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+start E 0 CODE 0 init C:\Users\almos\AppData\Local\Temp\sldo.o
+__size_of_Timer3_Init_Default 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __size_of_main 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __HbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __size_of_mcp2515_cmd_reset 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __size_of_mcp2515_cmd_write 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
-_external_interrupts_init 114 0 CODE 0 text10 dist/default/production\can_node_board_SW.X.production.o
+can_parse_msg_ext@mcp2515_rx_buf 55 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+mcp2515_cmd_load_tx_buf@txb 59 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_node1_state_msg 2B 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_external_interrupts_init 846 0 CODE 0 text17 dist/default/production\can_node_board_SW.X.production.o
+mcp2515_cmd_load_tx_buf@selected_txb 5A 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Hpowerup E 0 CODE 0 powerup dist/default/production\can_node_board_SW.X.production.o
-ttemp5 68 0 COMRAM 1 temp dist/default/production\can_node_board_SW.X.production.o
-ttemp6 6B 0 COMRAM 1 temp dist/default/production\can_node_board_SW.X.production.o
-ttemp7 6F 0 COMRAM 1 temp dist/default/production\can_node_board_SW.X.production.o
-__LnvCOMRAM 0 0 ABS 0 nvCOMRAM dist/default/production\can_node_board_SW.X.production.o
+ttemp5 80 0 COMRAM 1 temp dist/default/production\can_node_board_SW.X.production.o
+ttemp6 83 0 COMRAM 1 temp dist/default/production\can_node_board_SW.X.production.o
+ttemp7 87 0 COMRAM 1 temp dist/default/production\can_node_board_SW.X.production.o
 __HdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/production\can_node_board_SW.X.production.o
-__accesstop 80 0 ABS 0 - C:\Users\almos\AppData\Local\Temp\snfo.o
-intlevel0 0 0 CODE 0 text C:\Users\almos\AppData\Local\Temp\snfo.o
-intlevel1 0 0 CODE 0 text C:\Users\almos\AppData\Local\Temp\snfo.o
-intlevel2 0 0 CODE 0 text C:\Users\almos\AppData\Local\Temp\snfo.o
-intlevel3 0 0 CODE 0 text C:\Users\almos\AppData\Local\Temp\snfo.o
+__accesstop 80 0 ABS 0 - C:\Users\almos\AppData\Local\Temp\sldo.o
+intlevel0 0 0 CODE 0 text C:\Users\almos\AppData\Local\Temp\sldo.o
+intlevel1 0 0 CODE 0 text C:\Users\almos\AppData\Local\Temp\sldo.o
+intlevel2 0 0 CODE 0 text C:\Users\almos\AppData\Local\Temp\sldo.o
+intlevel3 0 0 CODE 0 text C:\Users\almos\AppData\Local\Temp\sldo.o
 __LbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
-_receive_byte 59 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+__size_of_mcp2515_cmd_rts 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
+_receive_byte 53 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __LnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\can_node_board_SW.X.production.o
-wtemp8 68 0 COMRAM 1 temp dist/default/production\can_node_board_SW.X.production.o
-__end_of_can_init_default 114 0 CODE 0 text1 dist/default/production\can_node_board_SW.X.production.o
+wtemp8 80 0 COMRAM 1 temp dist/default/production\can_node_board_SW.X.production.o
+_rxbf0_received 12 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+__end_of_can_init_default 7B8 0 CODE 0 text8 dist/default/production\can_node_board_SW.X.production.o
 __Hifardata 0 0 CODE 0 ifardata dist/default/production\can_node_board_SW.X.production.o
-mcp2515_current_opmode@opmode 5F 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+mcp2515_current_opmode@opmode 59 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_rxbf1_received 11 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Hclrtext 0 0 ABS 0 clrtext dist/default/production\can_node_board_SW.X.production.o
-__pidataCOMRAM 366 0 CODE 0 idataCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_cmd_read_rx_buf$614 58 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_Timer3_Init_Default BEE 0 CODE 0 text20 dist/default/production\can_node_board_SW.X.production.o
+__pidataCOMRAM C02 0 CODE 0 idataCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __size_of_can_init_default 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __size_of_SPI_Init_Master_Default 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
-___inthi_sp 0 0 STACK 2 stack C:\Users\almos\AppData\Local\Temp\snfo.o
-___intlo_sp 0 0 STACK 2 stack C:\Users\almos\AppData\Local\Temp\snfo.o
+___inthi_sp 0 0 STACK 2 stack C:\Users\almos\AppData\Local\Temp\sldo.o
+___intlo_sp 0 0 STACK 2 stack C:\Users\almos\AppData\Local\Temp\sldo.o
 __LdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Hintcode_body 0 0 ABS 0 intcode_body dist/default/production\can_node_board_SW.X.production.o
 __Lintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/production\can_node_board_SW.X.production.o
-_spi_transfer_complete_flag 49 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_spi_transfer_complete_flag 1B 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+__size_of_can_receive 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __Hmediumconst 0 0 MEDIUMCONST 0 mediumconst dist/default/production\can_node_board_SW.X.production.o
+_can_parse_msg_ext 2AE 0 CODE 0 text7 dist/default/production\can_node_board_SW.X.production.o
+__LnvBANK0 0 0 ABS 0 nvBANK0 dist/default/production\can_node_board_SW.X.production.o
 __Hintcodelo E 0 CODE 0 intcodelo dist/default/production\can_node_board_SW.X.production.o
-_CCP1_Compare_Init_Default 326 0 CODE 0 text13 dist/default/production\can_node_board_SW.X.production.o
+_adc_init_default A7A 0 CODE 0 text19 dist/default/production\can_node_board_SW.X.production.o
+__size_of_mcp2515_cmd_read_rx_buf 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
+_CCP1_Compare_Init_Default BAC 0 CODE 0 text23 dist/default/production\can_node_board_SW.X.production.o
 __size_of_mcp2515_cmd_write_bit 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __size_of_SPI_Transfer_Byte 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __LidataCOMRAM 0 0 ABS 0 idataCOMRAM dist/default/production\can_node_board_SW.X.production.o
-__HnvCOMRAM 0 0 ABS 0 nvCOMRAM dist/default/production\can_node_board_SW.X.production.o
+can_send@msg 5D 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
 _INTCON2bits FF1 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 _INTCON3bits FF0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __Lintcodelo E 0 CODE 0 intcodelo dist/default/production\can_node_board_SW.X.production.o
-__end_of_mcp2515_cmd_reset 366 0 CODE 0 text8 dist/default/production\can_node_board_SW.X.production.o
-__end_of_mcp2515_cmd_write 30E 0 CODE 0 text6 dist/default/production\can_node_board_SW.X.production.o
+__end_of_mcp2515_cmd_reset BEE 0 CODE 0 text15 dist/default/production\can_node_board_SW.X.production.o
+__size_of_mcp2515_cmd_load_tx_buf 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
+__end_of_mcp2515_cmd_write B7E 0 CODE 0 text13 dist/default/production\can_node_board_SW.X.production.o
 __size_of_SPI_Transfer_Byte_without_CS 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
-start_initialization 17E 0 CODE 0 cinit dist/default/production\can_node_board_SW.X.production.o
-mcp2515_cmd_read@buf 5C 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
-_node1_ready_to_tx 47 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
-external_interrupts_init@trigger_edge 5A 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+start_initialization 9C0 0 CODE 0 cinit dist/default/production\can_node_board_SW.X.production.o
+mcp2515_cmd_read@buf 56 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_node1_ready_to_tx 18 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_eng_spd_pot_reading F 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+external_interrupts_init@trigger_edge 54 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __HnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\can_node_board_SW.X.production.o
-SPI_Transfer_Byte_without_CS@rx 5A 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
-SPI_Transfer_Byte_without_CS@tx 5B 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_tx_counter D 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+SPI_Transfer_Byte_without_CS@rx 54 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+SPI_Transfer_Byte_without_CS@tx 55 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_TRISAbits F92 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 _TRISDbits F95 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
+_TRISEbits F96 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __size_of_external_interrupts_init 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
-__end_of_SPI_Transfer_Byte_without_CS 274 0 CODE 0 text7 dist/default/production\can_node_board_SW.X.production.o
+__end_of_CCP2_Compare_Init_Default BAC 0 CODE 0 text22 dist/default/production\can_node_board_SW.X.production.o
+__end_of_SPI_Transfer_Byte_without_CS B0A 0 CODE 0 text14 dist/default/production\can_node_board_SW.X.production.o
 __size_of_mcp2515_current_opmode 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 ___rparam_used 1 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_eflg_buf 51 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
 _SSPBUF FC9 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
-mcp2515_cmd_write@val 5C 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
-_rxbf0_full 4D 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
-_rxbf1_full 4C 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_txb0_reattempt_counter 16 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+__end_of_Timer3_Init_Default BF8 0 CODE 0 text20 dist/default/production\can_node_board_SW.X.production.o
+mcp2515_cmd_write@val 56 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_rxbf0_full 1F 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_rxbf1_full 1E 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Hbank0 0 0 ABS 0 bank0 dist/default/production\can_node_board_SW.X.production.o
 __Hbank1 0 0 ABS 0 bank1 dist/default/production\can_node_board_SW.X.production.o
 __Hbank2 0 0 ABS 0 bank2 dist/default/production\can_node_board_SW.X.production.o
@@ -400,18 +643,21 @@ __Hbank12 0 0 ABS 0 bank12 dist/default/production\can_node_board_SW.X.productio
 __Hbank13 0 0 ABS 0 bank13 dist/default/production\can_node_board_SW.X.production.o
 __Hbank14 0 0 ABS 0 bank14 dist/default/production\can_node_board_SW.X.production.o
 __Hbank15 0 0 ABS 0 bank15 dist/default/production\can_node_board_SW.X.production.o
+can_receive@return_val 78 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\can_node_board_SW.X.production.o
 __Hbigram 0 0 ABS 0 bigram dist/default/production\can_node_board_SW.X.production.o
-_txbf0_full 53 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\almos\AppData\Local\Temp\snfo.o
-_txbf0_sent 50 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
-_txbf1_full 52 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
-_txbf1_sent 4F 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_txb2ctrl_buf 4E 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_txbf0_full 25 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\almos\AppData\Local\Temp\sldo.o
+_txbf0_sent 22 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+__end_of_adc_init_default AAE 0 CODE 0 text19 dist/default/production\can_node_board_SW.X.production.o
+_txbf1_full 24 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_txbf1_sent 21 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Hcomram 0 0 ABS 0 comram dist/default/production\can_node_board_SW.X.production.o
 __Hconfig 30000E 0 CONFIG 4 config dist/default/production\can_node_board_SW.X.production.o
-_manual_transfer 66 0 COMRAM 1 nvCOMRAM dist/default/production\can_node_board_SW.X.production.o
-_txbf2_full 51 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
-_txbf2_sent 4E 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_manual_transfer AB 0 BANK0 1 nvBANK0 dist/default/production\can_node_board_SW.X.production.o
+_txbf2_full 23 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_txbf2_sent 20 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Lbank0 0 0 ABS 0 bank0 dist/default/production\can_node_board_SW.X.production.o
 __Lbank1 0 0 ABS 0 bank1 dist/default/production\can_node_board_SW.X.production.o
 __Lbank2 0 0 ABS 0 bank2 dist/default/production\can_node_board_SW.X.production.o
@@ -440,62 +686,97 @@ __Ltext6 0 0 ABS 0 text6 dist/default/production\can_node_board_SW.X.production.
 __Ltext7 0 0 ABS 0 text7 dist/default/production\can_node_board_SW.X.production.o
 __Ltext8 0 0 ABS 0 text8 dist/default/production\can_node_board_SW.X.production.o
 __Ltext9 0 0 ABS 0 text9 dist/default/production\can_node_board_SW.X.production.o
+__size_of_adc_init_default 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_interrupt_event 1A 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Hfarbss 0 0 FARRAM 0 farbss dist/default/production\can_node_board_SW.X.production.o
 __Lintcode_body 0 0 ABS 0 intcode_body dist/default/production\can_node_board_SW.X.production.o
+_PORTEbits F84 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 _INTCONbits FF2 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __Habs1 0 0 ABS 0 abs1 dist/default/production\can_node_board_SW.X.production.o
 __Hdata 0 0 ABS 0 data dist/default/production\can_node_board_SW.X.production.o
 __Hinit 12 0 CODE 0 init dist/default/production\can_node_board_SW.X.production.o
 __Hrbit 0 0 COMRAM 1 rbit dist/default/production\can_node_board_SW.X.production.o
 __Hrbss 0 0 COMRAM 1 rbss dist/default/production\can_node_board_SW.X.production.o
-__Htemp 68 0 COMRAM 1 temp dist/default/production\can_node_board_SW.X.production.o
+__Htemp 80 0 COMRAM 1 temp dist/default/production\can_node_board_SW.X.production.o
 __Htext 0 0 ABS 0 text dist/default/production\can_node_board_SW.X.production.o
 __Labs1 0 0 ABS 0 abs1 dist/default/production\can_node_board_SW.X.production.o
 __Ldata 0 0 ABS 0 data dist/default/production\can_node_board_SW.X.production.o
 __Linit E 0 CODE 0 init dist/default/production\can_node_board_SW.X.production.o
 __Lrbit 0 0 COMRAM 1 rbit dist/default/production\can_node_board_SW.X.production.o
 __Lrbss 0 0 COMRAM 1 rbss dist/default/production\can_node_board_SW.X.production.o
-__Ltemp 67 0 COMRAM 1 temp dist/default/production\can_node_board_SW.X.production.o
+__Ltemp 7F 0 COMRAM 1 temp dist/default/production\can_node_board_SW.X.production.o
 __Ltext 0 0 ABS 0 text dist/default/production\can_node_board_SW.X.production.o
-int$flags 67 0 COMRAM 1 temp dist/default/production\can_node_board_SW.X.production.o
+__pnvBANK0 AB 0 BANK0 1 nvBANK0 dist/default/production\can_node_board_SW.X.production.o
+int$flags 7F 0 COMRAM 1 temp dist/default/production\can_node_board_SW.X.production.o
 __HcstackCOMRAM 0 0 ABS 0 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Hintret 0 0 ABS 0 intret dist/default/production\can_node_board_SW.X.production.o
 __Hirdata 0 0 CODE 0 irdata dist/default/production\can_node_board_SW.X.production.o
-__S0 36A 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
-__S1 68 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
+__S0 C06 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
+__S1 AC 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __S2 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __S4 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __S5 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 _isr 8 0 CODE 0 intcode dist/default/production\can_node_board_SW.X.production.o
-_mcp2515_cmd_reset 35A 0 CODE 0 text8 dist/default/production\can_node_board_SW.X.production.o
-_mcp2515_cmd_write 2E8 0 CODE 0 text6 dist/default/production\can_node_board_SW.X.production.o
-__pnvCOMRAM 66 0 COMRAM 1 nvCOMRAM dist/default/production\can_node_board_SW.X.production.o
-__end_of_external_interrupts_init 17E 0 CODE 0 text10 dist/default/production\can_node_board_SW.X.production.o
-__end_of_SPI_Transfer_Byte 1EC 0 CODE 0 text9 dist/default/production\can_node_board_SW.X.production.o
+_node1_rxbf0_msg 3C 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_node1_rxbf1_msg 9A 0 BANK0 1 bssBANK0 dist/default/production\can_node_board_SW.X.production.o
+__size_of_CCP2_Compare_Init_Default 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_cmd_reset BE2 0 CODE 0 text15 dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_cmd_write B58 0 CODE 0 text13 dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_txb0ctrl_buf 50 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+__end_of_external_interrupts_init 8B0 0 CODE 0 text17 dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_intf_buf 52 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+mcp2515_cmd_load_tx_buf@tx_buf 56 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+__end_of_SPI_Transfer_Byte A7A 0 CODE 0 text16 dist/default/production\can_node_board_SW.X.production.o
 __HidataCOMRAM 0 0 ABS 0 idataCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Lbigdata 0 0 BIGRAM 1 bigdata dist/default/production\can_node_board_SW.X.production.o
-_mcp2515_cmd_read 2C2 0 CODE 0 text5 dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_cmd_read B32 0 CODE 0 text12 dist/default/production\can_node_board_SW.X.production.o
 __Hnvrram 0 0 COMRAM 1 nvrram dist/default/production\can_node_board_SW.X.production.o
-__end_of_isr 24C 0 CODE 0 intcode_body dist/default/production\can_node_board_SW.X.production.o
-int_func 21C 0 CODE 0 intcode_body dist/default/production\can_node_board_SW.X.production.o
-mcp2515_cmd_write_bit@reg_address 5E 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+__end_of_isr 9C0 0 CODE 0 intcode_body dist/default/production\can_node_board_SW.X.production.o
+int_func 96C 0 CODE 0 intcode_body dist/default/production\can_node_board_SW.X.production.o
+__HnvBANK0 0 0 ABS 0 nvBANK0 dist/default/production\can_node_board_SW.X.production.o
+mcp2515_cmd_write_bit@reg_address 58 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Lintentry 0 0 ABS 0 intentry dist/default/production\can_node_board_SW.X.production.o
 __Hramtop 1000 0 RAM 0 ramtop dist/default/production\can_node_board_SW.X.production.o
 __Hrparam 0 0 COMRAM 1 rparam dist/default/production\can_node_board_SW.X.production.o
+_can_receive 7B8 0 CODE 0 text5 dist/default/production\can_node_board_SW.X.production.o
 __activetblptr 2 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __Hstruct 0 0 COMRAM 1 struct dist/default/production\can_node_board_SW.X.production.o
+__LbssBANK0 0 0 ABS 0 bssBANK0 dist/default/production\can_node_board_SW.X.production.o
+mcp2515_cmd_read_rx_buf@rxb 57 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Htext10 0 0 ABS 0 text10 dist/default/production\can_node_board_SW.X.production.o
 __Htext11 0 0 ABS 0 text11 dist/default/production\can_node_board_SW.X.production.o
 __Htext12 0 0 ABS 0 text12 dist/default/production\can_node_board_SW.X.production.o
 __Htext13 0 0 ABS 0 text13 dist/default/production\can_node_board_SW.X.production.o
+__Htext14 0 0 ABS 0 text14 dist/default/production\can_node_board_SW.X.production.o
+__Htext15 0 0 ABS 0 text15 dist/default/production\can_node_board_SW.X.production.o
+__Htext16 0 0 ABS 0 text16 dist/default/production\can_node_board_SW.X.production.o
+__Htext17 0 0 ABS 0 text17 dist/default/production\can_node_board_SW.X.production.o
+__Htext18 0 0 ABS 0 text18 dist/default/production\can_node_board_SW.X.production.o
+__Htext19 0 0 ABS 0 text19 dist/default/production\can_node_board_SW.X.production.o
+__Htext20 0 0 ABS 0 text20 dist/default/production\can_node_board_SW.X.production.o
+__Htext21 0 0 ABS 0 text21 dist/default/production\can_node_board_SW.X.production.o
+__Htext22 0 0 ABS 0 text22 dist/default/production\can_node_board_SW.X.production.o
+__Htext23 0 0 ABS 0 text23 dist/default/production\can_node_board_SW.X.production.o
 _PIE1bits F9D 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
+_PIE2bits FA0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __size_of_Timer1_Init_Default 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
-__ptext10 114 0 CODE 0 text10 dist/default/production\can_node_board_SW.X.production.o
-__ptext11 274 0 CODE 0 text11 dist/default/production\can_node_board_SW.X.production.o
-__ptext12 34C 0 CODE 0 text12 dist/default/production\can_node_board_SW.X.production.o
-__ptext13 326 0 CODE 0 text13 dist/default/production\can_node_board_SW.X.production.o
-__pintcode_body 21C 0 CODE 0 intcode_body dist/default/production\can_node_board_SW.X.production.o
-mcp2515_cmd_write@reg_address 5D 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+__ptext10 AAE 0 CODE 0 text10 dist/default/production\can_node_board_SW.X.production.o
+__ptext11 B7E 0 CODE 0 text11 dist/default/production\can_node_board_SW.X.production.o
+__ptext12 B32 0 CODE 0 text12 dist/default/production\can_node_board_SW.X.production.o
+__ptext13 B58 0 CODE 0 text13 dist/default/production\can_node_board_SW.X.production.o
+__ptext14 ADE 0 CODE 0 text14 dist/default/production\can_node_board_SW.X.production.o
+__ptext15 BE2 0 CODE 0 text15 dist/default/production\can_node_board_SW.X.production.o
+__ptext16 A42 0 CODE 0 text16 dist/default/production\can_node_board_SW.X.production.o
+__ptext17 846 0 CODE 0 text17 dist/default/production\can_node_board_SW.X.production.o
+__ptext18 B0A 0 CODE 0 text18 dist/default/production\can_node_board_SW.X.production.o
+__ptext19 A7A 0 CODE 0 text19 dist/default/production\can_node_board_SW.X.production.o
+__ptext20 BEE 0 CODE 0 text20 dist/default/production\can_node_board_SW.X.production.o
+__ptext21 BF8 0 CODE 0 text21 dist/default/production\can_node_board_SW.X.production.o
+__ptext22 B96 0 CODE 0 text22 dist/default/production\can_node_board_SW.X.production.o
+__ptext23 BAC 0 CODE 0 text23 dist/default/production\can_node_board_SW.X.production.o
+__size_of_can_send 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
+__pintcode_body 96C 0 CODE 0 intcode_body dist/default/production\can_node_board_SW.X.production.o
+mcp2515_cmd_write@reg_address 57 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Lbank10 0 0 ABS 0 bank10 dist/default/production\can_node_board_SW.X.production.o
 __Lbank11 0 0 ABS 0 bank11 dist/default/production\can_node_board_SW.X.production.o
 __Lbank12 0 0 ABS 0 bank12 dist/default/production\can_node_board_SW.X.production.o
@@ -504,79 +785,121 @@ __Lbank14 0 0 ABS 0 bank14 dist/default/production\can_node_board_SW.X.productio
 __Lbank15 0 0 ABS 0 bank15 dist/default/production\can_node_board_SW.X.production.o
 __Lbigbss 0 0 BIGRAM 1 bigbss dist/default/production\can_node_board_SW.X.production.o
 __Lbigram 0 0 ABS 0 bigram dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_canctrl_buf 4D 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Lcomram 0 0 ABS 0 comram dist/default/production\can_node_board_SW.X.production.o
 __Lconfig 0 0 CONFIG 4 config dist/default/production\can_node_board_SW.X.production.o
 _LATDbits F8C 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __Lfarbss 0 0 FARRAM 0 farbss dist/default/production\can_node_board_SW.X.production.o
 __Lfardata 0 0 FARRAM 0 fardata dist/default/production\can_node_board_SW.X.production.o
-stackhi F7F 0 ABS 0 - C:\Users\almos\AppData\Local\Temp\snfo.o
-stacklo 80 0 ABS 0 - C:\Users\almos\AppData\Local\Temp\snfo.o
+can_compose_msg_ext@msg 54 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+CCP2_Compare_Init_Default@comp_val 54 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+stackhi F7F 0 ABS 0 - C:\Users\almos\AppData\Local\Temp\sldo.o
+stacklo AC 0 ABS 0 - C:\Users\almos\AppData\Local\Temp\sldo.o
 __Lintcode 8 0 CODE 0 intcode dist/default/production\can_node_board_SW.X.production.o
 __Lintret 0 0 ABS 0 intret dist/default/production\can_node_board_SW.X.production.o
+can_send@tx_msg_buf 5E 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Lirdata 0 0 CODE 0 irdata dist/default/production\can_node_board_SW.X.production.o
+_ADCON0bits FC2 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 _ADCON1bits FC1 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
-_SPI_Init_Master_Default 274 0 CODE 0 text11 dist/default/production\can_node_board_SW.X.production.o
+_ADCON2bits FC0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
+_SPI_Init_Master_Default B0A 0 CODE 0 text18 dist/default/production\can_node_board_SW.X.production.o
 __Lspace_0 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __Lspace_1 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __Lspace_2 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __Lspace_4 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
-_SPI_Transfer_Byte 1B8 0 CODE 0 text9 dist/default/production\can_node_board_SW.X.production.o
+_SPI_Transfer_Byte A42 0 CODE 0 text16 dist/default/production\can_node_board_SW.X.production.o
+mcp2515_cmd_load_tx_buf@i 5B 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __pbssCOMRAM 1 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
-__end_of_mcp2515_cmd_read 2E8 0 CODE 0 text5 dist/default/production\can_node_board_SW.X.production.o
-_Timer1_Init_Default 34C 0 CODE 0 text12 dist/default/production\can_node_board_SW.X.production.o
-__end_of_SPI_Init_Master_Default 29C 0 CODE 0 text11 dist/default/production\can_node_board_SW.X.production.o
+__size_of_can_compose_msg_ext 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
+__end_of_mcp2515_cmd_read B58 0 CODE 0 text12 dist/default/production\can_node_board_SW.X.production.o
+_CCP2_Compare_Init_Default B96 0 CODE 0 text22 dist/default/production\can_node_board_SW.X.production.o
+_Timer1_Init_Default BF8 0 CODE 0 text21 dist/default/production\can_node_board_SW.X.production.o
+__end_of_SPI_Init_Master_Default B32 0 CODE 0 text18 dist/default/production\can_node_board_SW.X.production.o
+can_send@txbf_to_use 6B 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
 _PIR1bits F9E 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
+_PIR2bits FA1 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __LcstackCOMRAM 0 0 ABS 0 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
-_mcp2515_current_opmode 30E 0 CODE 0 text4 dist/default/production\can_node_board_SW.X.production.o
-end_of_initialization 1AA 0 CODE 0 cinit dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_current_opmode B7E 0 CODE 0 text11 dist/default/production\can_node_board_SW.X.production.o
+mcp2515_cmd_read_rx_buf@rx_buf 56 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+end_of_initialization 9F8 0 CODE 0 cinit dist/default/production\can_node_board_SW.X.production.o
 __size_of_mcp2515_cmd_read 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
+can_parse_msg_ext@msg 54 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_can_send 914 0 CODE 0 text1 dist/default/production\can_node_board_SW.X.production.o
 __Lnvrram 0 0 COMRAM 1 nvrram dist/default/production\can_node_board_SW.X.production.o
 __Hintentry 0 0 ABS 0 intentry dist/default/production\can_node_board_SW.X.production.o
-mcp2515_cmd_read@reg_address 5D 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_txb2_reattempt_counter 14 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+mcp2515_cmd_read@reg_address 57 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __size_of_mcp2515_normal_mode 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __Hreset_vec 4 0 CODE 0 reset_vec dist/default/production\can_node_board_SW.X.production.o
+__HbssBANK0 0 0 ABS 0 bssBANK0 dist/default/production\can_node_board_SW.X.production.o
+__end_of_can_send 96C 0 CODE 0 text1 dist/default/production\can_node_board_SW.X.production.o
 __Lramtop 1000 0 RAM 0 ramtop dist/default/production\can_node_board_SW.X.production.o
 __Lrparam 0 0 COMRAM 1 rparam dist/default/production\can_node_board_SW.X.production.o
-__pcinit 17E 0 CODE 0 cinit dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_cmd_read_rx_buf A06 0 CODE 0 text6 dist/default/production\can_node_board_SW.X.production.o
+__pcinit 9C0 0 CODE 0 cinit dist/default/production\can_node_board_SW.X.production.o
 _SSPCON1bits FC6 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
-__ptext0 29C 0 CODE 0 text0 dist/default/production\can_node_board_SW.X.production.o
-__ptext1 12 0 CODE 0 text1 dist/default/production\can_node_board_SW.X.production.o
-__ptext2 33C 0 CODE 0 text2 dist/default/production\can_node_board_SW.X.production.o
-__ptext3 1EC 0 CODE 0 text3 dist/default/production\can_node_board_SW.X.production.o
-__ptext4 30E 0 CODE 0 text4 dist/default/production\can_node_board_SW.X.production.o
-__ptext5 2C2 0 CODE 0 text5 dist/default/production\can_node_board_SW.X.production.o
-__ptext6 2E8 0 CODE 0 text6 dist/default/production\can_node_board_SW.X.production.o
-__ptext7 24C 0 CODE 0 text7 dist/default/production\can_node_board_SW.X.production.o
-__ptext8 35A 0 CODE 0 text8 dist/default/production\can_node_board_SW.X.production.o
-__ptext9 1B8 0 CODE 0 text9 dist/default/production\can_node_board_SW.X.production.o
+__ptext0 12 0 CODE 0 text0 dist/default/production\can_node_board_SW.X.production.o
+__ptext1 914 0 CODE 0 text1 dist/default/production\can_node_board_SW.X.production.o
+__ptext2 BC2 0 CODE 0 text2 dist/default/production\can_node_board_SW.X.production.o
+__ptext3 8B0 0 CODE 0 text3 dist/default/production\can_node_board_SW.X.production.o
+__ptext4 4CE 0 CODE 0 text4 dist/default/production\can_node_board_SW.X.production.o
+__ptext5 7B8 0 CODE 0 text5 dist/default/production\can_node_board_SW.X.production.o
+__ptext6 A06 0 CODE 0 text6 dist/default/production\can_node_board_SW.X.production.o
+__ptext7 2AE 0 CODE 0 text7 dist/default/production\can_node_board_SW.X.production.o
+__ptext8 6B6 0 CODE 0 text8 dist/default/production\can_node_board_SW.X.production.o
+__ptext9 BD2 0 CODE 0 text9 dist/default/production\can_node_board_SW.X.production.o
 __Lstruct 0 0 COMRAM 1 struct dist/default/production\can_node_board_SW.X.production.o
+_ack_counter B 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+__end_of_mcp2515_cmd_read_rx_buf A42 0 CODE 0 text6 dist/default/production\can_node_board_SW.X.production.o
 __Ltext10 0 0 ABS 0 text10 dist/default/production\can_node_board_SW.X.production.o
 __Ltext11 0 0 ABS 0 text11 dist/default/production\can_node_board_SW.X.production.o
 __Ltext12 0 0 ABS 0 text12 dist/default/production\can_node_board_SW.X.production.o
 __Ltext13 0 0 ABS 0 text13 dist/default/production\can_node_board_SW.X.production.o
-__ramtop 1000 0 RAM 0 ramtop C:\Users\almos\AppData\Local\Temp\snfo.o
+__Ltext14 0 0 ABS 0 text14 dist/default/production\can_node_board_SW.X.production.o
+__Ltext15 0 0 ABS 0 text15 dist/default/production\can_node_board_SW.X.production.o
+__Ltext16 0 0 ABS 0 text16 dist/default/production\can_node_board_SW.X.production.o
+__Ltext17 0 0 ABS 0 text17 dist/default/production\can_node_board_SW.X.production.o
+__Ltext18 0 0 ABS 0 text18 dist/default/production\can_node_board_SW.X.production.o
+__Ltext19 0 0 ABS 0 text19 dist/default/production\can_node_board_SW.X.production.o
+__Ltext20 0 0 ABS 0 text20 dist/default/production\can_node_board_SW.X.production.o
+__Ltext21 0 0 ABS 0 text21 dist/default/production\can_node_board_SW.X.production.o
+__Ltext22 0 0 ABS 0 text22 dist/default/production\can_node_board_SW.X.production.o
+__Ltext23 0 0 ABS 0 text23 dist/default/production\can_node_board_SW.X.production.o
+mcp2515_cmd_rts@txb 56 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+__ramtop 1000 0 RAM 0 ramtop C:\Users\almos\AppData\Local\Temp\sldo.o
 __Lpowerup E 0 CODE 0 powerup dist/default/production\can_node_board_SW.X.production.o
 __Leeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\can_node_board_SW.X.production.o
+mcp2515_cmd_read_rx_buf@i 59 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_can_compose_msg_ext 4CE 0 CODE 0 text4 dist/default/production\can_node_board_SW.X.production.o
 __Lreset_vec 0 0 CODE 0 reset_vec dist/default/production\can_node_board_SW.X.production.o
-__end_of_mcp2515_cmd_write_bit 21C 0 CODE 0 text3 dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_cmd_load_tx_buf 8B0 0 CODE 0 text3 dist/default/production\can_node_board_SW.X.production.o
+__end_of_mcp2515_cmd_write_bit ADE 0 CODE 0 text10 dist/default/production\can_node_board_SW.X.production.o
+__size_of_can_parse_msg_ext 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
+__end_of_mcp2515_cmd_load_tx_buf 914 0 CODE 0 text3 dist/default/production\can_node_board_SW.X.production.o
 ___param_bank 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __Hbigdata 0 0 BIGRAM 1 bigdata dist/default/production\can_node_board_SW.X.production.o
-__end_of__initialization 1AA 0 CODE 0 cinit dist/default/production\can_node_board_SW.X.production.o
+__end_of_mcp2515_cmd_rts BD2 0 CODE 0 text2 dist/default/production\can_node_board_SW.X.production.o
+__end_of__initialization 9F8 0 CODE 0 cinit dist/default/production\can_node_board_SW.X.production.o
 __Libigdata 0 0 CODE 0 ibigdata dist/default/production\can_node_board_SW.X.production.o
-_mcp2515_normal_mode 33C 0 CODE 0 text2 dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_normal_mode BD2 0 CODE 0 text9 dist/default/production\can_node_board_SW.X.production.o
 __Lclrtext 0 0 ABS 0 clrtext dist/default/production\can_node_board_SW.X.production.o
-_spi_actor 4A 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
-_mcp2515_cmd_write_bit 1EC 0 CODE 0 text3 dist/default/production\can_node_board_SW.X.production.o
-CCP1_Compare_Init_Default@comp_val 5A 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
-__pcstackCOMRAM 5A 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
-_tmr_100ms_next 48 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
-__end_of_CCP1_Compare_Init_Default 33C 0 CODE 0 text13 dist/default/production\can_node_board_SW.X.production.o
+_spi_actor 1C 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_cmd_write_bit AAE 0 CODE 0 text10 dist/default/production\can_node_board_SW.X.production.o
+CCP1_Compare_Init_Default@comp_val 54 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+__pcstackCOMRAM 54 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_tmr_100ms_next 19 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+__end_of_CCP1_Compare_Init_Default BC2 0 CODE 0 text23 dist/default/production\can_node_board_SW.X.production.o
 _SSPCON1 FC6 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 _SSPSTAT FC7 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
-__end_of_main 2C2 0 CODE 0 text0 dist/default/production\can_node_board_SW.X.production.o
+can_receive@msg_buf0 69 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+can_receive@msg_buf1 6A 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+__end_of_main 2AE 0 CODE 0 text0 dist/default/production\can_node_board_SW.X.production.o
+_CCP2CONbits FBA 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __pintcode 8 0 CODE 0 intcode dist/default/production\can_node_board_SW.X.production.o
-__end_of_Timer1_Init_Default 35A 0 CODE 0 text12 dist/default/production\can_node_board_SW.X.production.o
+__end_of_Timer1_Init_Default C02 0 CODE 0 text21 dist/default/production\can_node_board_SW.X.production.o
+_ADRES FC3 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 _CCPR1 FBE 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
+_CCPR2 FBB 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 _T1CON FCD 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 _T3CON FB1 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 _TRISB F93 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
@@ -589,18 +912,25 @@ __LRAM 1 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
 __Lbss 0 0 RAM 1 bss dist/default/production\can_node_board_SW.X.production.o
 __Lram 0 0 ABS 0 ram dist/default/production\can_node_board_SW.X.production.o
 __Lsfr 0 0 ABS 0 sfr dist/default/production\can_node_board_SW.X.production.o
+can_compose_msg_ext@mcp2515_tx_buf 55 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
 _CCP1CON FBD 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
-mcp2515_cmd_write_bit@val 5D 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_CCP2CON FBA 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
+mcp2515_cmd_write_bit@val 57 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __size_of_isr 0 0 ABS 0 - dist/default/production\can_node_board_SW.X.production.o
-__initialization 17E 0 CODE 0 cinit dist/default/production\can_node_board_SW.X.production.o
-__pdataCOMRAM 62 0 COMRAM 1 dataCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_cmd_rts BC2 0 CODE 0 text2 dist/default/production\can_node_board_SW.X.production.o
+__initialization 9C0 0 CODE 0 cinit dist/default/production\can_node_board_SW.X.production.o
+__pbssBANK0 80 0 BANK0 1 bssBANK0 dist/default/production\can_node_board_SW.X.production.o
+__pdataCOMRAM 7B 0 COMRAM 1 dataCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_mcp2515_txb1ctrl_buf 4F 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
+__end_of_can_receive 846 0 CODE 0 text5 dist/default/production\can_node_board_SW.X.production.o
 __Hfardata 0 0 FARRAM 0 fardata dist/default/production\can_node_board_SW.X.production.o
 __Hsmallconst 0 0 SMALLCONST 0 smallconst dist/default/production\can_node_board_SW.X.production.o
-_can_init_default 12 0 CODE 0 text1 dist/default/production\can_node_board_SW.X.production.o
-mcp2515_cmd_write_bit@mask 5C 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
+_can_init_default 6B6 0 CODE 0 text8 dist/default/production\can_node_board_SW.X.production.o
+mcp2515_cmd_write_bit@mask 56 0 COMRAM 1 cstackCOMRAM dist/default/production\can_node_board_SW.X.production.o
 __Lifardata 0 0 CODE 0 ifardata dist/default/production\can_node_board_SW.X.production.o
 __Hintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/production\can_node_board_SW.X.production.o
 __Hintcode E 0 CODE 0 intcode dist/default/production\can_node_board_SW.X.production.o
+_msg_received 13 0 COMRAM 1 bssCOMRAM dist/default/production\can_node_board_SW.X.production.o
 # %SPLITSTAB Section
 # This section enumerates all the psect splits performed by the assembler.
 # The beginning of the section is indicated by %SPLITSTAB.
@@ -626,8 +956,9 @@ __Hintcode E 0 CODE 0 intcode dist/default/production\can_node_board_SW.X.produc
 # All other numeric quantities are in decimal.
 %SEGMENTS
 reset_vec 0 0 0 4 1
-intcode 0 8 8 362 1
-bssCOMRAM 1 1 1 67 1
+bssBANK0 1 80 80 2C 1
+intcode 0 8 8 BFE 1
+bssCOMRAM 1 1 1 7F 1
 # %NOTES Section
 # This section contains data of all the note-psects.  The beginning of the section
 # is indicated by %NOTES. The first line indicates the name and decimal

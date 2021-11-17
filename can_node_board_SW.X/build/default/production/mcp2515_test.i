@@ -7,7 +7,7 @@
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "mcp2515_test.c" 2
-# 18 "mcp2515_test.c"
+# 21 "mcp2515_test.c"
 #pragma config OSC = HSPLL
 #pragma config FCMEN = OFF
 #pragma config IESO = OFF
@@ -4439,7 +4439,7 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 33 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 2 3
-# 74 "mcp2515_test.c" 2
+# 77 "mcp2515_test.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 1 3
 # 22 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 3
@@ -4526,7 +4526,7 @@ typedef int32_t int_fast32_t;
 typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdint.h" 2 3
-# 75 "mcp2515_test.c" 2
+# 78 "mcp2515_test.c" 2
 
 # 1 "inc\\mcp2515.h" 1
 # 163 "inc\\mcp2515.h"
@@ -4609,7 +4609,7 @@ uint8_t can_send(can_msg * msg);
 
 
 uint8_t can_receive(can_msg * msg_buf0, can_msg * msg_buf1);
-# 76 "mcp2515_test.c" 2
+# 79 "mcp2515_test.c" 2
 
 # 1 "inc\\lcd_driver.h" 1
 # 207 "inc\\lcd_driver.h"
@@ -4651,7 +4651,7 @@ uint8_t LCD_turn_on_cursor(void);
 
 
 void LCD_write_uint32_number(uint32_t num);
-# 77 "mcp2515_test.c" 2
+# 80 "mcp2515_test.c" 2
 
 # 1 "inc\\ccp.h" 1
 # 159 "inc\\ccp.h"
@@ -4665,14 +4665,18 @@ void CCP1_Compare_Init_Default(uint16_t comp_val);
 void CCP2_Compare_Init_Default(uint16_t comp_val);
 void CCP1_Capture_Init_Default(void);
 void CCP2_Capture_Init_Default(void);
-# 78 "mcp2515_test.c" 2
+# 81 "mcp2515_test.c" 2
 
 # 1 "inc\\timer.h" 1
-# 68 "inc\\timer.h"
+# 78 "inc\\timer.h"
 void Timer1_Init_Default(void);
+void Timer3_Init_Default(void);
+
 void Timer1_Enable(void);
 void Timer1_Disable(void);
-# 79 "mcp2515_test.c" 2
+void Timer3_Enable(void);
+void Timer3_Disable(void);
+# 82 "mcp2515_test.c" 2
 
 # 1 "inc\\mssp_spi.h" 1
 # 114 "inc\\mssp_spi.h"
@@ -4700,10 +4704,10 @@ void SPI_Receive_Packet(uint8_t * rx_pack, uint16_t rx_size);
 
 void SPI_Transfer_Byte_without_CS(uint8_t tx, uint8_t * rx);
 void SPI_Transfer_Packet_without_CS(uint8_t * tx_pack, uint8_t * rx_pack, uint16_t pack_size);
-# 80 "mcp2515_test.c" 2
+# 83 "mcp2515_test.c" 2
 
 # 1 "inc\\external_interrupts.h" 1
-# 120 "inc\\external_interrupts.h"
+# 123 "inc\\external_interrupts.h"
 typedef enum { EXT_INT_INT0 = 1u, EXT_INT_INT1 = 2u, EXT_INT_INT2 = 4u } external_interrupts_t;
 typedef enum { FALLING_EDGE, RISING_EDGE } external_interrupt_edge_t;
 
@@ -4711,13 +4715,27 @@ typedef enum { FALLING_EDGE, RISING_EDGE } external_interrupt_edge_t;
 
 void external_interrupts_init_default(void);
 void external_interrupts_init(external_interrupts_t which_pin, external_interrupt_edge_t trigger_edge);
-# 81 "mcp2515_test.c" 2
+# 84 "mcp2515_test.c" 2
 
 # 1 "inc\\mcp2515_test.h" 1
-# 82 "mcp2515_test.c" 2
-# 108 "mcp2515_test.c"
+# 85 "mcp2515_test.c" 2
+
+# 1 "inc\\adc.h" 1
+# 208 "inc\\adc.h"
+typedef enum { ADC_ACQT_0TAD, ADC_ACQT_2TAD, ADC_ACQT_4TAD, ADC_ACQT_6TAD, ADC_ACQT_8TAD, ADC_ACQT_12TAD, ADC_ACQT_16TAD, ADC_ACQT_20TAD } adc_acqt_t;
+typedef enum { ADC_CLK_FOSC2=0u, ADC_CLK_FOSC4=4u, ADC_CLK_FOSC8=1u, ADC_CLK_FOSC16=5u, ADC_CLK_FOSC32=2u, ADC_CLK_FOSC64=6u, ADC_CLK_FRC=3u } adc_clk_t;
+typedef enum { ADC_AN0, ADC_AN1, ADC_AN2, ADC_AN3, ADC_AN4, ADC_AN5, ADC_AN6, ADC_AN7, ADC_AN8, ADC_AN9, ADC_AN10, ADC_AN11, ADC_AN12 } adc_pin_t;
+typedef enum { ADC_VREF, ADC_NOT_VREF } adc_vref_t;
+
+
+void adc_init(adc_pin_t adc_pin, adc_vref_t adc_vref, adc_acqt_t adc_acqt, adc_clk_t adc_clk);
+void adc_init_default(void);
+void adc_use_ccp2(void);
+# 86 "mcp2515_test.c" 2
+# 112 "mcp2515_test.c"
 extern uint8_t spi_transfer_complete_flag;
 
+static volatile uint8_t mcp2515_interrupt_event = 0x00u;
 extern uint8_t txbf0_full;
 extern uint8_t txbf1_full;
 extern uint8_t txbf2_full;
@@ -4728,13 +4746,30 @@ extern uint8_t rxbf0_full;
 extern uint8_t rxbf1_full;
 
 
-
-
 static volatile uint8_t tmr_100ms_next = 0x00;
-static can_msg node1_rx_msg;
-static can_msg node1_tx_msg;
+static can_msg node1_rxbf0_msg;
+static can_msg node1_rxbf1_msg;
+static can_msg node1_state_msg;
+
 static volatile uint8_t node1_ready_to_tx = 0x00;
-# 147 "mcp2515_test.c"
+static volatile uint16_t eng_spd_pot_reading = 0x0000u;
+static uint16_t tx_counter = 0x0000u;
+static uint16_t ack_counter = 0x0000u;
+
+static uint8_t mcp2515_intf_buf = 0x00u;
+static uint8_t mcp2515_eflg_buf = 0x00u;
+static uint8_t mcp2515_txb0ctrl_buf = 0x00u;
+static uint8_t mcp2515_txb1ctrl_buf = 0x00u;
+static uint8_t mcp2515_txb2ctrl_buf = 0x00u;
+static uint8_t mcp2515_canctrl_buf = 0x00u;
+static uint8_t mcp2515_one_shot_mode = 0x00u;
+static uint8_t mcp2515_txb0_reattempt_counter = 0x00u;
+static uint8_t mcp2515_txb1_reattempt_counter = 0x00u;
+static uint8_t mcp2515_txb2_reattempt_counter = 0x00u;
+static uint8_t msg_received = 0x00u;
+static uint8_t rxbf0_received = 0x00u;
+static uint8_t rxbf1_received = 0x00u;
+# 169 "mcp2515_test.c"
 static char hex_to_char(uint8_t hex_num);
 
 
@@ -4759,10 +4794,19 @@ void __attribute__((picinterrupt(("")))) isr(void){
 
 
 
+    if(INTCONbits.INT0IF && (INTCONbits.INT0IE)){
+        mcp2515_interrupt_event = 0x01u;
+
+        (INTCONbits.INT0IF = 0u);
+    }
+
+
+
+
+
 
 
     if(PIR1bits.CCP1IF && PIE1bits.CCP1IE){
-
 
         if(tmr_100ms_next){
 
@@ -4783,6 +4827,17 @@ void __attribute__((picinterrupt(("")))) isr(void){
     }
 
 
+    if(PIR2bits.CCP2IF && PIE2bits.CCP2IE) {
+        (PIR2bits.CCP2IF = 0u);
+    }
+
+
+    if((PIR1bits.ADIF) && (PIE1bits.ADIE)) {
+        eng_spd_pot_reading = ADRES;
+
+        (PIR1bits.ADIF = 0u);
+    }
+# 247 "mcp2515_test.c"
     return;
 }
 
@@ -4794,33 +4849,236 @@ void main(void) {
 
 
     can_init_default();
-# 226 "mcp2515_test.c"
+# 278 "mcp2515_test.c"
+    TRISEbits.RE0 = 1u;
+    TRISEbits.RE1 = 1u;
+
+
     Timer1_Init_Default();
     CCP1_Compare_Init_Default(62500u);
 
 
+    Timer3_Init_Default();
+    CCP2_Compare_Init_Default(12500u);
+    adc_init_default();
+
+
+
 
     T1CON |= 0x01;
+    T3CON |= 0x01u;
     (INTCONbits.PEIE = 1u);
     (INTCONbits.GIE = 1);
 
 
+
+
+    node1_state_msg.arb_field.sid = 0x001u;
+    node1_state_msg.arb_field.eid = 0x00000u;
+    node1_state_msg.arb_field.exide = 1u;
+    node1_state_msg.arb_field.rtr = 0u;
+
+    node1_state_msg.ctrl_field.dlc = 0x8u;
+
+
     while(1){
 
-        if(node1_ready_to_tx){
+
+        if(node1_ready_to_tx) {
 
 
+            node1_state_msg.data_field.data0 = (uint8_t) ((PORTEbits.RE0<<0u) | (PORTEbits.RE1<<1u));
 
+
+            node1_state_msg.data_field.data1 = (uint8_t) (eng_spd_pot_reading & 0x00FF);
+            node1_state_msg.data_field.data2 = (uint8_t) ((eng_spd_pot_reading & 0xFF00) >> 8u);
+
+            node1_state_msg.data_field.data3 = (uint8_t) (tx_counter & 0x00FF);
+            node1_state_msg.data_field.data4 = (uint8_t) ((tx_counter & 0xFF00) >> 8u);
+
+            node1_state_msg.data_field.data5 = (uint8_t) (ack_counter & 0x00FF);
+            node1_state_msg.data_field.data6 = (uint8_t) ((ack_counter & 0xFF00) >> 8u);
+
+            node1_state_msg.data_field.data7 = 0x00u;
+
+
+            can_send(&node1_state_msg);
 
 
             node1_ready_to_tx = 0x00;
         }
 
+
+
+        if(mcp2515_interrupt_event) {
+
+
+            mcp2515_cmd_read(0x2C, &mcp2515_intf_buf);
+
+
+
+
+            if(mcp2515_intf_buf & 0x80) {
+
+                mcp2515_cmd_read(0x0F, &mcp2515_canctrl_buf);
+                mcp2515_one_shot_mode = mcp2515_canctrl_buf & 0x08;
+# 358 "mcp2515_test.c"
+                if(mcp2515_one_shot_mode) {
+
+                    mcp2515_cmd_read(0x30, &mcp2515_txb0ctrl_buf);
+                    mcp2515_cmd_read(0x40, &mcp2515_txb1ctrl_buf);
+                    mcp2515_cmd_read(0x50, &mcp2515_txb2ctrl_buf);
+
+                    if(mcp2515_txb0ctrl_buf & 0x10) {
+                        mcp2515_txb0_reattempt_counter++;
+
+                        if(mcp2515_txb0_reattempt_counter < 4) {
+                            can_send(&node1_state_msg);
+                        } else {
+
+                        }
+
+                    }
+                    if(mcp2515_txb1ctrl_buf & 0x10) {
+
+                        mcp2515_txb1_reattempt_counter++;
+
+                        if(mcp2515_txb1_reattempt_counter < 4) {
+                            can_send(&node1_state_msg);
+                        } else {
+
+                        }
+
+                    }
+                    if(mcp2515_txb2ctrl_buf & 0x10) {
+
+                        mcp2515_txb2_reattempt_counter++;
+
+                        if(mcp2515_txb2_reattempt_counter < 4) {
+                            can_send(&node1_state_msg);
+                        } else {
+
+                        }
+
+                    }
+
+                }
+
+
+                mcp2515_cmd_write_bit(0x2C, 0x80, 0x00u);
+            }
+
+
+
+            if(mcp2515_intf_buf & 0x20) {
+
+                mcp2515_cmd_read(0x2D, &mcp2515_eflg_buf);
+
+                if(mcp2515_eflg_buf & 0x80) {
+
+                }
+                if(mcp2515_eflg_buf & 0x40) {
+
+                }
+                if(mcp2515_eflg_buf & 0x20) {
+
+                }
+
+
+                mcp2515_cmd_write_bit(0x2C, 0x2D, 0x00u);
+            }
+
+
+
+            if(mcp2515_intf_buf & 0x10) {
+
+                tx_counter++;
+
+
+                mcp2515_cmd_write_bit(0x2C, 0x10, 0x00u);
+            }
+            if(mcp2515_intf_buf & 0x08) {
+
+                tx_counter++;
+
+
+                mcp2515_cmd_write_bit(0x2C, 0x08, 0x00u);
+            }
+            if(mcp2515_intf_buf & 0x04) {
+
+                tx_counter++;
+
+
+                mcp2515_cmd_write_bit(0x2C, 0x04, 0x00u);
+            }
+
+
+
+            if(mcp2515_intf_buf & 0x02) {
+                rxbf1_full = 0x01u;
+                can_receive(&node1_rxbf0_msg, &node1_rxbf1_msg);
+                rxbf1_received = 0x01u;
+                msg_received = 0x01u;
+
+
+                mcp2515_cmd_write_bit(0x2C, 0x02, 0x00u);
+            }
+            if(mcp2515_intf_buf & 0x01) {
+                rxbf0_full = 0x01;
+                can_receive(&node1_rxbf0_msg, &node1_rxbf1_msg);
+                rxbf0_received = 0x01u;
+                msg_received = 0x01u;
+
+
+                mcp2515_cmd_write_bit(0x2C, 0x01, 0x00u);
+            }
+
+
+
+
+            mcp2515_interrupt_event = 0x00u;
+        }
+
+
+
+        if(msg_received) {
+
+
+
+
+
+
+
+            if(rxbf0_received) {
+                if( (node1_rxbf0_msg.arb_field.sid == 0x040u) && (node1_rxbf0_msg.arb_field.eid == 0x3FABCu) ) {
+                    ack_counter++;
+                    rxbf0_received = 0x00u;
+                } else if( (node1_rxbf0_msg.arb_field.sid == 0x040u) && (node1_rxbf0_msg.arb_field.eid == 0x01010u) ) {
+                    (LATDbits.LATD3 ^= 0x1u);
+                    rxbf0_received = 0x00u;
+                }
+            }
+
+            if(rxbf1_received) {
+                if( (node1_rxbf1_msg.arb_field.sid == 0x040u) && (node1_rxbf1_msg.arb_field.eid == 0x3FABCu) ) {
+                    ack_counter++;
+                    rxbf1_received = 0x00u;
+                } else if( (node1_rxbf1_msg.arb_field.sid == 0x040u) && (node1_rxbf1_msg.arb_field.eid == 0x01010u) ) {
+                    (LATDbits.LATD3 ^= 0x1u);
+                    rxbf1_received = 0x00u;
+                }
+            }
+
+            msg_received = 0x00u;
+
+        }
+
+
     }
-# 355 "mcp2515_test.c"
+# 617 "mcp2515_test.c"
     return;
 }
-# 374 "mcp2515_test.c"
+# 636 "mcp2515_test.c"
 static char hex_to_char(uint8_t hex_num){
     switch(hex_num){
 

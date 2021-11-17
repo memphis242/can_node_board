@@ -574,8 +574,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/adc.c: 45:     (ADCON1bits.VCFG = 0x3);
 [e = . . _ADCON1bits 0 1 -> -> 3 `i `uc ]
 "46
-[; ;src/adc.c: 46:     (ADCON2bits.ADFM = 0u);
-[e = . . _ADCON2bits 0 3 -> -> 0 `ui `uc ]
+[; ;src/adc.c: 46:     (ADCON2bits.ADFM = 1u);
+[e = . . _ADCON2bits 0 3 -> -> 1 `ui `uc ]
 "49
 [; ;src/adc.c: 49:     (ADCON2bits.ACQT = ADC_ACQT_4TAD);
 [e = . . _ADCON2bits 0 1 -> . `E2464 2 `uc ]

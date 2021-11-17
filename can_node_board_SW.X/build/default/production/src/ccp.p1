@@ -485,8 +485,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/ccp.c: 43:     (CCP1CON = 0xB);
 [e = _CCP1CON -> -> 11 `i `uc ]
 "44
-[; ;src/ccp.c: 44:     (T3CON &= ~0x48);
-[e =& _T3CON -> ~ -> 72 `i `Vuc ]
+[; ;src/ccp.c: 44:     do { T3CON &= ~(1u << 3); T3CON |= (1u << 6); } while(0);;
+[e :U 273 ]
+{
+[e =& _T3CON -> ~ << -> 1 `ui -> 3 `i `Vuc ]
+[e =| _T3CON -> << -> 1 `ui -> 6 `i `Vuc ]
+}
+[e :U 272 ]
 "45
 [; ;src/ccp.c: 45:     (CCPR1 = comp_val);
 [e = _CCPR1 _comp_val ]
@@ -511,8 +516,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/ccp.c: 50:     (CCP2CON = 0xB);
 [e = _CCP2CON -> -> 11 `i `uc ]
 "51
-[; ;src/ccp.c: 51:     (T3CON &= ~0x48);
-[e =& _T3CON -> ~ -> 72 `i `Vuc ]
+[; ;src/ccp.c: 51:     do { T3CON &= ~(1u << 3); T3CON |= (1u << 6); } while(0);;
+[e :U 277 ]
+{
+[e =& _T3CON -> ~ << -> 1 `ui -> 3 `i `Vuc ]
+[e =| _T3CON -> << -> 1 `ui -> 6 `i `Vuc ]
+}
+[e :U 276 ]
 "52
 [; ;src/ccp.c: 52:     (CCPR2 = comp_val);
 [e = _CCPR2 _comp_val ]
@@ -524,7 +534,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . . _INTCONbits 1 6 -> -> 1 `ui `uc ]
 "55
 [; ;src/ccp.c: 55: }
-[e :UE 271 ]
+[e :UE 274 ]
 }
 "68
 [; ;src/ccp.c: 68: void CCP1_Capture_Init_Default(void){
@@ -546,7 +556,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . . _INTCONbits 1 6 -> -> 1 `ui `uc ]
 "73
 [; ;src/ccp.c: 73: }
-[e :UE 272 ]
+[e :UE 278 ]
 }
 "74
 [; ;src/ccp.c: 74: void CCP2_Capture_Init_Default(void){
@@ -568,5 +578,5 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . . _INTCONbits 1 6 -> -> 1 `ui `uc ]
 "79
 [; ;src/ccp.c: 79: }
-[e :UE 273 ]
+[e :UE 279 ]
 }
